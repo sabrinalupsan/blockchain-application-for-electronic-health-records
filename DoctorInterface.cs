@@ -118,7 +118,7 @@ namespace BlockchainApp
             {
 
                 var querryString =
-                    "INSERT INTO Associations (doctor_id, patient_id)" +
+                    "INSERT INTO Associations (doctor_id, pacient_id)" +
                     "VALUES (@docID, @patientID);";
                 using (SqlCommand command = new SqlCommand(querryString, conn))
                 {
@@ -194,15 +194,43 @@ namespace BlockchainApp
 
         private void btnCheck_Click(object sender, EventArgs e)
         {
-            //get the PIN from the database
-            //check it with tbPIN.Text.Trim().ToString();
-            //if PIN ok:
-            tbTitle.Show();
-            dtpDate.Show();
-            tbDetails.Show();
-            label5.Show();
-            label6.Show();
-            Details.Show();
+            try
+            {
+                int patientPIN = int.Parse(tbPIN.Text.Trim().ToString());
+                string hashedPIN = computeHash2(patientPIN.ToString());
+                SqlConnectionStringBuilder builder = build();
+                ListViewItem item = (ListViewItem)lvPacients.SelectedItems[0];
+                Patient patient = (Patient)item.Tag;
+                string id = null;
+                using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+                {
+                    var querry = "SELECT hashed_pin FROM Pacients WHERE pacient_id = " + patient.patientID + ";";
+                    conn.Open();
+                    var command = new SqlCommand(querry, conn);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            id = (string)reader["hashed_pin"];
+                        }
+                    }
+                }
+                if (hashedPIN.CompareTo(id) == 0)
+                {
+                    tbTitle.Show();
+                    dtpDate.Show();
+                    tbDetails.Show();
+                    label5.Show();
+                    Details.Show();
+                    label6.Show();
+                }
+                else
+                    MessageBox.Show("Wrong ID!");
+            }
+            catch(ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Please select a patient!");
+            }
         }
 
         private void btnSelectPacient_Click(object sender, EventArgs e)

@@ -32,6 +32,12 @@ namespace BlockchainApp
             return builder;
         }
 
+        private int generatePIN()
+        {
+            Random random = new Random();
+            return random.Next(999, 10000);
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (successfulAuthentication < 3)
@@ -66,17 +72,45 @@ namespace BlockchainApp
                             string password = (string)reader["hashed_pass"];
                             if (id.CompareTo(pacientID) == 0 && (Encoding.Default.GetString(hashedPassword)).CompareTo(password) == 0)
                             {
-                                connected = true;
-                                string lastName = (string)reader["pacient_last_name"];
-                                string firstName = (string)reader["pacient_first_name"];
-                                byte[] thePass = System.Text.Encoding.UTF8.GetBytes(password);
-                                byte[] thePIN = null;//= System.Text.Encoding.UTF8.GetBytes(PIN_token);
-                                DateTime theDate = (DateTime)reader["last_login"];
-                                DateTime birthday = (DateTime)reader["birthday"];
-                                Patient pacient = new Patient(id, thePass, thePIN, lastName, firstName, birthday);
-                                PatientInterface pacientInterface = new PatientInterface(pacient);
-                                pacientInterface.ShowDialog();
-                                Hide();
+                                if (reader["hashed_PIN"] == System.DBNull.Value)
+                                {
+                                    int newPIN = generatePIN();
+                                    MessageBox.Show("Your new token PIN for the next 30 days is: " + newPIN.ToString());
+
+                                    PIN = System.Text.Encoding.UTF8.GetBytes(newPIN.ToString());
+                                    hashedPIN = hasher.ComputeHash(PIN);
+
+                                    var updatePINquery = "UPDATE Pacients SET hashed_PIN = @hashPIN WHERE pacient_id = " + id + ";";
+                                    using (SqlConnection updatePINconnection = new SqlConnection(builder.ConnectionString))
+                                    {
+                                        updatePINconnection.Open();
+                                        using (SqlCommand updatePINCommand = new SqlCommand(updatePINquery, updatePINconnection))
+                                        {
+                                            updatePINCommand.Parameters.AddWithValue("@hashPIN", hashedPIN);
+
+                                            using (SqlDataReader updatePINReader = updatePINCommand.ExecuteReader())
+                                            {
+                                                while (updatePINReader.Read())
+                                                {
+                                                    Console.WriteLine("{0} {1}", updatePINReader.GetString(0), updatePINReader.GetString(1));
+                                                }
+                                            }
+                                        }
+                                    }
+                                    connected = true;
+                                    string lastName = (string)reader["pacient_last_name"];
+                                    string firstName = (string)reader["pacient_first_name"];
+                                    byte[] thePass = System.Text.Encoding.UTF8.GetBytes(password);
+                                    //int newPIN = generatePIN();
+
+                                    byte[] thePIN = null;//= System.Text.Encoding.UTF8.GetBytes(PIN_token);
+                                    DateTime theDate = (DateTime)reader["last_login"];
+                                    DateTime birthday = (DateTime)reader["birthday"];
+                                    Patient pacient = new Patient(id, thePass, thePIN, lastName, firstName, birthday);
+                                    PatientInterface pacientInterface = new PatientInterface(pacient);
+                                    pacientInterface.ShowDialog();
+                                    Hide();
+                                }
                             }
                         }
                     }

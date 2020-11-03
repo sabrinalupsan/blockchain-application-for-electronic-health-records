@@ -15,8 +15,6 @@ D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\Syste
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.csproj.CopyComplete
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.DoctorLogIn.resources
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.PacientLogIn.resources
-D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.PacientInterface.resources
-D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.PacientRecord.resources
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\Microsoft.Data.SqlClient.dll
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\Microsoft.Identity.Client.dll
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll
@@ -47,3 +45,5 @@ D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\ru\Mi
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\zh-Hans\Microsoft.Data.SqlClient.resources.dll
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\zh-Hant\Microsoft.Data.SqlClient.resources.dll
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.MedicalRecordInterface.resources
+D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.PatientInterface.resources
+D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.PatientRecord.resources

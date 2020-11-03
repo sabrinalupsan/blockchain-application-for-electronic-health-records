@@ -23,6 +23,12 @@ namespace BlockchainApp
             InitializeComponent();
         }
 
+        private int generatePIN()
+        {
+            Random random = new Random();
+            return random.Next(999, 10000);
+        }
+
         private void tbDocID_Validating(object sender, CancelEventArgs e)
         {
             //if(tbDocID.Text.Trim().Length != 7)
@@ -81,7 +87,7 @@ namespace BlockchainApp
                             {
                                 if (reader["hashed_PIN"] == System.DBNull.Value)
                                 {
-                                    int newPIN = 12;
+                                    int newPIN = generatePIN();
                                     MessageBox.Show("Your new token PIN for the next 30 days is: " + newPIN.ToString());
 
                                     PIN = System.Text.Encoding.UTF8.GetBytes(newPIN.ToString());

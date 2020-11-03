@@ -117,11 +117,11 @@
       <DependentUpon>MedicalRecordInterface.cs</DependentUpon>
     </Compile>
     <Compile Include="Patient.cs" />
-    <Compile Include="PacientInterface.cs">
+    <Compile Include="PatientInterface.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PacientInterface.Designer.cs">
-      <DependentUpon>PacientInterface.cs</DependentUpon>
+    <Compile Include="PatientInterface.Designer.cs">
+      <DependentUpon>PatientInterface.cs</DependentUpon>
     </Compile>
     <Compile Include="PacientLogIn.cs">
       <SubType>Form</SubType>
@@ -129,11 +129,11 @@
     <Compile Include="PacientLogIn.Designer.cs">
       <DependentUpon>PacientLogIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="PacientRecord.cs">
+    <Compile Include="PatientRecord.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PacientRecord.Designer.cs">
-      <DependentUpon>PacientRecord.cs</DependentUpon>
+    <Compile Include="PatientRecord.Designer.cs">
+      <DependentUpon>PatientRecord.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -152,14 +152,14 @@
     <EmbeddedResource Include="MedicalRecordInterface.resx">
       <DependentUpon>MedicalRecordInterface.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PacientInterface.resx">
-      <DependentUpon>PacientInterface.cs</DependentUpon>
+    <EmbeddedResource Include="PatientInterface.resx">
+      <DependentUpon>PatientInterface.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PacientLogIn.resx">
       <DependentUpon>PacientLogIn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PacientRecord.resx">
-      <DependentUpon>PacientRecord.cs</DependentUpon>
+    <EmbeddedResource Include="PatientRecord.resx">
+      <DependentUpon>PatientRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

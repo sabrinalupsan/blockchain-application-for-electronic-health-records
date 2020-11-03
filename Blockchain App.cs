@@ -24,20 +24,20 @@ namespace BlockchainApp
 
         private void btnDoc_Click(object sender, EventArgs e)
         {
-            DoctorLogIn docInterface = new DoctorLogIn();
-            docInterface.Show();
+            DoctorLogIn doctorLogin = new DoctorLogIn();
+            doctorLogin.Show();
         }
 
         private void btnPacient_Click(object sender, EventArgs e)
         {
-            PacientLogIn pacientInterface = new PacientLogIn();
-            pacientInterface.Show();
+            PacientLogIn pacientLogin = new PacientLogIn();
+            pacientLogin.Show();
         }
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
-            AdminLogin form = new AdminLogin();
-            form.Show();
+            AdminLogin adminLogin = new AdminLogin();
+            adminLogin.Show();
         }
 
     }

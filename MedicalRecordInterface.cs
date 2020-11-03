@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace BlockchainApp
 {
-    public partial class MedicalRecordInterface : MaterialForm
+    public partial class MedicalRecordInterface : Form
     {
         MedicalRecord record;
         Patient patient;
@@ -22,10 +22,11 @@ namespace BlockchainApp
             InitializeComponent();
             this.record = record;
             this.patient = patient;
-            var skinManager = MaterialSkinManager.Instance;
-            skinManager.AddFormToManage(this);
-            skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            skinManager.ColorScheme = new ColorScheme(Primary.Pink200, Primary.Pink300, Primary.LightBlue200, Accent.LightBlue100, TextShade.WHITE);
+            //var skinManager = MaterialSkinManager.Instance;
+            //skinManager.AddFormToManage(this);
+            //skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            //skinManager.ColorScheme = new ColorScheme(Primary.Pink200, Primary.Pink300, Primary.LightBlue200, Accent.LightBlue100, TextShade.WHITE);
+            //skinManager.
         }
 
         private void btnDone_Click(object sender, EventArgs e)

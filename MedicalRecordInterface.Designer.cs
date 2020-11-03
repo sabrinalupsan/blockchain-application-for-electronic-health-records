@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MedicalRecordInterface));
+            this.components = new System.ComponentModel.Container();
             this.btnDone = new System.Windows.Forms.Button();
             this.tbTitle = new System.Windows.Forms.TextBox();
             this.tbDescription = new System.Windows.Forms.TextBox();
@@ -40,11 +40,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tbLastName = new System.Windows.Forms.TextBox();
             this.tbID = new System.Windows.Forms.TextBox();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
             // btnDone
             // 
-            this.btnDone.Location = new System.Drawing.Point(150, 422);
+            this.btnDone.Location = new System.Drawing.Point(155, 357);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(75, 23);
             this.btnDone.TabIndex = 0;
@@ -54,7 +55,7 @@
             // 
             // tbTitle
             // 
-            this.tbTitle.Location = new System.Drawing.Point(148, 198);
+            this.tbTitle.Location = new System.Drawing.Point(153, 133);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.ReadOnly = true;
             this.tbTitle.Size = new System.Drawing.Size(183, 22);
@@ -63,7 +64,7 @@
             // tbDescription
             // 
             this.tbDescription.BackColor = System.Drawing.SystemColors.Control;
-            this.tbDescription.Location = new System.Drawing.Point(150, 226);
+            this.tbDescription.Location = new System.Drawing.Point(155, 161);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.ReadOnly = true;
@@ -72,7 +73,7 @@
             // 
             // tbFirstName
             // 
-            this.tbFirstName.Location = new System.Drawing.Point(150, 123);
+            this.tbFirstName.Location = new System.Drawing.Point(155, 58);
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.ReadOnly = true;
             this.tbFirstName.Size = new System.Drawing.Size(183, 22);
@@ -81,7 +82,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 159);
+            this.label1.Location = new System.Drawing.Point(21, 94);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 17);
             this.label1.TabIndex = 4;
@@ -90,7 +91,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 123);
+            this.label2.Location = new System.Drawing.Point(21, 58);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(128, 17);
             this.label2.TabIndex = 5;
@@ -99,7 +100,7 @@
             // Patient
             // 
             this.Patient.AutoSize = true;
-            this.Patient.Location = new System.Drawing.Point(16, 89);
+            this.Patient.Location = new System.Drawing.Point(21, 24);
             this.Patient.Name = "Patient";
             this.Patient.Size = new System.Drawing.Size(127, 17);
             this.Patient.TabIndex = 6;
@@ -108,7 +109,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 198);
+            this.label4.Location = new System.Drawing.Point(21, 133);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 17);
             this.label4.TabIndex = 7;
@@ -117,7 +118,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 226);
+            this.label5.Location = new System.Drawing.Point(21, 161);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 17);
             this.label5.TabIndex = 8;
@@ -125,7 +126,7 @@
             // 
             // tbLastName
             // 
-            this.tbLastName.Location = new System.Drawing.Point(150, 86);
+            this.tbLastName.Location = new System.Drawing.Point(155, 21);
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.ReadOnly = true;
             this.tbLastName.Size = new System.Drawing.Size(183, 22);
@@ -133,19 +134,24 @@
             // 
             // tbID
             // 
-            this.tbID.Location = new System.Drawing.Point(148, 159);
+            this.tbID.Location = new System.Drawing.Point(153, 94);
             this.tbID.Name = "tbID";
             this.tbID.ReadOnly = true;
             this.tbID.Size = new System.Drawing.Size(183, 22);
             this.tbID.TabIndex = 10;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // MedicalRecordInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(434, 457);
+            this.ClientSize = new System.Drawing.Size(434, 399);
             this.Controls.Add(this.tbID);
             this.Controls.Add(this.tbLastName);
             this.Controls.Add(this.label5);
@@ -178,5 +184,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbLastName;
         private System.Windows.Forms.TextBox tbID;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

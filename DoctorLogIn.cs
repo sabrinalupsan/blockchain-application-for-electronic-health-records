@@ -57,7 +57,7 @@ namespace BlockchainApp
         {
             SqlConnectionStringBuilder builder = build();
 
-            if (successfulAuthentication<3)
+            if (successfulAuthentication < 3)
             {
                 long docID = long.Parse(tbDocID.Text.Trim());
 
@@ -110,7 +110,7 @@ namespace BlockchainApp
                                             }
                                         }
                                     }
-                                    
+
 
                                     connected = true;
                                     string lastName = (string)reader["doctor_last_name"];
@@ -173,7 +173,7 @@ namespace BlockchainApp
                                             updateCommand.Parameters.AddWithValue("@hashPIN", hashedPIN.ToString());
                                         }
                                         //we need to input the new login
-                                        var lastLoginQuery = "UPDATE Doctors" + " SET last_login = SYSDATETIME()" + "WHERE doctor_id ="+id+";";
+                                        var lastLoginQuery = "UPDATE Doctors" + " SET last_login = SYSDATETIME()" + "WHERE doctor_id =" + id + ";";
                                         using (SqlConnection lastLoginConnection = new SqlConnection(builder.ConnectionString))
                                         {
                                             lastLoginConnection.Open();
@@ -197,7 +197,7 @@ namespace BlockchainApp
                                         Hide();
                                     }
                                 }
-                                
+
                             }
                         }
                     }
@@ -206,7 +206,7 @@ namespace BlockchainApp
                 }
 
                 successfulAuthentication++;
-                
+
             }
         }
 
@@ -215,6 +215,36 @@ namespace BlockchainApp
             Close();
         }
 
-     
+        private void tbPIN_Validating(object sender, CancelEventArgs e)
+        {
+            //if(!(tbPIN.Text.Trim().All(char.IsNumber)) || tbPIN.Text.Trim().Length!=4)
+            //{
+            //    errorProvider.SetError(tbPIN, "You did not input a PIN code!");
+            //    e.Cancel = true;
+            //}
+        }
+
+        private void tbPIN_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbPIN, null);
+
+        }
+
+        private void tbPassword_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbPassword, null);
+        }
+
+        private void tbPassword_Validating(object sender, CancelEventArgs e)
+        {
+            //if (tbPassword.Text.Trim().Length < 5 || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
+            //    || !(tbPassword.Text.Trim().Any(char.IsLetter)) || !(tbPassword.Text.Trim().Any(char.IsNumber)) ||
+            //    !(tbPassword.Text.Trim().Any(char.IsPunctuation)))
+            //{
+            //    errorProvider.SetError(tbPassword, "Your passwords need to include a number, an uppercase character, a special symbol and " +
+            //        "at least 5 characters!");
+            //    e.Cancel = true;
+            //}
+        }
     }
 }

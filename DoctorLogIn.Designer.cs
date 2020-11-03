@@ -68,6 +68,8 @@
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 22);
             this.tbPassword.TabIndex = 2;
+            this.tbPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tbPassword_Validating);
+            this.tbPassword.Validated += new System.EventHandler(this.tbPassword_Validated);
             // 
             // label2
             // 
@@ -118,11 +120,14 @@
             this.tbPIN.PasswordChar = '*';
             this.tbPIN.Size = new System.Drawing.Size(100, 22);
             this.tbPIN.TabIndex = 8;
+            this.tbPIN.Validating += new System.ComponentModel.CancelEventHandler(this.tbPIN_Validating);
+            this.tbPIN.Validated += new System.EventHandler(this.tbPIN_Validated);
             // 
             // DoctorLogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(352, 275);
             this.Controls.Add(this.tbPIN);
             this.Controls.Add(this.label3);

@@ -36,8 +36,9 @@ namespace BlockchainApp
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
-            AdminInterface form = new AdminInterface();
+            AdminLogin form = new AdminLogin();
             form.Show();
         }
+
     }
 }

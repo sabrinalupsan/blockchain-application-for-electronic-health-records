@@ -231,7 +231,7 @@ namespace BlockchainApp
             {
                 MessageBox.Show("Please select a patient!");
             }
-            catch(System.FormatException)
+            catch(FormatException)
             {
                 MessageBox.Show("Please input a PIN code.");
             }

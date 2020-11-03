@@ -1,6 +1,6 @@
 ﻿namespace BlockchainApp
 {
-    partial class PacientRecord
+    partial class PatientRecord
     {
         /// <summary>
         /// Required designer variable.
@@ -75,20 +75,20 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(28, 42);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 17);
+            this.label1.Size = new System.Drawing.Size(69, 17);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Pacient ID";
+            this.label1.Text = "Patient ID";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 92);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 17);
+            this.label2.Size = new System.Drawing.Size(91, 17);
             this.label2.TabIndex = 8;
-            this.label2.Text = "Pacient name";
+            this.label2.Text = "Patient name";
             // 
-            // PacientRecord
+            // PatientRecord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -99,7 +99,7 @@
             this.Controls.Add(this.tbPacientID);
             this.Controls.Add(this.btnAddRecord);
             this.Controls.Add(this.btnSeeRecord);
-            this.Name = "PacientRecord";
+            this.Name = "PatientRecord";
             this.Text = "PacientRecord";
             this.ResumeLayout(false);
             this.PerformLayout();

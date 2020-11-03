@@ -77,17 +77,17 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Pacient ID";
+            this.columnHeader1.Text = "Patient ID";
             this.columnHeader1.Width = 90;
             // 
             // PacientLastName
             // 
-            this.PacientLastName.Text = "Pacient Last Name";
+            this.PacientLastName.Text = "Patient last name";
             this.PacientLastName.Width = 130;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Pacient First Name";
+            this.columnHeader2.Text = "Patient first name";
             this.columnHeader2.Width = 164;
             // 
             // label1
@@ -95,9 +95,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 17);
+            this.label1.Size = new System.Drawing.Size(80, 17);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Pacients list";
+            this.label1.Text = "Patients list";
             // 
             // btnSelectPacient
             // 
@@ -105,7 +105,7 @@
             this.btnSelectPacient.Name = "btnSelectPacient";
             this.btnSelectPacient.Size = new System.Drawing.Size(107, 26);
             this.btnSelectPacient.TabIndex = 3;
-            this.btnSelectPacient.Text = "Select pacient";
+            this.btnSelectPacient.Text = "Select patient";
             this.btnSelectPacient.UseVisualStyleBackColor = true;
             this.btnSelectPacient.Click += new System.EventHandler(this.btnSelectPacient_Click);
             // 
@@ -114,9 +114,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(79, 10);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 17);
+            this.label2.Size = new System.Drawing.Size(82, 17);
             this.label2.TabIndex = 4;
-            this.label2.Text = "New pacient";
+            this.label2.Text = "New patient";
             // 
             // btnDone
             // 
@@ -278,7 +278,7 @@
             this.selectRecord.Name = "selectRecord";
             this.selectRecord.Size = new System.Drawing.Size(107, 26);
             this.selectRecord.TabIndex = 11;
-            this.selectRecord.Text = "Select pacient";
+            this.selectRecord.Text = "Select record";
             this.selectRecord.UseVisualStyleBackColor = true;
             this.selectRecord.Click += new System.EventHandler(this.selectRecord_Click);
             // 

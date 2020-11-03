@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace BlockchainApp
 {
-    public partial class PacientRecord : Form
+    public partial class PatientInterface : Form
     {
-        public PacientRecord()
+        public PatientInterface(Patient pacient)
         {
             InitializeComponent();
         }

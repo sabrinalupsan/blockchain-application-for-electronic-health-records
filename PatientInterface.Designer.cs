@@ -1,6 +1,6 @@
 ﻿namespace BlockchainApp
 {
-    partial class PacientInterface
+    partial class PatientInterface
     {
         /// <summary>
         /// Required designer variable.

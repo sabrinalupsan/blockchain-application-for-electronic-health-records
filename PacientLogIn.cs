@@ -74,7 +74,7 @@ namespace BlockchainApp
                                 DateTime theDate = (DateTime)reader["last_login"];
                                 DateTime birthday = (DateTime)reader["birthday"];
                                 Patient pacient = new Patient(id, thePass, thePIN, lastName, firstName, birthday);
-                                PacientInterface pacientInterface = new PacientInterface(pacient);
+                                PatientInterface pacientInterface = new PatientInterface(pacient);
                                 pacientInterface.ShowDialog();
                                 Hide();
                             }

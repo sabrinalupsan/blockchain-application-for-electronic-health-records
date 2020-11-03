@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.tbPacientID = new System.Windows.Forms.TextBox();
@@ -36,6 +37,8 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.tbPIN = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -64,6 +67,8 @@
             this.tbPacientID.Name = "tbPacientID";
             this.tbPacientID.Size = new System.Drawing.Size(100, 22);
             this.tbPacientID.TabIndex = 2;
+            this.tbPacientID.Validating += new System.ComponentModel.CancelEventHandler(this.tbPacientID_Validating);
+            this.tbPacientID.Validated += new System.EventHandler(this.tbPacientID_Validated);
             // 
             // label2
             // 
@@ -81,6 +86,8 @@
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 22);
             this.tbPassword.TabIndex = 4;
+            this.tbPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tbPassword_Validating);
+            this.tbPassword.Validated += new System.EventHandler(this.tbPassword_Validated);
             // 
             // btnCancel
             // 
@@ -100,6 +107,8 @@
             this.tbPIN.PasswordChar = '*';
             this.tbPIN.Size = new System.Drawing.Size(100, 22);
             this.tbPIN.TabIndex = 10;
+            this.tbPIN.Validating += new System.ComponentModel.CancelEventHandler(this.tbPIN_Validating);
+            this.tbPIN.Validated += new System.EventHandler(this.tbPIN_Validated);
             // 
             // label3
             // 
@@ -109,6 +118,10 @@
             this.label3.Size = new System.Drawing.Size(64, 17);
             this.label3.TabIndex = 9;
             this.label3.Text = "Card PIN";
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // PacientLogIn
             // 
@@ -125,6 +138,7 @@
             this.Controls.Add(this.label1);
             this.Name = "PacientLogIn";
             this.Text = "PacientLogIn";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,5 +154,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TextBox tbPIN;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

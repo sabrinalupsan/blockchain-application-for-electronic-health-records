@@ -109,31 +109,37 @@ namespace BlockchainApp
 
         private void btnDone_Click(object sender, EventArgs e)
         {
-            long patientID = long.Parse(tbNewPacientID.Text.Trim());
-
-            //input in the patient database the docID, lastName, firstName, password
-            SqlConnectionStringBuilder builder = build();
-
-            using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+            //HERE YOU NEED TO CHECK IF THIS PATIENT ID EXISTS IN THE PATIENTS DATABASE
+            try
             {
+                long patientID = long.Parse(tbNewPacientID.Text.Trim());
+                SqlConnectionStringBuilder builder = build();
 
-                var querryString =
-                    "INSERT INTO Associations (doctor_id, pacient_id)" +
-                    "VALUES (@docID, @patientID);";
-                using (SqlCommand command = new SqlCommand(querryString, conn))
+                using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                 {
-                    conn.Open();
-                    command.Parameters.AddWithValue("@docID", doctor.docID);
-                    command.Parameters.AddWithValue("@patientID", patientID.ToString());
 
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    var querryString =
+                        "INSERT INTO Associations (doctor_id, pacient_id)" +
+                        "VALUES (@docID, @patientID);";
+                    using (SqlCommand command = new SqlCommand(querryString, conn))
                     {
-                        while (reader.Read())
+                        conn.Open();
+                        command.Parameters.AddWithValue("@docID", doctor.docID);
+                        command.Parameters.AddWithValue("@patientID", patientID.ToString());
+
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                            while (reader.Read())
+                            {
+                                Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                            }
                         }
                     }
                 }
+            }
+            catch(FormatException)
+            {
+                MessageBox.Show("Please input a valid patient ID!");
             }
         }
 
@@ -414,6 +420,34 @@ namespace BlockchainApp
             Patient patient = (Patient)item.Tag;
             MedicalRecordInterface medicalRecordInterface = new MedicalRecordInterface(record, patient);
             medicalRecordInterface.ShowDialog();
+        }
+
+        private void tbPIN_Validating(object sender, CancelEventArgs e)
+        {
+            //if (!(tbPIN.Text.Trim().All(char.IsNumber)) || tbPIN.Text.Trim().Length != 4)
+            //{
+            //    errorProvider.SetError(tbPIN, "You did not input a PIN code!");
+            //    e.Cancel = true;
+            //}
+        }
+
+        private void tbPIN_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbPIN, null);
+        }
+
+        private void tbNewPacientID_Validating(object sender, CancelEventArgs e)
+        {
+            //if(tbPacientID.Text.Trim().Length != 7)
+            //{
+            //    errorProvider.SetError(tbDocID, "Wrong ID.");
+            //    e.Cancel = true;
+            //}
+        }
+
+        private void tbNewPacientID_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbNewPacientID, null);
         }
     }
 }

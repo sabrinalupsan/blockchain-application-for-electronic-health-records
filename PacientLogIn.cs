@@ -184,9 +184,55 @@ namespace BlockchainApp
             else
                 MessageBox.Show("Too many attempts!");
         }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void tbPacientID_Validating(object sender, CancelEventArgs e)
+        {
+            //if(tbPacientID.Text.Trim().Length != 7)
+            //{
+            //    errorProvider.SetError(tbDocID, "Wrong ID.");
+            //    e.Cancel = true;
+            //}
+        }
+
+        private void tbPacientID_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbPacientID, null);
+        }
+
+        private void tbPassword_Validating(object sender, CancelEventArgs e)
+        {
+            //if (tbPassword.Text.Trim().Length < 5 || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
+            //    || !(tbPassword.Text.Trim().Any(char.IsLetter)) || !(tbPassword.Text.Trim().Any(char.IsNumber)) ||
+            //    !(tbPassword.Text.Trim().Any(char.IsPunctuation)))
+            //{
+            //    errorProvider.SetError(tbPassword, "Your passwords need to include a number, an uppercase character, a special symbol and " +
+            //        "at least 5 characters!");
+            //    e.Cancel = true;
+            //}
+        }
+
+        private void tbPassword_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbPassword, null);
+        }
+
+        private void tbPIN_Validating(object sender, CancelEventArgs e)
+        {
+            //if (!(tbPIN.Text.Trim().All(char.IsNumber)) || tbPIN.Text.Trim().Length != 4)
+            //{
+            //    errorProvider.SetError(tbPIN, "You did not input a PIN code!");
+            //    e.Cancel = true;
+            //}
+        }
+
+        private void tbPIN_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbPIN, null);
         }
     }
 }

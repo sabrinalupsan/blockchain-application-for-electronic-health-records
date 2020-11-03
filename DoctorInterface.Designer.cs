@@ -70,7 +70,7 @@
             this.lvPacients.HideSelection = false;
             this.lvPacients.Location = new System.Drawing.Point(12, 49);
             this.lvPacients.Name = "lvPacients";
-            this.lvPacients.Size = new System.Drawing.Size(471, 186);
+            this.lvPacients.Size = new System.Drawing.Size(471, 180);
             this.lvPacients.TabIndex = 1;
             this.lvPacients.UseCompatibleStateImageBehavior = false;
             this.lvPacients.View = System.Windows.Forms.View.Details;
@@ -134,6 +134,8 @@
             this.tbNewPacientID.Name = "tbNewPacientID";
             this.tbNewPacientID.Size = new System.Drawing.Size(100, 22);
             this.tbNewPacientID.TabIndex = 6;
+            this.tbNewPacientID.Validating += new System.ComponentModel.CancelEventHandler(this.tbNewPacientID_Validating);
+            this.tbNewPacientID.Validated += new System.EventHandler(this.tbNewPacientID_Validated);
             // 
             // label3
             // 
@@ -157,10 +159,10 @@
             // 
             // tbDetails
             // 
-            this.tbDetails.Location = new System.Drawing.Point(79, 134);
+            this.tbDetails.Location = new System.Drawing.Point(89, 134);
             this.tbDetails.Multiline = true;
             this.tbDetails.Name = "tbDetails";
-            this.tbDetails.Size = new System.Drawing.Size(382, 129);
+            this.tbDetails.Size = new System.Drawing.Size(372, 129);
             this.tbDetails.TabIndex = 9;
             // 
             // panel2
@@ -193,7 +195,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(25, 98);
+            this.label6.Location = new System.Drawing.Point(0, 98);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(40, 17);
             this.label6.TabIndex = 16;
@@ -201,14 +203,14 @@
             // 
             // dtpDate
             // 
-            this.dtpDate.Location = new System.Drawing.Point(79, 54);
+            this.dtpDate.Location = new System.Drawing.Point(89, 54);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(200, 22);
             this.dtpDate.TabIndex = 15;
             // 
             // tbTitle
             // 
-            this.tbTitle.Location = new System.Drawing.Point(79, 98);
+            this.tbTitle.Location = new System.Drawing.Point(89, 98);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.Size = new System.Drawing.Size(200, 22);
             this.tbTitle.TabIndex = 17;
@@ -216,7 +218,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 54);
+            this.label5.Location = new System.Drawing.Point(3, 54);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 17);
             this.label5.TabIndex = 14;
@@ -224,7 +226,7 @@
             // 
             // btnCheck
             // 
-            this.btnCheck.Location = new System.Drawing.Point(267, 13);
+            this.btnCheck.Location = new System.Drawing.Point(313, 14);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(75, 23);
             this.btnCheck.TabIndex = 13;
@@ -235,7 +237,7 @@
             // Details
             // 
             this.Details.AutoSize = true;
-            this.Details.Location = new System.Drawing.Point(22, 134);
+            this.Details.Location = new System.Drawing.Point(3, 131);
             this.Details.Name = "Details";
             this.Details.Size = new System.Drawing.Size(51, 17);
             this.Details.TabIndex = 11;
@@ -243,17 +245,19 @@
             // 
             // tbPIN
             // 
-            this.tbPIN.Location = new System.Drawing.Point(108, 13);
+            this.tbPIN.Location = new System.Drawing.Point(89, 14);
             this.tbPIN.Name = "tbPIN";
-            this.tbPIN.Size = new System.Drawing.Size(142, 22);
+            this.tbPIN.Size = new System.Drawing.Size(200, 22);
             this.tbPIN.TabIndex = 10;
             this.tbPIN.Text = "Input PIN here";
             this.tbPIN.Click += new System.EventHandler(this.tbPIN_Click);
+            this.tbPIN.Validating += new System.ComponentModel.CancelEventHandler(this.tbPIN_Validating);
+            this.tbPIN.Validated += new System.EventHandler(this.tbPIN_Validated);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(22, 13);
+            this.label4.Location = new System.Drawing.Point(3, 14);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 17);
             this.label4.TabIndex = 0;
@@ -274,7 +278,7 @@
             // 
             // selectRecord
             // 
-            this.selectRecord.Location = new System.Drawing.Point(492, 241);
+            this.selectRecord.Location = new System.Drawing.Point(600, 235);
             this.selectRecord.Name = "selectRecord";
             this.selectRecord.Size = new System.Drawing.Size(107, 26);
             this.selectRecord.TabIndex = 11;

@@ -20,6 +20,31 @@ namespace BlockchainApp
             InitializeComponent();
         }
 
+        private SqlConnectionStringBuilder build()
+        {
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+            builder.DataSource = "blockchainapp.database.windows.net";
+            builder.UserID = "lupsansabrina18";
+            builder.Password = "Selenacolierul9!";
+            builder.InitialCatalog = "blockchainapp";
+            return builder;
+        }
+
+        private byte[] computeHash(string toHash)
+        {
+            var hasher = SHA256.Create();
+            byte[] byteHash = System.Text.Encoding.UTF8.GetBytes(toHash);
+            return hasher.ComputeHash(byteHash);
+        }
+
+        private string computeHash2(string toHash)
+        {
+            var hasher = SHA256.Create();
+            byte[] byteHash = System.Text.Encoding.UTF8.GetBytes(toHash);
+            byte[] finalHash = hasher.ComputeHash(byteHash);
+            return Encoding.Default.GetString(finalHash);
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (tbPassword.Text.Trim().ToString().CompareTo(tbRePassword.Text.Trim().ToString()) != 0)
@@ -36,11 +61,7 @@ namespace BlockchainApp
                 byte[] hashedPassword = hasher.ComputeHash(pass);
 
 
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "blockchainapp.database.windows.net";
-                builder.UserID = "lupsansabrina18";
-                builder.Password = "Selenacolierul9!";
-                builder.InitialCatalog = "blockchainapp";
+                SqlConnectionStringBuilder builder = build();
 
 
                 using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
@@ -81,18 +102,12 @@ namespace BlockchainApp
                 long pacID = long.Parse(tbPacientID.Text.Trim());
                 string lastName = tbPacientLastName.Text.Trim().ToString();
                 string firstName = tbPacientFirstName.Text.Trim().ToString();
-                string password = tbPassword.Text.Trim().ToString();
-                var hasher = SHA256.Create();
-                byte[] pass = System.Text.Encoding.UTF8.GetBytes(password);
-                byte[] hashedPassword = hasher.ComputeHash(pass);
+                string password = tbPacientPassword.Text.Trim().ToString();
+                string hashedPass = computeHash2(password);
                 DateTime birthday = dtpBirthday.Value;
 
 
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "blockchainapp.database.windows.net";
-                builder.UserID = "lupsansabrina18";
-                builder.Password = "Selenacolierul9!";
-                builder.InitialCatalog = "blockchainapp";
+                SqlConnectionStringBuilder builder = build();
 
 
                 using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
@@ -107,7 +122,7 @@ namespace BlockchainApp
                         command.Parameters.AddWithValue("@pacID", tbPacientID.Text.Trim().ToString());
                         command.Parameters.AddWithValue("@lastName", tbPacientLastName.Text.Trim().ToString());
                         command.Parameters.AddWithValue("@firstName", tbPacientFirstName.Text.Trim().ToString());
-                        command.Parameters.AddWithValue("@hashedPass", Encoding.Default.GetString(hashedPassword));
+                        command.Parameters.AddWithValue("@hashedPass", hashedPass);
                         command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
                         command.Parameters.AddWithValue("@birthday", birthday.ToString("yyyy-MM-dd"));
 

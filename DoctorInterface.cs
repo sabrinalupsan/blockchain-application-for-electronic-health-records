@@ -231,6 +231,10 @@ namespace BlockchainApp
             {
                 MessageBox.Show("Please select a patient!");
             }
+            catch(System.FormatException)
+            {
+                MessageBox.Show("Please input a PIN code.");
+            }
         }
 
         private void btnSelectPacient_Click(object sender, EventArgs e)

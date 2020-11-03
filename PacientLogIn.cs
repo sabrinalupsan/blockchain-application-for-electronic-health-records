@@ -22,6 +22,21 @@ namespace BlockchainApp
             successfulAuthentication = 0;
         }
 
+        private byte[] computeHash(string toHash)
+        {
+            var hasher = SHA256.Create();
+            byte[] byteHash = System.Text.Encoding.UTF8.GetBytes(toHash);
+            return hasher.ComputeHash(byteHash);
+        }
+
+        private string computeHash2(string toHash)
+        {
+            var hasher = SHA256.Create();
+            byte[] byteHash = System.Text.Encoding.UTF8.GetBytes(toHash);
+            byte[] finalHash = hasher.ComputeHash(byteHash);
+            return Encoding.Default.GetString(finalHash);
+        }
+
         private SqlConnectionStringBuilder build()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
@@ -42,16 +57,11 @@ namespace BlockchainApp
         {
             if (successfulAuthentication < 3)
             {
-                long pacientID = long.Parse(tbPacientID.Text.Trim());
-
+                long inputedPacientID = long.Parse(tbPacientID.Text.Trim());
                 //https://stackoverflow.com/questions/3984138/hash-string-in-c-sharp
-                var hasher = SHA256.Create();
-                byte[] pass = System.Text.Encoding.UTF8.GetBytes(tbPassword.Text.Trim().ToString());
-                byte[] hashedPassword = hasher.ComputeHash(pass);
-                //MessageBox.Show(Encoding.Default.GetString(hashedPassword));
 
-                byte[] PIN = System.Text.Encoding.UTF8.GetBytes(tbPIN.Text.Trim().ToString());
-                byte[] hashedPIN = hasher.ComputeHash(PIN);
+                string inputedPass = tbPassword.Text.Trim().ToString();
+                string hashedPass = computeHash2(inputedPass);
 
                 SqlConnectionStringBuilder builder = build();
 
@@ -67,75 +77,113 @@ namespace BlockchainApp
                     {
                         while (reader.Read())
                         {
-                            int the_ID = (int)reader["pacient_id"];
-                            long id = the_ID;
-                            string password = (string)reader["hashed_pass"];
-                            if (id.CompareTo(pacientID) == 0 && (Encoding.Default.GetString(hashedPassword)).CompareTo(password) == 0)
-                            {
+                            int DBID = (int)reader["pacient_id"];
+                            long databaseID = (long)DBID;
+                            string databasePassword = (string)reader["hashed_pass"];
+
+                            if (inputedPacientID.CompareTo(databaseID) == 0 && hashedPass.CompareTo(databasePassword) == 0)
                                 if (reader["hashed_PIN"] == System.DBNull.Value)
                                 {
                                     int newPIN = generatePIN();
                                     MessageBox.Show("Your new token PIN for the next 30 days is: " + newPIN.ToString());
 
-                                    PIN = System.Text.Encoding.UTF8.GetBytes(newPIN.ToString());
-                                    hashedPIN = hasher.ComputeHash(PIN);
+                                    string hashedNewPIN = computeHash2(newPIN.ToString());
 
-                                    var updatePINquery = "UPDATE Pacients SET hashed_PIN = @hashPIN WHERE pacient_id = " + id + ";";
+                                    var updatePINquery = "UPDATE Pacients SET hashed_PIN = @hashPIN WHERE pacient_id = " + inputedPacientID + ";";
                                     using (SqlConnection updatePINconnection = new SqlConnection(builder.ConnectionString))
                                     {
                                         updatePINconnection.Open();
                                         using (SqlCommand updatePINCommand = new SqlCommand(updatePINquery, updatePINconnection))
                                         {
-                                            updatePINCommand.Parameters.AddWithValue("@hashPIN", hashedPIN);
+                                            updatePINCommand.Parameters.AddWithValue("@hashPIN", hashedNewPIN);
 
                                             using (SqlDataReader updatePINReader = updatePINCommand.ExecuteReader())
-                                            {
                                                 while (updatePINReader.Read())
-                                                {
                                                     Console.WriteLine("{0} {1}", updatePINReader.GetString(0), updatePINReader.GetString(1));
-                                                }
-                                            }
                                         }
                                     }
                                     connected = true;
                                     string lastName = (string)reader["pacient_last_name"];
                                     string firstName = (string)reader["pacient_first_name"];
-                                    byte[] thePass = System.Text.Encoding.UTF8.GetBytes(password);
-                                    //int newPIN = generatePIN();
-
-                                    byte[] thePIN = null;//= System.Text.Encoding.UTF8.GetBytes(PIN_token);
                                     DateTime theDate = (DateTime)reader["last_login"];
                                     DateTime birthday = (DateTime)reader["birthday"];
-                                    Patient pacient = new Patient(id, thePass, thePIN, lastName, firstName, birthday);
-                                    PatientInterface pacientInterface = new PatientInterface(pacient);
-                                    pacientInterface.ShowDialog();
+
+                                    byte[] thePass = System.Text.Encoding.UTF8.GetBytes(hashedPass);
+                                    byte[] thePIN = System.Text.Encoding.UTF8.GetBytes(hashedNewPIN);
+
+                                    Patient patient = new Patient(inputedPacientID, thePass, thePIN, lastName, firstName, birthday);
+                                    PatientInterface patientInterface = new PatientInterface(patient);
+                                    patientInterface.ShowDialog();
                                     Hide();
                                 }
-                            }
+                                else
+                                {
+                                    try
+                                    {
+                                        int inputedPIN = int.Parse(tbPIN.Text.Trim().ToString());
+                                        string hashedPIN = computeHash2(inputedPIN.ToString());
+
+                                        string databasePIN = (string)reader["hashed_PIN"];
+                                        if (hashedPIN.CompareTo(databasePIN) == 0)
+                                        {
+                                            connected = true;
+                                            string lastName = (string)reader["pacient_last_name"];
+                                            string firstName = (string)reader["pacient_first_name"];
+                                            DateTime theDate = (DateTime)reader["last_login"];
+                                            DateTime birthday = (DateTime)reader["birthday"];
+
+                                            if ((DateTime.Today.Date - theDate.Date).Days > 30)
+                                            {
+                                                int newPIN = generatePIN();
+                                                MessageBox.Show("Your new token PIN for the next 30 days is: " + newPIN.ToString());
+                                                //hash the PIN
+                                                string hashedNewPIN = computeHash2(newPIN.ToString());
+                                                var updateQuery = "UPDATE Pacients SET hashed_pin = @hashPIN;";
+                                                var updateCommand = new SqlCommand(updateQuery, conn);
+                                                updateCommand.Parameters.AddWithValue("@hashPIN", hashedNewPIN);
+                                            }
+                                            //we need to input the new login
+                                            var lastLoginQuery = "UPDATE Pacients" + " SET last_login = SYSDATETIME()" + "WHERE pacient_id =" + inputedPacientID + ";";
+                                            using (SqlConnection lastLoginConnection = new SqlConnection(builder.ConnectionString))
+                                            {
+                                                lastLoginConnection.Open();
+                                                using (SqlCommand lastLoginCommand = new SqlCommand(lastLoginQuery, lastLoginConnection))
+                                                {
+                                                    lastLoginCommand.Parameters.AddWithValue("@last_login", DateTime.Now.ToString("yyyy-MM-dd"));
+
+                                                    using (SqlDataReader lastLoginreader = lastLoginCommand.ExecuteReader())
+                                                        while (lastLoginreader.Read())
+                                                            Console.WriteLine("{0} {1}", lastLoginreader.GetString(0), lastLoginreader.GetString(1));
+                                                }
+                                            }
+
+                                            byte[] thePass = System.Text.Encoding.UTF8.GetBytes(hashedPass);
+                                            byte[] thePIN = System.Text.Encoding.UTF8.GetBytes(hashedPIN);
+
+                                            Patient patient = new Patient(inputedPacientID, thePass, thePIN, lastName, firstName, birthday);
+                                            PatientInterface patientInterface = new PatientInterface(patient);
+                                            patientInterface.ShowDialog();
+                                            Hide();
+                                        }
+                                    }
+                                    catch(FormatException)
+                                    {
+                                        MessageBox.Show("Please input the PIN");
+                                    }
+                                }
                         }
                     }
+
                     if (connected == false)
                         MessageBox.Show("Invalid credentials!");
+                    successfulAuthentication++;
+
+
                 }
-
-                //here i need to check with the database that the pass, ID and token are ok: SQL querry
-                //if yes:
-                //get the doc from the database and see how many days are in his last login: SQL querry
-                //firstly we see if we need to create a new token PIN
-                //if ((DateTime.Today.Date - doc.lastLogin.Date).Days > 30)
-                //{
-                //    MessageBox.Show("Your new token PIN for the next 30 days is: " + "randomized_PIN_here");
-                //    //hash the PIN
-                //    //change the value for hashed_pin and last_login from the table
-                //}
-                //if no:
-                successfulAuthentication++;
-
             }
             else
-                MessageBox.Show("Yo dont DDOS me");
+                MessageBox.Show("Too many attempts!");
         }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MedicalRecordInterface));
             this.btnDone = new System.Windows.Forms.Button();
             this.tbTitle = new System.Windows.Forms.TextBox();
             this.tbDescription = new System.Windows.Forms.TextBox();
@@ -43,7 +44,7 @@
             // 
             // btnDone
             // 
-            this.btnDone.Location = new System.Drawing.Point(148, 415);
+            this.btnDone.Location = new System.Drawing.Point(150, 422);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(75, 23);
             this.btnDone.TabIndex = 0;
@@ -53,7 +54,7 @@
             // 
             // tbTitle
             // 
-            this.tbTitle.Location = new System.Drawing.Point(148, 157);
+            this.tbTitle.Location = new System.Drawing.Point(148, 198);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.ReadOnly = true;
             this.tbTitle.Size = new System.Drawing.Size(183, 22);
@@ -62,7 +63,7 @@
             // tbDescription
             // 
             this.tbDescription.BackColor = System.Drawing.SystemColors.Control;
-            this.tbDescription.Location = new System.Drawing.Point(148, 208);
+            this.tbDescription.Location = new System.Drawing.Point(150, 226);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.ReadOnly = true;
@@ -71,7 +72,7 @@
             // 
             // tbFirstName
             // 
-            this.tbFirstName.Location = new System.Drawing.Point(150, 70);
+            this.tbFirstName.Location = new System.Drawing.Point(150, 123);
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.ReadOnly = true;
             this.tbFirstName.Size = new System.Drawing.Size(183, 22);
@@ -80,7 +81,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 118);
+            this.label1.Location = new System.Drawing.Point(16, 159);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 17);
             this.label1.TabIndex = 4;
@@ -89,7 +90,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 70);
+            this.label2.Location = new System.Drawing.Point(16, 123);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(128, 17);
             this.label2.TabIndex = 5;
@@ -98,7 +99,7 @@
             // Patient
             // 
             this.Patient.AutoSize = true;
-            this.Patient.Location = new System.Drawing.Point(16, 30);
+            this.Patient.Location = new System.Drawing.Point(16, 89);
             this.Patient.Name = "Patient";
             this.Patient.Size = new System.Drawing.Size(127, 17);
             this.Patient.TabIndex = 6;
@@ -107,7 +108,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 157);
+            this.label4.Location = new System.Drawing.Point(16, 198);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 17);
             this.label4.TabIndex = 7;
@@ -116,7 +117,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 208);
+            this.label5.Location = new System.Drawing.Point(16, 226);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 17);
             this.label5.TabIndex = 8;
@@ -124,7 +125,7 @@
             // 
             // tbLastName
             // 
-            this.tbLastName.Location = new System.Drawing.Point(148, 27);
+            this.tbLastName.Location = new System.Drawing.Point(150, 86);
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.ReadOnly = true;
             this.tbLastName.Size = new System.Drawing.Size(183, 22);
@@ -132,7 +133,7 @@
             // 
             // tbID
             // 
-            this.tbID.Location = new System.Drawing.Point(148, 118);
+            this.tbID.Location = new System.Drawing.Point(148, 159);
             this.tbID.Name = "tbID";
             this.tbID.ReadOnly = true;
             this.tbID.Size = new System.Drawing.Size(183, 22);
@@ -142,6 +143,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(434, 457);
             this.Controls.Add(this.tbID);
             this.Controls.Add(this.tbLastName);

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MaterialSkin;
+using MaterialSkin.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +12,7 @@ using System.Windows.Forms;
 
 namespace BlockchainApp
 {
-    public partial class MedicalRecordInterface : Form
+    public partial class MedicalRecordInterface : MaterialForm
     {
         MedicalRecord record;
         Patient patient;
@@ -20,6 +22,10 @@ namespace BlockchainApp
             InitializeComponent();
             this.record = record;
             this.patient = patient;
+            var skinManager = MaterialSkinManager.Instance;
+            skinManager.AddFormToManage(this);
+            skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            skinManager.ColorScheme = new ColorScheme(Primary.Pink200, Primary.Pink300, Primary.LightBlue200, Accent.LightBlue100, TextShade.WHITE);
         }
 
         private void btnDone_Click(object sender, EventArgs e)

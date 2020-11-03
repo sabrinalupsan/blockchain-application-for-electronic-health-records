@@ -46,3 +46,4 @@ D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\pt-BR
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\ru\Microsoft.Data.SqlClient.resources.dll
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\zh-Hans\Microsoft.Data.SqlClient.resources.dll
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.MedicalRecordInterface.resources

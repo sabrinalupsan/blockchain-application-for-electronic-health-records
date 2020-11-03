@@ -32,6 +32,16 @@ namespace BlockchainApp
             //}
         }
 
+        private SqlConnectionStringBuilder build()
+        {
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+            builder.DataSource = "blockchainapp.database.windows.net";
+            builder.UserID = "lupsansabrina18";
+            builder.Password = "Selenacolierul9!";
+            builder.InitialCatalog = "blockchainapp";
+            return builder;
+        }
+
         private void tbDocID_Validated(object sender, EventArgs e)
         {
             errorProvider.SetError(tbDocID, null);
@@ -39,11 +49,7 @@ namespace BlockchainApp
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "blockchainapp.database.windows.net";
-            builder.UserID = "lupsansabrina18";
-            builder.Password = "Selenacolierul9!";
-            builder.InitialCatalog = "blockchainapp";
+            SqlConnectionStringBuilder builder = build();
 
             if (successfulAuthentication<3)
             {

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BlockchainApp
 {
-    public class Pacient
+    public class Patient
     {
-        private long PacientID;
-        public long pacientID { get { return PacientID; } set { PacientID = value; } }
+        private long PatientID;
+        public long patientID { get { return PatientID; } set { PatientID = value; } }
 
         private byte[] PassHashed;
         public byte[] passHashed { get { return PassHashed; } }
@@ -30,19 +30,19 @@ namespace BlockchainApp
         public DateTime birthDate { get { return Birthdate; } set { Birthdate = value; } }
 
 
-        public Pacient() { }
+        public Patient() { }
 
-        public Pacient(long pacientID, string lastName, string firstName, DateTime bday)
+        public Patient(long patientID, string lastName, string firstName, DateTime bday)
         {
-            PacientID = pacientID;
+            PatientID = patientID;
             LastName = lastName;
             FirstName = firstName;
             Birthdate = bday;
         }
 
-        public Pacient(long pacientID, byte[] passHashed, byte[] cardPIN, List<Doctor> doctors, string lastName, string firstName, DateTime bday)
+        public Patient(long patientID, byte[] passHashed, byte[] cardPIN, List<Doctor> doctors, string lastName, string firstName, DateTime bday)
         {
-            PacientID = pacientID;
+            PatientID = patientID;
             PassHashed = passHashed;
             CardPIN = cardPIN;
             Doctors = doctors;
@@ -51,9 +51,9 @@ namespace BlockchainApp
             Birthdate = bday;
         }
 
-        public Pacient(long pacientID, byte[] passHashed, byte[] cardPIN, string lastName, string firstName, DateTime bday)
+        public Patient(long patientID, byte[] passHashed, byte[] cardPIN, string lastName, string firstName, DateTime bday)
         {
-            PacientID = pacientID;
+            PatientID = patientID;
             PassHashed = passHashed;
             CardPIN = cardPIN;
             LastName = lastName;

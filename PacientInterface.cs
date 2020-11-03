@@ -12,7 +12,7 @@ namespace BlockchainApp
 {
     public partial class PacientInterface : Form
     {
-        public PacientInterface(Pacient pacient)
+        public PacientInterface(Patient pacient)
         {
             InitializeComponent();
         }

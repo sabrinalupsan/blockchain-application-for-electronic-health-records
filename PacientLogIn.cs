@@ -22,6 +22,16 @@ namespace BlockchainApp
             successfulAuthentication = 0;
         }
 
+        private SqlConnectionStringBuilder build()
+        {
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+            builder.DataSource = "blockchainapp.database.windows.net";
+            builder.UserID = "lupsansabrina18";
+            builder.Password = "Selenacolierul9!";
+            builder.InitialCatalog = "blockchainapp";
+            return builder;
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (successfulAuthentication < 3)
@@ -37,11 +47,7 @@ namespace BlockchainApp
                 byte[] PIN = System.Text.Encoding.UTF8.GetBytes(tbPIN.Text.Trim().ToString());
                 byte[] hashedPIN = hasher.ComputeHash(PIN);
 
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "blockchainapp.database.windows.net";
-                builder.UserID = "lupsansabrina18";
-                builder.Password = "Selenacolierul9!";
-                builder.InitialCatalog = "blockchainapp";
+                SqlConnectionStringBuilder builder = build();
 
                 //select querry
                 var querry = "SELECT * from Pacients;";
@@ -67,7 +73,7 @@ namespace BlockchainApp
                                 byte[] thePIN = null;//= System.Text.Encoding.UTF8.GetBytes(PIN_token);
                                 DateTime theDate = (DateTime)reader["last_login"];
                                 DateTime birthday = (DateTime)reader["birthday"];
-                                Pacient pacient = new Pacient(id, thePass, thePIN, lastName, firstName, birthday);
+                                Patient pacient = new Patient(id, thePass, thePIN, lastName, firstName, birthday);
                                 PacientInterface pacientInterface = new PacientInterface(pacient);
                                 pacientInterface.ShowDialog();
                                 Hide();

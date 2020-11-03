@@ -53,6 +53,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lbRecords = new System.Windows.Forms.ListBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.selectRecord = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -271,11 +272,22 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // selectRecord
+            // 
+            this.selectRecord.Location = new System.Drawing.Point(492, 241);
+            this.selectRecord.Name = "selectRecord";
+            this.selectRecord.Size = new System.Drawing.Size(107, 26);
+            this.selectRecord.TabIndex = 11;
+            this.selectRecord.Text = "Select pacient";
+            this.selectRecord.UseVisualStyleBackColor = true;
+            this.selectRecord.Click += new System.EventHandler(this.selectRecord_Click);
+            // 
             // DoctorInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(809, 606);
+            this.Controls.Add(this.selectRecord);
             this.Controls.Add(this.lbRecords);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -320,5 +332,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnAddNewRecord;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Button selectRecord;
     }
 }

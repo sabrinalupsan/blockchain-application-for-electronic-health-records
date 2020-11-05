@@ -61,6 +61,7 @@
             // 
             // lvPacients
             // 
+            this.lvPacients.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.lvPacients.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.PacientLastName,
@@ -101,12 +102,14 @@
             // 
             // btnSelectPacient
             // 
+            this.btnSelectPacient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnSelectPacient.ForeColor = System.Drawing.Color.White;
             this.btnSelectPacient.Location = new System.Drawing.Point(12, 241);
             this.btnSelectPacient.Name = "btnSelectPacient";
             this.btnSelectPacient.Size = new System.Drawing.Size(107, 26);
             this.btnSelectPacient.TabIndex = 3;
             this.btnSelectPacient.Text = "Select patient";
-            this.btnSelectPacient.UseVisualStyleBackColor = true;
+            this.btnSelectPacient.UseVisualStyleBackColor = false;
             this.btnSelectPacient.Click += new System.EventHandler(this.btnSelectPacient_Click);
             // 
             // label2
@@ -120,16 +123,19 @@
             // 
             // btnDone
             // 
+            this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnDone.ForeColor = System.Drawing.Color.White;
             this.btnDone.Location = new System.Drawing.Point(82, 131);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(75, 23);
             this.btnDone.TabIndex = 5;
             this.btnDone.Text = "Done";
-            this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.UseVisualStyleBackColor = false;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // tbNewPacientID
             // 
+            this.tbNewPacientID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbNewPacientID.Location = new System.Drawing.Point(119, 57);
             this.tbNewPacientID.Name = "tbNewPacientID";
             this.tbNewPacientID.Size = new System.Drawing.Size(100, 22);
@@ -159,6 +165,7 @@
             // 
             // tbDetails
             // 
+            this.tbDetails.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbDetails.Location = new System.Drawing.Point(89, 134);
             this.tbDetails.Multiline = true;
             this.tbDetails.Name = "tbDetails";
@@ -203,6 +210,7 @@
             // 
             // dtpDate
             // 
+            this.dtpDate.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.dtpDate.Location = new System.Drawing.Point(89, 54);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(200, 22);
@@ -210,6 +218,7 @@
             // 
             // tbTitle
             // 
+            this.tbTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbTitle.Location = new System.Drawing.Point(89, 98);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.Size = new System.Drawing.Size(200, 22);
@@ -226,12 +235,14 @@
             // 
             // btnCheck
             // 
+            this.btnCheck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnCheck.ForeColor = System.Drawing.Color.White;
             this.btnCheck.Location = new System.Drawing.Point(313, 14);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(75, 23);
             this.btnCheck.TabIndex = 13;
             this.btnCheck.Text = "Check";
-            this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.UseVisualStyleBackColor = false;
             this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
             // 
             // Details
@@ -245,6 +256,7 @@
             // 
             // tbPIN
             // 
+            this.tbPIN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbPIN.Location = new System.Drawing.Point(89, 14);
             this.tbPIN.Name = "tbPIN";
             this.tbPIN.Size = new System.Drawing.Size(200, 22);
@@ -265,6 +277,7 @@
             // 
             // lbRecords
             // 
+            this.lbRecords.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.lbRecords.FormattingEnabled = true;
             this.lbRecords.ItemHeight = 16;
             this.lbRecords.Location = new System.Drawing.Point(492, 49);
@@ -278,18 +291,21 @@
             // 
             // selectRecord
             // 
+            this.selectRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.selectRecord.ForeColor = System.Drawing.Color.White;
             this.selectRecord.Location = new System.Drawing.Point(600, 235);
             this.selectRecord.Name = "selectRecord";
             this.selectRecord.Size = new System.Drawing.Size(107, 26);
             this.selectRecord.TabIndex = 11;
             this.selectRecord.Text = "Select record";
-            this.selectRecord.UseVisualStyleBackColor = true;
+            this.selectRecord.UseVisualStyleBackColor = false;
             this.selectRecord.Click += new System.EventHandler(this.selectRecord_Click);
             // 
             // DoctorInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
             this.ClientSize = new System.Drawing.Size(809, 606);
             this.Controls.Add(this.selectRecord);
             this.Controls.Add(this.lbRecords);

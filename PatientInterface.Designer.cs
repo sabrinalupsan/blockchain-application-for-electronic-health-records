@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.lvRecords = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnSeeRecord = new System.Windows.Forms.Button();
             this.btnPrintRecord = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label2 = new System.Windows.Forms.Label();
             this.tbDate = new System.Windows.Forms.TextBox();
             this.tbName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -43,15 +44,16 @@
             this.tbTitle = new System.Windows.Forms.TextBox();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.btnDone = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvRecords
             // 
+            this.lvRecords.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.lvRecords.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
+            this.lvRecords.ForeColor = System.Drawing.Color.Black;
             this.lvRecords.GridLines = true;
             this.lvRecords.HideSelection = false;
             this.lvRecords.Location = new System.Drawing.Point(12, 55);
@@ -60,24 +62,36 @@
             this.lvRecords.TabIndex = 0;
             this.lvRecords.UseCompatibleStateImageBehavior = false;
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Title";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Doctor name";
+            // 
             // btnSeeRecord
             // 
+            this.btnSeeRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnSeeRecord.ForeColor = System.Drawing.Color.White;
             this.btnSeeRecord.Location = new System.Drawing.Point(12, 244);
             this.btnSeeRecord.Name = "btnSeeRecord";
             this.btnSeeRecord.Size = new System.Drawing.Size(99, 23);
             this.btnSeeRecord.TabIndex = 1;
             this.btnSeeRecord.Text = "Show record";
-            this.btnSeeRecord.UseVisualStyleBackColor = true;
+            this.btnSeeRecord.UseVisualStyleBackColor = false;
             this.btnSeeRecord.Click += new System.EventHandler(this.btnSeeRecord_Click);
             // 
             // btnPrintRecord
             // 
+            this.btnPrintRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnPrintRecord.ForeColor = System.Drawing.Color.White;
             this.btnPrintRecord.Location = new System.Drawing.Point(12, 284);
             this.btnPrintRecord.Name = "btnPrintRecord";
             this.btnPrintRecord.Size = new System.Drawing.Size(99, 23);
             this.btnPrintRecord.TabIndex = 2;
             this.btnPrintRecord.Text = "Print record";
-            this.btnPrintRecord.UseVisualStyleBackColor = true;
+            this.btnPrintRecord.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -104,16 +118,18 @@
             this.panel1.Size = new System.Drawing.Size(319, 301);
             this.panel1.TabIndex = 4;
             // 
-            // columnHeader1
+            // label2
             // 
-            this.columnHeader1.Text = "Title";
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Doctor name";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 88);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 17);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Date";
             // 
             // tbDate
             // 
+            this.tbDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbDate.Location = new System.Drawing.Point(130, 88);
             this.tbDate.Name = "tbDate";
             this.tbDate.ReadOnly = true;
@@ -122,6 +138,7 @@
             // 
             // tbName
             // 
+            this.tbName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbName.Location = new System.Drawing.Point(130, 15);
             this.tbName.Name = "tbName";
             this.tbName.ReadOnly = true;
@@ -157,6 +174,7 @@
             // 
             // tbTitle
             // 
+            this.tbTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbTitle.Location = new System.Drawing.Point(130, 48);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.ReadOnly = true;
@@ -165,7 +183,7 @@
             // 
             // tbDescription
             // 
-            this.tbDescription.BackColor = System.Drawing.SystemColors.Control;
+            this.tbDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbDescription.Location = new System.Drawing.Point(88, 133);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
@@ -182,19 +200,11 @@
             this.btnDone.Text = "Done";
             this.btnDone.UseVisualStyleBackColor = true;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 88);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 17);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "Date";
-            // 
             // PatientInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
             this.ClientSize = new System.Drawing.Size(603, 331);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);

@@ -36,8 +36,10 @@
             // 
             // tbPassword
             // 
+            this.tbPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbPassword.Location = new System.Drawing.Point(155, 40);
             this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 22);
             this.tbPassword.TabIndex = 0;
             // 
@@ -52,30 +54,35 @@
             // 
             // OKbtn
             // 
+            this.OKbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
             this.OKbtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKbtn.Location = new System.Drawing.Point(59, 101);
+            this.OKbtn.ForeColor = System.Drawing.Color.White;
+            this.OKbtn.Location = new System.Drawing.Point(60, 101);
             this.OKbtn.Name = "OKbtn";
-            this.OKbtn.Size = new System.Drawing.Size(75, 23);
+            this.OKbtn.Size = new System.Drawing.Size(75, 28);
             this.OKbtn.TabIndex = 3;
             this.OKbtn.Text = "OK";
-            this.OKbtn.UseVisualStyleBackColor = true;
+            this.OKbtn.UseVisualStyleBackColor = false;
             this.OKbtn.Click += new System.EventHandler(this.OKbtn_Click);
             // 
             // CancelBtn
             // 
+            this.CancelBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.CancelBtn.ForeColor = System.Drawing.Color.White;
             this.CancelBtn.Location = new System.Drawing.Point(155, 101);
             this.CancelBtn.Name = "CancelBtn";
-            this.CancelBtn.Size = new System.Drawing.Size(75, 23);
+            this.CancelBtn.Size = new System.Drawing.Size(75, 28);
             this.CancelBtn.TabIndex = 4;
             this.CancelBtn.Text = "Cancel";
-            this.CancelBtn.UseVisualStyleBackColor = true;
+            this.CancelBtn.UseVisualStyleBackColor = false;
             this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
             // 
             // AdminLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
             this.ClientSize = new System.Drawing.Size(310, 173);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.OKbtn);

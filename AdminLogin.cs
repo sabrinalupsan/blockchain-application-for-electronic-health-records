@@ -28,6 +28,7 @@ namespace BlockchainApp
             if (password.CompareTo("123") == 0)
             {
                 AdminInterface form = new AdminInterface();
+                this.Hide();
                 form.Show();
             }
             else

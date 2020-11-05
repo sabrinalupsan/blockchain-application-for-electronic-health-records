@@ -57,9 +57,9 @@
             this.btnOkPacient = new System.Windows.Forms.Button();
             this.btnCancelPacient = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.dtpBirthday = new System.Windows.Forms.DateTimePicker();
             this.label14 = new System.Windows.Forms.Label();
+            this.dtpBirthday = new System.Windows.Forms.DateTimePicker();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -75,17 +75,20 @@
             // 
             // btnOK
             // 
+            this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOK.ForeColor = System.Drawing.Color.White;
             this.btnOK.Location = new System.Drawing.Point(43, 394);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(82, 27);
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "OK";
-            this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.UseVisualStyleBackColor = false;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // tbNewDocID
             // 
+            this.tbNewDocID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbNewDocID.Location = new System.Drawing.Point(178, 88);
             this.tbNewDocID.Name = "tbNewDocID";
             this.tbNewDocID.Size = new System.Drawing.Size(100, 22);
@@ -93,6 +96,7 @@
             // 
             // tbLastName
             // 
+            this.tbLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbLastName.Location = new System.Drawing.Point(178, 139);
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.Size = new System.Drawing.Size(100, 22);
@@ -109,6 +113,7 @@
             // 
             // tbFirstName
             // 
+            this.tbFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbFirstName.Location = new System.Drawing.Point(178, 186);
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.Size = new System.Drawing.Size(100, 22);
@@ -125,6 +130,7 @@
             // 
             // tbSpecialisation
             // 
+            this.tbSpecialisation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbSpecialisation.Location = new System.Drawing.Point(178, 232);
             this.tbSpecialisation.Name = "tbSpecialisation";
             this.tbSpecialisation.Size = new System.Drawing.Size(100, 22);
@@ -141,17 +147,20 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
             this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Location = new System.Drawing.Point(169, 394);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(82, 27);
             this.button1.TabIndex = 10;
             this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tbPassword
             // 
+            this.tbPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbPassword.Location = new System.Drawing.Point(178, 284);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
@@ -169,6 +178,7 @@
             // 
             // tbRePassword
             // 
+            this.tbRePassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbRePassword.Location = new System.Drawing.Point(178, 337);
             this.tbRePassword.Name = "tbRePassword";
             this.tbRePassword.PasswordChar = '*';
@@ -251,6 +261,7 @@
             // 
             // tbPacientID
             // 
+            this.tbPacientID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbPacientID.Location = new System.Drawing.Point(187, 88);
             this.tbPacientID.Name = "tbPacientID";
             this.tbPacientID.Size = new System.Drawing.Size(100, 22);
@@ -258,6 +269,7 @@
             // 
             // tbPacientLastName
             // 
+            this.tbPacientLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbPacientLastName.Location = new System.Drawing.Point(187, 136);
             this.tbPacientLastName.Name = "tbPacientLastName";
             this.tbPacientLastName.Size = new System.Drawing.Size(100, 22);
@@ -265,6 +277,7 @@
             // 
             // tbPacientFirstName
             // 
+            this.tbPacientFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbPacientFirstName.Location = new System.Drawing.Point(187, 186);
             this.tbPacientFirstName.Name = "tbPacientFirstName";
             this.tbPacientFirstName.Size = new System.Drawing.Size(100, 22);
@@ -272,6 +285,7 @@
             // 
             // tbPacientPassword
             // 
+            this.tbPacientPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbPacientPassword.Location = new System.Drawing.Point(187, 237);
             this.tbPacientPassword.Name = "tbPacientPassword";
             this.tbPacientPassword.PasswordChar = '*';
@@ -280,6 +294,7 @@
             // 
             // tbPacientREPass
             // 
+            this.tbPacientREPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbPacientREPass.Location = new System.Drawing.Point(187, 287);
             this.tbPacientREPass.Name = "tbPacientREPass";
             this.tbPacientREPass.PasswordChar = '*';
@@ -288,28 +303,33 @@
             // 
             // btnOkPacient
             // 
+            this.btnOkPacient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
             this.btnOkPacient.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOkPacient.ForeColor = System.Drawing.Color.White;
             this.btnOkPacient.Location = new System.Drawing.Point(53, 394);
             this.btnOkPacient.Name = "btnOkPacient";
             this.btnOkPacient.Size = new System.Drawing.Size(75, 23);
             this.btnOkPacient.TabIndex = 27;
             this.btnOkPacient.Text = "OK";
-            this.btnOkPacient.UseVisualStyleBackColor = true;
+            this.btnOkPacient.UseVisualStyleBackColor = false;
             this.btnOkPacient.Click += new System.EventHandler(this.btnOkPacient_Click);
             // 
             // btnCancelPacient
             // 
+            this.btnCancelPacient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
             this.btnCancelPacient.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelPacient.ForeColor = System.Drawing.Color.White;
             this.btnCancelPacient.Location = new System.Drawing.Point(199, 394);
             this.btnCancelPacient.Name = "btnCancelPacient";
             this.btnCancelPacient.Size = new System.Drawing.Size(75, 23);
             this.btnCancelPacient.TabIndex = 28;
             this.btnCancelPacient.Text = "Cancel";
-            this.btnCancelPacient.UseVisualStyleBackColor = true;
+            this.btnCancelPacient.UseVisualStyleBackColor = false;
             this.btnCancelPacient.Click += new System.EventHandler(this.btnCancelPacient_Click);
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(134)))), ((int)(((byte)(190)))));
             this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.dtpBirthday);
             this.panel1.Controls.Add(this.label8);
@@ -325,13 +345,31 @@
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.tbPacientLastName);
             this.panel1.Controls.Add(this.tbPacientID);
-            this.panel1.Location = new System.Drawing.Point(444, 12);
+            this.panel1.Location = new System.Drawing.Point(358, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(313, 441);
             this.panel1.TabIndex = 29;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(25, 337);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(60, 17);
+            this.label14.TabIndex = 30;
+            this.label14.Text = "Birthday";
+            // 
+            // dtpBirthday
+            // 
+            this.dtpBirthday.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.dtpBirthday.Location = new System.Drawing.Point(187, 332);
+            this.dtpBirthday.Name = "dtpBirthday";
+            this.dtpBirthday.Size = new System.Drawing.Size(100, 22);
+            this.dtpBirthday.TabIndex = 29;
+            // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(134)))), ((int)(((byte)(190)))));
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.label7);
@@ -352,27 +390,12 @@
             this.panel2.Size = new System.Drawing.Size(313, 441);
             this.panel2.TabIndex = 30;
             // 
-            // dtpBirthday
-            // 
-            this.dtpBirthday.Location = new System.Drawing.Point(187, 332);
-            this.dtpBirthday.Name = "dtpBirthday";
-            this.dtpBirthday.Size = new System.Drawing.Size(100, 22);
-            this.dtpBirthday.TabIndex = 29;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(25, 337);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(60, 17);
-            this.label14.TabIndex = 30;
-            this.label14.Text = "Birthday";
-            // 
             // AdminInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(769, 465);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
+            this.ClientSize = new System.Drawing.Size(684, 465);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "AdminInterface";

@@ -45,16 +45,19 @@
             // 
             // btnDone
             // 
-            this.btnDone.Location = new System.Drawing.Point(155, 357);
+            this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnDone.ForeColor = System.Drawing.Color.White;
+            this.btnDone.Location = new System.Drawing.Point(153, 373);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(75, 23);
             this.btnDone.TabIndex = 0;
             this.btnDone.Text = "Done";
-            this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.UseVisualStyleBackColor = false;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // tbTitle
             // 
+            this.tbTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbTitle.Location = new System.Drawing.Point(153, 133);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.ReadOnly = true;
@@ -63,8 +66,8 @@
             // 
             // tbDescription
             // 
-            this.tbDescription.BackColor = System.Drawing.SystemColors.Control;
-            this.tbDescription.Location = new System.Drawing.Point(155, 161);
+            this.tbDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.tbDescription.Location = new System.Drawing.Point(153, 177);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.ReadOnly = true;
@@ -73,6 +76,7 @@
             // 
             // tbFirstName
             // 
+            this.tbFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbFirstName.Location = new System.Drawing.Point(155, 58);
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.ReadOnly = true;
@@ -126,6 +130,7 @@
             // 
             // tbLastName
             // 
+            this.tbLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbLastName.Location = new System.Drawing.Point(155, 21);
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.ReadOnly = true;
@@ -134,6 +139,7 @@
             // 
             // tbID
             // 
+            this.tbID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbID.Location = new System.Drawing.Point(153, 94);
             this.tbID.Name = "tbID";
             this.tbID.ReadOnly = true;
@@ -150,7 +156,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
             this.ClientSize = new System.Drawing.Size(434, 399);
             this.Controls.Add(this.tbID);
             this.Controls.Add(this.tbLastName);

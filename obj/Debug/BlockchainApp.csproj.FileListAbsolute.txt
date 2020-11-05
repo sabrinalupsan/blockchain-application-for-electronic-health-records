@@ -46,6 +46,5 @@ D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\zh-Ha
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\zh-Hant\Microsoft.Data.SqlClient.resources.dll
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.MedicalRecordInterface.resources
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.PatientInterface.resources
-D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.PatientRecord.resources
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\MaterialSkin.dll
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.AdminLogin.resources

@@ -58,17 +58,20 @@
             this.lvRecords.HideSelection = false;
             this.lvRecords.Location = new System.Drawing.Point(12, 55);
             this.lvRecords.Name = "lvRecords";
-            this.lvRecords.Size = new System.Drawing.Size(245, 168);
+            this.lvRecords.Size = new System.Drawing.Size(357, 168);
             this.lvRecords.TabIndex = 0;
             this.lvRecords.UseCompatibleStateImageBehavior = false;
+            this.lvRecords.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Title";
+            this.columnHeader1.Width = 166;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Doctor name";
+            this.columnHeader2.Width = 121;
             // 
             // btnSeeRecord
             // 
@@ -113,7 +116,7 @@
             this.panel1.Controls.Add(this.tbTitle);
             this.panel1.Controls.Add(this.tbDescription);
             this.panel1.Controls.Add(this.btnDone);
-            this.panel1.Location = new System.Drawing.Point(275, 18);
+            this.panel1.Location = new System.Drawing.Point(413, 18);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(319, 301);
             this.panel1.TabIndex = 4;
@@ -209,7 +212,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
-            this.ClientSize = new System.Drawing.Size(603, 331);
+            this.ClientSize = new System.Drawing.Size(744, 331);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnPrintRecord);

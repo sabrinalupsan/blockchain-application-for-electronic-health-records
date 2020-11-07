@@ -107,37 +107,62 @@ namespace BlockchainApp
             }
         }
 
+        private bool checkID(long id)
+        {
+            bool ok = false;
+            var builder = build();
+            var querry = "SELECT pacient_id from Pacients;";
+            using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+            {
+                conn.Open();
+                var command = new SqlCommand(querry, conn);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int patient_id = (int)reader["pacient_id"];
+                        if (id == patient_id)
+                            ok = true;
+                    }
+                }
+            }
+            return ok;
+        }
+
         private void btnDone_Click(object sender, EventArgs e)
         {
-            //HERE YOU NEED TO CHECK IF THIS PATIENT ID EXISTS IN THE PATIENTS DATABASE
-            //ALSO CHECK THAT THE PATIENT IS NOT ALREADY ASSOCIATED WITH THE DOCTOR
             try
             {
                 long patientID = long.Parse(tbNewPacientID.Text.Trim());
-                SqlConnectionStringBuilder builder = build();
-
-                using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+                if (checkID(patientID) == true)
                 {
+                    SqlConnectionStringBuilder builder = build();
 
-                    var querryString =
-                        "INSERT INTO Associations (doctor_id, pacient_id)" +
-                        "VALUES (@docID, @patientID);";
-                    using (SqlCommand command = new SqlCommand(querryString, conn))
+                    using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                     {
-                        conn.Open();
-                        command.Parameters.AddWithValue("@docID", doctor.docID);
-                        command.Parameters.AddWithValue("@patientID", patientID.ToString());
 
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        var querryString =
+                            "INSERT INTO Associations (doctor_id, pacient_id)" +
+                            "VALUES (@docID, @patientID);";
+                        using (SqlCommand command = new SqlCommand(querryString, conn))
                         {
-                            while (reader.Read())
+                            conn.Open();
+                            command.Parameters.AddWithValue("@docID", doctor.docID);
+                            command.Parameters.AddWithValue("@patientID", patientID.ToString());
+
+                            using (SqlDataReader reader = command.ExecuteReader())
                             {
-                                Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                                while (reader.Read())
+                                {
+                                    Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                                }
                             }
                         }
                     }
+                    updateListView();
                 }
-                updateListView();
+                else
+                    MessageBox.Show("That ID does not correspond to any existing patient.");
             }
             catch(FormatException)
             {
@@ -267,7 +292,7 @@ namespace BlockchainApp
                     label6.Show();
                 }
                 else
-                    MessageBox.Show("Wrong ID!");
+                    MessageBox.Show("Wrong PIN!");
             }
             catch(ArgumentOutOfRangeException)
             {

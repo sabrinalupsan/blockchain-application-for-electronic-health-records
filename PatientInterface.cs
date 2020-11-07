@@ -85,6 +85,8 @@ namespace BlockchainApp
             {
                 var listViewItem = new ListViewItem(record.title);
                 listViewItem.SubItems.Add(getDoctorsLastName(record.doctorID));
+                listViewItem.Tag = record;
+                lvRecords.Items.Add(listViewItem);
             }
         }
 

@@ -245,31 +245,38 @@ namespace BlockchainApp
 
         private void btnSelectPacient_Click(object sender, EventArgs e)
         {
-            ListViewItem item = (ListViewItem)lvPacients.SelectedItems[0];
-            Patient patient = (Patient)item.Tag;
-
-            //select all the records in the listbox
-            SqlConnectionStringBuilder builder = build();
-
-            var populateListBoxQuerry = "SELECT appointment_title, appointment_description, appointment_date FROM Block " +
-                "WHERE doctor_id = " + doctor.docID + "AND pacient_id = " +patient.patientID;
-            
-            using (SqlConnection populateListBoxConn = new SqlConnection(builder.ConnectionString))
+            if (lvPacients.SelectedItems.Count > 0)
             {
-                populateListBoxConn.Open();
-                var command = new SqlCommand(populateListBoxQuerry, populateListBoxConn);
-                using (SqlDataReader reader = command.ExecuteReader())
+                ListViewItem item = lvPacients.SelectedItems[0];
+                Patient patient = (Patient)item.Tag;
+
+                //select all the records in the listbox
+                SqlConnectionStringBuilder builder = build();
+
+                var populateListBoxQuerry = "SELECT appointment_title, appointment_description, appointment_date FROM Block " +
+                    "WHERE doctor_id = " + doctor.docID + "AND pacient_id = " + patient.patientID;
+
+                using (SqlConnection populateListBoxConn = new SqlConnection(builder.ConnectionString))
                 {
-                    while (reader.Read())
+                    populateListBoxConn.Open();
+                    var command = new SqlCommand(populateListBoxQuerry, populateListBoxConn);
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        string title = (string)reader["appointment_title"];
-                        string description = (string)reader["appointment_description"];
-                        DateTime date = (DateTime)reader["appointment_date"];
-                        MedicalRecord record = new MedicalRecord(doctor.docID, patient.patientID, title, description, date);
-                        lbRecords.Items.Add(record);
+                        while (reader.Read())
+                        {
+                            string title = (string)reader["appointment_title"];
+                            string description = (string)reader["appointment_description"];
+                            DateTime date = (DateTime)reader["appointment_date"];
+                            MedicalRecord record = new MedicalRecord(doctor.docID, patient.patientID, title, description, date);
+                            lbRecords.Items.Add(record);
+                        }
                     }
                 }
-            }   
+            }
+            else
+            {
+                MessageBox.Show("Please select a patient!");
+            }
         }
     
         private int generateIndex(SqlConnectionStringBuilder builder)
@@ -448,6 +455,12 @@ namespace BlockchainApp
         private void tbNewPacientID_Validated(object sender, EventArgs e)
         {
             errorProvider.SetError(tbNewPacientID, null);
+        }
+
+        private void lvPacients_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lbRecords.Items.Clear();
+            btnSelectPacient.PerformClick();
         }
     }
 }

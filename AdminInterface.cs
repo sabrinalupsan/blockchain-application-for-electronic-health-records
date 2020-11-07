@@ -148,5 +148,165 @@ namespace BlockchainApp
         {
             Close();
         }
+
+        private void tbNewDocID_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbNewDocID, null);
+        }
+
+        private void tbNewDocID_Validating(object sender, CancelEventArgs e)
+        {
+            if (tbNewDocID.Text.Trim().Length != 7)
+            {
+                errorProvider.SetError(tbNewDocID, "Wrong ID.");
+                e.Cancel = true;
+            }
+        }
+
+        private void tbLastName_Validating(object sender, CancelEventArgs e)
+        {
+            if(tbLastName.Text.Trim().Length < 1)
+            {
+                errorProvider.SetError(tbLastName, "Your name is not valid!");
+                e.Cancel = true;
+            }
+        }
+
+        private void tbLastName_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbLastName, null);
+        }
+
+        private void tbFirstName_Validating(object sender, CancelEventArgs e)
+        {
+            if (tbFirstName.Text.Trim().Length < 1)
+            {
+                errorProvider.SetError(tbLastName, "Your name is not valid!");
+                e.Cancel = true;
+            }
+        }
+
+        private void tbFirstName_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbFirstName, null);
+        }
+
+        private void tbPassword_Validating(object sender, CancelEventArgs e)
+        {
+            if (tbPassword.Text.Trim().Length < 5 || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
+                || !(tbPassword.Text.Trim().Any(char.IsLetter)) || !(tbPassword.Text.Trim().Any(char.IsNumber)) ||
+                    !(tbPassword.Text.Trim().Any(char.IsPunctuation)))
+            {
+                errorProvider.SetError(tbPassword, "Your passwords need to include a number, an uppercase character, a special symbol and " +
+                    "at least 5 characters!");
+                e.Cancel = true;
+            }
+        }
+
+        private void tbPassword_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbPassword, null);
+        }
+
+        private void tbRePassword_Validating(object sender, CancelEventArgs e)
+        {
+            if(tbRePassword.Text.Trim().CompareTo(tbPassword.Text.Trim())!=0)
+            {
+                errorProvider.SetError(tbRePassword, "The passwords don't match!");
+                e.Cancel = true;
+            }
+        }
+
+        private void tbRePassword_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbRePassword, null);
+        }
+
+        private void tbPacientID_Validating(object sender, CancelEventArgs e)
+        {
+            if (tbPacientID.Text.Trim().Length != 7)
+            {
+                errorProvider.SetError(tbPacientID, "Wrong ID.");
+                e.Cancel = true;
+            }
+        }
+
+        private void tbPacientID_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbPacientID, null);
+        }
+
+        private void tbPacientLastName_Validating(object sender, CancelEventArgs e)
+        {
+            if (tbPacientLastName.Text.Trim().Length < 1)
+            {
+                errorProvider.SetError(tbPacientLastName, "Your name is not valid!");
+                e.Cancel = true;
+            }
+        }
+
+        private void tbPacientLastName_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbPacientLastName, null);
+        }
+
+        private void tbPacientFirstName_Validating(object sender, CancelEventArgs e)
+        {
+            if (tbPacientFirstName.Text.Trim().Length < 1)
+            {
+                errorProvider.SetError(tbPacientFirstName, "Your name is not valid!");
+                e.Cancel = true;
+            }
+        }
+
+        private void tbPacientFirstName_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbPacientFirstName, null);
+        }
+
+        private void tbPacientPassword_Validating(object sender, CancelEventArgs e)
+        {
+            if (tbPacientPassword.Text.Trim().Length < 5 || !(tbPacientPassword.Text.Trim().Any(char.IsUpper)) || !(tbPacientPassword.Text.Trim().Any(char.IsLower))
+                || !(tbPacientPassword.Text.Trim().Any(char.IsLetter)) || !(tbPacientPassword.Text.Trim().Any(char.IsNumber)) ||
+                    !(tbPacientPassword.Text.Trim().Any(char.IsPunctuation)))
+            {
+                errorProvider.SetError(tbPacientPassword, "Your passwords need to include a number, an uppercase character, a special symbol and " +
+                    "at least 5 characters!");
+                e.Cancel = true;
+            }
+        }
+
+        private void tbPacientPassword_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbPacientPassword, null);
+        }
+
+        private void tbPacientREPass_Validating(object sender, CancelEventArgs e)
+        {
+            if (tbPacientPassword.Text.Trim().CompareTo(tbPacientREPass.Text.Trim()) != 0)
+            {
+                errorProvider.SetError(tbPacientREPass, "The passwords don't match!");
+                e.Cancel = true;
+            }
+        }
+
+        private void tbPacientREPass_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbPacientREPass, null);
+        }
+
+        private void dtpBirthday_Validating(object sender, CancelEventArgs e)
+        {
+            if(dtpBirthday.Value < DateTime.Now)
+            {
+                errorProvider.SetError(dtpBirthday, "Invalid birthdate!");
+                e.Cancel = true;
+            }
+        }
+
+        private void dtpBirthday_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(dtpBirthday, null);
+        }
     }
 }

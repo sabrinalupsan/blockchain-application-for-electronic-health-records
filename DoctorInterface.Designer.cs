@@ -75,6 +75,7 @@
             this.lvPacients.TabIndex = 1;
             this.lvPacients.UseCompatibleStateImageBehavior = false;
             this.lvPacients.View = System.Windows.Forms.View.Details;
+            this.lvPacients.SelectedIndexChanged += new System.EventHandler(this.lvPacients_SelectedIndexChanged);
             // 
             // columnHeader1
             // 

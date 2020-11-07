@@ -31,11 +31,11 @@ namespace BlockchainApp
 
         private void tbDocID_Validating(object sender, CancelEventArgs e)
         {
-            //if(tbDocID.Text.Trim().Length != 7)
-            //{
-            //    errorProvider.SetError(tbDocID, "Wrong ID.");
-            //    e.Cancel = true;
-            //}
+            if (tbDocID.Text.Trim().Length != 7)
+            {
+                errorProvider.SetError(tbDocID, "Wrong ID.");
+                e.Cancel = true;
+            }
         }
 
         private SqlConnectionStringBuilder build()
@@ -217,11 +217,11 @@ namespace BlockchainApp
 
         private void tbPIN_Validating(object sender, CancelEventArgs e)
         {
-            //if(!(tbPIN.Text.Trim().All(char.IsNumber)) || tbPIN.Text.Trim().Length!=4)
-            //{
-            //    errorProvider.SetError(tbPIN, "You did not input a PIN code!");
-            //    e.Cancel = true;
-            //}
+            if (!(tbPIN.Text.Trim().All(char.IsNumber)) || tbPIN.Text.Trim().Length != 4)
+            {
+                errorProvider.SetError(tbPIN, "You did not input a PIN code!");
+                e.Cancel = true;
+            }
         }
 
         private void tbPIN_Validated(object sender, EventArgs e)
@@ -237,14 +237,14 @@ namespace BlockchainApp
 
         private void tbPassword_Validating(object sender, CancelEventArgs e)
         {
-            //if (tbPassword.Text.Trim().Length < 5 || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
-            //    || !(tbPassword.Text.Trim().Any(char.IsLetter)) || !(tbPassword.Text.Trim().Any(char.IsNumber)) ||
-            //    !(tbPassword.Text.Trim().Any(char.IsPunctuation)))
-            //{
-            //    errorProvider.SetError(tbPassword, "Your passwords need to include a number, an uppercase character, a special symbol and " +
-            //        "at least 5 characters!");
-            //    e.Cancel = true;
-            //}
+            if (tbPassword.Text.Trim().Length < 5 || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
+                || !(tbPassword.Text.Trim().Any(char.IsLetter)) || !(tbPassword.Text.Trim().Any(char.IsNumber)) ||
+                !(tbPassword.Text.Trim().Any(char.IsPunctuation)))
+            {
+                errorProvider.SetError(tbPassword, "Your passwords need to include a number, an uppercase character, a special symbol and " +
+                    "at least 5 characters!");
+                e.Cancel = true;
+            }
         }
     }
 }

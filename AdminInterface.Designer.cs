@@ -62,9 +62,11 @@
             this.dtpBirthday = new System.Windows.Forms.DateTimePicker();
             this.panel2 = new System.Windows.Forms.Panel();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -96,8 +98,6 @@
             this.tbNewDocID.Name = "tbNewDocID";
             this.tbNewDocID.Size = new System.Drawing.Size(100, 22);
             this.tbNewDocID.TabIndex = 3;
-            this.tbNewDocID.Validating += new System.ComponentModel.CancelEventHandler(this.tbNewDocID_Validating);
-            this.tbNewDocID.Validated += new System.EventHandler(this.tbNewDocID_Validated);
             // 
             // tbLastName
             // 
@@ -106,8 +106,6 @@
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.Size = new System.Drawing.Size(100, 22);
             this.tbLastName.TabIndex = 5;
-            this.tbLastName.Validating += new System.ComponentModel.CancelEventHandler(this.tbLastName_Validating);
-            this.tbLastName.Validated += new System.EventHandler(this.tbLastName_Validated);
             // 
             // label2
             // 
@@ -125,8 +123,6 @@
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.Size = new System.Drawing.Size(100, 22);
             this.tbFirstName.TabIndex = 7;
-            this.tbFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.tbFirstName_Validating);
-            this.tbFirstName.Validated += new System.EventHandler(this.tbFirstName_Validated);
             // 
             // label3
             // 
@@ -175,8 +171,6 @@
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 22);
             this.tbPassword.TabIndex = 12;
-            this.tbPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tbPassword_Validating);
-            this.tbPassword.Validated += new System.EventHandler(this.tbPassword_Validated);
             // 
             // label5
             // 
@@ -195,8 +189,6 @@
             this.tbRePassword.PasswordChar = '*';
             this.tbRePassword.Size = new System.Drawing.Size(100, 22);
             this.tbRePassword.TabIndex = 14;
-            this.tbRePassword.Validating += new System.ComponentModel.CancelEventHandler(this.tbRePassword_Validating);
-            this.tbRePassword.Validated += new System.EventHandler(this.tbRePassword_Validated);
             // 
             // label6
             // 
@@ -279,8 +271,6 @@
             this.tbPacientID.Name = "tbPacientID";
             this.tbPacientID.Size = new System.Drawing.Size(100, 22);
             this.tbPacientID.TabIndex = 22;
-            this.tbPacientID.Validating += new System.ComponentModel.CancelEventHandler(this.tbPacientID_Validating);
-            this.tbPacientID.Validated += new System.EventHandler(this.tbPacientID_Validated);
             // 
             // tbPacientLastName
             // 
@@ -289,8 +279,6 @@
             this.tbPacientLastName.Name = "tbPacientLastName";
             this.tbPacientLastName.Size = new System.Drawing.Size(100, 22);
             this.tbPacientLastName.TabIndex = 23;
-            this.tbPacientLastName.Validating += new System.ComponentModel.CancelEventHandler(this.tbPacientLastName_Validating);
-            this.tbPacientLastName.Validated += new System.EventHandler(this.tbPacientLastName_Validated);
             // 
             // tbPacientFirstName
             // 
@@ -299,8 +287,6 @@
             this.tbPacientFirstName.Name = "tbPacientFirstName";
             this.tbPacientFirstName.Size = new System.Drawing.Size(100, 22);
             this.tbPacientFirstName.TabIndex = 24;
-            this.tbPacientFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.tbPacientFirstName_Validating);
-            this.tbPacientFirstName.Validated += new System.EventHandler(this.tbPacientFirstName_Validated);
             // 
             // tbPacientPassword
             // 
@@ -310,8 +296,6 @@
             this.tbPacientPassword.PasswordChar = '*';
             this.tbPacientPassword.Size = new System.Drawing.Size(100, 22);
             this.tbPacientPassword.TabIndex = 25;
-            this.tbPacientPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tbPacientPassword_Validating);
-            this.tbPacientPassword.Validated += new System.EventHandler(this.tbPacientPassword_Validated);
             // 
             // tbPacientREPass
             // 
@@ -321,8 +305,6 @@
             this.tbPacientREPass.PasswordChar = '*';
             this.tbPacientREPass.Size = new System.Drawing.Size(100, 22);
             this.tbPacientREPass.TabIndex = 26;
-            this.tbPacientREPass.Validating += new System.ComponentModel.CancelEventHandler(this.tbPacientREPass_Validating);
-            this.tbPacientREPass.Validated += new System.EventHandler(this.tbPacientREPass_Validated);
             // 
             // btnOkPacient
             // 
@@ -389,8 +371,6 @@
             this.dtpBirthday.Name = "dtpBirthday";
             this.dtpBirthday.Size = new System.Drawing.Size(100, 22);
             this.dtpBirthday.TabIndex = 29;
-            this.dtpBirthday.Validating += new System.ComponentModel.CancelEventHandler(this.dtpBirthday_Validating);
-            this.dtpBirthday.Validated += new System.EventHandler(this.dtpBirthday_Validated);
             // 
             // panel2
             // 
@@ -419,10 +399,15 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // errorProvider2
+            // 
+            this.errorProvider2.ContainerControl = this;
+            // 
             // AdminInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
             this.ClientSize = new System.Drawing.Size(684, 465);
             this.Controls.Add(this.panel2);
@@ -434,6 +419,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -472,5 +458,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.DateTimePicker dtpBirthday;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider errorProvider2;
     }
 }

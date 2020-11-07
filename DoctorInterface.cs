@@ -431,11 +431,11 @@ namespace BlockchainApp
 
         private void tbPIN_Validating(object sender, CancelEventArgs e)
         {
-            //if (!(tbPIN.Text.Trim().All(char.IsNumber)) || tbPIN.Text.Trim().Length != 4)
-            //{
-            //    errorProvider.SetError(tbPIN, "You did not input a PIN code!");
-            //    e.Cancel = true;
-            //}
+            if (!(tbPIN.Text.Trim().All(char.IsNumber)) || tbPIN.Text.Trim().Length != 4)
+            {
+                errorProvider.SetError(tbPIN, "You did not input a PIN code!");
+                e.Cancel = true;
+            }
         }
 
         private void tbPIN_Validated(object sender, EventArgs e)
@@ -445,11 +445,11 @@ namespace BlockchainApp
 
         private void tbNewPacientID_Validating(object sender, CancelEventArgs e)
         {
-            //if(tbPacientID.Text.Trim().Length != 7)
-            //{
-            //    errorProvider.SetError(tbDocID, "Wrong ID.");
-            //    e.Cancel = true;
-            //}
+            if (tbNewPacientID.Text.Trim().Length != 7)
+            {
+                errorProvider.SetError(tbNewPacientID, "Wrong ID.");
+                e.Cancel = true;
+            }
         }
 
         private void tbNewPacientID_Validated(object sender, EventArgs e)

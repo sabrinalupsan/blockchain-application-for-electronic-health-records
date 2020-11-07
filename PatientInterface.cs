@@ -59,7 +59,7 @@ namespace BlockchainApp
         private string getDoctorsLastName(long id)
         {
             SqlConnectionStringBuilder builder = build();
-            var querry = "SELECT doctor_last_name, doctor_first_name FROM Block Doctors doctor_id = " + id + ";";
+            var querry = "SELECT doctor_last_name, doctor_first_name FROM Doctors WHERE doctor_id = " + id + ";";
             string lastName = null;
             string firstName = null;
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))

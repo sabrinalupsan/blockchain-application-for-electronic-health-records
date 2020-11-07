@@ -54,6 +54,7 @@
             this.lbRecords = new System.Windows.Forms.ListBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.selectRecord = new System.Windows.Forms.Button();
+            this.btnDones = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -155,6 +156,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(223)))), ((int)(((byte)(172)))));
             this.panel1.Controls.Add(this.tbNewPacientID);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.btnDone);
@@ -192,18 +194,20 @@
             // 
             // btnAddNewRecord
             // 
+            this.btnAddNewRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnAddNewRecord.ForeColor = System.Drawing.Color.White;
             this.btnAddNewRecord.Location = new System.Drawing.Point(220, 283);
             this.btnAddNewRecord.Name = "btnAddNewRecord";
             this.btnAddNewRecord.Size = new System.Drawing.Size(75, 23);
             this.btnAddNewRecord.TabIndex = 18;
             this.btnAddNewRecord.Text = "OK";
-            this.btnAddNewRecord.UseVisualStyleBackColor = true;
+            this.btnAddNewRecord.UseVisualStyleBackColor = false;
             this.btnAddNewRecord.Click += new System.EventHandler(this.btnAddNewRecord_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(0, 98);
+            this.label6.Location = new System.Drawing.Point(3, 98);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(40, 17);
             this.label6.TabIndex = 16;
@@ -302,12 +306,26 @@
             this.selectRecord.UseVisualStyleBackColor = false;
             this.selectRecord.Click += new System.EventHandler(this.selectRecord_Click);
             // 
+            // btnDones
+            // 
+            this.btnDones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnDones.ForeColor = System.Drawing.Color.White;
+            this.btnDones.Location = new System.Drawing.Point(541, 556);
+            this.btnDones.Name = "btnDones";
+            this.btnDones.Size = new System.Drawing.Size(75, 23);
+            this.btnDones.TabIndex = 12;
+            this.btnDones.Text = "Done";
+            this.btnDones.UseVisualStyleBackColor = false;
+            this.btnDones.Click += new System.EventHandler(this.btnDones_Click);
+            // 
             // DoctorInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
             this.ClientSize = new System.Drawing.Size(809, 606);
+            this.Controls.Add(this.btnDones);
             this.Controls.Add(this.selectRecord);
             this.Controls.Add(this.lbRecords);
             this.Controls.Add(this.panel2);
@@ -354,5 +372,6 @@
         private System.Windows.Forms.Button btnAddNewRecord;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Button selectRecord;
+        private System.Windows.Forms.Button btnDones;
     }
 }

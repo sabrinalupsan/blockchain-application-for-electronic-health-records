@@ -110,6 +110,7 @@ namespace BlockchainApp
         private void btnDone_Click(object sender, EventArgs e)
         {
             //HERE YOU NEED TO CHECK IF THIS PATIENT ID EXISTS IN THE PATIENTS DATABASE
+            //ALSO CHECK THAT THE PATIENT IS NOT ALREADY ASSOCIATED WITH THE DOCTOR
             try
             {
                 long patientID = long.Parse(tbNewPacientID.Text.Trim());
@@ -136,10 +137,16 @@ namespace BlockchainApp
                         }
                     }
                 }
+                updateListView();
             }
             catch(FormatException)
             {
                 MessageBox.Show("Please input a valid patient ID!");
+            }
+            catch(SqlException ex)
+            {
+                if (ex.Number == 2627)
+                    MessageBox.Show("You already have that patient!");
             }
         }
 
@@ -157,9 +164,38 @@ namespace BlockchainApp
             tbTitle.Hide();
         }
 
+        private void updateListView()
+        {
+            var querry = "SELECT pacient_id, pacient_last_name, pacient_first_name, birthday" + " FROM Pacients " +
+                "WHERE pacient_id IN(SELECT pacient_id from ASSOCIATIONS WHERE doctor_id =" + doctor.docID + ");";
+
+            doctor.patients.Clear();
+
+            SqlConnectionStringBuilder builder = build();
+
+            using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+            {
+                conn.Open();
+                var command = new SqlCommand(querry, conn);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        long id = (int)reader["pacient_id"];
+                        string patientLastName = (string)reader["pacient_last_name"];
+                        string pacienFirstName = (string)reader["pacient_first_name"];
+                        DateTime bday = (DateTime)reader["birthday"];
+
+                        Patient patient = new Patient(id, patientLastName, pacienFirstName, bday);
+                        doctor.patients.Add(patient);
+                    }
+                }
+            }
+            DisplayPacients();
+        }
+
         private void DoctorInterface_Load(object sender, EventArgs e)
         {
-
             tbTitle.Hide();
             tbDetails.Hide();
             dtpDate.Hide();
@@ -353,70 +389,101 @@ namespace BlockchainApp
             return hash;
         }
 
+        private bool validateRecord()
+        {
+            if (tbDetails.Text.Trim().ToString().Length < 1)
+            {
+                MessageBox.Show("Please input the details of the appointment!");
+                return false;
+            }
+            if (tbTitle.Text.Trim().ToString().Length < 1)
+            {
+                MessageBox.Show("Please input the type of the appointment!");
+                return false;
+            }
+            if (dtpDate.Value > DateTime.Now)
+            {
+                MessageBox.Show("The date is invalid!");
+                return false;
+            }
+            return true;
+        }
+
+        private void clearControls()
+        {
+            tbPIN.Text = null;
+            tbDetails.Text = null;
+            tbTitle.Text = null;
+            dtpDate.Value = DateTime.Now;
+        }
+
         private void btnAddNewRecord_Click(object sender, EventArgs e)
         {
+            if (validateRecord() == true)
+            {
+                try
+                {
+                    DateTime dateTime = dtpDate.Value;
+                    string date = dateTime.ToString("yyyy-MM-dd");
+                    string title = tbTitle.Text.Trim().ToString();
+                    string details = tbDetails.Text.Trim().ToString();
+                    int index;
 
-            try
-            { 
-                DateTime dateTime = dtpDate.Value;
-                string date = dateTime.ToString("yyyy-MM-dd");
-                string title = tbTitle.Text.Trim().ToString();
-                string details = tbDetails.Text.Trim().ToString();
-                int index;
-
-                ListViewItem item = (ListViewItem)lvPacients.SelectedItems[0];
-                Patient patient = (Patient)item.Tag;
-                long patientID = patient.patientID;
+                    ListViewItem item = (ListViewItem)lvPacients.SelectedItems[0];
+                    Patient patient = (Patient)item.Tag;
+                    long patientID = patient.patientID;
 
 
-                SqlConnectionStringBuilder builder = build();
+                    SqlConnectionStringBuilder builder = build();
 
-                using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
-                { 
-                    var querryString =
-                        "INSERT INTO Block (pacient_id, doctor_id, appointment_date, appointment_title, appointment_description, nounce, block_timestamp, block_index, " +
-                        "hash_of_prev_block, hash_of_curr_block)" +
-                        "VALUES (@pacID, @docID, @date, @title, @description, @nounce, @dateNow, @index, @hashOfPrevBlock, @hashOfCurrBlock);";
-                    using (SqlCommand command = new SqlCommand(querryString, conn))
+                    using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                     {
-                        conn.Open();
-                        command.Parameters.AddWithValue("@pacID", patientID);
-                        command.Parameters.AddWithValue("@docID", doctor.docID);
-                        command.Parameters.AddWithValue("@date", date);
-                        command.Parameters.AddWithValue("@title", title);
-                        command.Parameters.AddWithValue("@index", generateIndex(builder));
-                        command.Parameters.AddWithValue("@description", details);
-                        string now = DateTime.Now.ToString("yyyy-MM-dd");
-                        command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
-                        string theHashOfPrevBlock = getLastBlockHash();
-                        command.Parameters.AddWithValue("@hashOfPrevBlock", theHashOfPrevBlock);
-
-                        index = getIndex(builder);
-
-                        //compute hash of current block;
-                        string toHash = patientID + doctor.docID + date + title + details + now + index + theHashOfPrevBlock;
-                        int nounce = 0;
-                        Hash hash = new Hash(nounce, toHash);
-                        proofOfWork(hash, 1);
-                        command.Parameters.AddWithValue("@nounce", hash.nounce);
-                        command.Parameters.AddWithValue("@hashOfCurrBlock", hash.computeHash());
-
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        var querryString =
+                            "INSERT INTO Block (pacient_id, doctor_id, appointment_date, appointment_title, appointment_description, nounce, block_timestamp, block_index, " +
+                            "hash_of_prev_block, hash_of_curr_block)" +
+                            "VALUES (@pacID, @docID, @date, @title, @description, @nounce, @dateNow, @index, @hashOfPrevBlock, @hashOfCurrBlock);";
+                        using (SqlCommand command = new SqlCommand(querryString, conn))
                         {
-                            while (reader.Read())
+                            conn.Open();
+                            command.Parameters.AddWithValue("@pacID", patientID);
+                            command.Parameters.AddWithValue("@docID", doctor.docID);
+                            command.Parameters.AddWithValue("@date", date);
+                            command.Parameters.AddWithValue("@title", title);
+                            command.Parameters.AddWithValue("@index", generateIndex(builder));
+                            command.Parameters.AddWithValue("@description", details);
+                            string now = DateTime.Now.ToString("yyyy-MM-dd");
+                            command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
+                            string theHashOfPrevBlock = getLastBlockHash();
+                            command.Parameters.AddWithValue("@hashOfPrevBlock", theHashOfPrevBlock);
+
+                            index = getIndex(builder);
+
+                            //compute hash of current block;
+                            string toHash = patientID + doctor.docID + date + title + details + now + index + theHashOfPrevBlock;
+                            int nounce = 0;
+                            Hash hash = new Hash(nounce, toHash);
+                            proofOfWork(hash, 1);
+                            command.Parameters.AddWithValue("@nounce", hash.nounce);
+                            command.Parameters.AddWithValue("@hashOfCurrBlock", hash.computeHash());
+
+                            using (SqlDataReader reader = command.ExecuteReader())
                             {
-                                Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                                while (reader.Read())
+                                {
+                                    Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                                }
                             }
                         }
                     }
-                }
 
-                MedicalRecord record = new MedicalRecord(doctor.docID, patientID, title, details, dateTime);
-                lbRecords.Items.Add(record);
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                MessageBox.Show("Please select a patient!");
+                    MedicalRecord record = new MedicalRecord(doctor.docID, patientID, title, details, dateTime);
+                    clearControls();
+                    lbRecords.Items.Add(record);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    MessageBox.Show("Please select a patient!");
+                }
             }
         }
 
@@ -461,6 +528,11 @@ namespace BlockchainApp
         {
             lbRecords.Items.Clear();
             btnSelectPacient.PerformClick();
+        }
+
+        private void btnDones_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

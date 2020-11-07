@@ -24,6 +24,7 @@ namespace BlockchainApp
 
         private byte[] computeHash(string toHash)
         {
+            //https://stackoverflow.com/questions/3984138/hash-string-in-c-sharp
             var hasher = SHA256.Create();
             byte[] byteHash = System.Text.Encoding.UTF8.GetBytes(toHash);
             return hasher.ComputeHash(byteHash);
@@ -53,19 +54,53 @@ namespace BlockchainApp
             return random.Next(999, 10000);
         }
 
+        private void updateLastLogin(long patientID)
+        {
+            var builder = build();
+            var lastLoginQuery = "UPDATE Pacients" + " SET last_login = SYSDATETIME()" + "WHERE pacient_id =" + patientID + ";";
+            using (SqlConnection lastLoginConnection = new SqlConnection(builder.ConnectionString))
+            {
+                lastLoginConnection.Open();
+                using (SqlCommand lastLoginCommand = new SqlCommand(lastLoginQuery, lastLoginConnection))
+                {
+                    lastLoginCommand.Parameters.AddWithValue("@last_login", DateTime.Now.ToString("yyyy-MM-dd"));
+
+                    using (SqlDataReader lastLoginreader = lastLoginCommand.ExecuteReader())
+                        while (lastLoginreader.Read())
+                            Console.WriteLine("{0} {1}", lastLoginreader.GetString(0), lastLoginreader.GetString(1));
+                }
+            }
+        }
+
+        private void updatePIN(long patientID, string hashedPIN)
+        {
+            var builder = build();
+            var updatePINquery = "UPDATE Pacients SET hashed_PIN = @hashPIN WHERE pacient_id = " + patientID + ";";
+            using (SqlConnection updatePINconnection = new SqlConnection(builder.ConnectionString))
+            {
+                updatePINconnection.Open();
+                using (SqlCommand updatePINCommand = new SqlCommand(updatePINquery, updatePINconnection))
+                {
+                    updatePINCommand.Parameters.AddWithValue("@hashPIN", hashedPIN);
+
+                    using (SqlDataReader updatePINReader = updatePINCommand.ExecuteReader())
+                        while (updatePINReader.Read())
+                            Console.WriteLine("{0} {1}", updatePINReader.GetString(0), updatePINReader.GetString(1));
+                }
+            }
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (successfulAuthentication < 3 && ValidateChildren() == true)
             {
                 long inputedPacientID = long.Parse(tbPacientID.Text.Trim());
-                //https://stackoverflow.com/questions/3984138/hash-string-in-c-sharp
 
                 string inputedPass = tbPassword.Text.Trim().ToString();
                 string hashedPass = computeHash2(inputedPass);
 
                 SqlConnectionStringBuilder builder = build();
 
-                //select querry
                 var querry = "SELECT * from Pacients;";
 
                 using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
@@ -90,19 +125,8 @@ namespace BlockchainApp
 
                                     string hashedNewPIN = computeHash2(newPIN.ToString());
 
-                                    var updatePINquery = "UPDATE Pacients SET hashed_PIN = @hashPIN WHERE pacient_id = " + inputedPacientID + ";";
-                                    using (SqlConnection updatePINconnection = new SqlConnection(builder.ConnectionString))
-                                    {
-                                        updatePINconnection.Open();
-                                        using (SqlCommand updatePINCommand = new SqlCommand(updatePINquery, updatePINconnection))
-                                        {
-                                            updatePINCommand.Parameters.AddWithValue("@hashPIN", hashedNewPIN);
+                                    updatePIN(inputedPacientID, hashedNewPIN);
 
-                                            using (SqlDataReader updatePINReader = updatePINCommand.ExecuteReader())
-                                                while (updatePINReader.Read())
-                                                    Console.WriteLine("{0} {1}", updatePINReader.GetString(0), updatePINReader.GetString(1));
-                                        }
-                                    }
                                     connected = true;
                                     string lastName = (string)reader["pacient_last_name"];
                                     string firstName = (string)reader["pacient_first_name"];
@@ -114,8 +138,8 @@ namespace BlockchainApp
 
                                     Patient patient = new Patient(inputedPacientID, thePass, thePIN, lastName, firstName, birthday);
                                     PatientInterface patientInterface = new PatientInterface(patient);
-                                    patientInterface.ShowDialog();
                                     Hide();
+                                    patientInterface.ShowDialog();
                                 }
                                 else
                                 {
@@ -137,35 +161,19 @@ namespace BlockchainApp
                                             {
                                                 int newPIN = generatePIN();
                                                 MessageBox.Show("Your new token PIN for the next 30 days is: " + newPIN.ToString());
-                                                //hash the PIN
                                                 string hashedNewPIN = computeHash2(newPIN.ToString());
-                                                var updateQuery = "UPDATE Pacients SET hashed_pin = @hashPIN;";
-                                                var updateCommand = new SqlCommand(updateQuery, conn);
-                                                updateCommand.Parameters.AddWithValue("@hashPIN", hashedNewPIN);
+                                                updatePIN(inputedPacientID, hashedNewPIN);
                                             }
-                                            //we need to input the new login
-                                            var lastLoginQuery = "UPDATE Pacients" + " SET last_login = SYSDATETIME()" + "WHERE pacient_id =" + inputedPacientID + ";";
-                                            using (SqlConnection lastLoginConnection = new SqlConnection(builder.ConnectionString))
-                                            {
-                                                lastLoginConnection.Open();
-                                                using (SqlCommand lastLoginCommand = new SqlCommand(lastLoginQuery, lastLoginConnection))
-                                                {
-                                                    lastLoginCommand.Parameters.AddWithValue("@last_login", DateTime.Now.ToString("yyyy-MM-dd"));
 
-                                                    using (SqlDataReader lastLoginreader = lastLoginCommand.ExecuteReader())
-                                                        while (lastLoginreader.Read())
-                                                            Console.WriteLine("{0} {1}", lastLoginreader.GetString(0), lastLoginreader.GetString(1));
-                                                }
-                                            }
+                                            updateLastLogin(inputedPacientID);
 
                                             byte[] thePass = System.Text.Encoding.UTF8.GetBytes(hashedPass);
                                             byte[] thePIN = System.Text.Encoding.UTF8.GetBytes(hashedPIN);
 
                                             Patient patient = new Patient(inputedPacientID, thePass, thePIN, lastName, firstName, birthday);
                                             PatientInterface patientInterface = new PatientInterface(patient);
-                                            this.Hide();
-                                            patientInterface.ShowDialog();
                                             Hide();
+                                            patientInterface.ShowDialog();
                                         }
                                     }
                                     catch (FormatException)

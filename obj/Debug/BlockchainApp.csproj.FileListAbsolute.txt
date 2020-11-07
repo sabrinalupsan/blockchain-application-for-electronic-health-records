@@ -48,3 +48,6 @@ D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\Block
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.PatientInterface.resources
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\MaterialSkin.dll
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.AdminLogin.resources
+D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\NLog.dll
+D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\NLog.xml
+D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\NLog.config

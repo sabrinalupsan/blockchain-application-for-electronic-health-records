@@ -1,0 +1,2 @@
+2020-11-07 23:22:07.8646|DEBUG|BlockchainApp.DoctorLogIn|This is a debug message
+2020-11-07 23:22:09.6363|DEBUG|BlockchainApp.DoctorLogIn|This is a debug message

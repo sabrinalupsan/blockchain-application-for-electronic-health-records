@@ -10,13 +10,13 @@ using System.Windows.Forms;
 using System.Security.Cryptography;
 using Microsoft.SqlServer.Server;
 using System.Data.SqlClient;
+using NLog;
 
 namespace BlockchainApp
 {
     public partial class DoctorLogIn : Form
     {
-        private Doctor doc;
-        int successfulAuthentication = 0;
+        private int successfulAuthentication = 0;
 
         public DoctorLogIn()
         {
@@ -119,7 +119,7 @@ namespace BlockchainApp
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (successfulAuthentication < 3 && ValidateChildren()==true)
+            if (successfulAuthentication < 2 && ValidateChildren()==true)
             {
                 long docID = long.Parse(tbDocID.Text.Trim());
 
@@ -183,6 +183,12 @@ namespace BlockchainApp
                         MessageBox.Show("Invalid credentials!");
                 }
                 successfulAuthentication++;
+            }
+            else
+            {
+                //log this in a file
+                Logger logger = LogManager.GetCurrentClassLogger();
+                logger.Debug("This is a debug message");
             }
         }
 

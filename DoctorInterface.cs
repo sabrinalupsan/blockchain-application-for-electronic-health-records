@@ -552,7 +552,34 @@ namespace BlockchainApp
         private void lvPacients_SelectedIndexChanged(object sender, EventArgs e)
         {
             lbRecords.Items.Clear();
-            btnSelectPacient.PerformClick();
+            if (lvPacients.SelectedItems.Count > 0)
+            {
+                ListViewItem item = lvPacients.SelectedItems[0];
+                Patient patient = (Patient)item.Tag;
+
+                //select all the records in the listbox
+                SqlConnectionStringBuilder builder = build();
+
+                var populateListBoxQuerry = "SELECT appointment_title, appointment_description, appointment_date FROM Block " +
+                    "WHERE doctor_id = " + doctor.docID + "AND pacient_id = " + patient.patientID;
+
+                using (SqlConnection populateListBoxConn = new SqlConnection(builder.ConnectionString))
+                {
+                    populateListBoxConn.Open();
+                    var command = new SqlCommand(populateListBoxQuerry, populateListBoxConn);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string title = (string)reader["appointment_title"];
+                            string description = (string)reader["appointment_description"];
+                            DateTime date = (DateTime)reader["appointment_date"];
+                            MedicalRecord record = new MedicalRecord(doctor.docID, patient.patientID, title, description, date);
+                            lbRecords.Items.Add(record);
+                        }
+                    }
+                }
+            }
         }
 
         private void btnDones_Click(object sender, EventArgs e)

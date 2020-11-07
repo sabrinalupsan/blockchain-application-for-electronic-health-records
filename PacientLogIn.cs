@@ -55,7 +55,7 @@ namespace BlockchainApp
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (successfulAuthentication < 3)
+            if (successfulAuthentication < 3 && ValidateChildren() == true)
             {
                 long inputedPacientID = long.Parse(tbPacientID.Text.Trim());
                 //https://stackoverflow.com/questions/3984138/hash-string-in-c-sharp
@@ -71,6 +71,7 @@ namespace BlockchainApp
                 using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                 {
                     bool connected = false;
+                    bool showedIncorrectPIN = false;
                     conn.Open();
                     var command = new SqlCommand(querry, conn);
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -162,27 +163,28 @@ namespace BlockchainApp
 
                                             Patient patient = new Patient(inputedPacientID, thePass, thePIN, lastName, firstName, birthday);
                                             PatientInterface patientInterface = new PatientInterface(patient);
+                                            this.Hide();
                                             patientInterface.ShowDialog();
                                             Hide();
                                         }
                                     }
-                                    catch(FormatException)
+                                    catch (FormatException)
                                     {
+                                        showedIncorrectPIN = true;
                                         MessageBox.Show("Please input the PIN");
                                     }
                                 }
                         }
                     }
 
-                    if (connected == false)
+                    if (connected == false && showedIncorrectPIN == false)
                         MessageBox.Show("Invalid credentials!");
                     successfulAuthentication++;
-
-
                 }
             }
             else
-                MessageBox.Show("Too many attempts!");
+                if (ValidateChildren() == true)
+                    MessageBox.Show("Too many attempts!");
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -223,11 +225,11 @@ namespace BlockchainApp
 
         private void tbPIN_Validating(object sender, CancelEventArgs e)
         {
-            if (!(tbPIN.Text.Trim().All(char.IsNumber)) || tbPIN.Text.Trim().Length != 4)
-            {
-                errorProvider.SetError(tbPIN, "You did not input a PIN code!");
-                e.Cancel = true;
-            }
+            //if (!(tbPIN.Text.Trim().All(char.IsNumber)) || tbPIN.Text.Trim().Length != 4)
+            //{
+            //    errorProvider.SetError(tbPIN, "You did not input a PIN code!");
+            //    e.Cancel = true;
+            //}
         }
 
         private void tbPIN_Validated(object sender, EventArgs e)

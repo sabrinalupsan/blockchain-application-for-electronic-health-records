@@ -90,13 +90,18 @@ namespace BlockchainApp
 
         private void btnSeeRecord_Click(object sender, EventArgs e)
         {
-            ListViewItem lvi = lvRecords.SelectedItems[0];
-            MedicalRecord record = (MedicalRecord)lvi.Tag;
+            if (lvRecords.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvRecords.SelectedItems[0];
+                MedicalRecord record = (MedicalRecord)lvi.Tag;
 
-            tbDate.Text = record.date.ToShortDateString();
-            tbDescription.Text = record.description;
-            tbName.Text = getDoctorsLastName(record.doctorID);
-            tbTitle.Text = record.title;
+                tbDate.Text = record.date.ToShortDateString();
+                tbDescription.Text = record.description;
+                tbName.Text = getDoctorsLastName(record.doctorID);
+                tbTitle.Text = record.title;
+            }
+            else
+                MessageBox.Show("Please select a record!");
         }
     }
 }

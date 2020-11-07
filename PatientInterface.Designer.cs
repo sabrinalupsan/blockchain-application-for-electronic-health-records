@@ -130,6 +130,7 @@
             // tbDate
             // 
             this.tbDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.tbDate.Enabled = false;
             this.tbDate.Location = new System.Drawing.Point(130, 88);
             this.tbDate.Name = "tbDate";
             this.tbDate.ReadOnly = true;
@@ -139,6 +140,7 @@
             // tbName
             // 
             this.tbName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.tbName.Enabled = false;
             this.tbName.Location = new System.Drawing.Point(130, 15);
             this.tbName.Name = "tbName";
             this.tbName.ReadOnly = true;
@@ -175,6 +177,7 @@
             // tbTitle
             // 
             this.tbTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.tbTitle.Enabled = false;
             this.tbTitle.Location = new System.Drawing.Point(130, 48);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.ReadOnly = true;
@@ -184,6 +187,7 @@
             // tbDescription
             // 
             this.tbDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.tbDescription.Enabled = false;
             this.tbDescription.Location = new System.Drawing.Point(88, 133);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";

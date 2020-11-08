@@ -111,17 +111,51 @@ namespace BlockchainApp
 
         private void startDoctorInterface(long dbID, byte[] hashedPassword, string specialisation, string lastName, string firstName, byte[] dbPIN, DateTime date)
         {
+            updateLastLogin(dbID);
+            Logger logger = LogManager.GetCurrentClassLogger();
+            logger.Debug("The doctor with ID {0} logged in.", dbID);
             Doctor doc = new Doctor(dbID, hashedPassword, specialisation, lastName, firstName, dbPIN, DateTime.Now);
             DoctorInterface doctorInterface = new DoctorInterface(doc);
             Hide();
             doctorInterface.ShowDialog();
         }
 
+        private bool validateDoctor()
+        {
+            if (tbDocID.Text.Trim().Length != 7 || (tbDocID.Text.Trim().All(char.IsNumber) == false))
+            {
+                MessageBox.Show("The ID is invalid.");
+                return false;
+            }
+            if (tbPassword.Text.Trim().Length < 5 || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
+                || !(tbPassword.Text.Trim().Any(char.IsLetter)) || !(tbPassword.Text.Trim().Any(char.IsNumber)) ||
+                    !(tbPassword.Text.Trim().Any(char.IsPunctuation)))
+            {
+                MessageBox.Show("Your password needs to include a number, a lowercase character, an uppercase character, a special symbol and " +
+                    "at least 5 characters!");
+                return false;
+            }
+            return true;
+        }
+
+        private bool validatePIN()
+        {
+            if (tbPIN.Text.Trim().ToString().Length != 4 || (tbPIN.Text.Trim().All(char.IsNumber) == false))
+                return false;
+            return true;
+        }
+
+        private void wrongPIN()
+        {
+            successfulAuthentication++;
+            MessageBox.Show("Incorrect PIN!");
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             Logger logger = LogManager.GetCurrentClassLogger();
-
-            if (successfulAuthentication < 2 && ValidateChildren()==true)
+            string checkID= tbDocID.Text.Trim().ToString();
+            if (successfulAuthentication < 4 && validateDoctor() == true)
             {
                 long docID = long.Parse(tbDocID.Text.Trim());
 
@@ -134,11 +168,9 @@ namespace BlockchainApp
 
                 using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                 {
-                    bool connected = false;
                     conn.Open();
                     var command = new SqlCommand(querry, conn);
                     using (SqlDataReader reader = command.ExecuteReader())
-                    {
                         while (reader.Read())
                         {
                             long dbID = (int)reader["doctor_id"];
@@ -146,7 +178,6 @@ namespace BlockchainApp
                             string hashedNewPIN = null;
                             if (dbID.CompareTo(docID) == 0 && (Encoding.Default.GetString(hashedPassword)).CompareTo(dbPassword) == 0)
                             {
-                                connected = true;
                                 string lastName = (string)reader["doctor_last_name"];
                                 string firstName = (string)reader["doctor_first_name"];
                                 string specialisation = (string)reader["specialization"];
@@ -154,47 +185,42 @@ namespace BlockchainApp
                                 if (reader["hashed_PIN"] == System.DBNull.Value)
                                 {
                                     hashedNewPIN = updatePIN(dbID);
-                                    updateLastLogin(dbID);
-                                    logger.Debug("The user with ID {0} logged in.", dbID);
-                                    startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName, 
+                                    startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName,
                                         System.Text.Encoding.UTF8.GetBytes(hashedNewPIN), DateTime.Now);
                                 }
                                 else
-                                {
-                                    string dbPIN = (string)reader["hashed_PIN"];
-                                    if ((Encoding.Default.GetString(hashedPIN)).CompareTo(dbPIN) == 0)
+                                    if (validatePIN() == true)
                                     {
-                                        DateTime theDate = (DateTime)reader["last_login"];
-                                        if ((DateTime.Today.Date - theDate.Date).Days > 30)
+                                        string dbPIN = (string)reader["hashed_PIN"];
+                                        if ((Encoding.Default.GetString(hashedPIN)).CompareTo(dbPIN) == 0)
                                         {
-                                            hashedNewPIN = updatePIN(docID);
-                                            logger.Debug("The user with ID {0} logged in.", dbID);
-                                            startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName,
-                                        System.Text.Encoding.UTF8.GetBytes(hashedNewPIN), DateTime.Now);
+                                            DateTime theDate = (DateTime)reader["last_login"];
+                                            if ((DateTime.Today.Date - theDate.Date).Days > 30)
+                                            {
+                                                hashedNewPIN = updatePIN(docID);
+                                                startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName,
+                                                System.Text.Encoding.UTF8.GetBytes(hashedNewPIN), DateTime.Now);
+                                            }
+                                            else
+                                                startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName, hashedPIN, DateTime.Now);
                                         }
                                         else
-                                        {
-                                            logger.Debug("The user with ID {0} logged in.", dbID);
-                                            startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName, hashedPIN, DateTime.Now);
-                                            updateLastLogin(dbID);
-                                        }
-
+                                            wrongPIN();
                                     }
-                                    else connected = false;
-                                }
-
+                                    else
+                                        wrongPIN();
                             }
                         }
-                    }
-                    if (connected == false)
-                        MessageBox.Show("Invalid credentials!");
                 }
-                successfulAuthentication++;
             }
             else
             {
-                //log this in a file
-                //logger.Debug("The user with ID {0} is repeatedly trying to log in.", dbid);
+                successfulAuthentication++;
+                if (successfulAuthentication > 4)
+                {
+                    logger.Warn("The doctor with ID {0} is repeatedly trying to log in.", checkID);
+                    MessageBox.Show("Too many attempts!");
+                }
             }
         }
 

@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
 using System.Data.SqlClient;
+using NLog;
 
 namespace BlockchainApp
 {
     public partial class DoctorInterface : Form
     {
         Doctor doctor;
+        int successfulAuthentication = 0;
 
         private SqlConnectionStringBuilder build()
         {
@@ -261,46 +263,56 @@ namespace BlockchainApp
 
         private void btnCheck_Click(object sender, EventArgs e)
         {
-            try
+            Logger logger = LogManager.GetCurrentClassLogger();
+            if (successfulAuthentication > 5)
+                logger.Warn("The doctor with ID {0} is repeatedly trying to input the PIN code {1}.", doctor.docID, tbPIN.Text.Trim().ToString());
+            else
             {
-                int patientPIN = int.Parse(tbPIN.Text.Trim().ToString());
-                string hashedPIN = computeHash2(patientPIN.ToString());
-                SqlConnectionStringBuilder builder = build();
-                ListViewItem item = (ListViewItem)lvPacients.SelectedItems[0];
-                Patient patient = (Patient)item.Tag;
-                string id = null;
-                using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+                try
                 {
-                    var querry = "SELECT hashed_pin FROM Pacients WHERE pacient_id = " + patient.patientID + ";";
-                    conn.Open();
-                    var command = new SqlCommand(querry, conn);
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    int patientPIN = int.Parse(tbPIN.Text.Trim().ToString());
+                    string hashedPIN = computeHash2(patientPIN.ToString());
+                    SqlConnectionStringBuilder builder = build();
+                    ListViewItem item = (ListViewItem)lvPacients.SelectedItems[0];
+                    Patient patient = (Patient)item.Tag;
+                    string id = null;
+                    using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                     {
-                        while (reader.Read())
+                        var querry = "SELECT hashed_pin FROM Pacients WHERE pacient_id = " + patient.patientID + ";";
+                        conn.Open();
+                        var command = new SqlCommand(querry, conn);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            id = (string)reader["hashed_pin"];
+                            while (reader.Read())
+                            {
+                                id = (string)reader["hashed_pin"];
+                            }
                         }
                     }
+                    if (hashedPIN.CompareTo(id) == 0)
+                    {
+                        tbTitle.Show();
+                        dtpDate.Show();
+                        tbDetails.Show();
+                        label5.Show();
+                        Details.Show();
+                        label6.Show();
+                    }
+                    else
+                    {
+                        successfulAuthentication++;
+                        MessageBox.Show("Wrong PIN!");
+                    }
                 }
-                if (hashedPIN.CompareTo(id) == 0)
+                catch (ArgumentOutOfRangeException)
                 {
-                    tbTitle.Show();
-                    dtpDate.Show();
-                    tbDetails.Show();
-                    label5.Show();
-                    Details.Show();
-                    label6.Show();
+                    MessageBox.Show("Please select a patient!");
                 }
-                else
-                    MessageBox.Show("Wrong PIN!");
-            }
-            catch(ArgumentOutOfRangeException)
-            {
-                MessageBox.Show("Please select a patient!");
-            }
-            catch(FormatException)
-            {
-                MessageBox.Show("Please input a PIN code.");
+                catch (FormatException)
+                {
+                    successfulAuthentication++;
+                    MessageBox.Show("Please input a PIN code.");
+                }
             }
         }
 
@@ -311,7 +323,6 @@ namespace BlockchainApp
                 ListViewItem item = lvPacients.SelectedItems[0];
                 Patient patient = (Patient)item.Tag;
 
-                //select all the records in the listbox
                 SqlConnectionStringBuilder builder = build();
 
                 var populateListBoxQuerry = "SELECT appointment_title, appointment_description, appointment_date FROM Block " +
@@ -454,7 +465,7 @@ namespace BlockchainApp
                     string details = tbDetails.Text.Trim().ToString();
                     int index;
 
-                    ListViewItem item = (ListViewItem)lvPacients.SelectedItems[0];
+                    ListViewItem item = lvPacients.SelectedItems[0];
                     Patient patient = (Patient)item.Tag;
                     long patientID = patient.patientID;
 
@@ -500,7 +511,8 @@ namespace BlockchainApp
                             }
                         }
                     }
-
+                    Logger logger = LogManager.GetCurrentClassLogger();
+                    logger.Debug("Doctor {0} added a record for patient {1}.", doctor.docID, patientID);
                     MedicalRecord record = new MedicalRecord(doctor.docID, patientID, title, details, dateTime);
                     clearControls();
                     lbRecords.Items.Add(record);

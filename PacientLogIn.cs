@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
 using Microsoft.Data.SqlClient;
+using NLog;
 
 namespace BlockchainApp
 {
     public partial class PacientLogIn : Form
     {
-        private int successfulAuthentication;
+        private int successfulAuthentication = 0;
 
         public PacientLogIn()
         {
@@ -72,8 +73,11 @@ namespace BlockchainApp
             }
         }
 
-        private void updatePIN(long patientID, string hashedPIN)
+        private string updatePIN(long patientID)
         {
+            int newPIN = generatePIN();
+            MessageBox.Show("Your new token PIN for the next 30 days is: " + newPIN.ToString());
+            string hashedNewPIN = computeHash2(newPIN.ToString());
             var builder = build();
             var updatePINquery = "UPDATE Pacients SET hashed_PIN = @hashPIN WHERE pacient_id = " + patientID + ";";
             using (SqlConnection updatePINconnection = new SqlConnection(builder.ConnectionString))
@@ -81,118 +85,167 @@ namespace BlockchainApp
                 updatePINconnection.Open();
                 using (SqlCommand updatePINCommand = new SqlCommand(updatePINquery, updatePINconnection))
                 {
-                    updatePINCommand.Parameters.AddWithValue("@hashPIN", hashedPIN);
+                    updatePINCommand.Parameters.AddWithValue("@hashPIN", hashedNewPIN);
 
                     using (SqlDataReader updatePINReader = updatePINCommand.ExecuteReader())
                         while (updatePINReader.Read())
                             Console.WriteLine("{0} {1}", updatePINReader.GetString(0), updatePINReader.GetString(1));
                 }
             }
+            return hashedNewPIN;
+        }
+
+        private void startPatientInterface(long patientID, byte[] hashedPassword, byte[] hashedPIN, string lastName, string firstName, DateTime birthday)
+        {
+            Patient patient = new Patient(patientID, hashedPassword, hashedPIN, lastName, firstName, birthday);
+            PatientInterface patientInterface = new PatientInterface(patient);
+            Hide();
+            patientInterface.ShowDialog();
+        }
+
+        private bool validatePatient()
+        {
+            if (tbPacientID.Text.Trim().Length != 7 || (tbPacientID.Text.Trim().All(char.IsNumber) == false))
+            {
+                MessageBox.Show("The ID is invalid.");
+                return false;
+            }
+            if (tbPassword.Text.Trim().Length < 5 || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
+                || !(tbPassword.Text.Trim().Any(char.IsLetter)) || !(tbPassword.Text.Trim().Any(char.IsNumber)) ||
+                    !(tbPassword.Text.Trim().Any(char.IsPunctuation)))
+            {
+                MessageBox.Show("Your password needs to include a number, a lowercase character, an uppercase character, a special symbol and " +
+                    "at least 5 characters!");
+                return false;
+            }
+            return true;
+        }
+
+        private bool validatePIN()
+        {
+            if (tbPIN.Text.Trim().ToString().Length != 4 || (tbPIN.Text.Trim().All(char.IsNumber) == false))
+                return false;
+            return true;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (successfulAuthentication < 3 && ValidateChildren() == true)
+            Logger logger = LogManager.GetCurrentClassLogger();
+            long inputedPacientID = -1;
+            try
             {
-                long inputedPacientID = long.Parse(tbPacientID.Text.Trim());
-
-                string inputedPass = tbPassword.Text.Trim().ToString();
-                string hashedPass = computeHash2(inputedPass);
-
-                SqlConnectionStringBuilder builder = build();
-
-                var querry = "SELECT * from Pacients;";
-
-                using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+                if (successfulAuthentication < 4 && validatePatient() == true)
                 {
-                    bool connected = false;
-                    bool showedIncorrectPIN = false;
-                    conn.Open();
-                    var command = new SqlCommand(querry, conn);
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    inputedPacientID = long.Parse(tbPacientID.Text.Trim());
+
+                    string inputedPass = tbPassword.Text.Trim().ToString();
+                    string hashedPass = computeHash2(inputedPass);
+
+                    SqlConnectionStringBuilder builder = build();
+
+                    var querry = "SELECT * from Pacients;";
+
+                    using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                     {
-                        while (reader.Read())
+                        conn.Open();
+                        var command = new SqlCommand(querry, conn);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            int DBID = (int)reader["pacient_id"];
-                            long databaseID = (long)DBID;
-                            string databasePassword = (string)reader["hashed_pass"];
+                            while (reader.Read())
+                            {
+                                int DBID = (int)reader["pacient_id"];
+                                long databaseID = DBID;
+                                string databasePassword = (string)reader["hashed_pass"];
 
-                            if (inputedPacientID.CompareTo(databaseID) == 0 && hashedPass.CompareTo(databasePassword) == 0)
-                                if (reader["hashed_PIN"] == System.DBNull.Value)
-                                {
-                                    int newPIN = generatePIN();
-                                    MessageBox.Show("Your new token PIN for the next 30 days is: " + newPIN.ToString());
-
-                                    string hashedNewPIN = computeHash2(newPIN.ToString());
-
-                                    updatePIN(inputedPacientID, hashedNewPIN);
-
-                                    connected = true;
-                                    string lastName = (string)reader["pacient_last_name"];
-                                    string firstName = (string)reader["pacient_first_name"];
-                                    DateTime theDate = (DateTime)reader["last_login"];
-                                    DateTime birthday = (DateTime)reader["birthday"];
-
-                                    byte[] thePass = System.Text.Encoding.UTF8.GetBytes(hashedPass);
-                                    byte[] thePIN = System.Text.Encoding.UTF8.GetBytes(hashedNewPIN);
-
-                                    Patient patient = new Patient(inputedPacientID, thePass, thePIN, lastName, firstName, birthday);
-                                    PatientInterface patientInterface = new PatientInterface(patient);
-                                    Hide();
-                                    patientInterface.ShowDialog();
-                                }
-                                else
-                                {
-                                    try
+                                if (inputedPacientID.CompareTo(databaseID) == 0 && hashedPass.CompareTo(databasePassword) == 0)
+                                    if (reader["hashed_PIN"] == System.DBNull.Value)
                                     {
-                                        int inputedPIN = int.Parse(tbPIN.Text.Trim().ToString());
-                                        string hashedPIN = computeHash2(inputedPIN.ToString());
+                                        string hashedNewPIN = updatePIN(inputedPacientID);
 
-                                        string databasePIN = (string)reader["hashed_PIN"];
-                                        if (hashedPIN.CompareTo(databasePIN) == 0)
+                                        string lastName = (string)reader["pacient_last_name"];
+                                        string firstName = (string)reader["pacient_first_name"];
+                                        DateTime theDate = (DateTime)reader["last_login"];
+                                        DateTime birthday = (DateTime)reader["birthday"];
+
+                                        byte[] thePass = System.Text.Encoding.UTF8.GetBytes(hashedPass);
+                                        byte[] thePIN = System.Text.Encoding.UTF8.GetBytes(hashedNewPIN);
+
+                                        logger.Debug("The patient with ID {0} logged in.", inputedPacientID);
+                                        startPatientInterface(inputedPacientID, thePass, thePIN, lastName, firstName, birthday);
+                                    }
+                                    else
+                                    {
+                                        try
                                         {
-                                            connected = true;
-                                            string lastName = (string)reader["pacient_last_name"];
-                                            string firstName = (string)reader["pacient_first_name"];
-                                            DateTime theDate = (DateTime)reader["last_login"];
-                                            DateTime birthday = (DateTime)reader["birthday"];
-
-                                            if ((DateTime.Today.Date - theDate.Date).Days > 30)
+                                            if (validatePIN() == true)
                                             {
-                                                int newPIN = generatePIN();
-                                                MessageBox.Show("Your new token PIN for the next 30 days is: " + newPIN.ToString());
-                                                string hashedNewPIN = computeHash2(newPIN.ToString());
-                                                updatePIN(inputedPacientID, hashedNewPIN);
+                                                int inputedPIN = int.Parse(tbPIN.Text.Trim().ToString());
+                                                string hashedPIN = computeHash2(inputedPIN.ToString());
+
+                                                string databasePIN = (string)reader["hashed_PIN"];
+                                                if (hashedPIN.CompareTo(databasePIN) == 0)
+                                                {
+                                                    string lastName = (string)reader["pacient_last_name"];
+                                                    string firstName = (string)reader["pacient_first_name"];
+                                                    DateTime theDate = (DateTime)reader["last_login"];
+                                                    DateTime birthday = (DateTime)reader["birthday"];
+
+                                                    if ((DateTime.Today.Date - theDate.Date).Days > 30)
+                                                    {
+                                                        string hashedNewPIN = updatePIN(inputedPacientID);
+                                                    }
+
+                                                    updateLastLogin(inputedPacientID);
+
+                                                    byte[] thePass = System.Text.Encoding.UTF8.GetBytes(hashedPass);
+                                                    byte[] thePIN = System.Text.Encoding.UTF8.GetBytes(hashedPIN);
+
+                                                    logger.Debug("The doctor with ID {0} logged in.", inputedPacientID);
+                                                    startPatientInterface(inputedPacientID, thePass, thePIN, lastName, firstName, birthday);
+                                                }
+                                                else
+                                                {
+                                                    successfulAuthentication++;
+                                                    MessageBox.Show("Incorrect PIN!");
+                                                }
                                             }
-
-                                            updateLastLogin(inputedPacientID);
-
-                                            byte[] thePass = System.Text.Encoding.UTF8.GetBytes(hashedPass);
-                                            byte[] thePIN = System.Text.Encoding.UTF8.GetBytes(hashedPIN);
-
-                                            Patient patient = new Patient(inputedPacientID, thePass, thePIN, lastName, firstName, birthday);
-                                            PatientInterface patientInterface = new PatientInterface(patient);
-                                            Hide();
-                                            patientInterface.ShowDialog();
+                                            else
+                                            {
+                                                successfulAuthentication++;
+                                                MessageBox.Show("Incorrect PIN!");
+                                            }
+                                        }
+                                        catch (FormatException)
+                                        {
+                                            successfulAuthentication++;
+                                            MessageBox.Show("Incorrect PIN!");
                                         }
                                     }
-                                    catch (FormatException)
-                                    {
-                                        showedIncorrectPIN = true;
-                                        MessageBox.Show("Please input the PIN");
-                                    }
-                                }
+                            }
                         }
+                        successfulAuthentication++;
                     }
-
-                    if (connected == false && showedIncorrectPIN == false)
-                        MessageBox.Show("Invalid credentials!");
+                }
+                else
+                {
                     successfulAuthentication++;
+                    if (successfulAuthentication > 4)
+                    {
+                        logger.Warn("The patient with ID {0} is repeatedly trying to log in.", inputedPacientID);
+                        MessageBox.Show("Too many attempts!");
+                    }
                 }
             }
-            else
-                if (ValidateChildren() == true)
+            catch (FormatException)
+            {
+                successfulAuthentication++;
+                if (successfulAuthentication > 4)
+                {
+                    logger.Warn("The patient with ID {0} is repeatedly trying to log in.", inputedPacientID);
                     MessageBox.Show("Too many attempts!");
+                }
+            }
+            
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

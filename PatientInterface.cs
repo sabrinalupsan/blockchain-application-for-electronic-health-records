@@ -105,5 +105,10 @@ namespace BlockchainApp
             else
                 MessageBox.Show("Please select a record!");
         }
+
+        private void btnPrintRecord_Click(object sender, EventArgs e)
+        {
+            //log this
+        }
     }
 }

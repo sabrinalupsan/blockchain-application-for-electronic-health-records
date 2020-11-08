@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,8 @@ namespace BlockchainApp
 {
     public partial class AdminLogin : Form
     {
+        int successfulAuthentication = 0;
+
         public AdminLogin()
         {
             InitializeComponent();
@@ -24,15 +27,23 @@ namespace BlockchainApp
 
         private void OKbtn_Click(object sender, EventArgs e)
         {
+            Logger logger = LogManager.GetCurrentClassLogger();
             string password = tbPassword.Text.Trim().ToString();
             if (password.CompareTo("123") == 0)
             {
                 AdminInterface form = new AdminInterface();
-                this.Hide();
+                Hide();
                 form.Show();
             }
             else
+            {
                 MessageBox.Show("Wrong password.");
+                successfulAuthentication++;
+            }
+            if(successfulAuthentication>5)
+            {
+                logger.Warn("Someone is repeateldy trying to log into admin!");
+            }
         }
     }
 }

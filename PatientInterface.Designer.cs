@@ -95,6 +95,7 @@
             this.btnPrintRecord.TabIndex = 2;
             this.btnPrintRecord.Text = "Print record";
             this.btnPrintRecord.UseVisualStyleBackColor = false;
+            this.btnPrintRecord.Click += new System.EventHandler(this.btnPrintRecord_Click);
             // 
             // label1
             // 

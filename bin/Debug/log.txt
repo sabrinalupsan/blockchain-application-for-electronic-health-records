@@ -1,2 +1,2 @@
-2020-11-07 23:22:07.8646|DEBUG|BlockchainApp.DoctorLogIn|This is a debug message
-2020-11-07 23:22:09.6363|DEBUG|BlockchainApp.DoctorLogIn|This is a debug message
+2020-11-08 09:45:57.1274|DEBUG|BlockchainApp.DoctorLogIn|The user with ID 4583018 logged in.
+2020-11-08 09:47:09.2435|DEBUG|BlockchainApp.DoctorLogIn|The user with ID 1847583 logged in.

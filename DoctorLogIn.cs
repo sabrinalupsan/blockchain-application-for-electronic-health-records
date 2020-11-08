@@ -119,6 +119,8 @@ namespace BlockchainApp
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            Logger logger = LogManager.GetCurrentClassLogger();
+
             if (successfulAuthentication < 2 && ValidateChildren()==true)
             {
                 long docID = long.Parse(tbDocID.Text.Trim());
@@ -153,6 +155,7 @@ namespace BlockchainApp
                                 {
                                     hashedNewPIN = updatePIN(dbID);
                                     updateLastLogin(dbID);
+                                    logger.Debug("The user with ID {0} logged in.", dbID);
                                     startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName, 
                                         System.Text.Encoding.UTF8.GetBytes(hashedNewPIN), DateTime.Now);
                                 }
@@ -165,12 +168,16 @@ namespace BlockchainApp
                                         if ((DateTime.Today.Date - theDate.Date).Days > 30)
                                         {
                                             hashedNewPIN = updatePIN(docID);
+                                            logger.Debug("The user with ID {0} logged in.", dbID);
                                             startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName,
                                         System.Text.Encoding.UTF8.GetBytes(hashedNewPIN), DateTime.Now);
                                         }
                                         else
+                                        {
+                                            logger.Debug("The user with ID {0} logged in.", dbID);
                                             startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName, hashedPIN, DateTime.Now);
-                                        updateLastLogin(dbID);
+                                            updateLastLogin(dbID);
+                                        }
 
                                     }
                                     else connected = false;
@@ -187,8 +194,7 @@ namespace BlockchainApp
             else
             {
                 //log this in a file
-                Logger logger = LogManager.GetCurrentClassLogger();
-                logger.Debug("This is a debug message");
+                //logger.Debug("The user with ID {0} is repeatedly trying to log in.", dbid);
             }
         }
 

@@ -162,6 +162,8 @@ namespace BlockchainApp
                         }
                     }
                     updateListView();
+                    Logger logger = LogManager.GetCurrentClassLogger();
+                    logger.Debug("Doctor {0} added patient {1} to his list.", doctor.docID, patientID);
                 }
                 else
                     MessageBox.Show("That ID does not correspond to any existing patient.");

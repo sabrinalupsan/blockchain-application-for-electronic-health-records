@@ -157,6 +157,7 @@ namespace BlockchainApp
             string checkID= tbDocID.Text.Trim().ToString();
             if (successfulAuthentication < 4 && validateDoctor() == true)
             {
+                bool connected = false;
                 long docID = long.Parse(tbDocID.Text.Trim());
 
                 byte[] hashedPassword = computeHash(tbPassword.Text.Trim().ToString());
@@ -171,6 +172,7 @@ namespace BlockchainApp
                     conn.Open();
                     var command = new SqlCommand(querry, conn);
                     using (SqlDataReader reader = command.ExecuteReader())
+                    {
                         while (reader.Read())
                         {
                             long dbID = (int)reader["doctor_id"];
@@ -185,6 +187,7 @@ namespace BlockchainApp
                                 if (reader["hashed_PIN"] == System.DBNull.Value)
                                 {
                                     hashedNewPIN = updatePIN(dbID);
+                                    connected = true;
                                     startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName,
                                         System.Text.Encoding.UTF8.GetBytes(hashedNewPIN), DateTime.Now);
                                 }
@@ -198,19 +201,27 @@ namespace BlockchainApp
                                             if ((DateTime.Today.Date - theDate.Date).Days > 30)
                                             {
                                                 hashedNewPIN = updatePIN(docID);
+                                                connected = true;
                                                 startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName,
                                                 System.Text.Encoding.UTF8.GetBytes(hashedNewPIN), DateTime.Now);
                                             }
                                             else
+                                            {
+                                                connected = true;
                                                 startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName, hashedPIN, DateTime.Now);
+                                            }
                                         }
-                                        else
-                                            wrongPIN();
                                     }
-                                    else
-                                        wrongPIN();
                             }
                         }
+                        
+                    }
+                }
+                
+                if(connected == false)
+                {
+                    successfulAuthentication++;
+                    MessageBox.Show("Invalid credentials!");
                 }
             }
             else
@@ -219,7 +230,7 @@ namespace BlockchainApp
                 if (successfulAuthentication > 4)
                 {
                     logger.Warn("The doctor with ID {0} is repeatedly trying to log in.", checkID);
-                    MessageBox.Show("Too many attempts!");
+                    MessageBox.Show("Invalid credentials. Too many attempts!");
                 }
             }
         }

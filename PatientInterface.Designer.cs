@@ -54,6 +54,7 @@
             this.columnHeader1,
             this.columnHeader2});
             this.lvRecords.ForeColor = System.Drawing.Color.Black;
+            this.lvRecords.FullRowSelect = true;
             this.lvRecords.GridLines = true;
             this.lvRecords.HideSelection = false;
             this.lvRecords.Location = new System.Drawing.Point(12, 55);

@@ -97,6 +97,8 @@ namespace BlockchainApp
 
         private void startPatientInterface(long patientID, byte[] hashedPassword, byte[] hashedPIN, string lastName, string firstName, DateTime birthday)
         {
+            Logger logger = LogManager.GetCurrentClassLogger();
+            logger.Debug("The patient with ID {0} logged in.", patientID);
             Patient patient = new Patient(patientID, hashedPassword, hashedPIN, lastName, firstName, birthday);
             PatientInterface patientInterface = new PatientInterface(patient);
             Hide();
@@ -131,12 +133,13 @@ namespace BlockchainApp
         private void btnOK_Click(object sender, EventArgs e)
         {
             Logger logger = LogManager.GetCurrentClassLogger();
-            long inputedPacientID = -1;
+            string checkID = tbPacientID.Text.Trim().ToString();
             try
             {
                 if (successfulAuthentication < 4 && validatePatient() == true)
                 {
-                    inputedPacientID = long.Parse(tbPacientID.Text.Trim());
+                    bool connected = false;
+                    long inputedPacientID = long.Parse(tbPacientID.Text.Trim());
 
                     string inputedPass = tbPassword.Text.Trim().ToString();
                     string hashedPass = computeHash2(inputedPass);
@@ -170,7 +173,7 @@ namespace BlockchainApp
                                         byte[] thePass = System.Text.Encoding.UTF8.GetBytes(hashedPass);
                                         byte[] thePIN = System.Text.Encoding.UTF8.GetBytes(hashedNewPIN);
 
-                                        logger.Debug("The patient with ID {0} logged in.", inputedPacientID);
+                                        connected = true;
                                         startPatientInterface(inputedPacientID, thePass, thePIN, lastName, firstName, birthday);
                                     }
                                     else
@@ -200,7 +203,7 @@ namespace BlockchainApp
                                                     byte[] thePass = System.Text.Encoding.UTF8.GetBytes(hashedPass);
                                                     byte[] thePIN = System.Text.Encoding.UTF8.GetBytes(hashedPIN);
 
-                                                    logger.Debug("The doctor with ID {0} logged in.", inputedPacientID);
+                                                    connected = true;
                                                     startPatientInterface(inputedPacientID, thePass, thePIN, lastName, firstName, birthday);
                                                 }
                                                 else
@@ -223,6 +226,10 @@ namespace BlockchainApp
                                     }
                             }
                         }
+                    }
+                    if (connected == false)
+                    {
+                        MessageBox.Show("Invalid credentials!");
                         successfulAuthentication++;
                     }
                 }
@@ -231,8 +238,8 @@ namespace BlockchainApp
                     successfulAuthentication++;
                     if (successfulAuthentication > 4)
                     {
-                        logger.Warn("The patient with ID {0} is repeatedly trying to log in.", inputedPacientID);
-                        MessageBox.Show("Too many attempts!");
+                        logger.Warn("The patient with ID {0} is repeatedly trying to log in.", checkID);
+                        MessageBox.Show("Invalid credentials. Too many attempts!");
                     }
                 }
             }
@@ -241,7 +248,7 @@ namespace BlockchainApp
                 successfulAuthentication++;
                 if (successfulAuthentication > 4)
                 {
-                    logger.Warn("The patient with ID {0} is repeatedly trying to log in.", inputedPacientID);
+                    logger.Warn("The patient with ID {0} is repeatedly trying to log in.", checkID);
                     MessageBox.Show("Too many attempts!");
                 }
             }

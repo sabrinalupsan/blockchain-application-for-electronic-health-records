@@ -21,10 +21,12 @@ namespace BlockchainApp
         private SqlConnectionStringBuilder build()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+            #region Log in details
             builder.DataSource = "blockchainapp.database.windows.net";
             builder.UserID = "lupsansabrina18";
             builder.Password = "Selenacolierul9!";
             builder.InitialCatalog = "blockchainapp";
+            #endregion 
             return builder;
         }
 

@@ -225,7 +225,7 @@ namespace BlockchainApp
             DisplayPacients();
         }
 
-        private void DoctorInterface_Load(object sender, EventArgs e)
+        private void hideControls()
         {
             tbTitle.Hide();
             tbDetails.Hide();
@@ -233,6 +233,11 @@ namespace BlockchainApp
             label5.Hide();
             label6.Hide();
             Details.Hide();
+        }
+
+        private void DoctorInterface_Load(object sender, EventArgs e)
+        {
+            hideControls();
 
             var querry = "SELECT pacient_id, pacient_last_name, pacient_first_name, birthday" + " FROM Pacients " +
                 "WHERE pacient_id IN(SELECT pacient_id from ASSOCIATIONS WHERE doctor_id =" + doctor.docID + ");";
@@ -570,6 +575,7 @@ namespace BlockchainApp
             lbRecords.Items.Clear();
             if (lvPacients.SelectedItems.Count > 0)
             {
+                hideControls();
                 ListViewItem item = lvPacients.SelectedItems[0];
                 Patient patient = (Patient)item.Tag;
 
@@ -577,7 +583,7 @@ namespace BlockchainApp
                 SqlConnectionStringBuilder builder = build();
 
                 var populateListBoxQuerry = "SELECT appointment_title, appointment_description, appointment_date FROM Block " +
-                    "WHERE doctor_id = " + doctor.docID + "AND pacient_id = " + patient.patientID;
+                    "WHERE doctor_id = " + doctor.docID + "AND pacient_id = " + patient.patientID +";";
 
                 using (SqlConnection populateListBoxConn = new SqlConnection(builder.ConnectionString))
                 {
@@ -595,6 +601,7 @@ namespace BlockchainApp
                         }
                     }
                 }
+                
             }
         }
 

@@ -51,3 +51,4 @@ D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\Block
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\NLog.dll
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\NLog.xml
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\NLog.config
+D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.ResetPassword.resources

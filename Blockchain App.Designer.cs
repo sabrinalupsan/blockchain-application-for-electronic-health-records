@@ -35,6 +35,7 @@
             this.btnAdmin = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.forgotLabel = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // btnDoc
@@ -115,12 +116,24 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Blockchain App";
             // 
+            // forgotLabel
+            // 
+            this.forgotLabel.AutoSize = true;
+            this.forgotLabel.Location = new System.Drawing.Point(121, 365);
+            this.forgotLabel.Name = "forgotLabel";
+            this.forgotLabel.Size = new System.Drawing.Size(153, 17);
+            this.forgotLabel.TabIndex = 8;
+            this.forgotLabel.TabStop = true;
+            this.forgotLabel.Text = "Forgot your password?";
+            this.forgotLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.forgotLabel_LinkClicked);
+            // 
             // ProfileSelect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
             this.ClientSize = new System.Drawing.Size(391, 391);
+            this.Controls.Add(this.forgotLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAdmin);
@@ -142,6 +155,7 @@
         private System.Windows.Forms.Button btnAdmin;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.LinkLabel forgotLabel;
     }
 }
 

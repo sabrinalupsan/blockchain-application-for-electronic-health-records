@@ -40,5 +40,10 @@ namespace BlockchainApp
             adminLogin.Show();
         }
 
+        private void forgotLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ResetPassword reset = new ResetPassword();
+            reset.ShowDialog();
+        }
     }
 }

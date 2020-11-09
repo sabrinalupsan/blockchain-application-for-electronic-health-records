@@ -17,7 +17,7 @@ namespace BlockchainApp
 
         private string TheHash;
         public string theHash { get { return TheHash; } set { TheHash = value; } }
-        
+
         public Hash(int nounce, string theString)
         {
             Nounce = nounce;

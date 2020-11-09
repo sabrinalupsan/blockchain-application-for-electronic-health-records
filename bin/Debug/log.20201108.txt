@@ -1,0 +1,6 @@
+2020-11-08 22:52:28.6733|WARN|BlockchainApp.PacientLogIn|The patient with ID 5658230 is repeatedly trying to log in.
+2020-11-08 22:52:45.0277|DEBUG|BlockchainApp.PacientLogIn|The patient with ID 5658230 logged in.
+2020-11-08 23:00:58.8396|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2020-11-08 23:01:20.2618|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2020-11-08 23:07:30.6210|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2020-11-08 23:09:20.2936|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.

@@ -1,0 +1,15 @@
+2020-11-09 13:03:36.9622|DEBUG|BlockchainApp.ResetPassword|The user with the ID 4583018 just changed their password.
+2020-11-09 14:22:06.2416|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2020-11-09 14:25:42.0972|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2020-11-09 14:30:59.5829|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2020-11-09 14:31:12.8423|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 6290438.
+2020-11-09 14:36:26.8695|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1847583 logged in.
+2020-11-09 14:36:34.9690|DEBUG|BlockchainApp.DoctorInterface|Doctor 1847583 added a record for patient 8973496.
+2020-11-09 14:50:07.0096|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1847583 logged in.
+2020-11-09 14:50:40.3661|DEBUG|BlockchainApp.DoctorInterface|Doctor 1847583 added a record for patient 6290438.
+2020-11-09 14:51:22.9201|DEBUG|BlockchainApp.DoctorInterface|Doctor 1847583 added a record for patient 5658230.
+2020-11-09 14:54:24.1894|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1847583 logged in.
+2020-11-09 14:55:25.5328|DEBUG|BlockchainApp.DoctorInterface|Doctor 1847583 added a record for patient 8973496.
+2020-11-09 14:56:30.9182|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2020-11-09 14:57:54.3217|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2020-11-09 14:58:15.6332|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 6290438.

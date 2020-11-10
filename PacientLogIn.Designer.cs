@@ -58,7 +58,7 @@
             this.btnOK.Location = new System.Drawing.Point(34, 216);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 1;
+            this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = false;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -69,7 +69,7 @@
             this.tbPacientID.Location = new System.Drawing.Point(140, 57);
             this.tbPacientID.Name = "tbPacientID";
             this.tbPacientID.Size = new System.Drawing.Size(100, 22);
-            this.tbPacientID.TabIndex = 2;
+            this.tbPacientID.TabIndex = 0;
             this.tbPacientID.Validating += new System.ComponentModel.CancelEventHandler(this.tbPacientID_Validating);
             this.tbPacientID.Validated += new System.EventHandler(this.tbPacientID_Validated);
             // 
@@ -89,7 +89,7 @@
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 22);
-            this.tbPassword.TabIndex = 4;
+            this.tbPassword.TabIndex = 1;
             this.tbPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tbPassword_Validating);
             this.tbPassword.Validated += new System.EventHandler(this.tbPassword_Validated);
             // 
@@ -101,7 +101,7 @@
             this.btnCancel.Location = new System.Drawing.Point(182, 216);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 5;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -113,7 +113,7 @@
             this.tbPIN.Name = "tbPIN";
             this.tbPIN.PasswordChar = '*';
             this.tbPIN.Size = new System.Drawing.Size(100, 22);
-            this.tbPIN.TabIndex = 10;
+            this.tbPIN.TabIndex = 2;
             this.tbPIN.Validating += new System.ComponentModel.CancelEventHandler(this.tbPIN_Validating);
             this.tbPIN.Validated += new System.EventHandler(this.tbPIN_Validated);
             // 

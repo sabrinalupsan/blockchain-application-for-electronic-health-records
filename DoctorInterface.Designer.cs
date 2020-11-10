@@ -130,7 +130,7 @@
             this.btnDone.Location = new System.Drawing.Point(82, 131);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(75, 23);
-            this.btnDone.TabIndex = 5;
+            this.btnDone.TabIndex = 1;
             this.btnDone.Text = "Done";
             this.btnDone.UseVisualStyleBackColor = false;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
@@ -141,7 +141,7 @@
             this.tbNewPacientID.Location = new System.Drawing.Point(119, 57);
             this.tbNewPacientID.Name = "tbNewPacientID";
             this.tbNewPacientID.Size = new System.Drawing.Size(100, 22);
-            this.tbNewPacientID.TabIndex = 6;
+            this.tbNewPacientID.TabIndex = 0;
             this.tbNewPacientID.Validating += new System.ComponentModel.CancelEventHandler(this.tbNewPacientID_Validating);
             this.tbNewPacientID.Validated += new System.EventHandler(this.tbNewPacientID_Validated);
             // 
@@ -173,7 +173,7 @@
             this.tbDetails.Multiline = true;
             this.tbDetails.Name = "tbDetails";
             this.tbDetails.Size = new System.Drawing.Size(372, 129);
-            this.tbDetails.TabIndex = 9;
+            this.tbDetails.TabIndex = 4;
             // 
             // panel2
             // 
@@ -199,7 +199,7 @@
             this.btnAddNewRecord.Location = new System.Drawing.Point(220, 283);
             this.btnAddNewRecord.Name = "btnAddNewRecord";
             this.btnAddNewRecord.Size = new System.Drawing.Size(75, 23);
-            this.btnAddNewRecord.TabIndex = 18;
+            this.btnAddNewRecord.TabIndex = 5;
             this.btnAddNewRecord.Text = "OK";
             this.btnAddNewRecord.UseVisualStyleBackColor = false;
             this.btnAddNewRecord.Click += new System.EventHandler(this.btnAddNewRecord_Click);
@@ -219,7 +219,7 @@
             this.dtpDate.Location = new System.Drawing.Point(89, 54);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(200, 22);
-            this.dtpDate.TabIndex = 15;
+            this.dtpDate.TabIndex = 2;
             // 
             // tbTitle
             // 
@@ -227,7 +227,7 @@
             this.tbTitle.Location = new System.Drawing.Point(89, 98);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.Size = new System.Drawing.Size(200, 22);
-            this.tbTitle.TabIndex = 17;
+            this.tbTitle.TabIndex = 3;
             // 
             // label5
             // 
@@ -245,7 +245,7 @@
             this.btnCheck.Location = new System.Drawing.Point(313, 14);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(75, 23);
-            this.btnCheck.TabIndex = 13;
+            this.btnCheck.TabIndex = 1;
             this.btnCheck.Text = "Check";
             this.btnCheck.UseVisualStyleBackColor = false;
             this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
@@ -265,7 +265,7 @@
             this.tbPIN.Location = new System.Drawing.Point(89, 14);
             this.tbPIN.Name = "tbPIN";
             this.tbPIN.Size = new System.Drawing.Size(200, 22);
-            this.tbPIN.TabIndex = 10;
+            this.tbPIN.TabIndex = 0;
             this.tbPIN.Text = "Input PIN here";
             this.tbPIN.Click += new System.EventHandler(this.tbPIN_Click);
             this.tbPIN.Validating += new System.ComponentModel.CancelEventHandler(this.tbPIN_Validating);
@@ -313,7 +313,7 @@
             this.btnDones.Location = new System.Drawing.Point(541, 556);
             this.btnDones.Name = "btnDones";
             this.btnDones.Size = new System.Drawing.Size(75, 23);
-            this.btnDones.TabIndex = 12;
+            this.btnDones.TabIndex = 0;
             this.btnDones.Text = "Done";
             this.btnDones.UseVisualStyleBackColor = false;
             this.btnDones.Click += new System.EventHandler(this.btnDones_Click);

@@ -86,7 +86,7 @@
             this.btnOK.Location = new System.Drawing.Point(43, 394);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(82, 27);
-            this.btnOK.TabIndex = 2;
+            this.btnOK.TabIndex = 6;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = false;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -97,7 +97,7 @@
             this.tbNewDocID.Location = new System.Drawing.Point(178, 88);
             this.tbNewDocID.Name = "tbNewDocID";
             this.tbNewDocID.Size = new System.Drawing.Size(100, 22);
-            this.tbNewDocID.TabIndex = 3;
+            this.tbNewDocID.TabIndex = 0;
             // 
             // tbLastName
             // 
@@ -105,7 +105,7 @@
             this.tbLastName.Location = new System.Drawing.Point(178, 139);
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.Size = new System.Drawing.Size(100, 22);
-            this.tbLastName.TabIndex = 5;
+            this.tbLastName.TabIndex = 1;
             // 
             // label2
             // 
@@ -122,7 +122,7 @@
             this.tbFirstName.Location = new System.Drawing.Point(178, 186);
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.Size = new System.Drawing.Size(100, 22);
-            this.tbFirstName.TabIndex = 7;
+            this.tbFirstName.TabIndex = 2;
             // 
             // label3
             // 
@@ -139,7 +139,7 @@
             this.tbSpecialisation.Location = new System.Drawing.Point(178, 232);
             this.tbSpecialisation.Name = "tbSpecialisation";
             this.tbSpecialisation.Size = new System.Drawing.Size(100, 22);
-            this.tbSpecialisation.TabIndex = 9;
+            this.tbSpecialisation.TabIndex = 3;
             // 
             // label4
             // 
@@ -158,7 +158,7 @@
             this.button1.Location = new System.Drawing.Point(169, 394);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(82, 27);
-            this.button1.TabIndex = 10;
+            this.button1.TabIndex = 7;
             this.button1.Text = "Cancel";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -170,7 +170,7 @@
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 22);
-            this.tbPassword.TabIndex = 12;
+            this.tbPassword.TabIndex = 4;
             // 
             // label5
             // 
@@ -188,7 +188,7 @@
             this.tbRePassword.Name = "tbRePassword";
             this.tbRePassword.PasswordChar = '*';
             this.tbRePassword.Size = new System.Drawing.Size(100, 22);
-            this.tbRePassword.TabIndex = 14;
+            this.tbRePassword.TabIndex = 5;
             // 
             // label6
             // 
@@ -270,7 +270,7 @@
             this.tbPacientID.Location = new System.Drawing.Point(187, 88);
             this.tbPacientID.Name = "tbPacientID";
             this.tbPacientID.Size = new System.Drawing.Size(100, 22);
-            this.tbPacientID.TabIndex = 22;
+            this.tbPacientID.TabIndex = 0;
             // 
             // tbPacientLastName
             // 
@@ -278,7 +278,7 @@
             this.tbPacientLastName.Location = new System.Drawing.Point(187, 136);
             this.tbPacientLastName.Name = "tbPacientLastName";
             this.tbPacientLastName.Size = new System.Drawing.Size(100, 22);
-            this.tbPacientLastName.TabIndex = 23;
+            this.tbPacientLastName.TabIndex = 1;
             // 
             // tbPacientFirstName
             // 
@@ -286,7 +286,7 @@
             this.tbPacientFirstName.Location = new System.Drawing.Point(187, 186);
             this.tbPacientFirstName.Name = "tbPacientFirstName";
             this.tbPacientFirstName.Size = new System.Drawing.Size(100, 22);
-            this.tbPacientFirstName.TabIndex = 24;
+            this.tbPacientFirstName.TabIndex = 2;
             // 
             // tbPacientPassword
             // 
@@ -295,7 +295,7 @@
             this.tbPacientPassword.Name = "tbPacientPassword";
             this.tbPacientPassword.PasswordChar = '*';
             this.tbPacientPassword.Size = new System.Drawing.Size(100, 22);
-            this.tbPacientPassword.TabIndex = 25;
+            this.tbPacientPassword.TabIndex = 3;
             // 
             // tbPacientREPass
             // 
@@ -304,7 +304,7 @@
             this.tbPacientREPass.Name = "tbPacientREPass";
             this.tbPacientREPass.PasswordChar = '*';
             this.tbPacientREPass.Size = new System.Drawing.Size(100, 22);
-            this.tbPacientREPass.TabIndex = 26;
+            this.tbPacientREPass.TabIndex = 4;
             // 
             // btnOkPacient
             // 
@@ -314,7 +314,7 @@
             this.btnOkPacient.Location = new System.Drawing.Point(53, 394);
             this.btnOkPacient.Name = "btnOkPacient";
             this.btnOkPacient.Size = new System.Drawing.Size(75, 23);
-            this.btnOkPacient.TabIndex = 27;
+            this.btnOkPacient.TabIndex = 6;
             this.btnOkPacient.Text = "OK";
             this.btnOkPacient.UseVisualStyleBackColor = false;
             this.btnOkPacient.Click += new System.EventHandler(this.btnOkPacient_Click);
@@ -327,7 +327,7 @@
             this.btnCancelPacient.Location = new System.Drawing.Point(199, 394);
             this.btnCancelPacient.Name = "btnCancelPacient";
             this.btnCancelPacient.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelPacient.TabIndex = 28;
+            this.btnCancelPacient.TabIndex = 7;
             this.btnCancelPacient.Text = "Cancel";
             this.btnCancelPacient.UseVisualStyleBackColor = false;
             this.btnCancelPacient.Click += new System.EventHandler(this.btnCancelPacient_Click);
@@ -370,7 +370,7 @@
             this.dtpBirthday.Location = new System.Drawing.Point(187, 332);
             this.dtpBirthday.Name = "dtpBirthday";
             this.dtpBirthday.Size = new System.Drawing.Size(100, 22);
-            this.dtpBirthday.TabIndex = 29;
+            this.dtpBirthday.TabIndex = 5;
             // 
             // panel2
             // 

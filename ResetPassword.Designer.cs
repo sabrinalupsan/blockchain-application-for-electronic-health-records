@@ -48,7 +48,7 @@
             this.btnOK.Location = new System.Drawing.Point(63, 217);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 0;
+            this.btnOK.TabIndex = 4;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = false;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -77,7 +77,7 @@
             this.tbID.Location = new System.Drawing.Point(182, 38);
             this.tbID.Name = "tbID";
             this.tbID.Size = new System.Drawing.Size(100, 22);
-            this.tbID.TabIndex = 3;
+            this.tbID.TabIndex = 0;
             // 
             // tbPIN
             // 
@@ -86,7 +86,7 @@
             this.tbPIN.Name = "tbPIN";
             this.tbPIN.PasswordChar = '*';
             this.tbPIN.Size = new System.Drawing.Size(100, 22);
-            this.tbPIN.TabIndex = 4;
+            this.tbPIN.TabIndex = 1;
             // 
             // btnCancel
             // 
@@ -108,7 +108,7 @@
             this.tbRePassword.Name = "tbRePassword";
             this.tbRePassword.PasswordChar = '*';
             this.tbRePassword.Size = new System.Drawing.Size(100, 22);
-            this.tbRePassword.TabIndex = 18;
+            this.tbRePassword.TabIndex = 3;
             // 
             // label6
             // 
@@ -126,7 +126,7 @@
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 22);
-            this.tbPassword.TabIndex = 16;
+            this.tbPassword.TabIndex = 2;
             // 
             // label5
             // 

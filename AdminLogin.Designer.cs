@@ -60,7 +60,7 @@
             this.OKbtn.Location = new System.Drawing.Point(60, 101);
             this.OKbtn.Name = "OKbtn";
             this.OKbtn.Size = new System.Drawing.Size(75, 28);
-            this.OKbtn.TabIndex = 3;
+            this.OKbtn.TabIndex = 1;
             this.OKbtn.Text = "OK";
             this.OKbtn.UseVisualStyleBackColor = false;
             this.OKbtn.Click += new System.EventHandler(this.OKbtn_Click);
@@ -73,7 +73,7 @@
             this.CancelBtn.Location = new System.Drawing.Point(155, 101);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 28);
-            this.CancelBtn.TabIndex = 4;
+            this.CancelBtn.TabIndex = 2;
             this.CancelBtn.Text = "Cancel";
             this.CancelBtn.UseVisualStyleBackColor = false;
             this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);

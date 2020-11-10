@@ -329,6 +329,7 @@ namespace BlockchainApp
         {
             if (lvPacients.SelectedItems.Count > 0)
             {
+                lbRecords.Items.Clear();
                 ListViewItem item = lvPacients.SelectedItems[0];
                 Patient patient = (Patient)item.Tag;
 
@@ -355,9 +356,7 @@ namespace BlockchainApp
                 }
             }
             else
-            {
                 MessageBox.Show("Please select a patient!");
-            }
         }
     
         private int generateIndex(SqlConnectionStringBuilder builder)

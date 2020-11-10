@@ -147,6 +147,7 @@
             this.Controls.Add(this.btnOK);
             this.Name = "DoctorLogIn";
             this.Text = "Doctor and Nurse Log In";
+            this.Load += new System.EventHandler(this.DoctorLogIn_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

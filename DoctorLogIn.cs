@@ -11,6 +11,8 @@ using System.Security.Cryptography;
 using Microsoft.SqlServer.Server;
 using System.Data.SqlClient;
 using NLog;
+using System.Net;
+using NLog.Targets;
 
 namespace BlockchainApp
 {
@@ -231,10 +233,50 @@ namespace BlockchainApp
                 successfulAuthentication++;
                 if (successfulAuthentication > 4)
                 {
-                    logger.Warn("The doctor with ID {0} is repeatedly trying to log in.", checkID);
-                    MessageBox.Show("Invalid credentials. Too many attempts!");
+                    string myIP = getIP();
+                    logger.Warn("The doctor with IP {0} is repeatedly trying to log in.", myIP);
+                    MessageBox.Show("Invalid credentials and too many attempts! You need to wait 30 seconds to log in again.");
+                    Wait(30);
+                }
+
+            }
+        }
+
+        private void readLog(string ip)
+        {
+            string[] lines = System.IO.File.ReadAllLines("log.txt");
+            int j = lines.Length-1;
+            for(int i=j; i>=0; i--)
+            {
+                string substring = lines[i].Substring(24, (lines[i].Length-24));
+                string toCompare = "|WARN|BlockchainApp.DoctorLogIn|The doctor with IP "+ ip+" is repeatedly trying to log in.";
+                if (substring.CompareTo(toCompare) ==0)
+                {
+                    string timestamp = lines[i].Substring(0, 19);
+                    DateTimeConverter converter = new DateTimeConverter();
+                    DateTime date = (DateTime)converter.ConvertFromString(timestamp);
+                    double secondsPassed = (DateTime.Now - date).TotalSeconds;
+                    if (secondsPassed < 40)
+                    {
+                        double secondsLeft = 40 - secondsPassed;
+                        Wait(secondsLeft);
+                        break;
+                    }
                 }
             }
+        }
+
+        private void Wait(double seconds)
+        {
+            tbDocID.Enabled = false;
+            tbPassword.Enabled = false;
+            tbPIN.Enabled = false;
+            btnOK.Enabled = false;
+            System.Threading.Thread.Sleep(1000*(int)seconds);
+            tbDocID.Enabled = true;
+            tbPassword.Enabled = true;
+            tbPIN.Enabled = true;
+            btnOK.Enabled = true;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -272,6 +314,18 @@ namespace BlockchainApp
                     "at least 5 characters!");
                 e.Cancel = true;
             }
+        }
+
+        private string getIP()
+        {
+            string hostName = Dns.GetHostName();
+            return Dns.GetHostByName(hostName).AddressList[0].ToString();
+        }
+
+        private void DoctorLogIn_Load(object sender, EventArgs e)
+        {
+            string myIP = getIP();
+            readLog(myIP);
         }
     }
 }

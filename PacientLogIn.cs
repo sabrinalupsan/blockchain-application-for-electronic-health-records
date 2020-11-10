@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Security.Cryptography;
 using Microsoft.Data.SqlClient;
 using NLog;
+using System.Net;
 
 namespace BlockchainApp
 {
@@ -238,8 +239,10 @@ namespace BlockchainApp
                     successfulAuthentication++;
                     if (successfulAuthentication > 4)
                     {
-                        logger.Warn("The patient with ID {0} is repeatedly trying to log in.", checkID);
-                        MessageBox.Show("Invalid credentials. Too many attempts!");
+                        string myIP = getIP();
+                        logger.Warn("The patient with IP {0} is repeatedly trying to log in.", myIP);
+                        MessageBox.Show("Invalid credentials and too many attempts! You need to wait 30 seconds to log in again.");
+                        Wait(30);
                     }
                 }
             }
@@ -248,11 +251,50 @@ namespace BlockchainApp
                 successfulAuthentication++;
                 if (successfulAuthentication > 4)
                 {
-                    logger.Warn("The patient with ID {0} is repeatedly trying to log in.", checkID);
-                    MessageBox.Show("Too many attempts!");
+                    string myIP = getIP();
+                    logger.Warn("The patient with IP {0} is repeatedly trying to log in.", myIP);
+                    MessageBox.Show("Invalid credentials and too many attempts! You need to wait 30 seconds to log in again.");
+                    Wait(30);
                 }
             }
             
+        }
+
+        private void readLog(string ip)
+        {
+            string[] lines = System.IO.File.ReadAllLines("log.txt");
+            int j = lines.Length - 1;
+            for (int i = j; i >= 0; i--)
+            {
+                string substring = lines[i].Substring(24, (lines[i].Length - 24));
+                string toCompare = "|WARN|BlockchainApp.PacientLogIn|The patient with IP " + ip + " is repeatedly trying to log in.";
+                if (substring.CompareTo(toCompare) == 0)
+                {
+                    string timestamp = lines[i].Substring(0, 19);
+                    DateTimeConverter converter = new DateTimeConverter();
+                    DateTime date = (DateTime)converter.ConvertFromString(timestamp);
+                    double secondsPassed = (DateTime.Now - date).TotalSeconds;
+                    if (secondsPassed < 40)
+                    {
+                        double secondsLeft = 40 - secondsPassed;
+                        Wait(secondsLeft);
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void Wait(double seconds)
+        {
+            tbPacientID.Enabled = false;
+            tbPassword.Enabled = false;
+            tbPIN.Enabled = false;
+            btnOK.Enabled = false;
+            System.Threading.Thread.Sleep(1000 * (int)seconds);
+            tbPacientID.Enabled = true;
+            tbPassword.Enabled = true;
+            tbPIN.Enabled = true;
+            btnOK.Enabled = true;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -303,6 +345,18 @@ namespace BlockchainApp
         private void tbPIN_Validated(object sender, EventArgs e)
         {
             errorProvider.SetError(tbPIN, null);
+        }
+
+        private string getIP()
+        {
+            string hostName = Dns.GetHostName();
+            return Dns.GetHostByName(hostName).AddressList[0].ToString();
+        }
+
+        private void PacientLogIn_Load(object sender, EventArgs e)
+        {
+            string myIP = getIP();
+            readLog(myIP);
         }
     }
 }

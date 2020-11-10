@@ -147,6 +147,7 @@
             this.Controls.Add(this.label1);
             this.Name = "PacientLogIn";
             this.Text = "PacientLogIn";
+            this.Load += new System.EventHandler(this.PacientLogIn_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

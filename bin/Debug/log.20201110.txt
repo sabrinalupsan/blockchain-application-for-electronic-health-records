@@ -1,0 +1,14 @@
+2020-11-10 19:21:13.4084|WARN|BlockchainApp.DoctorLogIn|The doctor with IP 26.235.128.98 is repeatedly trying to log in.
+2020-11-10 19:21:57.2498|WARN|BlockchainApp.DoctorLogIn|The doctor with IP 26.235.128.98 is repeatedly trying to log in.
+2020-11-10 19:43:09.4807|WARN|BlockchainApp.DoctorLogIn|The doctor with IP 26.235.128.98 is repeatedly trying to log in.
+2020-11-10 19:43:51.9612|WARN|BlockchainApp.DoctorLogIn|The doctor with IP 26.235.128.98 is repeatedly trying to log in.
+2020-11-10 19:45:06.9595|WARN|BlockchainApp.DoctorLogIn|The doctor with IP 26.235.128.98 is repeatedly trying to log in.
+2020-11-10 19:48:53.0892|WARN|BlockchainApp.DoctorLogIn|The doctor with IP 26.235.128.98 is repeatedly trying to log in.
+2020-11-10 23:05:56.8720|WARN|BlockchainApp.DoctorLogIn|The doctor with IP 26.235.128.98 is repeatedly trying to log in.
+2020-11-10 23:07:11.0821|WARN|BlockchainApp.DoctorLogIn|The doctor with IP 26.235.128.98 is repeatedly trying to log in.
+2020-11-10 23:08:56.8182|WARN|BlockchainApp.DoctorLogIn|The doctor with IP 26.235.128.98 is repeatedly trying to log in.
+2020-11-10 23:10:02.2893|WARN|BlockchainApp.DoctorLogIn|The doctor with IP 26.235.128.98 is repeatedly trying to log in.
+2020-11-10 23:11:35.1123|WARN|BlockchainApp.DoctorLogIn|The doctor with IP fe80::1f8:7324:32ad:b348%11 is repeatedly trying to log in.
+2020-11-10 23:17:42.8716|WARN|BlockchainApp.PacientLogIn|The patient with ID fe80::1f8:7324:32ad:b348%11 is repeatedly trying to log in.
+2020-11-10 23:21:43.2814|WARN|BlockchainApp.DoctorLogIn|The doctor with IP 26.235.128.98 is repeatedly trying to log in.
+2020-11-10 23:23:06.9323|WARN|BlockchainApp.PacientLogIn|The patient with IP 26.235.128.98 is repeatedly trying to log in.

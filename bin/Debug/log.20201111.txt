@@ -1,0 +1,2 @@
+2020-11-11 12:51:56.5914|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2020-11-11 12:52:59.2323|DEBUG|BlockchainApp.PacientLogIn|The patient with ID 8973496 logged in.

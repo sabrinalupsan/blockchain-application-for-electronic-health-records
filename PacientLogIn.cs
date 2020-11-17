@@ -17,11 +17,14 @@ namespace BlockchainApp
     public partial class PacientLogIn : Form
     {
         private int successfulAuthentication = 0;
+        private SqlConnectionStringBuilder builder;
 
         public PacientLogIn()
         {
             InitializeComponent();
             successfulAuthentication = 0;
+            MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
+            builder = mySqlBuilder.builder;
         }
 
         private byte[] computeHash(string toHash)
@@ -40,15 +43,15 @@ namespace BlockchainApp
             return Encoding.Default.GetString(finalHash);
         }
 
-        private SqlConnectionStringBuilder build()
-        {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "blockchainapp.database.windows.net";
-            builder.UserID = "lupsansabrina18";
-            builder.Password = "Selenacolierul9!";
-            builder.InitialCatalog = "blockchainapp";
-            return builder;
-        }
+        //private SqlConnectionStringBuilder build()
+        //{
+        //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+        //    builder.DataSource = "blockchainapp.database.windows.net";
+        //    builder.UserID = "lupsansabrina18";
+        //    builder.Password = "Selenacolierul9!";
+        //    builder.InitialCatalog = "blockchainapp";
+        //    return builder;
+        //}
 
         private int generatePIN()
         {
@@ -58,7 +61,6 @@ namespace BlockchainApp
 
         private void updateLastLogin(long patientID)
         {
-            var builder = build();
             var lastLoginQuery = "UPDATE Pacients" + " SET last_login = SYSDATETIME()" + "WHERE pacient_id =" + patientID + ";";
             using (SqlConnection lastLoginConnection = new SqlConnection(builder.ConnectionString))
             {
@@ -79,7 +81,6 @@ namespace BlockchainApp
             int newPIN = generatePIN();
             MessageBox.Show("Your new token PIN for the next 30 days is: " + newPIN.ToString());
             string hashedNewPIN = computeHash2(newPIN.ToString());
-            var builder = build();
             var updatePINquery = "UPDATE Pacients SET hashed_PIN = @hashPIN WHERE pacient_id = " + patientID + ";";
             using (SqlConnection updatePINconnection = new SqlConnection(builder.ConnectionString))
             {
@@ -145,7 +146,8 @@ namespace BlockchainApp
                     string inputedPass = tbPassword.Text.Trim().ToString();
                     string hashedPass = computeHash2(inputedPass);
 
-                    SqlConnectionStringBuilder builder = build();
+                    MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
+                    SqlConnectionStringBuilder builder = mySqlBuilder.builder;
 
                     var querry = "SELECT * from Pacients;";
 

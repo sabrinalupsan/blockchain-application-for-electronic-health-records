@@ -154,6 +154,7 @@
     <Compile Include="ResetPassword.Designer.cs">
       <DependentUpon>ResetPassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="SqlBuilder.cs" />
     <EmbeddedResource Include="AdminInterface.resx">
       <DependentUpon>AdminInterface.cs</DependentUpon>
     </EmbeddedResource>

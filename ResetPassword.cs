@@ -15,20 +15,24 @@ namespace BlockchainApp
 {
     public partial class ResetPassword : Form
     {
+        private SqlConnectionStringBuilder builder;
+
         public ResetPassword()
         {
             InitializeComponent();
+            MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
+            builder = mySqlBuilder.builder;
         }
 
-        private SqlConnectionStringBuilder build()
-        {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "blockchainapp.database.windows.net";
-            builder.UserID = "lupsansabrina18";
-            builder.Password = "Selenacolierul9!";
-            builder.InitialCatalog = "blockchainapp";
-            return builder;
-        }
+        //private SqlConnectionStringBuilder build()
+        //{
+        //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+        //    builder.DataSource = "blockchainapp.database.windows.net";
+        //    builder.UserID = "lupsansabrina18";
+        //    builder.Password = "Selenacolierul9!";
+        //    builder.InitialCatalog = "blockchainapp";
+        //    return builder;
+        //}
 
         private string computeHash(string toHash)
         {
@@ -77,7 +81,6 @@ namespace BlockchainApp
             {
                 long ID = int.Parse(tbID.Text.Trim().ToString());
                 int PIN = int.Parse(tbPIN.Text.Trim().ToString());
-                var builder = build();
                 string hashedPassword = computeHash(tbPassword.Text.Trim().ToString());
                 string hashedPIN = computeHash(PIN.ToString());
                 using (SqlConnection conn = new SqlConnection(builder.ConnectionString))

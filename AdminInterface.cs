@@ -15,21 +15,25 @@ namespace BlockchainApp
 {
     public partial class AdminInterface : Form
     {
+        private SqlConnectionStringBuilder builder;
+
         public AdminInterface()
         {
             InitializeComponent();
             Select();
+            MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
+            builder = mySqlBuilder.builder;
         }
 
-        private SqlConnectionStringBuilder build()
-        {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "blockchainapp.database.windows.net";
-            builder.UserID = "lupsansabrina18";
-            builder.Password = "Selenacolierul9!";
-            builder.InitialCatalog = "blockchainapp";
-            return builder;
-        }
+        //private SqlConnectionStringBuilder build()
+        //{
+        //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+        //    builder.DataSource = "blockchainapp.database.windows.net";
+        //    builder.UserID = "lupsansabrina18";
+        //    builder.Password = "Selenacolierul9!";
+        //    builder.InitialCatalog = "blockchainapp";
+        //    return builder;
+        //}
 
         private byte[] computeHash(string toHash)
         {
@@ -155,10 +159,6 @@ namespace BlockchainApp
                 byte[] pass = System.Text.Encoding.UTF8.GetBytes(password);
                 byte[] hashedPassword = hasher.ComputeHash(pass);
 
-
-                SqlConnectionStringBuilder builder = build();
-
-
                 using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                 {
 
@@ -198,10 +198,6 @@ namespace BlockchainApp
                 string password = tbPacientPassword.Text.Trim().ToString();
                 string hashedPass = computeHash2(password);
                 DateTime birthday = dtpBirthday.Value;
-
-
-                SqlConnectionStringBuilder builder = build();
-
 
                 using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                 {

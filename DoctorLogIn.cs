@@ -9,20 +9,23 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
 using Microsoft.SqlServer.Server;
-using System.Data.SqlClient;
 using NLog;
 using System.Net;
 using NLog.Targets;
+using Microsoft.Data.SqlClient;
 
 namespace BlockchainApp
 {
     public partial class DoctorLogIn : Form
     {
         private int successfulAuthentication = 0;
+        private SqlConnectionStringBuilder builder;
 
         public DoctorLogIn()
         {
             InitializeComponent();
+            MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
+            builder = mySqlBuilder.builder;
         }
 
         private int generatePIN()
@@ -56,17 +59,17 @@ namespace BlockchainApp
             }
         }
 
-        private SqlConnectionStringBuilder build()
-        {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            #region Log in details
-            builder.DataSource = "blockchainapp.database.windows.net";
-            builder.UserID = "lupsansabrina18";
-            builder.Password = "Selenacolierul9!";
-            builder.InitialCatalog = "blockchainapp";
-            #endregion 
-            return builder;
-        }
+        //private SqlConnectionStringBuilder build()
+        //{
+        //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+        //    #region Log in details
+        //    builder.DataSource = "blockchainapp.database.windows.net";
+        //    builder.UserID = "lupsansabrina18";
+        //    builder.Password = "Selenacolierul9!";
+        //    builder.InitialCatalog = "blockchainapp";
+        //    #endregion 
+        //    return builder;
+        //}
 
         private void tbDocID_Validated(object sender, EventArgs e)
         {
@@ -75,7 +78,7 @@ namespace BlockchainApp
 
         private void updateLastLogin(long doctorID)
         {
-            var builder = build();
+            //var builder = build();
             var lastLoginQuery = "UPDATE Doctors" + " SET last_login = SYSDATETIME()" + "WHERE doctor_id =" + doctorID + ";";
             using (SqlConnection lastLoginConnection = new SqlConnection(builder.ConnectionString))
             {
@@ -96,7 +99,7 @@ namespace BlockchainApp
             int newPIN = generatePIN();
             MessageBox.Show("Your new token PIN for the next 30 days is: " + newPIN.ToString());
             string hashedNewPIN = computeHash2(newPIN.ToString());
-            var builder = build();
+            //var builder = build();
             var updatePINquery = "UPDATE Doctors SET hashed_PIN = @hashPIN WHERE doctor_id = " + doctorID + ";";
             using (SqlConnection updatePINconnection = new SqlConnection(builder.ConnectionString))
             {
@@ -167,7 +170,7 @@ namespace BlockchainApp
                 byte[] hashedPassword = computeHash(tbPassword.Text.Trim().ToString());
                 byte[] hashedPIN = computeHash(tbPIN.Text.Trim().ToString());
 
-                SqlConnectionStringBuilder builder = build();
+                //SqlConnectionStringBuilder builder = build();
 
                 var querry = "SELECT * from Doctors;";
 

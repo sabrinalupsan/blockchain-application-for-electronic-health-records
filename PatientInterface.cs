@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,26 +15,28 @@ namespace BlockchainApp
     {
         Patient patient;
         List<MedicalRecord> records = new List<MedicalRecord>();
+        private SqlConnectionStringBuilder builder;
 
         public PatientInterface(Patient patient)
         {
             InitializeComponent();
             this.patient = patient;
+            MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
+            builder = mySqlBuilder.builder;
         }
 
-        private SqlConnectionStringBuilder build()
-        {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "blockchainapp.database.windows.net";
-            builder.UserID = "lupsansabrina18";
-            builder.Password = "Selenacolierul9!";
-            builder.InitialCatalog = "blockchainapp";
-            return builder;
-        }
+        //private SqlConnectionStringBuilder build()
+        //{
+        //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+        //    builder.DataSource = "blockchainapp.database.windows.net";
+        //    builder.UserID = "lupsansabrina18";
+        //    builder.Password = "Selenacolierul9!";
+        //    builder.InitialCatalog = "blockchainapp";
+        //    return builder;
+        //}
 
         private void PatientInterface_Load(object sender, EventArgs e)
         {
-            SqlConnectionStringBuilder builder = build();
             var querry = "SELECT doctor_id, appointment_date, appointment_title, appointment_description FROM Block WHERE pacient_id = " + patient.patientID+";";
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
@@ -58,7 +60,6 @@ namespace BlockchainApp
 
         private string getDoctorsLastName(long id)
         {
-            SqlConnectionStringBuilder builder = build();
             var querry = "SELECT doctor_last_name, doctor_first_name FROM Doctors WHERE doctor_id = " + id + ";";
             string lastName = null;
             string firstName = null;

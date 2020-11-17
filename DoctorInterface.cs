@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
-using System.Data.SqlClient;
 using NLog;
+using Microsoft.Data.SqlClient;
 
 namespace BlockchainApp
 {
@@ -18,26 +18,27 @@ namespace BlockchainApp
         Doctor doctor;
         int successfulAuthentication = 0;
 
-        private SqlConnectionStringBuilder build()
-        {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            #region Log in details
-            builder.DataSource = "blockchainapp.database.windows.net";
-            builder.UserID = "lupsansabrina18";
-            builder.Password = "Selenacolierul9!";
-            builder.InitialCatalog = "blockchainapp";
-            #endregion 
-            return builder;
-        }
+        private SqlConnectionStringBuilder builder;
+
+        //private SqlConnectionStringBuilder build()
+        //{
+        //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+        //    #region Log in details
+        //    builder.DataSource = "blockchainapp.database.windows.net";
+        //    builder.UserID = "lupsansabrina18";
+        //    builder.Password = "Selenacolierul9!";
+        //    builder.InitialCatalog = "blockchainapp";
+        //    #endregion 
+        //    return builder;
+        //}
 
         public DoctorInterface(Doctor doctor)
         {
             InitializeComponent();
             this.doctor = doctor;
             doctor.patients = new List<Patient>();
-
-            SqlConnectionStringBuilder builder = build();
-
+            MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
+            builder = mySqlBuilder.builder;
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
 
@@ -79,8 +80,6 @@ namespace BlockchainApp
 
         private void GenesisBlock()
         {
-            SqlConnectionStringBuilder builder = build();
-
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
 
@@ -114,7 +113,6 @@ namespace BlockchainApp
         private bool checkID(long id)
         {
             bool ok = false;
-            var builder = build();
             var querry = "SELECT pacient_id from Pacients;";
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
@@ -140,8 +138,6 @@ namespace BlockchainApp
                 long patientID = long.Parse(tbNewPacientID.Text.Trim());
                 if (checkID(patientID) == true)
                 {
-                    SqlConnectionStringBuilder builder = build();
-
                     using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                     {
 
@@ -181,7 +177,7 @@ namespace BlockchainApp
             }
         }
 
-        public void DisplayPacients()
+        public void DisplayPatients()
         {
             lvPacients.Items.Clear();
             foreach (Patient patient in doctor.patients)
@@ -202,8 +198,6 @@ namespace BlockchainApp
 
             doctor.patients.Clear();
 
-            SqlConnectionStringBuilder builder = build();
-
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
                 conn.Open();
@@ -222,7 +216,7 @@ namespace BlockchainApp
                     }
                 }
             }
-            DisplayPacients();
+            DisplayPatients();
         }
 
         private void hideControls()
@@ -242,8 +236,6 @@ namespace BlockchainApp
             var querry = "SELECT pacient_id, pacient_last_name, pacient_first_name, birthday" + " FROM Pacients " +
                 "WHERE pacient_id IN(SELECT pacient_id from ASSOCIATIONS WHERE doctor_id =" + doctor.docID + ");";
 
-            SqlConnectionStringBuilder builder = build();
-
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
                 conn.Open();
@@ -254,15 +246,15 @@ namespace BlockchainApp
                     {
                         long id = (int)reader["pacient_id"];
                         string patientLastName = (string)reader["pacient_last_name"];
-                        string pacienFirstName = (string)reader["pacient_first_name"];
+                        string patientFirstName = (string)reader["pacient_first_name"];
                         DateTime bday = (DateTime)reader["birthday"];
 
-                        Patient patient = new Patient(id, patientLastName, pacienFirstName, bday);
+                        Patient patient = new Patient(id, patientLastName, patientFirstName, bday);
                         doctor.patients.Add(patient);
                     }
                 }
             }
-            DisplayPacients();
+            DisplayPatients();
         }
 
         private void tbPIN_Click(object sender, EventArgs e)
@@ -281,7 +273,6 @@ namespace BlockchainApp
                 {
                     int patientPIN = int.Parse(tbPIN.Text.Trim().ToString());
                     string hashedPIN = computeHash2(patientPIN.ToString());
-                    SqlConnectionStringBuilder builder = build();
                     ListViewItem item = (ListViewItem)lvPacients.SelectedItems[0];
                     Patient patient = (Patient)item.Tag;
                     string id = null;
@@ -332,8 +323,6 @@ namespace BlockchainApp
                 lbRecords.Items.Clear();
                 ListViewItem item = lvPacients.SelectedItems[0];
                 Patient patient = (Patient)item.Tag;
-
-                SqlConnectionStringBuilder builder = build();
 
                 var populateListBoxQuerry = "SELECT appointment_title, appointment_description, appointment_date FROM Block " +
                     "WHERE doctor_id = " + doctor.docID + "AND pacient_id = " + patient.patientID;
@@ -413,7 +402,6 @@ namespace BlockchainApp
 
         private string getLastBlockHash()
         {
-            SqlConnectionStringBuilder builder = build();
             string hash = null;
 
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
@@ -476,9 +464,6 @@ namespace BlockchainApp
                     ListViewItem item = lvPacients.SelectedItems[0];
                     Patient patient = (Patient)item.Tag;
                     long patientID = patient.patientID;
-
-
-                    SqlConnectionStringBuilder builder = build();
 
                     using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                     {
@@ -579,8 +564,6 @@ namespace BlockchainApp
                 Patient patient = (Patient)item.Tag;
 
                 //select all the records in the listbox
-                SqlConnectionStringBuilder builder = build();
-
                 var populateListBoxQuerry = "SELECT appointment_title, appointment_description, appointment_date FROM Block " +
                     "WHERE doctor_id = " + doctor.docID + "AND pacient_id = " + patient.patientID +";";
 

@@ -22,7 +22,6 @@ namespace BlockchainApp
         public PacientLogIn()
         {
             InitializeComponent();
-            successfulAuthentication = 0;
             MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
             builder = mySqlBuilder.builder;
         }

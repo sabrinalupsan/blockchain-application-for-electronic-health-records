@@ -63,6 +63,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.docPB = new System.Windows.Forms.ProgressBar();
+            this.patientPB = new System.Windows.Forms.ProgressBar();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -98,6 +100,7 @@
             this.tbNewDocID.Name = "tbNewDocID";
             this.tbNewDocID.Size = new System.Drawing.Size(100, 22);
             this.tbNewDocID.TabIndex = 0;
+            this.tbNewDocID.Click += new System.EventHandler(this.controlClicked);
             // 
             // tbLastName
             // 
@@ -106,6 +109,7 @@
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.Size = new System.Drawing.Size(100, 22);
             this.tbLastName.TabIndex = 1;
+            this.tbLastName.Click += new System.EventHandler(this.controlClicked);
             // 
             // label2
             // 
@@ -123,6 +127,7 @@
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.Size = new System.Drawing.Size(100, 22);
             this.tbFirstName.TabIndex = 2;
+            this.tbFirstName.Click += new System.EventHandler(this.controlClicked);
             // 
             // label3
             // 
@@ -140,6 +145,7 @@
             this.tbSpecialisation.Name = "tbSpecialisation";
             this.tbSpecialisation.Size = new System.Drawing.Size(100, 22);
             this.tbSpecialisation.TabIndex = 3;
+            this.tbSpecialisation.Click += new System.EventHandler(this.controlClicked);
             // 
             // label4
             // 
@@ -171,6 +177,7 @@
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 22);
             this.tbPassword.TabIndex = 4;
+            this.tbPassword.Click += new System.EventHandler(this.controlClicked);
             // 
             // label5
             // 
@@ -189,6 +196,7 @@
             this.tbRePassword.PasswordChar = '*';
             this.tbRePassword.Size = new System.Drawing.Size(100, 22);
             this.tbRePassword.TabIndex = 5;
+            this.tbRePassword.Click += new System.EventHandler(this.controlClicked);
             // 
             // label6
             // 
@@ -271,6 +279,7 @@
             this.tbPacientID.Name = "tbPacientID";
             this.tbPacientID.Size = new System.Drawing.Size(100, 22);
             this.tbPacientID.TabIndex = 0;
+            this.tbPacientID.Click += new System.EventHandler(this.controlClicked);
             // 
             // tbPacientLastName
             // 
@@ -279,6 +288,7 @@
             this.tbPacientLastName.Name = "tbPacientLastName";
             this.tbPacientLastName.Size = new System.Drawing.Size(100, 22);
             this.tbPacientLastName.TabIndex = 1;
+            this.tbPacientLastName.Click += new System.EventHandler(this.controlClicked);
             // 
             // tbPacientFirstName
             // 
@@ -287,6 +297,7 @@
             this.tbPacientFirstName.Name = "tbPacientFirstName";
             this.tbPacientFirstName.Size = new System.Drawing.Size(100, 22);
             this.tbPacientFirstName.TabIndex = 2;
+            this.tbPacientFirstName.Click += new System.EventHandler(this.controlClicked);
             // 
             // tbPacientPassword
             // 
@@ -296,6 +307,7 @@
             this.tbPacientPassword.PasswordChar = '*';
             this.tbPacientPassword.Size = new System.Drawing.Size(100, 22);
             this.tbPacientPassword.TabIndex = 3;
+            this.tbPacientPassword.Click += new System.EventHandler(this.controlClicked);
             // 
             // tbPacientREPass
             // 
@@ -305,6 +317,7 @@
             this.tbPacientREPass.PasswordChar = '*';
             this.tbPacientREPass.Size = new System.Drawing.Size(100, 22);
             this.tbPacientREPass.TabIndex = 4;
+            this.tbPacientREPass.Click += new System.EventHandler(this.controlClicked);
             // 
             // btnOkPacient
             // 
@@ -371,6 +384,7 @@
             this.dtpBirthday.Name = "dtpBirthday";
             this.dtpBirthday.Size = new System.Drawing.Size(100, 22);
             this.dtpBirthday.TabIndex = 5;
+            this.dtpBirthday.DropDown += new System.EventHandler(this.controlClicked);
             // 
             // panel2
             // 
@@ -403,13 +417,29 @@
             // 
             this.errorProvider2.ContainerControl = this;
             // 
+            // docPB
+            // 
+            this.docPB.Location = new System.Drawing.Point(12, 460);
+            this.docPB.Name = "docPB";
+            this.docPB.Size = new System.Drawing.Size(313, 23);
+            this.docPB.TabIndex = 31;
+            // 
+            // patientPB
+            // 
+            this.patientPB.Location = new System.Drawing.Point(358, 459);
+            this.patientPB.Name = "patientPB";
+            this.patientPB.Size = new System.Drawing.Size(314, 23);
+            this.patientPB.TabIndex = 32;
+            // 
             // AdminInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
-            this.ClientSize = new System.Drawing.Size(684, 465);
+            this.ClientSize = new System.Drawing.Size(684, 486);
+            this.Controls.Add(this.patientPB);
+            this.Controls.Add(this.docPB);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "AdminInterface";
@@ -459,5 +489,7 @@
         private System.Windows.Forms.DateTimePicker dtpBirthday;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.ErrorProvider errorProvider2;
+        private System.Windows.Forms.ProgressBar patientPB;
+        private System.Windows.Forms.ProgressBar docPB;
     }
 }

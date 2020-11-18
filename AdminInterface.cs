@@ -25,16 +25,6 @@ namespace BlockchainApp
             builder = mySqlBuilder.builder;
         }
 
-        //private SqlConnectionStringBuilder build()
-        //{
-        //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-        //    builder.DataSource = "blockchainapp.database.windows.net";
-        //    builder.UserID = "lupsansabrina18";
-        //    builder.Password = "Selenacolierul9!";
-        //    builder.InitialCatalog = "blockchainapp";
-        //    return builder;
-        //}
-
         private byte[] computeHash(string toHash)
         {
             var hasher = SHA256.Create();
@@ -146,6 +136,24 @@ namespace BlockchainApp
             tbPacientREPass.Text = null;
         }
 
+        private string saltPassword(string password, long ID)
+        {
+            string saltedPassword = null;
+            for (int i = 0; i < password.Length; i++)
+            {
+                if (i == 2)
+                    saltedPassword += ID.ToString();
+                saltedPassword += password[i];
+            }
+            return saltedPassword;
+        }
+
+        private void clickField()
+        {
+            patientPB.Value = 0;
+            docPB.Value = 0;
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             if(validateDoctor()==true)
@@ -155,8 +163,9 @@ namespace BlockchainApp
                 string firstName = tbLastName.Text.Trim().ToString();
                 string specialization = tbSpecialisation.Text.Trim().ToString();
                 string password = tbPassword.Text.Trim().ToString();
+                string saltedPassword = saltPassword(password, docID);
                 var hasher = SHA256.Create();
-                byte[] pass = System.Text.Encoding.UTF8.GetBytes(password);
+                byte[] pass = System.Text.Encoding.UTF8.GetBytes(saltedPassword);
                 byte[] hashedPassword = hasher.ComputeHash(pass);
 
                 using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
@@ -184,6 +193,7 @@ namespace BlockchainApp
                         }
                     }
                 }
+                docPB.Value = 100;
                 clearDoctorControls(); 
             }
         }
@@ -196,7 +206,8 @@ namespace BlockchainApp
                 string lastName = tbPacientLastName.Text.Trim().ToString();
                 string firstName = tbPacientFirstName.Text.Trim().ToString();
                 string password = tbPacientPassword.Text.Trim().ToString();
-                string hashedPass = computeHash2(password);
+                string saltedPassword = saltPassword(password, pacID);
+                string hashedPass = computeHash2(saltedPassword);
                 DateTime birthday = dtpBirthday.Value;
 
                 using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
@@ -224,6 +235,7 @@ namespace BlockchainApp
                         }
                     }
                 }
+                patientPB.Value = 100;
                 clearPatientControls();
             }
         }
@@ -238,6 +250,11 @@ namespace BlockchainApp
             Close();
         }
 
+        private void controlClicked(object sender, EventArgs e)
+        {
+            clickField();
+        }
+        
         //private void tbNewDocID_Validated(object sender, EventArgs e)
         //{
         //    errorProvider.SetError(tbNewDocID, null);

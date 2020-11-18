@@ -1,0 +1,5 @@
+2020-11-17 09:01:39.0159|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1847583 logged in.
+2020-11-17 09:05:02.1427|DEBUG|BlockchainApp.PacientLogIn|The patient with ID 5658230 logged in.
+2020-11-17 09:10:42.6143|DEBUG|BlockchainApp.PacientLogIn|The patient with ID 5658230 logged in.
+2020-11-17 09:10:59.3133|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1847583 logged in.
+2020-11-17 09:11:57.6399|DEBUG|BlockchainApp.DoctorInterface|Doctor 1847583 added a record for patient 6290438.

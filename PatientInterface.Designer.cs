@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PatientInterface));
             this.lvRecords = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -44,6 +45,10 @@
             this.tbTitle = new System.Windows.Forms.TextBox();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.btnDone = new System.Windows.Forms.Button();
+            this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.pageSetupDialog = new System.Windows.Forms.PageSetupDialog();
+            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,7 +83,7 @@
             // 
             this.btnSeeRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
             this.btnSeeRecord.ForeColor = System.Drawing.Color.White;
-            this.btnSeeRecord.Location = new System.Drawing.Point(12, 244);
+            this.btnSeeRecord.Location = new System.Drawing.Point(12, 250);
             this.btnSeeRecord.Name = "btnSeeRecord";
             this.btnSeeRecord.Size = new System.Drawing.Size(99, 23);
             this.btnSeeRecord.TabIndex = 1;
@@ -90,7 +95,7 @@
             // 
             this.btnPrintRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
             this.btnPrintRecord.ForeColor = System.Drawing.Color.White;
-            this.btnPrintRecord.Location = new System.Drawing.Point(12, 284);
+            this.btnPrintRecord.Location = new System.Drawing.Point(12, 296);
             this.btnPrintRecord.Name = "btnPrintRecord";
             this.btnPrintRecord.Size = new System.Drawing.Size(99, 23);
             this.btnPrintRecord.TabIndex = 2;
@@ -192,11 +197,11 @@
             // tbDescription
             // 
             this.tbDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbDescription.Enabled = false;
             this.tbDescription.Location = new System.Drawing.Point(88, 133);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.ReadOnly = true;
+            this.tbDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbDescription.Size = new System.Drawing.Size(228, 156);
             this.tbDescription.TabIndex = 13;
             // 
@@ -209,12 +214,37 @@
             this.btnDone.Text = "Done";
             this.btnDone.UseVisualStyleBackColor = true;
             // 
+            // printDialog
+            // 
+            this.printDialog.Document = this.printDocument;
+            this.printDialog.UseEXDialog = true;
+            // 
+            // printDocument
+            // 
+            this.printDocument.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDocument_BeginPrint);
+            this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
+            // 
+            // pageSetupDialog
+            // 
+            this.pageSetupDialog.Document = this.printDocument;
+            // 
+            // printPreviewDialog
+            // 
+            this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog.Document = this.printDocument;
+            this.printPreviewDialog.Enabled = true;
+            this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
+            this.printPreviewDialog.Name = "printPreviewDialog";
+            this.printPreviewDialog.Visible = false;
+            // 
             // PatientInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
-            this.ClientSize = new System.Drawing.Size(744, 331);
+            this.ClientSize = new System.Drawing.Size(744, 348);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnPrintRecord);
@@ -248,5 +278,9 @@
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PrintDialog printDialog;
+        private System.Drawing.Printing.PrintDocument printDocument;
+        private System.Windows.Forms.PageSetupDialog pageSetupDialog;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
     }
 }

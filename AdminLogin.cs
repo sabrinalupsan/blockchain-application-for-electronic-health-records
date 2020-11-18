@@ -20,6 +20,18 @@ namespace BlockchainApp
             InitializeComponent();
         }
 
+        private string saltPassword(string password)
+        {
+            string saltedPassword = null;
+            for (int i = 0; i < password.Length; i++)
+            {
+                if (i == 2)
+                    saltedPassword += "blockchainapplication";
+                saltedPassword += password[i];
+            }
+            return saltedPassword;
+        }
+
         private void CancelBtn_Click(object sender, EventArgs e)
         {
             Close();
@@ -29,7 +41,8 @@ namespace BlockchainApp
         {
             Logger logger = LogManager.GetCurrentClassLogger();
             string password = tbPassword.Text.Trim().ToString();
-            if (password.CompareTo("123") == 0)
+            string saltedPassword = saltPassword(password);
+            if (saltedPassword.CompareTo("12blockchainapplication3") == 0)
             {
                 AdminInterface form = new AdminInterface();
                 Hide();

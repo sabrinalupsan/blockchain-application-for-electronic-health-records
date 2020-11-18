@@ -42,20 +42,22 @@ namespace BlockchainApp
             return Encoding.Default.GetString(finalHash);
         }
 
-        //private SqlConnectionStringBuilder build()
-        //{
-        //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-        //    builder.DataSource = "blockchainapp.database.windows.net";
-        //    builder.UserID = "lupsansabrina18";
-        //    builder.Password = "Selenacolierul9!";
-        //    builder.InitialCatalog = "blockchainapp";
-        //    return builder;
-        //}
-
         private int generatePIN()
         {
             Random random = new Random();
             return random.Next(999, 10000);
+        }
+
+        private string saltPassword(string password, long ID)
+        {
+            string saltedPassword = null;
+            for (int i = 0; i < password.Length; i++)
+            {
+                if (i == 2)
+                    saltedPassword += ID.ToString();
+                saltedPassword += password[i];
+            }
+            return saltedPassword;
         }
 
         private void updateLastLogin(long patientID)
@@ -143,7 +145,8 @@ namespace BlockchainApp
                     long inputedPacientID = long.Parse(tbPacientID.Text.Trim());
 
                     string inputedPass = tbPassword.Text.Trim().ToString();
-                    string hashedPass = computeHash2(inputedPass);
+                    string saltedPass = saltPassword(inputedPass, inputedPacientID);
+                    string hashedPass = computeHash2(saltedPass);
 
                     MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
                     SqlConnectionStringBuilder builder = mySqlBuilder.builder;

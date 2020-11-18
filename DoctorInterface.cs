@@ -313,6 +313,10 @@ namespace BlockchainApp
                     successfulAuthentication++;
                     MessageBox.Show("Please input a PIN code.");
                 }
+                catch(InvalidCastException)
+                {
+                    MessageBox.Show("That patient does not have a PIN code yet. Please contact de administrator or inform them to log in first.");
+                }
             }
         }
 

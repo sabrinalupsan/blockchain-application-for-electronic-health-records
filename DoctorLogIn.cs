@@ -50,6 +50,18 @@ namespace BlockchainApp
             return Encoding.Default.GetString(finalHash);
         }
 
+        private string saltPassword(string password, long ID)
+        {
+            string saltedPassword = null;
+            for (int i = 0; i < password.Length; i++)
+            {
+                if (i == 2)
+                    saltedPassword += ID.ToString();
+                saltedPassword += password[i];
+            }
+            return saltedPassword;
+        }
+
         private void tbDocID_Validating(object sender, CancelEventArgs e)
         {
             if (tbDocID.Text.Trim().Length != 7)
@@ -59,18 +71,6 @@ namespace BlockchainApp
             }
         }
 
-        //private SqlConnectionStringBuilder build()
-        //{
-        //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-        //    #region Log in details
-        //    builder.DataSource = "blockchainapp.database.windows.net";
-        //    builder.UserID = "lupsansabrina18";
-        //    builder.Password = "Selenacolierul9!";
-        //    builder.InitialCatalog = "blockchainapp";
-        //    #endregion 
-        //    return builder;
-        //}
-
         private void tbDocID_Validated(object sender, EventArgs e)
         {
             errorProvider.SetError(tbDocID, null);
@@ -78,7 +78,6 @@ namespace BlockchainApp
 
         private void updateLastLogin(long doctorID)
         {
-            //var builder = build();
             var lastLoginQuery = "UPDATE Doctors" + " SET last_login = SYSDATETIME()" + "WHERE doctor_id =" + doctorID + ";";
             using (SqlConnection lastLoginConnection = new SqlConnection(builder.ConnectionString))
             {
@@ -167,10 +166,9 @@ namespace BlockchainApp
                 bool connected = false;
                 long docID = long.Parse(tbDocID.Text.Trim());
 
-                byte[] hashedPassword = computeHash(tbPassword.Text.Trim().ToString());
+                string saltedPassword = saltPassword(tbPassword.Text.Trim().ToString(), docID);
+                byte[] hashedPassword = computeHash(saltedPassword);
                 byte[] hashedPIN = computeHash(tbPIN.Text.Trim().ToString());
-
-                //SqlConnectionStringBuilder builder = build();
 
                 var querry = "SELECT * from Doctors;";
 

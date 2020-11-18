@@ -15,7 +15,9 @@ namespace BlockchainApp
     {
         Patient patient;
         List<MedicalRecord> records = new List<MedicalRecord>();
+        MedicalRecord selectedRecord;
         private SqlConnectionStringBuilder builder;
+        private int charIndex;
 
         public PatientInterface(Patient patient)
         {
@@ -96,12 +98,12 @@ namespace BlockchainApp
             if (lvRecords.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = lvRecords.SelectedItems[0];
-                MedicalRecord record = (MedicalRecord)lvi.Tag;
+                selectedRecord = (MedicalRecord)lvi.Tag;
 
-                tbDate.Text = record.date.ToShortDateString();
-                tbDescription.Text = record.description;
-                tbName.Text = getDoctorsLastName(record.doctorID);
-                tbTitle.Text = record.title;
+                tbDate.Text = selectedRecord.date.ToShortDateString();
+                tbDescription.Text = selectedRecord.description;
+                tbName.Text = getDoctorsLastName(selectedRecord.doctorID);
+                tbTitle.Text = selectedRecord.title;
             }
             else
                 MessageBox.Show("Please select a record!");
@@ -109,7 +111,78 @@ namespace BlockchainApp
 
         private void btnPrintRecord_Click(object sender, EventArgs e)
         {
+            if (lvRecords.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvRecords.SelectedItems[0];
+                selectedRecord = (MedicalRecord)lvi.Tag;
+
+                tbDate.Text = selectedRecord.date.ToShortDateString();
+                tbDescription.Text = selectedRecord.description;
+                tbName.Text = getDoctorsLastName(selectedRecord.doctorID);
+                tbTitle.Text = selectedRecord.title;
+            }
+            else
+                MessageBox.Show("Please select a record!");
             //log this
+
+            pageSetupDialog.PageSettings = printDocument.DefaultPageSettings;
+
+            if (pageSetupDialog.ShowDialog() == DialogResult.OK)
+            {
+                printDocument.DefaultPageSettings = pageSetupDialog.PageSettings;
+
+                try
+                {
+                    printPreviewDialog.ShowDialog();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("An error occurred while trying to load the document for Print Preview. Make sure you currently have access to a printer. A printer must be connected and accessible for Print Preview to work.");
+                }
+                if(printPreviewDialog.DialogResult != DialogResult.Cancel)
+                    if (printDialog.ShowDialog() == DialogResult.OK)
+                        printDocument.Print();
+            }
+        }
+
+        private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            Font font = new Font("Microsoft Sans Serif", 24);
+
+            var pageSettings = printDocument.DefaultPageSettings;
+
+            var intPrintAreaHeight = pageSettings.PaperSize.Height - pageSettings.Margins.Top - pageSettings.Margins.Bottom;
+            var intPrintAreaWidth = pageSettings.PaperSize.Width - pageSettings.Margins.Left - pageSettings.Margins.Right;
+
+            var marginLeft = pageSettings.Margins.Left;
+            var marginTop = pageSettings.Margins.Top;
+
+            if (printDocument.DefaultPageSettings.Landscape)
+            {
+                var intTemp = intPrintAreaHeight;
+                intPrintAreaHeight = intPrintAreaWidth;
+                intPrintAreaWidth = intTemp;
+            }
+
+            RectangleF rectPrintingArea = new RectangleF(marginLeft, marginTop, intPrintAreaWidth, intPrintAreaHeight);
+
+            StringFormat fmt = new StringFormat(StringFormatFlags.LineLimit);
+
+            int intLinesFilled;
+            int intCharsFitted;
+            e.Graphics.MeasureString(selectedRecord.description.Substring(charIndex), font, new SizeF(intPrintAreaWidth, intPrintAreaHeight), fmt, out intCharsFitted, out intLinesFilled);
+
+            e.Graphics.DrawString(selectedRecord.description.Substring(charIndex), font, Brushes.Black, rectPrintingArea, fmt);
+
+            charIndex += intCharsFitted;
+
+            if (charIndex < selectedRecord.description.Length)
+                e.HasMorePages = true;
+        }
+
+        private void printDocument_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            charIndex = 0;
         }
     }
 }

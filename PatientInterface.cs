@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -109,6 +110,11 @@ namespace BlockchainApp
                 MessageBox.Show("Please select a record!");
         }
 
+        private string stringToPrint(Patient patient, MedicalRecord record)
+        {
+            return patient.lastName + " " + patient.firstName + ", ID: " + patient.patientID + "\n" + record.title + "\n" + record.description;
+        }
+
         private void btnPrintRecord_Click(object sender, EventArgs e)
         {
             if (lvRecords.SelectedItems.Count > 0)
@@ -123,7 +129,6 @@ namespace BlockchainApp
             }
             else
                 MessageBox.Show("Please select a record!");
-            //log this
 
             pageSetupDialog.PageSettings = printDocument.DefaultPageSettings;
 
@@ -139,9 +144,13 @@ namespace BlockchainApp
                 {
                     MessageBox.Show("An error occurred while trying to load the document for Print Preview. Make sure you currently have access to a printer. A printer must be connected and accessible for Print Preview to work.");
                 }
-                if(printPreviewDialog.DialogResult != DialogResult.Cancel)
+                if (printPreviewDialog.DialogResult != DialogResult.Cancel)
                     if (printDialog.ShowDialog() == DialogResult.OK)
+                    {
                         printDocument.Print();
+                        Logger logger = LogManager.GetCurrentClassLogger();
+                        logger.Debug("The patient with ID {0} just printed their record.", patient.patientID);
+                    }
             }
         }
 
@@ -170,9 +179,10 @@ namespace BlockchainApp
 
             int intLinesFilled;
             int intCharsFitted;
-            e.Graphics.MeasureString(selectedRecord.description.Substring(charIndex), font, new SizeF(intPrintAreaWidth, intPrintAreaHeight), fmt, out intCharsFitted, out intLinesFilled);
 
-            e.Graphics.DrawString(selectedRecord.description.Substring(charIndex), font, Brushes.Black, rectPrintingArea, fmt);
+            e.Graphics.MeasureString(stringToPrint(patient, selectedRecord).Substring(charIndex), font, new SizeF(intPrintAreaWidth, intPrintAreaHeight), fmt, out intCharsFitted, out intLinesFilled);
+
+            e.Graphics.DrawString(stringToPrint(patient, selectedRecord).Substring(charIndex), font, Brushes.Black, rectPrintingArea, fmt);
 
             charIndex += intCharsFitted;
 

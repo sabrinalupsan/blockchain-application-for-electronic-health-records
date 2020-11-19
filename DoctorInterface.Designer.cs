@@ -172,11 +172,13 @@
             this.tbDetails.Location = new System.Drawing.Point(89, 134);
             this.tbDetails.Multiline = true;
             this.tbDetails.Name = "tbDetails";
+            this.tbDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbDetails.Size = new System.Drawing.Size(372, 129);
             this.tbDetails.TabIndex = 4;
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(223)))), ((int)(((byte)(172)))));
             this.panel2.Controls.Add(this.btnAddNewRecord);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.dtpDate);

@@ -227,6 +227,7 @@ namespace BlockchainApp
             label5.Hide();
             label6.Hide();
             Details.Hide();
+            lbRecords.Visible = false;
         }
 
         private void DoctorInterface_Load(object sender, EventArgs e)
@@ -266,14 +267,17 @@ namespace BlockchainApp
         {
             Logger logger = LogManager.GetCurrentClassLogger();
             if (successfulAuthentication > 5)
+            {
                 logger.Warn("The doctor with ID {0} is repeatedly trying to input the PIN code {1}.", doctor.docID, tbPIN.Text.Trim().ToString());
+                //do the same thing with the log-in part. log the doctor out maybe? and freeze everything for 30 seconds?
+            }
             else
             {
                 try
                 {
                     int patientPIN = int.Parse(tbPIN.Text.Trim().ToString());
                     string hashedPIN = computeHash2(patientPIN.ToString());
-                    ListViewItem item = (ListViewItem)lvPacients.SelectedItems[0];
+                    ListViewItem item = lvPacients.SelectedItems[0];
                     Patient patient = (Patient)item.Tag;
                     string id = null;
                     using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
@@ -291,6 +295,7 @@ namespace BlockchainApp
                     }
                     if (hashedPIN.CompareTo(id) == 0)
                     {
+                        lbRecords.Visible = true;
                         tbTitle.Show();
                         dtpDate.Show();
                         tbDetails.Show();
@@ -313,7 +318,7 @@ namespace BlockchainApp
                     successfulAuthentication++;
                     MessageBox.Show("Please input a PIN code.");
                 }
-                catch(InvalidCastException)
+                catch (InvalidCastException)
                 {
                     MessageBox.Show("That patient does not have a PIN code yet. Please contact de administrator or inform them to log in first.");
                 }
@@ -495,17 +500,13 @@ namespace BlockchainApp
                             string toHash = patientID + doctor.docID + date + title + details + now + index + theHashOfPrevBlock;
                             int nounce = 0;
                             Hash hash = new Hash(nounce, toHash);
-                            proofOfWork(hash, 1);
+                            proofOfWork(hash, 2);
                             command.Parameters.AddWithValue("@nounce", hash.nounce);
                             command.Parameters.AddWithValue("@hashOfCurrBlock", hash.computeHash());
 
                             using (SqlDataReader reader = command.ExecuteReader())
-                            {
                                 while (reader.Read())
-                                {
                                     Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
-                                }
-                            }
                         }
                     }
                     Logger logger = LogManager.GetCurrentClassLogger();
@@ -567,7 +568,6 @@ namespace BlockchainApp
                 ListViewItem item = lvPacients.SelectedItems[0];
                 Patient patient = (Patient)item.Tag;
 
-                //select all the records in the listbox
                 var populateListBoxQuerry = "SELECT appointment_title, appointment_description, appointment_date FROM Block " +
                     "WHERE doctor_id = " + doctor.docID + "AND pacient_id = " + patient.patientID +";";
 
@@ -584,6 +584,8 @@ namespace BlockchainApp
                             DateTime date = (DateTime)reader["appointment_date"];
                             MedicalRecord record = new MedicalRecord(doctor.docID, patient.patientID, title, description, date);
                             lbRecords.Items.Add(record);
+                            //lbRecords.Items.
+                            lbRecords.Visible = false;
                         }
                     }
                 }

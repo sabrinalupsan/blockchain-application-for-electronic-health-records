@@ -1,6 +1,6 @@
 ﻿namespace BlockchainApp
 {
-    partial class PacientLogIn
+    partial class PatientLogin
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
-            this.tbPacientID = new System.Windows.Forms.TextBox();
+            this.tbPatientID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -63,15 +63,15 @@
             this.btnOK.UseVisualStyleBackColor = false;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // tbPacientID
+            // tbPatientID
             // 
-            this.tbPacientID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPacientID.Location = new System.Drawing.Point(140, 57);
-            this.tbPacientID.Name = "tbPacientID";
-            this.tbPacientID.Size = new System.Drawing.Size(100, 22);
-            this.tbPacientID.TabIndex = 0;
-            this.tbPacientID.Validating += new System.ComponentModel.CancelEventHandler(this.tbPacientID_Validating);
-            this.tbPacientID.Validated += new System.EventHandler(this.tbPacientID_Validated);
+            this.tbPatientID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.tbPatientID.Location = new System.Drawing.Point(140, 57);
+            this.tbPatientID.Name = "tbPatientID";
+            this.tbPatientID.Size = new System.Drawing.Size(100, 22);
+            this.tbPatientID.TabIndex = 0;
+            this.tbPatientID.Validating += new System.ComponentModel.CancelEventHandler(this.tbPatientID_Validating);
+            this.tbPatientID.Validated += new System.EventHandler(this.tbPatientID_Validated);
             // 
             // label2
             // 
@@ -130,7 +130,7 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // PacientLogIn
+            // PatientLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -142,12 +142,12 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.tbPassword);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.tbPacientID);
+            this.Controls.Add(this.tbPatientID);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.label1);
-            this.Name = "PacientLogIn";
-            this.Text = "PacientLogIn";
-            this.Load += new System.EventHandler(this.PacientLogIn_Load);
+            this.Name = "PatientLogin";
+            this.Text = "PatientLogIn";
+            this.Load += new System.EventHandler(this.PatientLogIn_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -158,7 +158,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.TextBox tbPacientID;
+        private System.Windows.Forms.TextBox tbPatientID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Button btnCancel;

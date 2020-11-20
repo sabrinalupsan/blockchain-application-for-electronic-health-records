@@ -28,10 +28,10 @@ namespace BlockchainApp
             doctorLogin.Show();
         }
 
-        private void btnPacient_Click(object sender, EventArgs e)
+        private void btnPatient_Click(object sender, EventArgs e)
         {
-            PacientLogIn pacientLogin = new PacientLogIn();
-            pacientLogin.Show();
+            PatientLogin patientLogin = new PatientLogin();
+            patientLogin.Show();
         }
 
         private void btnAdmin_Click(object sender, EventArgs e)

@@ -38,7 +38,7 @@ namespace BlockchainApp
         {
             tbLastName.Text = patient.lastName;
             tbFirstName.Text = patient.firstName;
-            tbID.Text = record.pacientID.ToString();
+            tbID.Text = record.patientID.ToString();
             tbTitle.Text = record.title;
             tbDescription.Text = record.description;
         }

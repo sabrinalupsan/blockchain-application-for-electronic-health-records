@@ -80,30 +80,30 @@ namespace BlockchainApp
 
         private bool validatePatient()
         {
-            if (tbPacientID.Text.Trim().Length != 7)
+            if (tbPatientID.Text.Trim().Length != 7)
             {
                 MessageBox.Show("The ID is invalid.");
                 return false;
             }
-            if (tbPacientLastName.Text.Trim().Length < 1)
+            if (tbPatientLastName.Text.Trim().Length < 1)
             {
                 MessageBox.Show("The last name is invalid.");
                 return false;
             }
-            if (tbPacientFirstName.Text.Trim().Length < 1)
+            if (tbPatientFirstName.Text.Trim().Length < 1)
             {
                 MessageBox.Show("The first name is invalid.");
                 return false;
             }
-            if (tbPacientPassword.Text.Trim().Length < 5 || !(tbPacientPassword.Text.Trim().Any(char.IsUpper)) || !(tbPacientPassword.Text.Trim().Any(char.IsLower))
-                || !(tbPacientPassword.Text.Trim().Any(char.IsLetter)) || !(tbPacientPassword.Text.Trim().Any(char.IsNumber)) ||
-                    !(tbPacientPassword.Text.Trim().Any(char.IsPunctuation)))
+            if (tbPatientPassword.Text.Trim().Length < 5 || !(tbPatientPassword.Text.Trim().Any(char.IsUpper)) || !(tbPatientPassword.Text.Trim().Any(char.IsLower))
+                || !(tbPatientPassword.Text.Trim().Any(char.IsLetter)) || !(tbPatientPassword.Text.Trim().Any(char.IsNumber)) ||
+                    !(tbPatientPassword.Text.Trim().Any(char.IsPunctuation)))
             {
                 MessageBox.Show("Your password needs to include a number, a lowercase character, an uppercase character, a special symbol and " +
                     "at least 5 characters!");
                 return false;
             }
-            if (tbPacientREPass.Text.Trim().CompareTo(tbPacientPassword.Text.Trim()) != 0)
+            if (tbPatientREPass.Text.Trim().CompareTo(tbPatientPassword.Text.Trim()) != 0)
             {
                 MessageBox.Show("The passwords don't match!");
                 return false;
@@ -128,12 +128,12 @@ namespace BlockchainApp
 
         private void clearPatientControls()
         {
-            tbPacientFirstName.Text = null;
-            tbPacientID.Text = null;
-            tbPacientPassword.Text = null;
+            tbPatientFirstName.Text = null;
+            tbPatientID.Text = null;
+            tbPatientPassword.Text = null;
             dtpBirthday.Value = DateTime.Now;
-            tbPacientLastName.Text = null;
-            tbPacientREPass.Text = null;
+            tbPatientLastName.Text = null;
+            tbPatientREPass.Text = null;
         }
 
         private string saltPassword(string password, long ID)
@@ -202,11 +202,11 @@ namespace BlockchainApp
         {
             if (validatePatient()==true)
             {
-                long pacID = long.Parse(tbPacientID.Text.Trim());
-                string lastName = tbPacientLastName.Text.Trim().ToString();
-                string firstName = tbPacientFirstName.Text.Trim().ToString();
-                string password = tbPacientPassword.Text.Trim().ToString();
-                string saltedPassword = saltPassword(password, pacID);
+                long patientID = long.Parse(tbPatientID.Text.Trim());
+                string lastName = tbPatientLastName.Text.Trim().ToString();
+                string firstName = tbPatientFirstName.Text.Trim().ToString();
+                string password = tbPatientPassword.Text.Trim().ToString();
+                string saltedPassword = saltPassword(password, patientID);
                 string hashedPass = computeHash2(saltedPassword);
                 DateTime birthday = dtpBirthday.Value;
 
@@ -219,9 +219,9 @@ namespace BlockchainApp
                     using (SqlCommand command = new SqlCommand(querryString, conn))
                     {
                         conn.Open();
-                        command.Parameters.AddWithValue("@pacID", tbPacientID.Text.Trim().ToString());
-                        command.Parameters.AddWithValue("@lastName", tbPacientLastName.Text.Trim().ToString());
-                        command.Parameters.AddWithValue("@firstName", tbPacientFirstName.Text.Trim().ToString());
+                        command.Parameters.AddWithValue("@pacID", tbPatientID.Text.Trim().ToString());
+                        command.Parameters.AddWithValue("@lastName", tbPatientLastName.Text.Trim().ToString());
+                        command.Parameters.AddWithValue("@firstName", tbPatientFirstName.Text.Trim().ToString());
                         command.Parameters.AddWithValue("@hashedPass", hashedPass);
                         command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
                         command.Parameters.AddWithValue("@birthday", birthday.ToString("yyyy-MM-dd"));
@@ -245,7 +245,7 @@ namespace BlockchainApp
             Close();
         }
 
-        private void btnCancelPacient_Click(object sender, EventArgs e)
+        private void btnCancelPatient_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -254,7 +254,12 @@ namespace BlockchainApp
         {
             clickField();
         }
-        
+
+        private void btnCancelDoctor_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         //private void tbNewDocID_Validated(object sender, EventArgs e)
         //{
         //    errorProvider.SetError(tbNewDocID, null);

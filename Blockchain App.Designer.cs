@@ -75,7 +75,7 @@
             this.btnPacient.TabIndex = 3;
             this.btnPacient.Text = "I\'m a patient";
             this.btnPacient.UseVisualStyleBackColor = false;
-            this.btnPacient.Click += new System.EventHandler(this.btnPacient_Click);
+            this.btnPacient.Click += new System.EventHandler(this.btnPatient_Click);
             // 
             // btnAdmin
             // 

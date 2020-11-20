@@ -14,12 +14,12 @@ using System.Net;
 
 namespace BlockchainApp
 {
-    public partial class PacientLogIn : Form
+    public partial class PatientLogin : Form
     {
         private int successfulAuthentication = 0;
         private SqlConnectionStringBuilder builder;
 
-        public PacientLogIn()
+        public PatientLogin()
         {
             InitializeComponent();
             MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
@@ -110,7 +110,7 @@ namespace BlockchainApp
 
         private bool validatePatient()
         {
-            if (tbPacientID.Text.Trim().Length != 7 || (tbPacientID.Text.Trim().All(char.IsNumber) == false))
+            if (tbPatientID.Text.Trim().Length != 7 || (tbPatientID.Text.Trim().All(char.IsNumber) == false))
             {
                 MessageBox.Show("The ID is invalid.");
                 return false;
@@ -136,13 +136,13 @@ namespace BlockchainApp
         private void btnOK_Click(object sender, EventArgs e)
         {
             Logger logger = LogManager.GetCurrentClassLogger();
-            string checkID = tbPacientID.Text.Trim().ToString();
+            string checkID = tbPatientID.Text.Trim().ToString();
             try
             {
                 if (successfulAuthentication < 4 && validatePatient() == true)
                 {
                     bool connected = false;
-                    long inputedPacientID = long.Parse(tbPacientID.Text.Trim());
+                    long inputedPacientID = long.Parse(tbPatientID.Text.Trim());
 
                     string inputedPass = tbPassword.Text.Trim().ToString();
                     string saltedPass = saltPassword(inputedPass, inputedPacientID);
@@ -290,12 +290,12 @@ namespace BlockchainApp
 
         private void Wait(double seconds)
         {
-            tbPacientID.Enabled = false;
+            tbPatientID.Enabled = false;
             tbPassword.Enabled = false;
             tbPIN.Enabled = false;
             btnOK.Enabled = false;
             System.Threading.Thread.Sleep(1000 * (int)seconds);
-            tbPacientID.Enabled = true;
+            tbPatientID.Enabled = true;
             tbPassword.Enabled = true;
             tbPIN.Enabled = true;
             btnOK.Enabled = true;
@@ -306,18 +306,18 @@ namespace BlockchainApp
             Close();
         }
 
-        private void tbPacientID_Validating(object sender, CancelEventArgs e)
+        private void tbPatientID_Validating(object sender, CancelEventArgs e)
         {
-            if (tbPacientID.Text.Trim().Length != 7)
+            if (tbPatientID.Text.Trim().Length != 7)
             {
-                errorProvider.SetError(tbPacientID, "Wrong ID.");
+                errorProvider.SetError(tbPatientID, "Wrong ID.");
                 e.Cancel = true;
             }
         }
 
-        private void tbPacientID_Validated(object sender, EventArgs e)
+        private void tbPatientID_Validated(object sender, EventArgs e)
         {
-            errorProvider.SetError(tbPacientID, null);
+            errorProvider.SetError(tbPatientID, null);
         }
 
         private void tbPassword_Validating(object sender, CancelEventArgs e)
@@ -357,7 +357,7 @@ namespace BlockchainApp
             return Dns.GetHostByName(hostName).AddressList[0].ToString();
         }
 
-        private void PacientLogIn_Load(object sender, EventArgs e)
+        private void PatientLogIn_Load(object sender, EventArgs e)
         {
             string myIP = getIP();
             readLog(myIP);

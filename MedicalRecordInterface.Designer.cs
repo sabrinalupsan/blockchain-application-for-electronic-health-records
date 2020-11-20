@@ -41,13 +41,14 @@
             this.tbLastName = new System.Windows.Forms.TextBox();
             this.tbID = new System.Windows.Forms.TextBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.btnPrintRecord = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDone
             // 
             this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
             this.btnDone.ForeColor = System.Drawing.Color.White;
-            this.btnDone.Location = new System.Drawing.Point(153, 373);
+            this.btnDone.Location = new System.Drawing.Point(298, 373);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(75, 23);
             this.btnDone.TabIndex = 0;
@@ -153,12 +154,24 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // btnPrintRecord
+            // 
+            this.btnPrintRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnPrintRecord.ForeColor = System.Drawing.Color.White;
+            this.btnPrintRecord.Location = new System.Drawing.Point(180, 373);
+            this.btnPrintRecord.Name = "btnPrintRecord";
+            this.btnPrintRecord.Size = new System.Drawing.Size(99, 23);
+            this.btnPrintRecord.TabIndex = 11;
+            this.btnPrintRecord.Text = "Print record";
+            this.btnPrintRecord.UseVisualStyleBackColor = false;
+            // 
             // MedicalRecordInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
             this.ClientSize = new System.Drawing.Size(434, 399);
+            this.Controls.Add(this.btnPrintRecord);
             this.Controls.Add(this.tbID);
             this.Controls.Add(this.tbLastName);
             this.Controls.Add(this.label5);
@@ -192,5 +205,6 @@
         private System.Windows.Forms.TextBox tbLastName;
         private System.Windows.Forms.TextBox tbID;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Button btnPrintRecord;
     }
 }

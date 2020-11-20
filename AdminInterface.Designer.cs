@@ -38,7 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbSpecialisation = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCancelDoctor = new System.Windows.Forms.Button();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbRePassword = new System.Windows.Forms.TextBox();
@@ -50,13 +50,13 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.tbPacientID = new System.Windows.Forms.TextBox();
-            this.tbPacientLastName = new System.Windows.Forms.TextBox();
-            this.tbPacientFirstName = new System.Windows.Forms.TextBox();
-            this.tbPacientPassword = new System.Windows.Forms.TextBox();
-            this.tbPacientREPass = new System.Windows.Forms.TextBox();
-            this.btnOkPacient = new System.Windows.Forms.Button();
-            this.btnCancelPacient = new System.Windows.Forms.Button();
+            this.tbPatientID = new System.Windows.Forms.TextBox();
+            this.tbPatientLastName = new System.Windows.Forms.TextBox();
+            this.tbPatientFirstName = new System.Windows.Forms.TextBox();
+            this.tbPatientPassword = new System.Windows.Forms.TextBox();
+            this.tbPatientREPass = new System.Windows.Forms.TextBox();
+            this.btnOkPatient = new System.Windows.Forms.Button();
+            this.btnCancelPatient = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
             this.dtpBirthday = new System.Windows.Forms.DateTimePicker();
@@ -156,18 +156,18 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Doctor specialization";
             // 
-            // button1
+            // btnCancelDoctor
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(169, 394);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(82, 27);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnCancelDoctor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnCancelDoctor.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelDoctor.ForeColor = System.Drawing.Color.White;
+            this.btnCancelDoctor.Location = new System.Drawing.Point(169, 394);
+            this.btnCancelDoctor.Name = "btnCancelDoctor";
+            this.btnCancelDoctor.Size = new System.Drawing.Size(82, 27);
+            this.btnCancelDoctor.TabIndex = 7;
+            this.btnCancelDoctor.Text = "Cancel";
+            this.btnCancelDoctor.UseVisualStyleBackColor = false;
+            this.btnCancelDoctor.Click += new System.EventHandler(this.btnCancelDoctor_Click);
             // 
             // tbPassword
             // 
@@ -223,18 +223,18 @@
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(24, 32);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(115, 24);
+            this.label8.Size = new System.Drawing.Size(109, 24);
             this.label8.TabIndex = 16;
-            this.label8.Text = "New pacient";
+            this.label8.Text = "New patient";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(25, 88);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(103, 17);
+            this.label9.Size = new System.Drawing.Size(100, 17);
             this.label9.TabIndex = 17;
-            this.label9.Text = "New Pacient ID";
+            this.label9.Text = "New Patient ID";
             // 
             // label10
             // 
@@ -272,78 +272,78 @@
             this.label13.TabIndex = 21;
             this.label13.Text = "Reinput password";
             // 
-            // tbPacientID
+            // tbPatientID
             // 
-            this.tbPacientID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPacientID.Location = new System.Drawing.Point(187, 88);
-            this.tbPacientID.Name = "tbPacientID";
-            this.tbPacientID.Size = new System.Drawing.Size(100, 22);
-            this.tbPacientID.TabIndex = 0;
-            this.tbPacientID.Click += new System.EventHandler(this.controlClicked);
+            this.tbPatientID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.tbPatientID.Location = new System.Drawing.Point(187, 88);
+            this.tbPatientID.Name = "tbPatientID";
+            this.tbPatientID.Size = new System.Drawing.Size(100, 22);
+            this.tbPatientID.TabIndex = 0;
+            this.tbPatientID.Click += new System.EventHandler(this.controlClicked);
             // 
-            // tbPacientLastName
+            // tbPatientLastName
             // 
-            this.tbPacientLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPacientLastName.Location = new System.Drawing.Point(187, 136);
-            this.tbPacientLastName.Name = "tbPacientLastName";
-            this.tbPacientLastName.Size = new System.Drawing.Size(100, 22);
-            this.tbPacientLastName.TabIndex = 1;
-            this.tbPacientLastName.Click += new System.EventHandler(this.controlClicked);
+            this.tbPatientLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.tbPatientLastName.Location = new System.Drawing.Point(187, 136);
+            this.tbPatientLastName.Name = "tbPatientLastName";
+            this.tbPatientLastName.Size = new System.Drawing.Size(100, 22);
+            this.tbPatientLastName.TabIndex = 1;
+            this.tbPatientLastName.Click += new System.EventHandler(this.controlClicked);
             // 
-            // tbPacientFirstName
+            // tbPatientFirstName
             // 
-            this.tbPacientFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPacientFirstName.Location = new System.Drawing.Point(187, 186);
-            this.tbPacientFirstName.Name = "tbPacientFirstName";
-            this.tbPacientFirstName.Size = new System.Drawing.Size(100, 22);
-            this.tbPacientFirstName.TabIndex = 2;
-            this.tbPacientFirstName.Click += new System.EventHandler(this.controlClicked);
+            this.tbPatientFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.tbPatientFirstName.Location = new System.Drawing.Point(187, 186);
+            this.tbPatientFirstName.Name = "tbPatientFirstName";
+            this.tbPatientFirstName.Size = new System.Drawing.Size(100, 22);
+            this.tbPatientFirstName.TabIndex = 2;
+            this.tbPatientFirstName.Click += new System.EventHandler(this.controlClicked);
             // 
-            // tbPacientPassword
+            // tbPatientPassword
             // 
-            this.tbPacientPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPacientPassword.Location = new System.Drawing.Point(187, 237);
-            this.tbPacientPassword.Name = "tbPacientPassword";
-            this.tbPacientPassword.PasswordChar = '*';
-            this.tbPacientPassword.Size = new System.Drawing.Size(100, 22);
-            this.tbPacientPassword.TabIndex = 3;
-            this.tbPacientPassword.Click += new System.EventHandler(this.controlClicked);
+            this.tbPatientPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.tbPatientPassword.Location = new System.Drawing.Point(187, 237);
+            this.tbPatientPassword.Name = "tbPatientPassword";
+            this.tbPatientPassword.PasswordChar = '*';
+            this.tbPatientPassword.Size = new System.Drawing.Size(100, 22);
+            this.tbPatientPassword.TabIndex = 3;
+            this.tbPatientPassword.Click += new System.EventHandler(this.controlClicked);
             // 
-            // tbPacientREPass
+            // tbPatientREPass
             // 
-            this.tbPacientREPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPacientREPass.Location = new System.Drawing.Point(187, 287);
-            this.tbPacientREPass.Name = "tbPacientREPass";
-            this.tbPacientREPass.PasswordChar = '*';
-            this.tbPacientREPass.Size = new System.Drawing.Size(100, 22);
-            this.tbPacientREPass.TabIndex = 4;
-            this.tbPacientREPass.Click += new System.EventHandler(this.controlClicked);
+            this.tbPatientREPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.tbPatientREPass.Location = new System.Drawing.Point(187, 287);
+            this.tbPatientREPass.Name = "tbPatientREPass";
+            this.tbPatientREPass.PasswordChar = '*';
+            this.tbPatientREPass.Size = new System.Drawing.Size(100, 22);
+            this.tbPatientREPass.TabIndex = 4;
+            this.tbPatientREPass.Click += new System.EventHandler(this.controlClicked);
             // 
-            // btnOkPacient
+            // btnOkPatient
             // 
-            this.btnOkPacient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
-            this.btnOkPacient.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOkPacient.ForeColor = System.Drawing.Color.White;
-            this.btnOkPacient.Location = new System.Drawing.Point(53, 394);
-            this.btnOkPacient.Name = "btnOkPacient";
-            this.btnOkPacient.Size = new System.Drawing.Size(75, 23);
-            this.btnOkPacient.TabIndex = 6;
-            this.btnOkPacient.Text = "OK";
-            this.btnOkPacient.UseVisualStyleBackColor = false;
-            this.btnOkPacient.Click += new System.EventHandler(this.btnOkPacient_Click);
+            this.btnOkPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnOkPatient.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOkPatient.ForeColor = System.Drawing.Color.White;
+            this.btnOkPatient.Location = new System.Drawing.Point(53, 394);
+            this.btnOkPatient.Name = "btnOkPatient";
+            this.btnOkPatient.Size = new System.Drawing.Size(75, 23);
+            this.btnOkPatient.TabIndex = 6;
+            this.btnOkPatient.Text = "OK";
+            this.btnOkPatient.UseVisualStyleBackColor = false;
+            this.btnOkPatient.Click += new System.EventHandler(this.btnOkPacient_Click);
             // 
-            // btnCancelPacient
+            // btnCancelPatient
             // 
-            this.btnCancelPacient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
-            this.btnCancelPacient.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelPacient.ForeColor = System.Drawing.Color.White;
-            this.btnCancelPacient.Location = new System.Drawing.Point(199, 394);
-            this.btnCancelPacient.Name = "btnCancelPacient";
-            this.btnCancelPacient.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelPacient.TabIndex = 7;
-            this.btnCancelPacient.Text = "Cancel";
-            this.btnCancelPacient.UseVisualStyleBackColor = false;
-            this.btnCancelPacient.Click += new System.EventHandler(this.btnCancelPacient_Click);
+            this.btnCancelPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnCancelPatient.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelPatient.ForeColor = System.Drawing.Color.White;
+            this.btnCancelPatient.Location = new System.Drawing.Point(199, 394);
+            this.btnCancelPatient.Name = "btnCancelPatient";
+            this.btnCancelPatient.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelPatient.TabIndex = 7;
+            this.btnCancelPatient.Text = "Cancel";
+            this.btnCancelPatient.UseVisualStyleBackColor = false;
+            this.btnCancelPatient.Click += new System.EventHandler(this.btnCancelPatient_Click);
             // 
             // panel1
             // 
@@ -351,18 +351,18 @@
             this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.dtpBirthday);
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.btnCancelPacient);
+            this.panel1.Controls.Add(this.btnCancelPatient);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.btnOkPacient);
+            this.panel1.Controls.Add(this.btnOkPatient);
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.tbPacientREPass);
+            this.panel1.Controls.Add(this.tbPatientREPass);
             this.panel1.Controls.Add(this.label11);
-            this.panel1.Controls.Add(this.tbPacientPassword);
+            this.panel1.Controls.Add(this.tbPatientPassword);
             this.panel1.Controls.Add(this.label12);
-            this.panel1.Controls.Add(this.tbPacientFirstName);
+            this.panel1.Controls.Add(this.tbPatientFirstName);
             this.panel1.Controls.Add(this.label13);
-            this.panel1.Controls.Add(this.tbPacientLastName);
-            this.panel1.Controls.Add(this.tbPacientID);
+            this.panel1.Controls.Add(this.tbPatientLastName);
+            this.panel1.Controls.Add(this.tbPatientID);
             this.panel1.Location = new System.Drawing.Point(358, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(313, 441);
@@ -389,7 +389,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(134)))), ((int)(((byte)(190)))));
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.btnCancelDoctor);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.btnOK);
@@ -464,7 +464,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbSpecialisation;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCancelDoctor;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbRePassword;
@@ -476,13 +476,13 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox tbPacientID;
-        private System.Windows.Forms.TextBox tbPacientLastName;
-        private System.Windows.Forms.TextBox tbPacientFirstName;
-        private System.Windows.Forms.TextBox tbPacientPassword;
-        private System.Windows.Forms.TextBox tbPacientREPass;
-        private System.Windows.Forms.Button btnOkPacient;
-        private System.Windows.Forms.Button btnCancelPacient;
+        private System.Windows.Forms.TextBox tbPatientID;
+        private System.Windows.Forms.TextBox tbPatientLastName;
+        private System.Windows.Forms.TextBox tbPatientFirstName;
+        private System.Windows.Forms.TextBox tbPatientPassword;
+        private System.Windows.Forms.TextBox tbPatientREPass;
+        private System.Windows.Forms.Button btnOkPatient;
+        private System.Windows.Forms.Button btnCancelPatient;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label14;

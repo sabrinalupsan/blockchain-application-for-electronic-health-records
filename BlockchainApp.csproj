@@ -140,11 +140,11 @@
     <Compile Include="PatientInterface.Designer.cs">
       <DependentUpon>PatientInterface.cs</DependentUpon>
     </Compile>
-    <Compile Include="PacientLogIn.cs">
+    <Compile Include="PatientLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PacientLogIn.Designer.cs">
-      <DependentUpon>PacientLogIn.cs</DependentUpon>
+    <Compile Include="PatientLogin.Designer.cs">
+      <DependentUpon>PatientLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -176,8 +176,8 @@
     <EmbeddedResource Include="PatientInterface.resx">
       <DependentUpon>PatientInterface.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PacientLogIn.resx">
-      <DependentUpon>PacientLogIn.cs</DependentUpon>
+    <EmbeddedResource Include="PatientLogin.resx">
+      <DependentUpon>PatientLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

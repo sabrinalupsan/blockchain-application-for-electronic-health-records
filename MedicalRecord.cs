@@ -18,8 +18,8 @@ namespace BlockchainApp
         private long DoctorID;
         public long doctorID { get { return DoctorID; } set { DoctorID = value; } }
 
-        private long PacientID;
-        public long pacientID { get { return PacientID; } set { PacientID = value; } }
+        private long PatientID;
+        public long patientID { get { return PatientID; } set { PatientID = value; } }
 
         private DateTime Date;
         public DateTime date { get { return Date; } set { Date = value; } }
@@ -29,9 +29,9 @@ namespace BlockchainApp
 
         }
 
-        public MedicalRecord(long pacientID, long doctorID, string title, string description, DateTime date)
+        public MedicalRecord(long patientID, long doctorID, string title, string description, DateTime date)
         {
-            PacientID = pacientID;
+            PatientID = patientID;
             DoctorID = doctorID;
             Title = title;
             Description = description;

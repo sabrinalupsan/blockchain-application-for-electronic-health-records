@@ -1,0 +1,16 @@
+2020-11-19 17:04:48.2739|DEBUG|BlockchainApp.PacientLogIn|The patient with ID 5658230 logged in.
+2020-11-19 17:07:03.6979|DEBUG|BlockchainApp.PacientLogIn|The patient with ID 5658230 logged in.
+2020-11-19 17:07:33.7156|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 7290163 logged in.
+2020-11-19 17:08:17.2201|DEBUG|BlockchainApp.DoctorInterface|Doctor 7290163 added a record for patient 5658230.
+2020-11-19 17:08:35.3134|DEBUG|BlockchainApp.PacientLogIn|The patient with ID 5658230 logged in.
+2020-11-19 17:10:52.5080|DEBUG|BlockchainApp.PacientLogIn|The patient with ID 5658230 logged in.
+2020-11-19 17:15:34.8166|DEBUG|BlockchainApp.PacientLogIn|The patient with ID 5658230 logged in.
+2020-11-19 17:18:29.2809|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 7290163 logged in.
+2020-11-19 17:23:14.8875|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 7290163 logged in.
+2020-11-19 17:27:54.1305|WARN|BlockchainApp.DoctorInterface|The doctor with ID 7290163 is repeatedly trying to input the PIN code 3209.
+2020-11-19 17:27:57.2923|WARN|BlockchainApp.DoctorInterface|The doctor with ID 7290163 is repeatedly trying to input the PIN code 3209.
+2020-11-19 17:27:59.8673|WARN|BlockchainApp.DoctorInterface|The doctor with ID 7290163 is repeatedly trying to input the PIN code 3209.
+2020-11-19 17:28:00.3031|WARN|BlockchainApp.DoctorInterface|The doctor with ID 7290163 is repeatedly trying to input the PIN code 3209.
+2020-11-19 17:29:06.3635|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 7290163 logged in.
+2020-11-19 17:33:46.9771|DEBUG|BlockchainApp.PacientLogIn|The patient with ID 5658230 logged in.
+2020-11-19 17:36:54.9839|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 7290163 logged in.

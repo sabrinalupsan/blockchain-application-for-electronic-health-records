@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Security.Cryptography;
 using NLog;
 using Microsoft.Data.SqlClient;
+using System.Net;
 
 namespace BlockchainApp
 {
@@ -28,23 +29,14 @@ namespace BlockchainApp
             builder = mySqlBuilder.builder;
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
-
                 var querryString =
                     "SELECT * FROM BLOCK;";
                 using (SqlCommand command = new SqlCommand(querryString, conn))
                 {
                     conn.Open();
-
                     using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                            if(reader.HasRows)
-                            {
-
-                            }
-                            else
-                                GenesisBlock();
-
-                    }
+                        if(!reader.HasRows)
+                            GenesisBlock();
                 }
             }
 
@@ -69,9 +61,8 @@ namespace BlockchainApp
         {
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
-
                 var querryString =
-                    "INSERT INTO Block (pacient_id, doctor_id, appointment_date, appointment_description, appointment_title, block_timestamp, block_index, " +
+                    "INSERT INTO Block (patient_id, doctor_id, appointment_date, appointment_description, appointment_title, block_timestamp, block_index, " +
                     "hash_of_prev_block, hash_of_curr_block)" +
                     "VALUES (-1, -1, @date, 'no description', 'no title', @dateNow, 0, 0, @hashOfCurrBlock);";
                 using (SqlCommand command = new SqlCommand(querryString, conn))
@@ -81,18 +72,12 @@ namespace BlockchainApp
                     command.Parameters.AddWithValue("@date", now);
                     command.Parameters.AddWithValue("@dateNow", now);
 
-                    //compute hash of current block;
                     string toHash = "-1" + "-1" + now + "no description" + now + "0" + "0";
-
                     command.Parameters.AddWithValue("@hashOfCurrBlock", computeHash2(toHash));
 
                     using (SqlDataReader reader = command.ExecuteReader())
-                    {
                         while (reader.Read())
-                        {
                             Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
-                        }
-                    }
                 }
             }
         }
@@ -100,7 +85,7 @@ namespace BlockchainApp
         private bool checkID(long id)
         {
             bool ok = false;
-            var querry = "SELECT pacient_id from Pacients;";
+            var querry = "SELECT patient_id from Patients;";
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
                 conn.Open();
@@ -109,7 +94,7 @@ namespace BlockchainApp
                 {
                     while (reader.Read())
                     {
-                        int patient_id = (int)reader["pacient_id"];
+                        int patient_id = (int)reader["patient_id"];
                         if (id == patient_id)
                             ok = true;
                     }
@@ -127,9 +112,8 @@ namespace BlockchainApp
                 {
                     using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                     {
-
                         var querryString =
-                            "INSERT INTO Associations (doctor_id, pacient_id)" +
+                            "INSERT INTO Associations (doctor_id, patient_id)" +
                             "VALUES (@docID, @patientID);";
                         using (SqlCommand command = new SqlCommand(querryString, conn))
                         {
@@ -138,17 +122,14 @@ namespace BlockchainApp
                             command.Parameters.AddWithValue("@patientID", patientID.ToString());
 
                             using (SqlDataReader reader = command.ExecuteReader())
-                            {
                                 while (reader.Read())
-                                {
-                                    Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
-                                }
-                            }
+                                    Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));  
                         }
                     }
                     updateListView();
                     Logger logger = LogManager.GetCurrentClassLogger();
                     logger.Debug("Doctor {0} added patient {1} to his list.", doctor.docID, patientID);
+                    tbNewPacientID.Clear();
                 }
                 else
                     MessageBox.Show("That ID does not correspond to any existing patient.");
@@ -166,22 +147,22 @@ namespace BlockchainApp
 
         public void DisplayPatients()
         {
-            lvPacients.Items.Clear();
+            lvPatients.Items.Clear();
             foreach (Patient patient in doctor.patients)
             {
                 var listViewItem = new ListViewItem(patient.patientID.ToString());
                 listViewItem.SubItems.Add(patient.lastName);
                 listViewItem.SubItems.Add(patient.firstName);
                 listViewItem.Tag = patient;
-                lvPacients.Items.Add(listViewItem);
+                lvPatients.Items.Add(listViewItem);
             }
             tbTitle.Hide();
         }
 
         private void updateListView()
         {
-            var querry = "SELECT pacient_id, pacient_last_name, pacient_first_name, birthday" + " FROM Pacients " +
-                "WHERE pacient_id IN(SELECT pacient_id from ASSOCIATIONS WHERE doctor_id =" + doctor.docID + ");";
+            var querry = "SELECT patient_id, patient_last_name, patient_first_name, birthday" + " FROM Patients " +
+                "WHERE patient_id IN(SELECT patient_id from ASSOCIATIONS WHERE doctor_id =" + doctor.docID + ");";
 
             doctor.patients.Clear();
 
@@ -193,12 +174,12 @@ namespace BlockchainApp
                 {
                     while (reader.Read())
                     {
-                        long id = (int)reader["pacient_id"];
-                        string patientLastName = (string)reader["pacient_last_name"];
-                        string pacienFirstName = (string)reader["pacient_first_name"];
+                        long id = (int)reader["patient_id"];
+                        string patientLastName = (string)reader["patient_last_name"];
+                        string patientFirstName = (string)reader["patient_first_name"];
                         DateTime bday = (DateTime)reader["birthday"];
 
-                        Patient patient = new Patient(id, patientLastName, pacienFirstName, bday);
+                        Patient patient = new Patient(id, patientLastName, patientFirstName, bday);
                         doctor.patients.Add(patient);
                     }
                 }
@@ -216,13 +197,26 @@ namespace BlockchainApp
             Details.Hide();
             lbRecords.Visible = false;
         }
+        
+        private void showControls()
+        {
+            lbRecords.Visible = true;
+            tbTitle.Show();
+            dtpDate.Show();
+            tbDetails.Show();
+            label5.Show();
+            Details.Show();
+            label6.Show();
+        }
 
         private void DoctorInterface_Load(object sender, EventArgs e)
         {
+            string myIP = getIP();
+            readLog(myIP);
             hideControls();
 
-            var querry = "SELECT pacient_id, pacient_last_name, pacient_first_name, birthday" + " FROM Pacients " +
-                "WHERE pacient_id IN(SELECT pacient_id from ASSOCIATIONS WHERE doctor_id =" + doctor.docID + ");";
+            var querry = "SELECT patient_id, patient_last_name, patient_first_name, birthday" + " FROM Patients " +
+                "WHERE patient_id IN(SELECT patient_id from ASSOCIATIONS WHERE doctor_id =" + doctor.docID + ");";
 
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
@@ -232,9 +226,9 @@ namespace BlockchainApp
                 {
                     while (reader.Read())
                     {
-                        long id = (int)reader["pacient_id"];
-                        string patientLastName = (string)reader["pacient_last_name"];
-                        string patientFirstName = (string)reader["pacient_first_name"];
+                        long id = (int)reader["patient_id"];
+                        string patientLastName = (string)reader["patient_last_name"];
+                        string patientFirstName = (string)reader["patient_first_name"];
                         DateTime bday = (DateTime)reader["birthday"];
 
                         Patient patient = new Patient(id, patientLastName, patientFirstName, bday);
@@ -243,6 +237,32 @@ namespace BlockchainApp
                 }
             }
             DisplayPatients();
+        }
+
+        private void readLog(string ip)
+        {
+            string[] lines = System.IO.File.ReadAllLines("log.txt");
+            int j = lines.Length - 1;
+            for (int i = j; i >= 0; i--)
+            {
+                string substring = lines[i].Substring(24, (lines[i].Length - 24));
+                string toCompare = 
+                    "|WARN|BlockchainApp.DoctorInterface|The doctor with ID 4583018 and IP 26.235.128.98 is repeatedly trying to input the PIN code 1234. " + ip + " is repeatedly trying to log in.";
+                //de scris expresii regulate cu Cosmin
+                if (substring.CompareTo(toCompare) == 0)
+                {
+                    string timestamp = lines[i].Substring(0, 19);
+                    DateTimeConverter converter = new DateTimeConverter();
+                    DateTime date = (DateTime)converter.ConvertFromString(timestamp);
+                    double secondsPassed = (DateTime.Now - date).TotalSeconds;
+                    if (secondsPassed < 40)
+                    {
+                        double secondsLeft = 40 - secondsPassed;
+                        Wait(secondsLeft);
+                        break;
+                    }
+                }
+            }
         }
 
         private void tbPIN_Click(object sender, EventArgs e)
@@ -255,8 +275,10 @@ namespace BlockchainApp
             Logger logger = LogManager.GetCurrentClassLogger();
             if (successfulAuthentication > 5)
             {
-                logger.Warn("The doctor with ID {0} is repeatedly trying to input the PIN code {1}.", doctor.docID, tbPIN.Text.Trim().ToString());
-                //do the same thing with the log-in part. log the doctor out maybe? and freeze everything for 30 seconds?
+                string myIP = getIP();
+                logger.Warn("The doctor with ID {0} and IP {1} is repeatedly trying to input the PIN code {2}.", doctor.docID, myIP, tbPIN.Text.Trim().ToString());
+                MessageBox.Show("Invalid PIN and too many attempts! You need to wait 30 seconds.");
+                Wait(30);
             }
             else
             {
@@ -264,32 +286,20 @@ namespace BlockchainApp
                 {
                     int patientPIN = int.Parse(tbPIN.Text.Trim().ToString());
                     string hashedPIN = computeHash2(patientPIN.ToString());
-                    ListViewItem item = lvPacients.SelectedItems[0];
+                    ListViewItem item = lvPatients.SelectedItems[0];
                     Patient patient = (Patient)item.Tag;
                     string id = null;
                     using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                     {
-                        var querry = "SELECT hashed_pin FROM Pacients WHERE pacient_id = " + patient.patientID + ";";
+                        var querry = "SELECT hashed_pin FROM Patients WHERE patient_id = " + patient.patientID + ";";
                         conn.Open();
                         var command = new SqlCommand(querry, conn);
                         using (SqlDataReader reader = command.ExecuteReader())
-                        {
                             while (reader.Read())
-                            {
                                 id = (string)reader["hashed_pin"];
-                            }
-                        }
                     }
                     if (hashedPIN.CompareTo(id) == 0)
-                    {
-                        lbRecords.Visible = true;
-                        tbTitle.Show();
-                        dtpDate.Show();
-                        tbDetails.Show();
-                        label5.Show();
-                        Details.Show();
-                        label6.Show();
-                    }
+                        showControls();
                     else
                     {
                         successfulAuthentication++;
@@ -312,23 +322,53 @@ namespace BlockchainApp
             }
         }
 
+        private void Wait(double seconds)
+        {
+            tbPIN.Enabled = false;
+            tbTitle.Enabled = false;
+            tbDetails.Enabled = false;
+            dtpDate.Enabled = false;
+            tbNewPacientID.Enabled = false;
+            lbRecords.Enabled = false;
+            lvPatients.Enabled = false;
+            btnAddNewRecord.Enabled = false;
+            btnCheck.Enabled = false;
+            btnDones.Enabled = false;
+            btnDone.Enabled = false;
+            btnSelectPacient.Enabled = false;
+            btnAddNewRecord.Enabled = false;
+            System.Threading.Thread.Sleep(1000 * (int)seconds);
+            tbPIN.Enabled = true;
+            tbTitle.Enabled = true;
+            tbDetails.Enabled = true;
+            dtpDate.Enabled = true;
+            tbNewPacientID.Enabled = true;
+            lbRecords.Enabled = true;
+            lvPatients.Enabled = true;
+            btnAddNewRecord.Enabled = true;
+            btnCheck.Enabled = true;
+            btnDones.Enabled = true;
+            btnDone.Enabled = true;
+            btnSelectPacient.Enabled = true;
+            btnAddNewRecord.Enabled = true;
+        }
+
         private void btnSelectPacient_Click(object sender, EventArgs e)
         {
-            if (lvPacients.SelectedItems.Count > 0)
+            if (lvPatients.SelectedItems.Count > 0)
             {
                 lbRecords.Items.Clear();
-                ListViewItem item = lvPacients.SelectedItems[0];
+                ListViewItem item = lvPatients.SelectedItems[0];
                 Patient patient = (Patient)item.Tag;
 
                 var populateListBoxQuerry = "SELECT appointment_title, appointment_description, appointment_date FROM Block " +
-                    "WHERE doctor_id = " + doctor.docID + "AND pacient_id = " + patient.patientID;
+                    "WHERE doctor_id = " + doctor.docID + "AND patient_id = " + patient.patientID;
 
                 using (SqlConnection populateListBoxConn = new SqlConnection(builder.ConnectionString))
                 {
                     populateListBoxConn.Open();
                     var command = new SqlCommand(populateListBoxQuerry, populateListBoxConn);
                     using (SqlDataReader reader = command.ExecuteReader())
-                    {
                         while (reader.Read())
                         {
                             string title = (string)reader["appointment_title"];
@@ -337,7 +377,6 @@ namespace BlockchainApp
                             MedicalRecord record = new MedicalRecord(doctor.docID, patient.patientID, title, description, date);
                             lbRecords.Items.Add(record);
                         }
-                    }
                 }
             }
             else
@@ -351,15 +390,10 @@ namespace BlockchainApp
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
                 conn.Open();
-
                 var command = new SqlCommand(querryString, conn);
                 using (SqlDataReader reader = command.ExecuteReader())
-                {
                     while (reader.Read())
-                    {
                         x = (int)(reader["val"]);
-                    }
-                }
             }
             return x;
         }
@@ -371,15 +405,10 @@ namespace BlockchainApp
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
                 conn.Open();
-                
                 var command = new SqlCommand(querryString, conn);
                 using (SqlDataReader reader = command.ExecuteReader())
-                {
                     while (reader.Read())
-                    {
                         x = (int)(reader["current_value"]);
-                    }
-                }
             }
             return x;
         }
@@ -393,7 +422,6 @@ namespace BlockchainApp
                 hash.nounce++;
                 hash.theHash = hash.computeHash();
             }
-
         }
 
         private string getLastBlockHash()
@@ -408,10 +436,8 @@ namespace BlockchainApp
                     conn.Open();
 
                     using (SqlDataReader reader = command.ExecuteReader())
-                    {
                         while(reader.Read())
                             hash = (string)reader["hash_of_curr_block"];
-                    }
                 }
             }
             return hash;
@@ -457,14 +483,14 @@ namespace BlockchainApp
                     string details = tbDetails.Text.Trim().ToString();
                     int index;
 
-                    ListViewItem item = lvPacients.SelectedItems[0];
+                    ListViewItem item = lvPatients.SelectedItems[0];
                     Patient patient = (Patient)item.Tag;
                     long patientID = patient.patientID;
 
                     using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                     {
                         var querryString =
-                            "INSERT INTO Block (pacient_id, doctor_id, appointment_date, appointment_title, appointment_description, nounce, block_timestamp, block_index, " +
+                            "INSERT INTO Block (patient_id, doctor_id, appointment_date, appointment_title, appointment_description, nounce, block_timestamp, block_index, " +
                             "hash_of_prev_block, hash_of_curr_block)" +
                             "VALUES (@pacID, @docID, @date, @title, @description, @nounce, @dateNow, @index, @hashOfPrevBlock, @hashOfCurrBlock);";
                         using (SqlCommand command = new SqlCommand(querryString, conn))
@@ -483,7 +509,6 @@ namespace BlockchainApp
 
                             index = getIndex(builder);
 
-                            //compute hash of current block;
                             string toHash = patientID + doctor.docID + date + title + details + now + index + theHashOfPrevBlock;
                             int nounce = 0;
                             Hash hash = new Hash(nounce, toHash);
@@ -512,7 +537,7 @@ namespace BlockchainApp
         private void selectRecord_Click(object sender, EventArgs e)
         {
             MedicalRecord record = (MedicalRecord)lbRecords.SelectedItem;
-            ListViewItem item = (ListViewItem)lvPacients.SelectedItems[0];
+            ListViewItem item = lvPatients.SelectedItems[0];
             Patient patient = (Patient)item.Tag;
             MedicalRecordInterface medicalRecordInterface = new MedicalRecordInterface(record, patient);
             medicalRecordInterface.ShowDialog();
@@ -546,17 +571,28 @@ namespace BlockchainApp
             errorProvider.SetError(tbNewPacientID, null);
         }
 
-        private void lvPacients_SelectedIndexChanged(object sender, EventArgs e)
+        private string getIP()
+        {
+            string hostName = Dns.GetHostName();
+            return Dns.GetHostByName(hostName).AddressList[0].ToString();
+        }
+
+        private void btnDones_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void lvPatients_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             lbRecords.Items.Clear();
-            if (lvPacients.SelectedItems.Count > 0)
+            if (lvPatients.SelectedItems.Count > 0)
             {
                 hideControls();
-                ListViewItem item = lvPacients.SelectedItems[0];
+                ListViewItem item = lvPatients.SelectedItems[0];
                 Patient patient = (Patient)item.Tag;
 
                 var populateListBoxQuerry = "SELECT appointment_title, appointment_description, appointment_date FROM Block " +
-                    "WHERE doctor_id = " + doctor.docID + "AND pacient_id = " + patient.patientID +";";
+                    "WHERE doctor_id = " + doctor.docID + "AND patient_id = " + patient.patientID + ";";
 
                 using (SqlConnection populateListBoxConn = new SqlConnection(builder.ConnectionString))
                 {
@@ -571,18 +607,12 @@ namespace BlockchainApp
                             DateTime date = (DateTime)reader["appointment_date"];
                             MedicalRecord record = new MedicalRecord(doctor.docID, patient.patientID, title, description, date);
                             lbRecords.Items.Add(record);
-                            //lbRecords.Items.
                             lbRecords.Visible = false;
                         }
                     }
                 }
-                
-            }
-        }
 
-        private void btnDones_Click(object sender, EventArgs e)
-        {
-            Close();
+            }
         }
     }
 }

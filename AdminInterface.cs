@@ -185,12 +185,8 @@ namespace BlockchainApp
                         command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
 
                         using (SqlDataReader reader = command.ExecuteReader())
-                        {
                             while (reader.Read())
-                            {
                                 Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
-                            }
-                        }
                     }
                 }
                 docPB.Value = 100;
@@ -214,7 +210,7 @@ namespace BlockchainApp
                 {
 
                     var querryString =
-                        "INSERT INTO Pacients (pacient_id, pacient_last_name, pacient_first_name, hashed_pass, last_login, birthday)" +
+                        "INSERT INTO Patients (patient_id, patient_last_name, patient_first_name, hashed_pass, last_login, birthday)" +
                         "VALUES (@pacID, @lastName, @firstName, @hashedPass, @dateNow, @birthday);";
                     using (SqlCommand command = new SqlCommand(querryString, conn))
                     {

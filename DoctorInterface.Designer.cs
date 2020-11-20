@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.lvPacients = new System.Windows.Forms.ListView();
+            this.lvPatients = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PacientLastName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -60,23 +60,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
-            // lvPacients
+            // lvPatients
             // 
-            this.lvPacients.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.lvPacients.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvPatients.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.lvPatients.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.PacientLastName,
             this.columnHeader2});
-            this.lvPacients.FullRowSelect = true;
-            this.lvPacients.GridLines = true;
-            this.lvPacients.HideSelection = false;
-            this.lvPacients.Location = new System.Drawing.Point(12, 49);
-            this.lvPacients.Name = "lvPacients";
-            this.lvPacients.Size = new System.Drawing.Size(471, 180);
-            this.lvPacients.TabIndex = 1;
-            this.lvPacients.UseCompatibleStateImageBehavior = false;
-            this.lvPacients.View = System.Windows.Forms.View.Details;
-            this.lvPacients.SelectedIndexChanged += new System.EventHandler(this.lvPacients_SelectedIndexChanged);
+            this.lvPatients.FullRowSelect = true;
+            this.lvPatients.GridLines = true;
+            this.lvPatients.HideSelection = false;
+            this.lvPatients.Location = new System.Drawing.Point(12, 49);
+            this.lvPatients.Name = "lvPatients";
+            this.lvPatients.Size = new System.Drawing.Size(471, 180);
+            this.lvPatients.TabIndex = 1;
+            this.lvPatients.UseCompatibleStateImageBehavior = false;
+            this.lvPatients.View = System.Windows.Forms.View.Details;
+            this.lvPatients.SelectedIndexChanged += new System.EventHandler(this.lvPatients_SelectedIndexChanged_1);
             // 
             // columnHeader1
             // 
@@ -334,7 +334,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSelectPacient);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.lvPacients);
+            this.Controls.Add(this.lvPatients);
             this.Name = "DoctorInterface";
             this.Text = "DoctorInterface";
             this.Load += new System.EventHandler(this.DoctorInterface_Load);
@@ -349,7 +349,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.ListView lvPacients;
+        private System.Windows.Forms.ListView lvPatients;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSelectPacient;
         private System.Windows.Forms.Label label2;

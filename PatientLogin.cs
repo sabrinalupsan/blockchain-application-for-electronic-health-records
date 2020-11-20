@@ -62,7 +62,7 @@ namespace BlockchainApp
 
         private void updateLastLogin(long patientID)
         {
-            var lastLoginQuery = "UPDATE Pacients" + " SET last_login = SYSDATETIME()" + "WHERE pacient_id =" + patientID + ";";
+            var lastLoginQuery = "UPDATE Patients" + " SET last_login = SYSDATETIME()" + "WHERE patient_id =" + patientID + ";";
             using (SqlConnection lastLoginConnection = new SqlConnection(builder.ConnectionString))
             {
                 lastLoginConnection.Open();
@@ -82,7 +82,7 @@ namespace BlockchainApp
             int newPIN = generatePIN();
             MessageBox.Show("Your new token PIN for the next 30 days is: " + newPIN.ToString());
             string hashedNewPIN = computeHash2(newPIN.ToString());
-            var updatePINquery = "UPDATE Pacients SET hashed_PIN = @hashPIN WHERE pacient_id = " + patientID + ";";
+            var updatePINquery = "UPDATE Patients SET hashed_PIN = @hashPIN WHERE patient_id = " + patientID + ";";
             using (SqlConnection updatePINconnection = new SqlConnection(builder.ConnectionString))
             {
                 updatePINconnection.Open();
@@ -151,7 +151,7 @@ namespace BlockchainApp
                     MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
                     SqlConnectionStringBuilder builder = mySqlBuilder.builder;
 
-                    var querry = "SELECT * from Pacients;";
+                    var querry = "SELECT * from Patients;";
 
                     using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                     {
@@ -161,7 +161,7 @@ namespace BlockchainApp
                         {
                             while (reader.Read())
                             {
-                                int DBID = (int)reader["pacient_id"];
+                                int DBID = (int)reader["patient_id"];
                                 long databaseID = DBID;
                                 string databasePassword = (string)reader["hashed_pass"];
 
@@ -170,8 +170,8 @@ namespace BlockchainApp
                                     {
                                         string hashedNewPIN = updatePIN(inputedPacientID);
 
-                                        string lastName = (string)reader["pacient_last_name"];
-                                        string firstName = (string)reader["pacient_first_name"];
+                                        string lastName = (string)reader["patient_last_name"];
+                                        string firstName = (string)reader["patient_first_name"];
                                         DateTime theDate = (DateTime)reader["last_login"];
                                         DateTime birthday = (DateTime)reader["birthday"];
 
@@ -193,8 +193,8 @@ namespace BlockchainApp
                                                 string databasePIN = (string)reader["hashed_PIN"];
                                                 if (hashedPIN.CompareTo(databasePIN) == 0)
                                                 {
-                                                    string lastName = (string)reader["pacient_last_name"];
-                                                    string firstName = (string)reader["pacient_first_name"];
+                                                    string lastName = (string)reader["patient_last_name"];
+                                                    string firstName = (string)reader["patient_first_name"];
                                                     DateTime theDate = (DateTime)reader["last_login"];
                                                     DateTime birthday = (DateTime)reader["birthday"];
 

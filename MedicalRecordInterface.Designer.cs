@@ -48,7 +48,7 @@
             // 
             this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
             this.btnDone.ForeColor = System.Drawing.Color.White;
-            this.btnDone.Location = new System.Drawing.Point(298, 373);
+            this.btnDone.Location = new System.Drawing.Point(295, 383);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(75, 23);
             this.btnDone.TabIndex = 0;
@@ -59,7 +59,7 @@
             // tbTitle
             // 
             this.tbTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbTitle.Location = new System.Drawing.Point(153, 133);
+            this.tbTitle.Location = new System.Drawing.Point(155, 141);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.ReadOnly = true;
             this.tbTitle.Size = new System.Drawing.Size(183, 22);
@@ -68,7 +68,7 @@
             // tbDescription
             // 
             this.tbDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbDescription.Location = new System.Drawing.Point(153, 177);
+            this.tbDescription.Location = new System.Drawing.Point(155, 178);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.ReadOnly = true;
@@ -79,7 +79,7 @@
             // tbFirstName
             // 
             this.tbFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbFirstName.Location = new System.Drawing.Point(155, 58);
+            this.tbFirstName.Location = new System.Drawing.Point(155, 67);
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.ReadOnly = true;
             this.tbFirstName.Size = new System.Drawing.Size(183, 22);
@@ -88,7 +88,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 94);
+            this.label1.Location = new System.Drawing.Point(21, 104);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 17);
             this.label1.TabIndex = 4;
@@ -97,7 +97,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 58);
+            this.label2.Location = new System.Drawing.Point(20, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(128, 17);
             this.label2.TabIndex = 5;
@@ -106,7 +106,7 @@
             // Patient
             // 
             this.Patient.AutoSize = true;
-            this.Patient.Location = new System.Drawing.Point(21, 24);
+            this.Patient.Location = new System.Drawing.Point(21, 30);
             this.Patient.Name = "Patient";
             this.Patient.Size = new System.Drawing.Size(127, 17);
             this.Patient.TabIndex = 6;
@@ -115,7 +115,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 133);
+            this.label4.Location = new System.Drawing.Point(21, 141);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 17);
             this.label4.TabIndex = 7;
@@ -124,7 +124,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(21, 161);
+            this.label5.Location = new System.Drawing.Point(21, 178);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 17);
             this.label5.TabIndex = 8;
@@ -133,7 +133,7 @@
             // tbLastName
             // 
             this.tbLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbLastName.Location = new System.Drawing.Point(155, 21);
+            this.tbLastName.Location = new System.Drawing.Point(155, 30);
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.ReadOnly = true;
             this.tbLastName.Size = new System.Drawing.Size(183, 22);
@@ -142,7 +142,7 @@
             // tbID
             // 
             this.tbID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbID.Location = new System.Drawing.Point(153, 94);
+            this.tbID.Location = new System.Drawing.Point(155, 104);
             this.tbID.Name = "tbID";
             this.tbID.ReadOnly = true;
             this.tbID.Size = new System.Drawing.Size(183, 22);
@@ -158,7 +158,7 @@
             // 
             this.btnPrintRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
             this.btnPrintRecord.ForeColor = System.Drawing.Color.White;
-            this.btnPrintRecord.Location = new System.Drawing.Point(180, 373);
+            this.btnPrintRecord.Location = new System.Drawing.Point(176, 383);
             this.btnPrintRecord.Name = "btnPrintRecord";
             this.btnPrintRecord.Size = new System.Drawing.Size(99, 23);
             this.btnPrintRecord.TabIndex = 11;
@@ -170,7 +170,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
-            this.ClientSize = new System.Drawing.Size(434, 399);
+            this.ClientSize = new System.Drawing.Size(434, 421);
             this.Controls.Add(this.btnPrintRecord);
             this.Controls.Add(this.tbID);
             this.Controls.Add(this.tbLastName);

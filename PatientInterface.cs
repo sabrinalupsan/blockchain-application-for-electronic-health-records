@@ -40,7 +40,7 @@ namespace BlockchainApp
 
         private void PatientInterface_Load(object sender, EventArgs e)
         {
-            var querry = "SELECT doctor_id, appointment_date, appointment_title, appointment_description FROM Block WHERE pacient_id = " + patient.patientID+";";
+            var querry = "SELECT doctor_id, appointment_date, appointment_title, appointment_description FROM Block WHERE patient_id = " + patient.patientID+";";
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
                 conn.Open();
@@ -126,32 +126,33 @@ namespace BlockchainApp
                 tbDescription.Text = selectedRecord.description;
                 tbName.Text = getDoctorsLastName(selectedRecord.doctorID);
                 tbTitle.Text = selectedRecord.title;
+
+                pageSetupDialog.PageSettings = printDocument.DefaultPageSettings;
+
+                if (pageSetupDialog.ShowDialog() == DialogResult.OK)
+                {
+                    printDocument.DefaultPageSettings = pageSetupDialog.PageSettings;
+                    try
+                    {
+                        printPreviewDialog.ShowDialog();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("An error occurred while trying to load the document for Print Preview. Make sure you currently have access to a printer. A printer must be connected and accessible for Print Preview to work.");
+                    }
+                    if (printPreviewDialog.DialogResult != DialogResult.Cancel)
+                        if (printDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            printDocument.Print();
+                            Logger logger = LogManager.GetCurrentClassLogger();
+                            logger.Debug("The patient with ID {0} just printed their record.", patient.patientID);
+                        }
+                }
             }
             else
                 MessageBox.Show("Please select a record!");
 
-            pageSetupDialog.PageSettings = printDocument.DefaultPageSettings;
-
-            if (pageSetupDialog.ShowDialog() == DialogResult.OK)
-            {
-                printDocument.DefaultPageSettings = pageSetupDialog.PageSettings;
-
-                try
-                {
-                    printPreviewDialog.ShowDialog();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("An error occurred while trying to load the document for Print Preview. Make sure you currently have access to a printer. A printer must be connected and accessible for Print Preview to work.");
-                }
-                if (printPreviewDialog.DialogResult != DialogResult.Cancel)
-                    if (printDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        printDocument.Print();
-                        Logger logger = LogManager.GetCurrentClassLogger();
-                        logger.Debug("The patient with ID {0} just printed their record.", patient.patientID);
-                    }
-            }
+            
         }
 
         private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)

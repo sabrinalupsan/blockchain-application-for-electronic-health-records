@@ -209,6 +209,12 @@ namespace BlockchainApp
             label6.Show();
         }
 
+        private string getIP()
+        {
+            string hostName = Dns.GetHostName();
+            return Dns.GetHostByName(hostName).AddressList[0].ToString();
+        }
+
         private void DoctorInterface_Load(object sender, EventArgs e)
         {
             string myIP = getIP();
@@ -569,12 +575,6 @@ namespace BlockchainApp
         private void tbNewPacientID_Validated(object sender, EventArgs e)
         {
             errorProvider.SetError(tbNewPacientID, null);
-        }
-
-        private string getIP()
-        {
-            string hostName = Dns.GetHostName();
-            return Dns.GetHostByName(hostName).AddressList[0].ToString();
         }
 
         private void btnDones_Click(object sender, EventArgs e)

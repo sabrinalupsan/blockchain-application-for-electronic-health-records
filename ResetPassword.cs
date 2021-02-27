@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace BlockchainApp
 {
-    public partial class ResetPassword : Form
+    public partial class ResetPassword : MaterialSkin.Controls.MaterialForm
     {
         private SqlConnectionStringBuilder builder;
 

@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace BlockchainApp
 {
-    public partial class MedicalRecordInterface : Form
+    public partial class MedicalRecordInterface : MaterialSkin.Controls.MaterialForm
     {
         MedicalRecord record;
         Patient patient;

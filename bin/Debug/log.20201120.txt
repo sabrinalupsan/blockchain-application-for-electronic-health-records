@@ -1,0 +1,11 @@
+2020-11-20 20:43:50.7867|DEBUG|BlockchainApp.PatientLogin|The patient with ID 8973496 logged in.
+2020-11-20 20:50:00.9260|DEBUG|BlockchainApp.PatientLogin|The patient with ID 5658230 logged in.
+2020-11-20 20:50:24.7394|DEBUG|BlockchainApp.PatientLogin|The patient with ID 6290438 logged in.
+2020-11-20 20:50:46.8012|DEBUG|BlockchainApp.PatientLogin|The patient with ID 8534791 logged in.
+2020-11-20 20:51:11.3902|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2020-11-20 20:52:16.4471|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2020-11-20 20:52:36.3412|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added patient 8973496 to his list.
+2020-11-20 20:54:51.1047|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2020-11-20 20:55:06.8484|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2020-11-20 22:02:33.8368|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2020-11-20 22:02:44.8949|WARN|BlockchainApp.DoctorInterface|The doctor with ID 4583018 and IP 26.235.128.98 is repeatedly trying to input the PIN code 1234.

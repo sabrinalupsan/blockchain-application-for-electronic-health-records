@@ -52,3 +52,10 @@ D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\NLog.
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\NLog.config
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.ResetPassword.resources
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.PatientLogin.resources
+D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\MetroFramework.Design.dll
+D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\MetroFramework.dll
+D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\MetroFramework.Fonts.dll
+D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\Microsoft.Data.Tools.Schema.Sql.dll
+D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\Microsoft.Data.Tools.Utilities.dll
+D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\Microsoft.SqlServer.Dac.dll
+D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.Confirm_Overwrite.resources

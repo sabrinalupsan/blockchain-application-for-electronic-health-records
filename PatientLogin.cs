@@ -11,11 +11,13 @@ using System.Security.Cryptography;
 using Microsoft.Data.SqlClient;
 using NLog;
 using System.Net;
+using MaterialSkin;
 
 namespace BlockchainApp
 {
-    public partial class PatientLogin : Form
+    public partial class PatientLogin : MaterialSkin.Controls.MaterialForm
     {
+        
         private int successfulAuthentication = 0;
         private SqlConnectionStringBuilder builder;
 
@@ -361,6 +363,11 @@ namespace BlockchainApp
         {
             string myIP = getIP();
             readLog(myIP);
+        }
+
+        private void PatientLogin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = false;
         }
     }
 }

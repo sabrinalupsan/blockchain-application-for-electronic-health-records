@@ -44,7 +44,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 60);
+            this.label1.Location = new System.Drawing.Point(47, 104);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 17);
             this.label1.TabIndex = 0;
@@ -52,10 +52,10 @@
             // 
             // btnOK
             // 
-            this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.ForeColor = System.Drawing.Color.White;
-            this.btnOK.Location = new System.Drawing.Point(34, 216);
+            this.btnOK.Location = new System.Drawing.Point(45, 235);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 3;
@@ -66,7 +66,7 @@
             // tbPatientID
             // 
             this.tbPatientID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPatientID.Location = new System.Drawing.Point(140, 57);
+            this.tbPatientID.Location = new System.Drawing.Point(147, 101);
             this.tbPatientID.Name = "tbPatientID";
             this.tbPatientID.Size = new System.Drawing.Size(100, 22);
             this.tbPatientID.TabIndex = 0;
@@ -76,7 +76,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(40, 106);
+            this.label2.Location = new System.Drawing.Point(47, 150);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 17);
             this.label2.TabIndex = 3;
@@ -85,7 +85,7 @@
             // tbPassword
             // 
             this.tbPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPassword.Location = new System.Drawing.Point(140, 103);
+            this.tbPassword.Location = new System.Drawing.Point(147, 147);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 22);
@@ -95,10 +95,10 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(182, 216);
+            this.btnCancel.Location = new System.Drawing.Point(156, 235);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 4;
@@ -109,7 +109,7 @@
             // tbPIN
             // 
             this.tbPIN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPIN.Location = new System.Drawing.Point(140, 151);
+            this.tbPIN.Location = new System.Drawing.Point(147, 195);
             this.tbPIN.Name = "tbPIN";
             this.tbPIN.PasswordChar = '*';
             this.tbPIN.Size = new System.Drawing.Size(100, 22);
@@ -120,7 +120,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(40, 151);
+            this.label3.Location = new System.Drawing.Point(47, 195);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 17);
             this.label3.TabIndex = 9;
@@ -135,7 +135,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(297, 270);
             this.Controls.Add(this.tbPIN);
             this.Controls.Add(this.label3);
@@ -146,7 +146,8 @@
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.label1);
             this.Name = "PatientLogin";
-            this.Text = "PatientLogIn";
+            this.Text = "Patient login";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PatientLogin_FormClosing);
             this.Load += new System.EventHandler(this.PatientLogIn_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

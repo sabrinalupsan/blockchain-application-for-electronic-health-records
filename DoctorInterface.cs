@@ -14,7 +14,7 @@ using System.Net;
 
 namespace BlockchainApp
 {
-    public partial class DoctorInterface : Form
+    public partial class DoctorInterface : MaterialSkin.Controls.MaterialForm
     {
         Doctor doctor;
         int successfulAuthentication = 0;
@@ -72,7 +72,7 @@ namespace BlockchainApp
                     command.Parameters.AddWithValue("@date", now);
                     command.Parameters.AddWithValue("@dateNow", now);
 
-                    string toHash = "-1" + "-1" + now + "no description" + now + "0" + "0";
+                    string toHash = "-1" + "-1" + "1" + "no description" + "1" + "0" + "0";
                     command.Parameters.AddWithValue("@hashOfCurrBlock", computeHash2(toHash));
 
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -446,6 +446,10 @@ namespace BlockchainApp
                             hash = (string)reader["hash_of_curr_block"];
                 }
             }
+            if(hash==null)
+            {
+                MessageBox.Show("An error occured. Please refer to the administrator."); //YOU NEED TO PUT A DROP SEQUENCE!
+            }
             return hash;
         }
 
@@ -518,7 +522,7 @@ namespace BlockchainApp
                             string toHash = patientID + doctor.docID + date + title + details + now + index + theHashOfPrevBlock;
                             int nounce = 0;
                             Hash hash = new Hash(nounce, toHash);
-                            proofOfWork(hash, 2);
+                            proofOfWork(hash, 1);
                             command.Parameters.AddWithValue("@nounce", hash.nounce);
                             command.Parameters.AddWithValue("@hashOfCurrBlock", hash.computeHash());
 
@@ -536,6 +540,11 @@ namespace BlockchainApp
                 catch (ArgumentOutOfRangeException)
                 {
                     MessageBox.Show("Please select a patient!");
+                }
+                catch(Microsoft.Data.SqlClient.SqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    //fix the error => drop sequence and restart it from where you left (SELECT LAST BLOCK and get its index
                 }
             }
         }

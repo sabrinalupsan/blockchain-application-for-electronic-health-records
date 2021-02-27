@@ -42,10 +42,10 @@
             // 
             // btnOK
             // 
-            this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.ForeColor = System.Drawing.Color.White;
-            this.btnOK.Location = new System.Drawing.Point(63, 217);
+            this.btnOK.Location = new System.Drawing.Point(85, 279);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 4;
@@ -56,7 +56,7 @@
             // ID
             // 
             this.ID.AutoSize = true;
-            this.ID.Location = new System.Drawing.Point(33, 41);
+            this.ID.Location = new System.Drawing.Point(55, 103);
             this.ID.Name = "ID";
             this.ID.Size = new System.Drawing.Size(21, 17);
             this.ID.TabIndex = 1;
@@ -65,7 +65,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 85);
+            this.label2.Location = new System.Drawing.Point(55, 147);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 17);
             this.label2.TabIndex = 2;
@@ -74,7 +74,7 @@
             // tbID
             // 
             this.tbID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbID.Location = new System.Drawing.Point(182, 38);
+            this.tbID.Location = new System.Drawing.Point(204, 100);
             this.tbID.Name = "tbID";
             this.tbID.Size = new System.Drawing.Size(100, 22);
             this.tbID.TabIndex = 0;
@@ -82,7 +82,7 @@
             // tbPIN
             // 
             this.tbPIN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPIN.Location = new System.Drawing.Point(182, 80);
+            this.tbPIN.Location = new System.Drawing.Point(204, 142);
             this.tbPIN.Name = "tbPIN";
             this.tbPIN.PasswordChar = '*';
             this.tbPIN.Size = new System.Drawing.Size(100, 22);
@@ -90,10 +90,10 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(170, 217);
+            this.btnCancel.Location = new System.Drawing.Point(192, 279);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 5;
@@ -104,7 +104,7 @@
             // tbRePassword
             // 
             this.tbRePassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbRePassword.Location = new System.Drawing.Point(182, 161);
+            this.tbRePassword.Location = new System.Drawing.Point(204, 223);
             this.tbRePassword.Name = "tbRePassword";
             this.tbRePassword.PasswordChar = '*';
             this.tbRePassword.Size = new System.Drawing.Size(100, 22);
@@ -113,7 +113,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(33, 161);
+            this.label6.Location = new System.Drawing.Point(55, 223);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(121, 17);
             this.label6.TabIndex = 17;
@@ -122,7 +122,7 @@
             // tbPassword
             // 
             this.tbPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPassword.Location = new System.Drawing.Point(182, 119);
+            this.tbPassword.Location = new System.Drawing.Point(204, 181);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 22);
@@ -131,7 +131,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(33, 122);
+            this.label5.Location = new System.Drawing.Point(55, 184);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 17);
             this.label5.TabIndex = 15;
@@ -141,8 +141,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
-            this.ClientSize = new System.Drawing.Size(305, 256);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(356, 330);
             this.Controls.Add(this.tbRePassword);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.tbPassword);

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace BlockchainApp
 {
-    public partial class AdminLogin : Form
+    public partial class AdminLogin : MaterialSkin.Controls.MaterialForm
     {
         int successfulAuthentication = 0;
 

@@ -10,12 +10,21 @@ using System.Windows.Forms;
 using System.Security.Cryptography;
 using Microsoft.Data.Sql;
 using Microsoft.Data.SqlClient;
+using MaterialSkin;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+using System.Xml.Serialization;
+using System.Security.AccessControl;
+using NLog;
 
 namespace BlockchainApp
 {
-    public partial class AdminInterface : Form
+    public partial class AdminInterface : MaterialSkin.Controls.MaterialForm
     {
         private SqlConnectionStringBuilder builder;
+        private List<Block> blocks = new List<Block>();
+        private string backupFileName = "backup.bin";
+        Aes aes;
 
         public AdminInterface()
         {
@@ -23,6 +32,10 @@ namespace BlockchainApp
             Select();
             MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
             builder = mySqlBuilder.builder;
+            aes = Aes.Create();
+            byte[] key = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16 };
+            aes.Key = key;
+            updateLastBackup();
         }
 
         private byte[] computeHash(string toHash)
@@ -150,100 +163,144 @@ namespace BlockchainApp
 
         private void clickField()
         {
-            patientPB.Value = 0;
-            docPB.Value = 0;
+            progressBar.Value = 0;
+            progressLabel.Text = "";
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if(validateDoctor()==true)
-            { 
-                long docID = long.Parse(tbNewDocID.Text.Trim());
-                string lastName = tbLastName.Text.Trim().ToString();
-                string firstName = tbLastName.Text.Trim().ToString();
-                string specialization = tbSpecialisation.Text.Trim().ToString();
-                string password = tbPassword.Text.Trim().ToString();
-                string saltedPassword = saltPassword(password, docID);
-                var hasher = SHA256.Create();
-                byte[] pass = System.Text.Encoding.UTF8.GetBytes(saltedPassword);
-                byte[] hashedPassword = hasher.ComputeHash(pass);
-
-                using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+            try
+            {
+                if (validateDoctor() == true)
                 {
+                    long docID = long.Parse(tbNewDocID.Text.Trim());
+                    string lastName = tbLastName.Text.Trim().ToString();
+                    string firstName = tbLastName.Text.Trim().ToString();
+                    string specialization = tbSpecialisation.Text.Trim().ToString();
+                    string password = tbPassword.Text.Trim().ToString();
+                    string saltedPassword = saltPassword(password, docID);
+                    var hasher = SHA256.Create();
+                    byte[] pass = System.Text.Encoding.UTF8.GetBytes(saltedPassword);
+                    byte[] hashedPassword = hasher.ComputeHash(pass);
 
-                    var querryString =
-                        "INSERT INTO Doctors (doctor_id, doctor_last_name, doctor_first_name, specialization, hashed_pass, last_login)" +
-                        "VALUES (@docID, @lastName, @firstName, @specialization, @hashedPass, @dateNow);";
-                    using (SqlCommand command = new SqlCommand(querryString, conn))
+                    using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                     {
-                        conn.Open();
-                        command.Parameters.AddWithValue("@docID", tbNewDocID.Text.Trim().ToString());
-                        command.Parameters.AddWithValue("@lastName", tbLastName.Text.Trim().ToString());
-                        command.Parameters.AddWithValue("@firstName", tbFirstName.Text.Trim().ToString());
-                        command.Parameters.AddWithValue("@specialization", tbSpecialisation.Text.Trim().ToString());
-                        command.Parameters.AddWithValue("@hashedPass", Encoding.Default.GetString(hashedPassword));
-                        command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
 
-                        using (SqlDataReader reader = command.ExecuteReader())
-                            while (reader.Read())
-                                Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                        var querryString =
+                            "INSERT INTO Doctors (doctor_id, doctor_last_name, doctor_first_name, specialization, hashed_pass, last_login)" +
+                            "VALUES (@docID, @lastName, @firstName, @specialization, @hashedPass, @dateNow);";
+                        using (SqlCommand command = new SqlCommand(querryString, conn))
+                        {
+                            conn.Open();
+                            command.Parameters.AddWithValue("@docID", tbNewDocID.Text.Trim().ToString());
+                            command.Parameters.AddWithValue("@lastName", tbLastName.Text.Trim().ToString());
+                            command.Parameters.AddWithValue("@firstName", tbFirstName.Text.Trim().ToString());
+                            command.Parameters.AddWithValue("@specialization", tbSpecialisation.Text.Trim().ToString());
+                            command.Parameters.AddWithValue("@hashedPass", Encoding.Default.GetString(hashedPassword));
+                            command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
+
+                            using (SqlDataReader reader = command.ExecuteReader())
+                                while (reader.Read())
+                                    Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                        }
                     }
+                    progressBar.Value = 100;
+                    progressLabel.Text = "Doctor added!";
+                    clearDoctorControls();
                 }
-                docPB.Value = 100;
-                clearDoctorControls(); 
+            }
+            catch(Exception ex)
+            {
+                string s = "Violation of PRIMARY KEY constraint";
+                if (ex.Message.Substring(0, s.Length).CompareTo(s) == 0)
+                {
+                    MessageBox.Show("Database error! This doctor is already present in the database.");
+                }
+            }
+        }
+
+        private void GenesisBlock()
+        {
+            using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+            {
+                var querryString =
+                    "INSERT INTO Block (patient_id, doctor_id, appointment_date, appointment_description, appointment_title, block_timestamp, block_index, " +
+                    "hash_of_prev_block, hash_of_curr_block)" +
+                    "VALUES (-1, -1, @date, 'no description', 'no title', @dateNow, 0, 0, @hashOfCurrBlock);";
+                using (SqlCommand command = new SqlCommand(querryString, conn))
+                {
+                    conn.Open();
+                    string now = DateTime.Now.ToString("yyyy-MM-dd");
+                    command.Parameters.AddWithValue("@date", now);
+                    command.Parameters.AddWithValue("@dateNow", now);
+
+                    string toHash = "-1" + "-1" + "1" + "no description" + "1" + "0" + "0";
+                    command.Parameters.AddWithValue("@hashOfCurrBlock", computeHash2(toHash));
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                        while (reader.Read())
+                            Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                }
             }
         }
 
         private void btnOkPacient_Click(object sender, EventArgs e)
         {
-            if (validatePatient()==true)
+            try
             {
-                long patientID = long.Parse(tbPatientID.Text.Trim());
-                string lastName = tbPatientLastName.Text.Trim().ToString();
-                string firstName = tbPatientFirstName.Text.Trim().ToString();
-                string password = tbPatientPassword.Text.Trim().ToString();
-                string saltedPassword = saltPassword(password, patientID);
-                string hashedPass = computeHash2(saltedPassword);
-                DateTime birthday = dtpBirthday.Value;
-
-                using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+                if (validatePatient() == true)
                 {
+                    long patientID = long.Parse(tbPatientID.Text.Trim());
+                    string lastName = tbPatientLastName.Text.Trim().ToString();
+                    string firstName = tbPatientFirstName.Text.Trim().ToString();
+                    string password = tbPatientPassword.Text.Trim().ToString();
+                    string saltedPassword = saltPassword(password, patientID);
+                    string hashedPass = computeHash2(saltedPassword);
+                    DateTime birthday = dtpBirthday.Value;
 
-                    var querryString =
-                        "INSERT INTO Patients (patient_id, patient_last_name, patient_first_name, hashed_pass, last_login, birthday)" +
-                        "VALUES (@pacID, @lastName, @firstName, @hashedPass, @dateNow, @birthday);";
-                    using (SqlCommand command = new SqlCommand(querryString, conn))
+                    using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                     {
-                        conn.Open();
-                        command.Parameters.AddWithValue("@pacID", tbPatientID.Text.Trim().ToString());
-                        command.Parameters.AddWithValue("@lastName", tbPatientLastName.Text.Trim().ToString());
-                        command.Parameters.AddWithValue("@firstName", tbPatientFirstName.Text.Trim().ToString());
-                        command.Parameters.AddWithValue("@hashedPass", hashedPass);
-                        command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
-                        command.Parameters.AddWithValue("@birthday", birthday.ToString("yyyy-MM-dd"));
 
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        var querryString =
+                            "INSERT INTO Patients (patient_id, patient_last_name, patient_first_name, hashed_pass, last_login, birthday)" +
+                            "VALUES (@pacID, @lastName, @firstName, @hashedPass, @dateNow, @birthday);";
+                        using (SqlCommand command = new SqlCommand(querryString, conn))
                         {
-                            while (reader.Read())
+                            conn.Open();
+                            command.Parameters.AddWithValue("@pacID", tbPatientID.Text.Trim().ToString());
+                            command.Parameters.AddWithValue("@lastName", tbPatientLastName.Text.Trim().ToString());
+                            command.Parameters.AddWithValue("@firstName", tbPatientFirstName.Text.Trim().ToString());
+                            command.Parameters.AddWithValue("@hashedPass", hashedPass);
+                            command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
+                            command.Parameters.AddWithValue("@birthday", birthday.ToString("yyyy-MM-dd"));
+
+                            using (SqlDataReader reader = command.ExecuteReader())
                             {
-                                Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                                while (reader.Read())
+                                {
+                                    Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                                }
                             }
                         }
                     }
+                    progressBar.Value = 100;
+                    progressLabel.Text = "Patient added!";
+                    clearPatientControls();
                 }
-                patientPB.Value = 100;
-                clearPatientControls();
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Close();
+            catch(Exception ex)
+            {
+                string s = "Violation of PRIMARY KEY constraint";
+                if (ex.Message.Substring(0, s.Length).CompareTo(s)==0)
+                {
+                    MessageBox.Show("Database error! This patient is already present in the database.");
+                }
+            }
         }
 
         private void btnCancelPatient_Click(object sender, EventArgs e)
         {
-            Close();
+            clearPatientControls();
         }
 
         private void controlClicked(object sender, EventArgs e)
@@ -253,7 +310,7 @@ namespace BlockchainApp
 
         private void btnCancelDoctor_Click(object sender, EventArgs e)
         {
-            Close();
+            clearDoctorControls();
         }
 
         //private void tbNewDocID_Validated(object sender, EventArgs e)
@@ -416,5 +473,227 @@ namespace BlockchainApp
         //    errorProvider2.SetError(dtpBirthday, null);
         //}
 
+        private bool checkBlockchain()
+        {
+            var selectEverythingQuery = "SELECT * FROM Block ORDER BY block_index";
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                var command = new SqlCommand(selectEverythingQuery, connection);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    string genesisContent = "-1" + "-1" + "1" + "no description" + "1" + "0" + "0";
+                    string hashedgenesisContent = computeHash2(genesisContent);
+
+                    reader.Read();
+                    string previousHash = (string)reader["hash_of_curr_block"];
+                    if(previousHash.CompareTo(hashedgenesisContent) !=0)
+                    {
+                        return false;
+                    }
+                    DateTime genesisDate = (DateTime)reader["appointment_date"];
+                    DateTime genesisTimestamp = (DateTime)reader["block_timestamp"];
+                    string current;
+                    string previous;
+                    while (reader.Read())
+                    {
+                        current = (string)reader["hash_of_curr_block"];
+                        previous = (string)reader["hash_of_prev_block"];
+
+                        long patientID = (int)reader["patient_id"];
+                        long doctorID = (int)reader["doctor_id"];
+                        string title = (string)reader["appointment_title"];
+                        string description = (string)reader["appointment_description"];
+                        DateTime date = (DateTime)reader["appointment_date"];
+                        DateTime timestamp = (DateTime)reader["block_timestamp"];
+                        int nounce = (int)reader["nounce"];
+                        int blockIndex = (int)reader["block_index"];
+
+                        string toHash = patientID + doctorID + date.ToString("yyyy-MM-dd") + title + description + timestamp.ToString("yyyy-MM-dd") + blockIndex + previous;
+                        Hash hash = new Hash(nounce, toHash);
+                        if (current.CompareTo(hash.computeHash()) != 0)
+                            return false;
+
+                        if (previousHash.CompareTo(previous) != 0)
+                            return false;
+
+                        Block block = new Block(patientID, doctorID, title, description, date, timestamp, nounce, blockIndex, previous, current);
+                        blocks.Add(block);
+
+                        previousHash = current;
+
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        private void AdminInterface_Click(object sender, EventArgs e)
+        {
+            clickField();
+        }
+
+        public void updateLastBackup()
+        {
+            DateTime modification = File.GetLastWriteTime(backupFileName);
+            tbLastBackup.Text = modification.ToString();
+        }
+
+        private void btnBackup_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (checkBlockchain() == true)
+                {
+                    //generate IV and write to a new file
+                    aes.GenerateIV();
+                    BinaryFormatter bf = new BinaryFormatter();
+                    using (FileStream s = File.Create("IV.bin"))
+                        bf.Serialize(s, aes.IV);
+
+                    //write to file the whole list
+                    using (FileStream fs = new FileStream(backupFileName, FileMode.Create))
+                    {
+                        using (CryptoStream cs = new CryptoStream(fs, aes.CreateEncryptor(), CryptoStreamMode.Write))
+                        { 
+                            new BinaryFormatter().Serialize(cs, blocks);
+                        }
+                    }
+
+                    //BinaryFormatter formatter = new BinaryFormatter();
+                    //using (FileStream s = File.Create("backup.bin"))
+                    //{
+                    //    using (CryptoStream cs = new CryptoStream(s, aes.CreateEncryptor(key, iv), CryptoStreamMode.Write))
+                    //        formatter.Serialize(cs, blocks);
+                    //}
+                    progressBar.Value = 100;
+                    progressLabel.Text = "Created backup.";
+                    updateLastBackup();
+                }
+                else
+                    MessageBox.Show("CRITICAL ERROR. BLOCKCHAIN HAS BEEN COMPROMISED.");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error writing to file"+" "+ex.Message);
+            }
+        }
+
+        private void proofOfWork(Hash hash, int difficulty)
+        {
+            var leadingZeros = new string('0', difficulty);
+
+            while (hash.theHash.Substring(0, difficulty) != leadingZeros)
+            {
+                hash.nounce++;
+                hash.theHash = hash.computeHash();
+            }
+        }
+
+        private void deleteBlockTable(int n)
+        {
+            using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+            {
+                var deteleQuery =
+                    "DELETE FROM Block;";
+                using (SqlCommand command = new SqlCommand(deteleQuery, conn))
+                {
+                    conn.Open();
+                    command.ExecuteNonQuery();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                        while (reader.Read())
+                            Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                }
+            }
+
+            using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+            {
+                var resetQuery = "ALTER SEQUENCE block_indexes RESTART WITH " + n + ";";
+
+                using (SqlCommand command = new SqlCommand(resetQuery, conn))
+                {
+                    conn.Open();
+                    command.ExecuteNonQuery();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                        while (reader.Read())
+                            Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                }
+            }
+        }
+
+        private void btnOverwrite_Click(object sender, EventArgs e)
+        {
+            clickField();
+            Confirm_Overwrite confirm_Overwrite = new Confirm_Overwrite();
+            confirm_Overwrite.ShowDialog();
+            if(confirm_Overwrite.DialogResult==DialogResult.OK)
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                using (FileStream s = File.OpenRead("IV.bin"))
+                {
+                    aes.IV = (byte[])formatter.Deserialize(s);
+                }
+                using (FileStream fs = new FileStream(backupFileName, FileMode.Open))
+                {
+                    using (CryptoStream cs = new CryptoStream(fs, aes.CreateDecryptor(), CryptoStreamMode.Read))
+                    {
+                        List<Block> deserialized = (List<Block>)new BinaryFormatter().Deserialize(cs);
+
+                        deleteBlockTable(deserialized.Count+1);
+
+                        GenesisBlock();
+
+                        using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+                        {
+                            var querryString =
+                                "INSERT INTO Block (patient_id, doctor_id, appointment_date, appointment_title, appointment_description, nounce, block_timestamp, block_index, " +
+                                "hash_of_prev_block, hash_of_curr_block)" +
+                                "VALUES (@pacID, @docID, @date, @title, @description, @nounce, @dateNow, @index, @hashOfPrevBlock, @hashOfCurrBlock);";
+                            using (SqlCommand command = new SqlCommand(querryString, conn))
+                            {
+                                conn.Open();
+                                for (int i = 0; i < deserialized.Count; i++)
+                                {
+                                    Block currentBlock = deserialized[i];
+                                    command.Parameters.Clear();
+                                    command.Parameters.AddWithValue("@pacID", currentBlock.patientID);
+                                    command.Parameters.AddWithValue("@docID", currentBlock.doctorID);
+                                    command.Parameters.AddWithValue("@date", currentBlock.date);
+                                    command.Parameters.AddWithValue("@title", currentBlock.title);
+                                    command.Parameters.AddWithValue("@index", currentBlock.index);
+                                    command.Parameters.AddWithValue("@description", currentBlock.description);
+                                    command.Parameters.AddWithValue("@dateNow", currentBlock.timestamp);
+                                    command.Parameters.AddWithValue("@hashOfPrevBlock", currentBlock.hashOfPrevBlock);
+                                    command.Parameters.AddWithValue("@nounce", currentBlock.nounce);
+                                    command.Parameters.AddWithValue("@hashOfCurrBlock", currentBlock.hashOfCurrBlock);
+
+                                    using (SqlDataReader reader = command.ExecuteReader())
+                                        while (reader.Read())
+                                            Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                                }
+                            }
+                        }
+                        progressBar.Value = 100;
+                        progressLabel.Text = "Database overwritten.";
+                        Logger logger = LogManager.GetCurrentClassLogger();
+                        logger.Warn("Database has been overwritten");
+                    }
+
+                }
+            }
+        }
+
+        private void tabControl1_Click(object sender, EventArgs e)
+        {
+            clickField();
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+            clickField();
+        }
     }
 }

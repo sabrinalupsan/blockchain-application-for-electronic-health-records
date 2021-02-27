@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialSkin;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,16 +11,15 @@ using System.Windows.Forms;
 
 namespace BlockchainApp
 {
-    public partial class ProfileSelect : Form
+    public partial class ProfileSelect : MaterialSkin.Controls.MaterialForm
     {
         public ProfileSelect()
         {
+            MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Indigo300, Primary.Indigo400, Primary.Indigo500, Accent.Pink200, TextShade.WHITE);
             InitializeComponent();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            Close();
         }
 
         private void btnDoc_Click(object sender, EventArgs e)

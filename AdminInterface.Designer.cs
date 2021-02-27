@@ -63,12 +63,26 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.docPB = new System.Windows.Forms.ProgressBar();
-            this.patientPB = new System.Windows.Forms.ProgressBar();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.progressLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnOverwrite = new System.Windows.Forms.Button();
+            this.tbLastBackup = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.btnBackup = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
+            this.statusStrip1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -82,7 +96,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.ForeColor = System.Drawing.Color.White;
             this.btnOK.Location = new System.Drawing.Point(43, 394);
@@ -104,7 +118,7 @@
             // 
             // tbLastName
             // 
-            this.tbLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.tbLastName.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.tbLastName.Location = new System.Drawing.Point(178, 139);
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.Size = new System.Drawing.Size(100, 22);
@@ -158,7 +172,7 @@
             // 
             // btnCancelDoctor
             // 
-            this.btnCancelDoctor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnCancelDoctor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnCancelDoctor.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelDoctor.ForeColor = System.Drawing.Color.White;
             this.btnCancelDoctor.Location = new System.Drawing.Point(169, 394);
@@ -321,7 +335,7 @@
             // 
             // btnOkPatient
             // 
-            this.btnOkPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnOkPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnOkPatient.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOkPatient.ForeColor = System.Drawing.Color.White;
             this.btnOkPatient.Location = new System.Drawing.Point(53, 394);
@@ -334,7 +348,7 @@
             // 
             // btnCancelPatient
             // 
-            this.btnCancelPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnCancelPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnCancelPatient.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelPatient.ForeColor = System.Drawing.Color.White;
             this.btnCancelPatient.Location = new System.Drawing.Point(199, 394);
@@ -347,7 +361,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(134)))), ((int)(((byte)(190)))));
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.dtpBirthday);
             this.panel1.Controls.Add(this.label8);
@@ -363,9 +377,9 @@
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.tbPatientLastName);
             this.panel1.Controls.Add(this.tbPatientID);
-            this.panel1.Location = new System.Drawing.Point(358, 12);
+            this.panel1.Location = new System.Drawing.Point(28, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(313, 441);
+            this.panel1.Size = new System.Drawing.Size(320, 435);
             this.panel1.TabIndex = 29;
             // 
             // label14
@@ -388,7 +402,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(134)))), ((int)(((byte)(190)))));
+            this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.btnCancelDoctor);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.label7);
@@ -404,9 +418,9 @@
             this.panel2.Controls.Add(this.tbFirstName);
             this.panel2.Controls.Add(this.tbSpecialisation);
             this.panel2.Controls.Add(this.label4);
-            this.panel2.Location = new System.Drawing.Point(12, 12);
+            this.panel2.Location = new System.Drawing.Point(20, 20);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(313, 441);
+            this.panel2.Size = new System.Drawing.Size(337, 449);
             this.panel2.TabIndex = 30;
             // 
             // errorProvider
@@ -417,19 +431,118 @@
             // 
             this.errorProvider2.ContainerControl = this;
             // 
-            // docPB
+            // statusStrip1
             // 
-            this.docPB.Location = new System.Drawing.Point(12, 460);
-            this.docPB.Name = "docPB";
-            this.docPB.Size = new System.Drawing.Size(313, 23);
-            this.docPB.TabIndex = 31;
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.progressBar,
+            this.progressLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 619);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(408, 25);
+            this.statusStrip1.TabIndex = 33;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // patientPB
+            // progressBar
             // 
-            this.patientPB.Location = new System.Drawing.Point(358, 459);
-            this.patientPB.Name = "patientPB";
-            this.patientPB.Size = new System.Drawing.Size(314, 23);
-            this.patientPB.TabIndex = 32;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(100, 19);
+            // 
+            // progressLabel
+            // 
+            this.progressLabel.BackColor = System.Drawing.Color.White;
+            this.progressLabel.Name = "progressLabel";
+            this.progressLabel.Size = new System.Drawing.Size(0, 20);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(12, 88);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(384, 513);
+            this.tabControl1.TabIndex = 34;
+            this.tabControl1.Click += new System.EventHandler(this.tabControl1_Click);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.panel2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(376, 484);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Add doctor";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.panel1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(376, 484);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Add patient";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.btnOverwrite);
+            this.tabPage3.Controls.Add(this.tbLastBackup);
+            this.tabPage3.Controls.Add(this.label15);
+            this.tabPage3.Controls.Add(this.btnBackup);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(376, 484);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Backup";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // btnOverwrite
+            // 
+            this.btnOverwrite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
+            this.btnOverwrite.ForeColor = System.Drawing.Color.White;
+            this.btnOverwrite.Location = new System.Drawing.Point(22, 158);
+            this.btnOverwrite.Name = "btnOverwrite";
+            this.btnOverwrite.Size = new System.Drawing.Size(86, 24);
+            this.btnOverwrite.TabIndex = 3;
+            this.btnOverwrite.Text = "Overwrite";
+            this.btnOverwrite.UseVisualStyleBackColor = false;
+            this.btnOverwrite.Click += new System.EventHandler(this.btnOverwrite_Click);
+            // 
+            // tbLastBackup
+            // 
+            this.tbLastBackup.Enabled = false;
+            this.tbLastBackup.Location = new System.Drawing.Point(124, 40);
+            this.tbLastBackup.Name = "tbLastBackup";
+            this.tbLastBackup.Size = new System.Drawing.Size(143, 22);
+            this.tbLastBackup.TabIndex = 2;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(23, 40);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(85, 17);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "Last backup";
+            // 
+            // btnBackup
+            // 
+            this.btnBackup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
+            this.btnBackup.ForeColor = System.Drawing.Color.White;
+            this.btnBackup.Location = new System.Drawing.Point(22, 113);
+            this.btnBackup.Name = "btnBackup";
+            this.btnBackup.Size = new System.Drawing.Size(86, 24);
+            this.btnBackup.TabIndex = 0;
+            this.btnBackup.Text = "Backup";
+            this.btnBackup.UseVisualStyleBackColor = false;
+            this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
             // 
             // AdminInterface
             // 
@@ -437,20 +550,27 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
-            this.ClientSize = new System.Drawing.Size(684, 486);
-            this.Controls.Add(this.patientPB);
-            this.Controls.Add(this.docPB);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(408, 644);
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.statusStrip1);
             this.Name = "AdminInterface";
-            this.Text = "AdminInterface";
+            this.Text = "Admin Page";
+            this.Click += new System.EventHandler(this.AdminInterface_Click);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -489,7 +609,16 @@
         private System.Windows.Forms.DateTimePicker dtpBirthday;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.ErrorProvider errorProvider2;
-        private System.Windows.Forms.ProgressBar patientPB;
-        private System.Windows.Forms.ProgressBar docPB;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripProgressBar progressBar;
+        private System.Windows.Forms.ToolStripStatusLabel progressLabel;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TextBox tbLastBackup;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button btnBackup;
+        private System.Windows.Forms.Button btnOverwrite;
     }
 }

@@ -32,12 +32,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.OKbtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbPassword
             // 
             this.tbPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPassword.Location = new System.Drawing.Point(155, 40);
+            this.tbPassword.Location = new System.Drawing.Point(197, 172);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 22);
@@ -46,7 +47,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 44);
+            this.label1.Location = new System.Drawing.Point(76, 176);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 17);
             this.label1.TabIndex = 2;
@@ -54,10 +55,10 @@
             // 
             // OKbtn
             // 
-            this.OKbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.OKbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.OKbtn.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.OKbtn.ForeColor = System.Drawing.Color.White;
-            this.OKbtn.Location = new System.Drawing.Point(60, 101);
+            this.OKbtn.Location = new System.Drawing.Point(102, 233);
             this.OKbtn.Name = "OKbtn";
             this.OKbtn.Size = new System.Drawing.Size(75, 28);
             this.OKbtn.TabIndex = 1;
@@ -67,10 +68,10 @@
             // 
             // CancelBtn
             // 
-            this.CancelBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.CancelBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.CancelBtn.ForeColor = System.Drawing.Color.White;
-            this.CancelBtn.Location = new System.Drawing.Point(155, 101);
+            this.CancelBtn.Location = new System.Drawing.Point(197, 233);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 28);
             this.CancelBtn.TabIndex = 2;
@@ -78,18 +79,30 @@
             this.CancelBtn.UseVisualStyleBackColor = false;
             this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(33, 117);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(304, 24);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Unauthorized access is prohoibited";
+            // 
             // AdminLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
-            this.ClientSize = new System.Drawing.Size(310, 173);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(380, 308);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.OKbtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbPassword);
             this.Name = "AdminLogin";
-            this.Text = "AdminLogin";
+            this.Text = "Admin Login";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -101,5 +114,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button OKbtn;
         private System.Windows.Forms.Button CancelBtn;
+        private System.Windows.Forms.Label label2;
     }
 }

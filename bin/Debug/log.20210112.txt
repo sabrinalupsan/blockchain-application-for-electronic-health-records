@@ -1,0 +1,5 @@
+2021-01-12 00:11:23.2949|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-01-12 00:12:50.7444|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-01-12 00:36:27.9217|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-01-12 00:38:09.2690|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-01-12 00:41:25.6634|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.

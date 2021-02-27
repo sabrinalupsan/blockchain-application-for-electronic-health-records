@@ -30,10 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.lvPatients = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.PatientID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PacientLastName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label1 = new System.Windows.Forms.Label();
+            this.PatientFirstName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnSelectPacient = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnDone = new System.Windows.Forms.Button();
@@ -64,13 +63,13 @@
             // 
             this.lvPatients.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.lvPatients.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
+            this.PatientID,
             this.PacientLastName,
-            this.columnHeader2});
+            this.PatientFirstName});
             this.lvPatients.FullRowSelect = true;
             this.lvPatients.GridLines = true;
             this.lvPatients.HideSelection = false;
-            this.lvPatients.Location = new System.Drawing.Point(12, 49);
+            this.lvPatients.Location = new System.Drawing.Point(12, 89);
             this.lvPatients.Name = "lvPatients";
             this.lvPatients.Size = new System.Drawing.Size(471, 180);
             this.lvPatients.TabIndex = 1;
@@ -78,35 +77,26 @@
             this.lvPatients.View = System.Windows.Forms.View.Details;
             this.lvPatients.SelectedIndexChanged += new System.EventHandler(this.lvPatients_SelectedIndexChanged_1);
             // 
-            // columnHeader1
+            // PatientID
             // 
-            this.columnHeader1.Text = "Patient ID";
-            this.columnHeader1.Width = 90;
+            this.PatientID.Text = "Patient ID";
+            this.PatientID.Width = 90;
             // 
             // PacientLastName
             // 
             this.PacientLastName.Text = "Patient last name";
             this.PacientLastName.Width = 130;
             // 
-            // columnHeader2
+            // PatientFirstName
             // 
-            this.columnHeader2.Text = "Patient first name";
-            this.columnHeader2.Width = 164;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Patients list";
+            this.PatientFirstName.Text = "Patient first name";
+            this.PatientFirstName.Width = 164;
             // 
             // btnSelectPacient
             // 
-            this.btnSelectPacient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnSelectPacient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnSelectPacient.ForeColor = System.Drawing.Color.White;
-            this.btnSelectPacient.Location = new System.Drawing.Point(12, 241);
+            this.btnSelectPacient.Location = new System.Drawing.Point(595, 298);
             this.btnSelectPacient.Name = "btnSelectPacient";
             this.btnSelectPacient.Size = new System.Drawing.Size(107, 26);
             this.btnSelectPacient.TabIndex = 3;
@@ -125,7 +115,7 @@
             // 
             // btnDone
             // 
-            this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnDone.ForeColor = System.Drawing.Color.White;
             this.btnDone.Location = new System.Drawing.Point(82, 131);
             this.btnDone.Name = "btnDone";
@@ -161,7 +151,7 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.btnDone);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(541, 317);
+            this.panel1.Location = new System.Drawing.Point(1124, 386);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(243, 186);
             this.panel1.TabIndex = 8;
@@ -189,7 +179,7 @@
             this.panel2.Controls.Add(this.tbPIN);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.tbDetails);
-            this.panel2.Location = new System.Drawing.Point(12, 273);
+            this.panel2.Location = new System.Drawing.Point(647, 358);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(471, 321);
             this.panel2.TabIndex = 10;
@@ -242,7 +232,7 @@
             // 
             // btnCheck
             // 
-            this.btnCheck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.btnCheck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnCheck.ForeColor = System.Drawing.Color.White;
             this.btnCheck.Location = new System.Drawing.Point(313, 14);
             this.btnCheck.Name = "btnCheck";
@@ -287,7 +277,7 @@
             this.lbRecords.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.lbRecords.FormattingEnabled = true;
             this.lbRecords.ItemHeight = 16;
-            this.lbRecords.Location = new System.Drawing.Point(492, 49);
+            this.lbRecords.Location = new System.Drawing.Point(1072, 124);
             this.lbRecords.Name = "lbRecords";
             this.lbRecords.Size = new System.Drawing.Size(305, 180);
             this.lbRecords.TabIndex = 0;
@@ -298,9 +288,9 @@
             // 
             // selectRecord
             // 
-            this.selectRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
+            this.selectRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.selectRecord.ForeColor = System.Drawing.Color.White;
-            this.selectRecord.Location = new System.Drawing.Point(600, 235);
+            this.selectRecord.Location = new System.Drawing.Point(1183, 304);
             this.selectRecord.Name = "selectRecord";
             this.selectRecord.Size = new System.Drawing.Size(107, 26);
             this.selectRecord.TabIndex = 11;
@@ -312,7 +302,7 @@
             // 
             this.btnDones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
             this.btnDones.ForeColor = System.Drawing.Color.White;
-            this.btnDones.Location = new System.Drawing.Point(541, 556);
+            this.btnDones.Location = new System.Drawing.Point(1124, 625);
             this.btnDones.Name = "btnDones";
             this.btnDones.Size = new System.Drawing.Size(75, 23);
             this.btnDones.TabIndex = 0;
@@ -325,18 +315,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(203)))), ((int)(((byte)(227)))));
-            this.ClientSize = new System.Drawing.Size(809, 606);
+            this.ClientSize = new System.Drawing.Size(1426, 723);
             this.Controls.Add(this.btnDones);
             this.Controls.Add(this.selectRecord);
             this.Controls.Add(this.lbRecords);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSelectPacient);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.lvPatients);
             this.Name = "DoctorInterface";
-            this.Text = "DoctorInterface";
+            this.Text = "My patients";
             this.Load += new System.EventHandler(this.DoctorInterface_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -344,21 +332,19 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.ListView lvPatients;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSelectPacient;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.TextBox tbNewPacientID;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader PatientID;
         private System.Windows.Forms.ColumnHeader PacientLastName;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader PatientFirstName;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox tbDetails;
         private System.Windows.Forms.Panel panel2;

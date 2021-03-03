@@ -695,5 +695,92 @@ namespace BlockchainApp
         {
             clickField();
         }
+
+        private int getNoDoctors()
+        {
+            int noDoctors = 0;
+            try
+            {
+                var querryString = "SELECT COUNT(doctor_id) AS counted FROM Doctors;";
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    var command = new SqlCommand(querryString, connection);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            noDoctors = (int)reader["counted"];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return noDoctors;
+            }
+            return noDoctors;
+        }
+
+        private int getNoPatients()
+        {
+            int noPatients = 0;
+            try
+            {
+                var querryString = "SELECT COUNT(patient_id) AS counted FROM Patients;";
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    var command = new SqlCommand(querryString, connection);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            noPatients = (int)reader["counted"];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return noPatients;
+            }
+            return noPatients;
+        }
+
+        private int getNoRecords()
+        {
+            int noRecords = 0;
+            try
+            {
+                var querryString = "SELECT COUNT(block_index) AS counted FROM Block;";
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    var command = new SqlCommand(querryString, connection);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            noRecords = (int)reader["counted"];
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return noRecords;
+            }
+            return noRecords;
+        }
+
+        private void AdminInterface_Load(object sender, EventArgs e)
+        {
+            labelNoDoctors.Text = "The number of doctors is: " + getNoDoctors();
+            labelNoPatients.Text = "The number of patients is: " + getNoPatients();
+            labelNoRecords.Text = "The number of records is: " + getNoRecords();
+        }
     }
 }

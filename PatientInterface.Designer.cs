@@ -32,7 +32,6 @@
             this.lvRecords = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnSeeRecord = new System.Windows.Forms.Button();
             this.btnPrintRecord = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -68,6 +67,7 @@
             this.lvRecords.TabIndex = 0;
             this.lvRecords.UseCompatibleStateImageBehavior = false;
             this.lvRecords.View = System.Windows.Forms.View.Details;
+            this.lvRecords.SelectedIndexChanged += new System.EventHandler(this.lvRecords_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -79,25 +79,13 @@
             this.columnHeader2.Text = "Doctor name";
             this.columnHeader2.Width = 121;
             // 
-            // btnSeeRecord
-            // 
-            this.btnSeeRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
-            this.btnSeeRecord.ForeColor = System.Drawing.Color.White;
-            this.btnSeeRecord.Location = new System.Drawing.Point(30, 345);
-            this.btnSeeRecord.Name = "btnSeeRecord";
-            this.btnSeeRecord.Size = new System.Drawing.Size(99, 23);
-            this.btnSeeRecord.TabIndex = 1;
-            this.btnSeeRecord.Text = "Show record";
-            this.btnSeeRecord.UseVisualStyleBackColor = false;
-            this.btnSeeRecord.Click += new System.EventHandler(this.btnSeeRecord_Click);
-            // 
             // btnPrintRecord
             // 
             this.btnPrintRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnPrintRecord.ForeColor = System.Drawing.Color.White;
-            this.btnPrintRecord.Location = new System.Drawing.Point(30, 391);
+            this.btnPrintRecord.Location = new System.Drawing.Point(30, 356);
             this.btnPrintRecord.Name = "btnPrintRecord";
-            this.btnPrintRecord.Size = new System.Drawing.Size(99, 23);
+            this.btnPrintRecord.Size = new System.Drawing.Size(104, 28);
             this.btnPrintRecord.TabIndex = 2;
             this.btnPrintRecord.Text = "Print record";
             this.btnPrintRecord.UseVisualStyleBackColor = false;
@@ -131,7 +119,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 88);
+            this.label2.Location = new System.Drawing.Point(3, 88);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 17);
             this.label2.TabIndex = 21;
@@ -141,7 +129,7 @@
             // 
             this.tbDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbDate.Enabled = false;
-            this.tbDate.Location = new System.Drawing.Point(130, 88);
+            this.tbDate.Location = new System.Drawing.Point(88, 88);
             this.tbDate.Name = "tbDate";
             this.tbDate.ReadOnly = true;
             this.tbDate.Size = new System.Drawing.Size(145, 22);
@@ -151,7 +139,7 @@
             // 
             this.tbName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbName.Enabled = false;
-            this.tbName.Location = new System.Drawing.Point(130, 15);
+            this.tbName.Location = new System.Drawing.Point(88, 15);
             this.tbName.Name = "tbName";
             this.tbName.ReadOnly = true;
             this.tbName.Size = new System.Drawing.Size(145, 22);
@@ -169,7 +157,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 48);
+            this.label4.Location = new System.Drawing.Point(3, 48);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 17);
             this.label4.TabIndex = 17;
@@ -178,17 +166,17 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 15);
+            this.label3.Location = new System.Drawing.Point(3, 15);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 17);
+            this.label3.Size = new System.Drawing.Size(50, 17);
             this.label3.TabIndex = 15;
-            this.label3.Text = "Doctor\'s name";
+            this.label3.Text = "Doctor";
             // 
             // tbTitle
             // 
             this.tbTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbTitle.Enabled = false;
-            this.tbTitle.Location = new System.Drawing.Point(130, 48);
+            this.tbTitle.Location = new System.Drawing.Point(88, 48);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.ReadOnly = true;
             this.tbTitle.Size = new System.Drawing.Size(145, 22);
@@ -244,14 +232,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(821, 462);
+            this.ClientSize = new System.Drawing.Size(778, 440);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnPrintRecord);
-            this.Controls.Add(this.btnSeeRecord);
             this.Controls.Add(this.lvRecords);
             this.Name = "PatientInterface";
-            this.Text = "Patient Interface";
+            this.Text = "Patient Page";
             this.Load += new System.EventHandler(this.PatientInterface_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -263,7 +250,6 @@
         #endregion
 
         private System.Windows.Forms.ListView lvRecords;
-        private System.Windows.Forms.Button btnSeeRecord;
         private System.Windows.Forms.Button btnPrintRecord;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;

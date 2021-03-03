@@ -33,7 +33,6 @@
             this.PatientID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PacientLastName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PatientFirstName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnSelectPacient = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnDone = new System.Windows.Forms.Button();
             this.tbNewPacientID = new System.Windows.Forms.TextBox();
@@ -53,10 +52,21 @@
             this.lbRecords = new System.Windows.Forms.ListBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.selectRecord = new System.Windows.Forms.Button();
-            this.btnDones = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.progressLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvPatients
@@ -69,13 +79,15 @@
             this.lvPatients.FullRowSelect = true;
             this.lvPatients.GridLines = true;
             this.lvPatients.HideSelection = false;
-            this.lvPatients.Location = new System.Drawing.Point(12, 89);
+            this.lvPatients.Location = new System.Drawing.Point(12, 91);
             this.lvPatients.Name = "lvPatients";
-            this.lvPatients.Size = new System.Drawing.Size(471, 180);
+            this.lvPatients.Size = new System.Drawing.Size(442, 198);
             this.lvPatients.TabIndex = 1;
             this.lvPatients.UseCompatibleStateImageBehavior = false;
             this.lvPatients.View = System.Windows.Forms.View.Details;
+            this.lvPatients.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvPatients_ColumnClick);
             this.lvPatients.SelectedIndexChanged += new System.EventHandler(this.lvPatients_SelectedIndexChanged_1);
+            this.lvPatients.Click += new System.EventHandler(this.lvPatients_Click);
             // 
             // PatientID
             // 
@@ -91,18 +103,6 @@
             // 
             this.PatientFirstName.Text = "Patient first name";
             this.PatientFirstName.Width = 164;
-            // 
-            // btnSelectPacient
-            // 
-            this.btnSelectPacient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
-            this.btnSelectPacient.ForeColor = System.Drawing.Color.White;
-            this.btnSelectPacient.Location = new System.Drawing.Point(595, 298);
-            this.btnSelectPacient.Name = "btnSelectPacient";
-            this.btnSelectPacient.Size = new System.Drawing.Size(107, 26);
-            this.btnSelectPacient.TabIndex = 3;
-            this.btnSelectPacient.Text = "Select patient";
-            this.btnSelectPacient.UseVisualStyleBackColor = false;
-            this.btnSelectPacient.Click += new System.EventHandler(this.btnSelectPacient_Click);
             // 
             // label2
             // 
@@ -146,12 +146,12 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(223)))), ((int)(((byte)(172)))));
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.tbNewPacientID);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.btnDone);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(1124, 386);
+            this.panel1.Location = new System.Drawing.Point(96, 66);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(243, 186);
             this.panel1.TabIndex = 8;
@@ -163,12 +163,12 @@
             this.tbDetails.Multiline = true;
             this.tbDetails.Name = "tbDetails";
             this.tbDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbDetails.Size = new System.Drawing.Size(372, 129);
+            this.tbDetails.Size = new System.Drawing.Size(292, 121);
             this.tbDetails.TabIndex = 4;
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(223)))), ((int)(((byte)(172)))));
+            this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.btnAddNewRecord);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.dtpDate);
@@ -179,16 +179,17 @@
             this.panel2.Controls.Add(this.tbPIN);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.tbDetails);
-            this.panel2.Location = new System.Drawing.Point(647, 358);
+            this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(471, 321);
+            this.panel2.Size = new System.Drawing.Size(428, 306);
             this.panel2.TabIndex = 10;
+            this.panel2.Click += new System.EventHandler(this.panel2_Click);
             // 
             // btnAddNewRecord
             // 
             this.btnAddNewRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
             this.btnAddNewRecord.ForeColor = System.Drawing.Color.White;
-            this.btnAddNewRecord.Location = new System.Drawing.Point(220, 283);
+            this.btnAddNewRecord.Location = new System.Drawing.Point(181, 273);
             this.btnAddNewRecord.Name = "btnAddNewRecord";
             this.btnAddNewRecord.Size = new System.Drawing.Size(75, 23);
             this.btnAddNewRecord.TabIndex = 5;
@@ -258,7 +259,7 @@
             this.tbPIN.Name = "tbPIN";
             this.tbPIN.Size = new System.Drawing.Size(200, 22);
             this.tbPIN.TabIndex = 0;
-            this.tbPIN.Text = "Input PIN here";
+            this.tbPIN.Text = "Introduce PIN";
             this.tbPIN.Click += new System.EventHandler(this.tbPIN_Click);
             this.tbPIN.Validating += new System.ComponentModel.CancelEventHandler(this.tbPIN_Validating);
             this.tbPIN.Validated += new System.EventHandler(this.tbPIN_Validated);
@@ -268,19 +269,21 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(3, 14);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 17);
+            this.label4.Size = new System.Drawing.Size(30, 17);
             this.label4.TabIndex = 0;
-            this.label4.Text = "New record";
+            this.label4.Text = "PIN";
             // 
             // lbRecords
             // 
             this.lbRecords.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.lbRecords.FormattingEnabled = true;
             this.lbRecords.ItemHeight = 16;
-            this.lbRecords.Location = new System.Drawing.Point(1072, 124);
+            this.lbRecords.Location = new System.Drawing.Point(60, 6);
+            this.lbRecords.MultiColumn = true;
             this.lbRecords.Name = "lbRecords";
-            this.lbRecords.Size = new System.Drawing.Size(305, 180);
+            this.lbRecords.Size = new System.Drawing.Size(338, 196);
             this.lbRecords.TabIndex = 0;
+            this.lbRecords.DoubleClick += new System.EventHandler(this.lbRecords_DoubleClick);
             // 
             // errorProvider
             // 
@@ -290,7 +293,7 @@
             // 
             this.selectRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.selectRecord.ForeColor = System.Drawing.Color.White;
-            this.selectRecord.Location = new System.Drawing.Point(1183, 304);
+            this.selectRecord.Location = new System.Drawing.Point(175, 230);
             this.selectRecord.Name = "selectRecord";
             this.selectRecord.Size = new System.Drawing.Size(107, 26);
             this.selectRecord.TabIndex = 11;
@@ -298,46 +301,106 @@
             this.selectRecord.UseVisualStyleBackColor = false;
             this.selectRecord.Click += new System.EventHandler(this.selectRecord_Click);
             // 
-            // btnDones
+            // tabControl1
             // 
-            this.btnDones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(134)))), ((int)(((byte)(180)))));
-            this.btnDones.ForeColor = System.Drawing.Color.White;
-            this.btnDones.Location = new System.Drawing.Point(1124, 625);
-            this.btnDones.Name = "btnDones";
-            this.btnDones.Size = new System.Drawing.Size(75, 23);
-            this.btnDones.TabIndex = 0;
-            this.btnDones.Text = "Done";
-            this.btnDones.UseVisualStyleBackColor = false;
-            this.btnDones.Click += new System.EventHandler(this.btnDones_Click);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(12, 313);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(442, 338);
+            this.tabControl1.TabIndex = 12;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.panel2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(434, 309);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Add a record";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.lbRecords);
+            this.tabPage2.Controls.Add(this.selectRecord);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(434, 309);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "See records";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.panel1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(434, 309);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Add a patient";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.progressBar,
+            this.progressLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 667);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(466, 25);
+            this.statusStrip1.TabIndex = 13;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(100, 19);
+            // 
+            // progressLabel
+            // 
+            this.progressLabel.Name = "progressLabel";
+            this.progressLabel.Size = new System.Drawing.Size(0, 20);
             // 
             // DoctorInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(1426, 723);
-            this.Controls.Add(this.btnDones);
-            this.Controls.Add(this.selectRecord);
-            this.Controls.Add(this.lbRecords);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btnSelectPacient);
+            this.ClientSize = new System.Drawing.Size(466, 692);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.lvPatients);
             this.Name = "DoctorInterface";
             this.Text = "My patients";
             this.Load += new System.EventHandler(this.DoctorInterface_Load);
+            this.Click += new System.EventHandler(this.DoctorInterface_Click);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.ListView lvPatients;
-        private System.Windows.Forms.Button btnSelectPacient;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.TextBox tbNewPacientID;
@@ -360,6 +423,12 @@
         private System.Windows.Forms.Button btnAddNewRecord;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Button selectRecord;
-        private System.Windows.Forms.Button btnDones;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripProgressBar progressBar;
+        private System.Windows.Forms.ToolStripStatusLabel progressLabel;
     }
 }

@@ -74,6 +74,10 @@
             this.tbLastBackup = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.btnBackup = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.labelNoPatients = new System.Windows.Forms.Label();
+            this.labelNoDoctors = new System.Windows.Forms.Label();
+            this.labelNoRecords = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -88,11 +92,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 88);
+            this.label1.Location = new System.Drawing.Point(25, 88);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 17);
+            this.label1.Size = new System.Drawing.Size(52, 17);
             this.label1.TabIndex = 1;
-            this.label1.Text = "New doctor ID";
+            this.label1.Text = "New ID";
             // 
             // btnOK
             // 
@@ -101,7 +105,7 @@
             this.btnOK.ForeColor = System.Drawing.Color.White;
             this.btnOK.Location = new System.Drawing.Point(43, 394);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(82, 27);
+            this.btnOK.Size = new System.Drawing.Size(104, 28);
             this.btnOK.TabIndex = 6;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = false;
@@ -110,74 +114,74 @@
             // tbNewDocID
             // 
             this.tbNewDocID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbNewDocID.Location = new System.Drawing.Point(178, 88);
+            this.tbNewDocID.Location = new System.Drawing.Point(187, 88);
             this.tbNewDocID.Name = "tbNewDocID";
-            this.tbNewDocID.Size = new System.Drawing.Size(100, 22);
+            this.tbNewDocID.Size = new System.Drawing.Size(137, 22);
             this.tbNewDocID.TabIndex = 0;
             this.tbNewDocID.Click += new System.EventHandler(this.controlClicked);
             // 
             // tbLastName
             // 
-            this.tbLastName.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.tbLastName.Location = new System.Drawing.Point(178, 139);
+            this.tbLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.tbLastName.Location = new System.Drawing.Point(187, 138);
             this.tbLastName.Name = "tbLastName";
-            this.tbLastName.Size = new System.Drawing.Size(100, 22);
+            this.tbLastName.Size = new System.Drawing.Size(137, 22);
             this.tbLastName.TabIndex = 1;
             this.tbLastName.Click += new System.EventHandler(this.controlClicked);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 136);
+            this.label2.Location = new System.Drawing.Point(25, 138);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(115, 17);
+            this.label2.Size = new System.Drawing.Size(74, 17);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Doctor last name";
+            this.label2.Text = "Last name";
             // 
             // tbFirstName
             // 
             this.tbFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbFirstName.Location = new System.Drawing.Point(178, 186);
+            this.tbFirstName.Location = new System.Drawing.Point(187, 188);
             this.tbFirstName.Name = "tbFirstName";
-            this.tbFirstName.Size = new System.Drawing.Size(100, 22);
+            this.tbFirstName.Size = new System.Drawing.Size(137, 22);
             this.tbFirstName.TabIndex = 2;
             this.tbFirstName.Click += new System.EventHandler(this.controlClicked);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 186);
+            this.label3.Location = new System.Drawing.Point(25, 188);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(116, 17);
+            this.label3.Size = new System.Drawing.Size(74, 17);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Doctor first name";
+            this.label3.Text = "First name";
             // 
             // tbSpecialisation
             // 
             this.tbSpecialisation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbSpecialisation.Location = new System.Drawing.Point(178, 232);
+            this.tbSpecialisation.Location = new System.Drawing.Point(187, 238);
             this.tbSpecialisation.Name = "tbSpecialisation";
-            this.tbSpecialisation.Size = new System.Drawing.Size(100, 22);
+            this.tbSpecialisation.Size = new System.Drawing.Size(137, 22);
             this.tbSpecialisation.TabIndex = 3;
             this.tbSpecialisation.Click += new System.EventHandler(this.controlClicked);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(29, 232);
+            this.label4.Location = new System.Drawing.Point(25, 238);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(139, 17);
+            this.label4.Size = new System.Drawing.Size(95, 17);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Doctor specialization";
+            this.label4.Text = "Specialization";
             // 
             // btnCancelDoctor
             // 
             this.btnCancelDoctor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnCancelDoctor.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelDoctor.ForeColor = System.Drawing.Color.White;
-            this.btnCancelDoctor.Location = new System.Drawing.Point(169, 394);
+            this.btnCancelDoctor.Location = new System.Drawing.Point(174, 394);
             this.btnCancelDoctor.Name = "btnCancelDoctor";
-            this.btnCancelDoctor.Size = new System.Drawing.Size(82, 27);
+            this.btnCancelDoctor.Size = new System.Drawing.Size(104, 28);
             this.btnCancelDoctor.TabIndex = 7;
             this.btnCancelDoctor.Text = "Cancel";
             this.btnCancelDoctor.UseVisualStyleBackColor = false;
@@ -186,17 +190,17 @@
             // tbPassword
             // 
             this.tbPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPassword.Location = new System.Drawing.Point(178, 284);
+            this.tbPassword.Location = new System.Drawing.Point(187, 287);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
-            this.tbPassword.Size = new System.Drawing.Size(100, 22);
+            this.tbPassword.Size = new System.Drawing.Size(137, 22);
             this.tbPassword.TabIndex = 4;
             this.tbPassword.Click += new System.EventHandler(this.controlClicked);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(29, 284);
+            this.label5.Location = new System.Drawing.Point(25, 288);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 17);
             this.label5.TabIndex = 11;
@@ -205,17 +209,17 @@
             // tbRePassword
             // 
             this.tbRePassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbRePassword.Location = new System.Drawing.Point(178, 337);
+            this.tbRePassword.Location = new System.Drawing.Point(187, 337);
             this.tbRePassword.Name = "tbRePassword";
             this.tbRePassword.PasswordChar = '*';
-            this.tbRePassword.Size = new System.Drawing.Size(100, 22);
+            this.tbRePassword.Size = new System.Drawing.Size(137, 22);
             this.tbRePassword.TabIndex = 5;
             this.tbRePassword.Click += new System.EventHandler(this.controlClicked);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(29, 337);
+            this.label6.Location = new System.Drawing.Point(25, 338);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(121, 17);
             this.label6.TabIndex = 13;
@@ -225,7 +229,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(29, 32);
+            this.label7.Location = new System.Drawing.Point(24, 32);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(107, 24);
             this.label7.TabIndex = 15;
@@ -246,14 +250,14 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(25, 88);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(100, 17);
+            this.label9.Size = new System.Drawing.Size(52, 17);
             this.label9.TabIndex = 17;
-            this.label9.Text = "New Patient ID";
+            this.label9.Text = "New ID";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(25, 136);
+            this.label10.Location = new System.Drawing.Point(25, 138);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(74, 17);
             this.label10.TabIndex = 18;
@@ -262,7 +266,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(25, 186);
+            this.label11.Location = new System.Drawing.Point(25, 188);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(74, 17);
             this.label11.TabIndex = 19;
@@ -271,7 +275,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(25, 237);
+            this.label12.Location = new System.Drawing.Point(25, 238);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(69, 17);
             this.label12.TabIndex = 20;
@@ -280,7 +284,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(25, 287);
+            this.label13.Location = new System.Drawing.Point(25, 288);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(121, 17);
             this.label13.TabIndex = 21;
@@ -291,45 +295,45 @@
             this.tbPatientID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbPatientID.Location = new System.Drawing.Point(187, 88);
             this.tbPatientID.Name = "tbPatientID";
-            this.tbPatientID.Size = new System.Drawing.Size(100, 22);
+            this.tbPatientID.Size = new System.Drawing.Size(137, 22);
             this.tbPatientID.TabIndex = 0;
             this.tbPatientID.Click += new System.EventHandler(this.controlClicked);
             // 
             // tbPatientLastName
             // 
             this.tbPatientLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPatientLastName.Location = new System.Drawing.Point(187, 136);
+            this.tbPatientLastName.Location = new System.Drawing.Point(187, 138);
             this.tbPatientLastName.Name = "tbPatientLastName";
-            this.tbPatientLastName.Size = new System.Drawing.Size(100, 22);
+            this.tbPatientLastName.Size = new System.Drawing.Size(137, 22);
             this.tbPatientLastName.TabIndex = 1;
             this.tbPatientLastName.Click += new System.EventHandler(this.controlClicked);
             // 
             // tbPatientFirstName
             // 
             this.tbPatientFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPatientFirstName.Location = new System.Drawing.Point(187, 186);
+            this.tbPatientFirstName.Location = new System.Drawing.Point(187, 188);
             this.tbPatientFirstName.Name = "tbPatientFirstName";
-            this.tbPatientFirstName.Size = new System.Drawing.Size(100, 22);
+            this.tbPatientFirstName.Size = new System.Drawing.Size(137, 22);
             this.tbPatientFirstName.TabIndex = 2;
             this.tbPatientFirstName.Click += new System.EventHandler(this.controlClicked);
             // 
             // tbPatientPassword
             // 
             this.tbPatientPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPatientPassword.Location = new System.Drawing.Point(187, 237);
+            this.tbPatientPassword.Location = new System.Drawing.Point(187, 238);
             this.tbPatientPassword.Name = "tbPatientPassword";
             this.tbPatientPassword.PasswordChar = '*';
-            this.tbPatientPassword.Size = new System.Drawing.Size(100, 22);
+            this.tbPatientPassword.Size = new System.Drawing.Size(137, 22);
             this.tbPatientPassword.TabIndex = 3;
             this.tbPatientPassword.Click += new System.EventHandler(this.controlClicked);
             // 
             // tbPatientREPass
             // 
             this.tbPatientREPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPatientREPass.Location = new System.Drawing.Point(187, 287);
+            this.tbPatientREPass.Location = new System.Drawing.Point(187, 288);
             this.tbPatientREPass.Name = "tbPatientREPass";
             this.tbPatientREPass.PasswordChar = '*';
-            this.tbPatientREPass.Size = new System.Drawing.Size(100, 22);
+            this.tbPatientREPass.Size = new System.Drawing.Size(137, 22);
             this.tbPatientREPass.TabIndex = 4;
             this.tbPatientREPass.Click += new System.EventHandler(this.controlClicked);
             // 
@@ -338,9 +342,9 @@
             this.btnOkPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnOkPatient.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOkPatient.ForeColor = System.Drawing.Color.White;
-            this.btnOkPatient.Location = new System.Drawing.Point(53, 394);
+            this.btnOkPatient.Location = new System.Drawing.Point(43, 394);
             this.btnOkPatient.Name = "btnOkPatient";
-            this.btnOkPatient.Size = new System.Drawing.Size(75, 23);
+            this.btnOkPatient.Size = new System.Drawing.Size(104, 28);
             this.btnOkPatient.TabIndex = 6;
             this.btnOkPatient.Text = "OK";
             this.btnOkPatient.UseVisualStyleBackColor = false;
@@ -351,9 +355,9 @@
             this.btnCancelPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnCancelPatient.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelPatient.ForeColor = System.Drawing.Color.White;
-            this.btnCancelPatient.Location = new System.Drawing.Point(199, 394);
+            this.btnCancelPatient.Location = new System.Drawing.Point(174, 394);
             this.btnCancelPatient.Name = "btnCancelPatient";
-            this.btnCancelPatient.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelPatient.Size = new System.Drawing.Size(104, 28);
             this.btnCancelPatient.TabIndex = 7;
             this.btnCancelPatient.Text = "Cancel";
             this.btnCancelPatient.UseVisualStyleBackColor = false;
@@ -377,15 +381,15 @@
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.tbPatientLastName);
             this.panel1.Controls.Add(this.tbPatientID);
-            this.panel1.Location = new System.Drawing.Point(28, 20);
+            this.panel1.Location = new System.Drawing.Point(20, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(320, 435);
+            this.panel1.Size = new System.Drawing.Size(341, 438);
             this.panel1.TabIndex = 29;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(25, 337);
+            this.label14.Location = new System.Drawing.Point(25, 338);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(60, 17);
             this.label14.TabIndex = 30;
@@ -394,9 +398,9 @@
             // dtpBirthday
             // 
             this.dtpBirthday.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.dtpBirthday.Location = new System.Drawing.Point(187, 332);
+            this.dtpBirthday.Location = new System.Drawing.Point(187, 338);
             this.dtpBirthday.Name = "dtpBirthday";
-            this.dtpBirthday.Size = new System.Drawing.Size(100, 22);
+            this.dtpBirthday.Size = new System.Drawing.Size(137, 22);
             this.dtpBirthday.TabIndex = 5;
             this.dtpBirthday.DropDown += new System.EventHandler(this.controlClicked);
             // 
@@ -490,6 +494,10 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.labelNoRecords);
+            this.tabPage3.Controls.Add(this.labelNoDoctors);
+            this.tabPage3.Controls.Add(this.labelNoPatients);
+            this.tabPage3.Controls.Add(this.label16);
             this.tabPage3.Controls.Add(this.btnOverwrite);
             this.tabPage3.Controls.Add(this.tbLastBackup);
             this.tabPage3.Controls.Add(this.label15);
@@ -509,7 +517,7 @@
             this.btnOverwrite.ForeColor = System.Drawing.Color.White;
             this.btnOverwrite.Location = new System.Drawing.Point(22, 158);
             this.btnOverwrite.Name = "btnOverwrite";
-            this.btnOverwrite.Size = new System.Drawing.Size(86, 24);
+            this.btnOverwrite.Size = new System.Drawing.Size(104, 28);
             this.btnOverwrite.TabIndex = 3;
             this.btnOverwrite.Text = "Overwrite";
             this.btnOverwrite.UseVisualStyleBackColor = false;
@@ -526,11 +534,12 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(23, 40);
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.label15.Location = new System.Drawing.Point(19, 40);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(85, 17);
+            this.label15.Size = new System.Drawing.Size(92, 18);
             this.label15.TabIndex = 1;
-            this.label15.Text = "Last backup";
+            this.label15.Text = "Last backup:";
             // 
             // btnBackup
             // 
@@ -538,11 +547,51 @@
             this.btnBackup.ForeColor = System.Drawing.Color.White;
             this.btnBackup.Location = new System.Drawing.Point(22, 113);
             this.btnBackup.Name = "btnBackup";
-            this.btnBackup.Size = new System.Drawing.Size(86, 24);
+            this.btnBackup.Size = new System.Drawing.Size(104, 28);
             this.btnBackup.TabIndex = 0;
             this.btnBackup.Text = "Backup";
             this.btnBackup.UseVisualStyleBackColor = false;
             this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.label16.Location = new System.Drawing.Point(22, 209);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(42, 18);
+            this.label16.TabIndex = 4;
+            this.label16.Text = "Stats";
+            // 
+            // labelNoPatients
+            // 
+            this.labelNoPatients.AutoSize = true;
+            this.labelNoPatients.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.labelNoPatients.Location = new System.Drawing.Point(22, 235);
+            this.labelNoPatients.Name = "labelNoPatients";
+            this.labelNoPatients.Size = new System.Drawing.Size(32, 18);
+            this.labelNoPatients.TabIndex = 5;
+            this.labelNoPatients.Text = "aaa";
+            // 
+            // labelNoDoctors
+            // 
+            this.labelNoDoctors.AutoSize = true;
+            this.labelNoDoctors.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.labelNoDoctors.Location = new System.Drawing.Point(22, 252);
+            this.labelNoDoctors.Name = "labelNoDoctors";
+            this.labelNoDoctors.Size = new System.Drawing.Size(32, 18);
+            this.labelNoDoctors.TabIndex = 6;
+            this.labelNoDoctors.Text = "aaa";
+            // 
+            // labelNoRecords
+            // 
+            this.labelNoRecords.AutoSize = true;
+            this.labelNoRecords.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
+            this.labelNoRecords.Location = new System.Drawing.Point(22, 269);
+            this.labelNoRecords.Name = "labelNoRecords";
+            this.labelNoRecords.Size = new System.Drawing.Size(32, 18);
+            this.labelNoRecords.TabIndex = 7;
+            this.labelNoRecords.Text = "aaa";
             // 
             // AdminInterface
             // 
@@ -555,6 +604,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Name = "AdminInterface";
             this.Text = "Admin Page";
+            this.Load += new System.EventHandler(this.AdminInterface_Load);
             this.Click += new System.EventHandler(this.AdminInterface_Click);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -620,5 +670,9 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button btnBackup;
         private System.Windows.Forms.Button btnOverwrite;
+        private System.Windows.Forms.Label labelNoRecords;
+        private System.Windows.Forms.Label labelNoDoctors;
+        private System.Windows.Forms.Label labelNoPatients;
+        private System.Windows.Forms.Label label16;
     }
 }

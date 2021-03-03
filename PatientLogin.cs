@@ -139,6 +139,7 @@ namespace BlockchainApp
         {
             Logger logger = LogManager.GetCurrentClassLogger();
             string checkID = tbPatientID.Text.Trim().ToString();
+            bool warned = false; //to make sure we don't send two MessageBox warnings about wrong credentials
             try
             {
                 if (successfulAuthentication < 4 && validatePatient() == true)
@@ -216,18 +217,21 @@ namespace BlockchainApp
                                                 else
                                                 {
                                                     successfulAuthentication++;
+                                                    warned = true;
                                                     MessageBox.Show("Incorrect PIN!");
                                                 }
                                             }
                                             else
                                             {
                                                 successfulAuthentication++;
+                                                warned = true;
                                                 MessageBox.Show("Incorrect PIN!");
                                             }
                                         }
                                         catch (FormatException)
                                         {
                                             successfulAuthentication++;
+                                            warned = true;
                                             MessageBox.Show("Incorrect PIN!");
                                         }
                                     }
@@ -236,7 +240,11 @@ namespace BlockchainApp
                     }
                     if (connected == false)
                     {
-                        MessageBox.Show("Invalid credentials!");
+                        if (warned == false)
+                        {
+                            MessageBox.Show("Invalid credentials!");
+                            warned = true;
+                        }
                         successfulAuthentication++;
                     }
                 }

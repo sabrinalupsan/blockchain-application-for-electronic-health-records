@@ -94,22 +94,6 @@ namespace BlockchainApp
             }
         }
 
-        private void btnSeeRecord_Click(object sender, EventArgs e)
-        {
-            if (lvRecords.SelectedItems.Count > 0)
-            {
-                ListViewItem lvi = lvRecords.SelectedItems[0];
-                selectedRecord = (MedicalRecord)lvi.Tag;
-
-                tbDate.Text = selectedRecord.date.ToShortDateString();
-                tbDescription.Text = selectedRecord.description;
-                tbName.Text = getDoctorsLastName(selectedRecord.doctorID);
-                tbTitle.Text = selectedRecord.title;
-            }
-            else
-                MessageBox.Show("Please select a record!");
-        }
-
         private string stringToPrint(Patient patient, MedicalRecord record)
         {
             return patient.lastName + " " + patient.firstName + ", ID: " + patient.patientID + "\n" + record.title + "\n" + record.description;
@@ -194,6 +178,21 @@ namespace BlockchainApp
         private void printDocument_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             charIndex = 0;
+        }
+
+        private void lvRecords_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvRecords.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lvRecords.SelectedItems[0];
+                selectedRecord = (MedicalRecord)lvi.Tag;
+
+                tbDate.Text = selectedRecord.date.ToShortDateString();
+                tbDescription.Text = selectedRecord.description;
+                tbName.Text = getDoctorsLastName(selectedRecord.doctorID);
+                tbTitle.Text = selectedRecord.title;
+            }
+            
         }
     }
 }

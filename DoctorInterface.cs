@@ -16,8 +16,9 @@ namespace BlockchainApp
 {
     public partial class DoctorInterface : MaterialSkin.Controls.MaterialForm
     {
-        Doctor doctor;
-        int successfulAuthentication = 0;
+        private Doctor doctor;
+        private List<Block> blocks = new List<Block>();
+        private int successfulAuthentication = 0;
         private SqlConnectionStringBuilder builder;
 
         public DoctorInterface(Doctor doctor)
@@ -129,6 +130,8 @@ namespace BlockchainApp
                     updateListView();
                     Logger logger = LogManager.GetCurrentClassLogger();
                     logger.Debug("Doctor {0} added patient {1} to his list.", doctor.docID, patientID);
+                    progressBar.Value = 100;
+                    progressLabel.Text = "Patient added!";
                     tbNewPacientID.Clear();
                 }
                 else
@@ -195,7 +198,7 @@ namespace BlockchainApp
             label5.Hide();
             label6.Hide();
             Details.Hide();
-            lbRecords.Visible = false;
+            //lbRecords.Visible = false;
         }
         
         private void showControls()
@@ -339,9 +342,9 @@ namespace BlockchainApp
             lvPatients.Enabled = false;
             btnAddNewRecord.Enabled = false;
             btnCheck.Enabled = false;
-            btnDones.Enabled = false;
+            //btnDones.Enabled = false;
             btnDone.Enabled = false;
-            btnSelectPacient.Enabled = false;
+            //btnSelectPacient.Enabled = false;
             btnAddNewRecord.Enabled = false;
             System.Threading.Thread.Sleep(1000 * (int)seconds);
             tbPIN.Enabled = true;
@@ -353,41 +356,41 @@ namespace BlockchainApp
             lvPatients.Enabled = true;
             btnAddNewRecord.Enabled = true;
             btnCheck.Enabled = true;
-            btnDones.Enabled = true;
+            //btnDones.Enabled = true;
             btnDone.Enabled = true;
-            btnSelectPacient.Enabled = true;
+            //btnSelectPacient.Enabled = true;
             btnAddNewRecord.Enabled = true;
         }
 
-        private void btnSelectPacient_Click(object sender, EventArgs e)
-        {
-            if (lvPatients.SelectedItems.Count > 0)
-            {
-                lbRecords.Items.Clear();
-                ListViewItem item = lvPatients.SelectedItems[0];
-                Patient patient = (Patient)item.Tag;
+        //private void btnSelectPacient_Click(object sender, EventArgs e)
+        //{
+        //    if (lvPatients.SelectedItems.Count > 0)
+        //    {
+        //        lbRecords.Items.Clear();
+        //        ListViewItem item = lvPatients.SelectedItems[0];
+        //        Patient patient = (Patient)item.Tag;
 
-                var populateListBoxQuerry = "SELECT appointment_title, appointment_description, appointment_date FROM Block " +
-                    "WHERE doctor_id = " + doctor.docID + "AND patient_id = " + patient.patientID;
+        //        var populateListBoxQuerry = "SELECT appointment_title, appointment_description, appointment_date FROM Block " +
+        //            "WHERE doctor_id = " + doctor.docID + "AND patient_id = " + patient.patientID;
 
-                using (SqlConnection populateListBoxConn = new SqlConnection(builder.ConnectionString))
-                {
-                    populateListBoxConn.Open();
-                    var command = new SqlCommand(populateListBoxQuerry, populateListBoxConn);
-                    using (SqlDataReader reader = command.ExecuteReader())
-                        while (reader.Read())
-                        {
-                            string title = (string)reader["appointment_title"];
-                            string description = (string)reader["appointment_description"];
-                            DateTime date = (DateTime)reader["appointment_date"];
-                            MedicalRecord record = new MedicalRecord(doctor.docID, patient.patientID, title, description, date);
-                            lbRecords.Items.Add(record);
-                        }
-                }
-            }
-            else
-                MessageBox.Show("Please select a patient!");
-        }
+        //        using (SqlConnection populateListBoxConn = new SqlConnection(builder.ConnectionString))
+        //        {
+        //            populateListBoxConn.Open();
+        //            var command = new SqlCommand(populateListBoxQuerry, populateListBoxConn);
+        //            using (SqlDataReader reader = command.ExecuteReader())
+        //                while (reader.Read())
+        //                {
+        //                    string title = (string)reader["appointment_title"];
+        //                    string description = (string)reader["appointment_description"];
+        //                    DateTime date = (DateTime)reader["appointment_date"];
+        //                    MedicalRecord record = new MedicalRecord(doctor.docID, patient.patientID, title, description, date);
+        //                    lbRecords.Items.Add(record);
+        //                }
+        //        }
+        //    }
+        //    else
+        //        MessageBox.Show("Please select a patient!");
+        //}
     
         private int generateIndex(SqlConnectionStringBuilder builder)
         {
@@ -481,9 +484,65 @@ namespace BlockchainApp
             dtpDate.Value = DateTime.Now;
         }
 
+        private bool checkBlockchain()
+        {
+            var selectEverythingQuery = "SELECT * FROM Block ORDER BY block_index";
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            {
+                connection.Open();
+                var command = new SqlCommand(selectEverythingQuery, connection);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    string genesisContent = "-1" + "-1" + "1" + "no description" + "1" + "0" + "0";
+                    string hashedgenesisContent = computeHash2(genesisContent);
+
+                    reader.Read();
+                    string previousHash = (string)reader["hash_of_curr_block"];
+                    if (previousHash.CompareTo(hashedgenesisContent) != 0)
+                    {
+                        return false;
+                    }
+                    DateTime genesisDate = (DateTime)reader["appointment_date"];
+                    DateTime genesisTimestamp = (DateTime)reader["block_timestamp"];
+                    string current;
+                    string previous;
+                    while (reader.Read())
+                    {
+                        current = (string)reader["hash_of_curr_block"];
+                        previous = (string)reader["hash_of_prev_block"];
+
+                        long patientID = (int)reader["patient_id"];
+                        long doctorID = (int)reader["doctor_id"];
+                        string title = (string)reader["appointment_title"];
+                        string description = (string)reader["appointment_description"];
+                        DateTime date = (DateTime)reader["appointment_date"];
+                        DateTime timestamp = (DateTime)reader["block_timestamp"];
+                        int nounce = (int)reader["nounce"];
+                        int blockIndex = (int)reader["block_index"];
+
+                        string toHash = patientID + doctorID + date.ToString("yyyy-MM-dd") + title + description + timestamp.ToString("yyyy-MM-dd") + blockIndex + previous;
+                        Hash hash = new Hash(nounce, toHash);
+                        if (current.CompareTo(hash.computeHash()) != 0)
+                            return false;
+
+                        if (previousHash.CompareTo(previous) != 0)
+                            return false;
+
+                        Block block = new Block(patientID, doctorID, title, description, date, timestamp, nounce, blockIndex, previous, current);
+                        blocks.Add(block);
+
+                        previousHash = current;
+
+                    }
+                }
+            }
+
+            return true;
+        }
+
         private void btnAddNewRecord_Click(object sender, EventArgs e)
         {
-            if (validateRecord() == true)
+            if (validateRecord() == true && checkBlockchain()==true)
             {
                 try
                 {
@@ -534,6 +593,8 @@ namespace BlockchainApp
                     Logger logger = LogManager.GetCurrentClassLogger();
                     logger.Debug("Doctor {0} added a record for patient {1}.", doctor.docID, patientID);
                     MedicalRecord record = new MedicalRecord(doctor.docID, patientID, title, details, dateTime);
+                    progressBar.Value = 100;
+                    progressLabel.Text = "Appointment added!";
                     clearControls();
                     lbRecords.Items.Add(record);
                 }
@@ -586,11 +647,6 @@ namespace BlockchainApp
             errorProvider.SetError(tbNewPacientID, null);
         }
 
-        private void btnDones_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void lvPatients_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             lbRecords.Items.Clear();
@@ -616,12 +672,70 @@ namespace BlockchainApp
                             DateTime date = (DateTime)reader["appointment_date"];
                             MedicalRecord record = new MedicalRecord(doctor.docID, patient.patientID, title, description, date);
                             lbRecords.Items.Add(record);
-                            lbRecords.Visible = false;
+                            //lbRecords.Visible = false;
                         }
                     }
                 }
 
             }
+        }
+
+        private void lbRecords_DoubleClick(object sender, EventArgs e)
+        {
+            MedicalRecord record = (MedicalRecord)lbRecords.SelectedItem;
+            ListViewItem item = lvPatients.SelectedItems[0];
+            Patient patient = (Patient)item.Tag;
+            MedicalRecordInterface medicalRecordInterface = new MedicalRecordInterface(record, patient);
+            medicalRecordInterface.ShowDialog();
+        }
+
+        private void lvPatients_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            int column = e.Column;
+            if(column == 0)
+            {
+                doctor.patients = doctor.patients.OrderBy(p => p.patientID).ToList();
+            }
+            else
+                if(column == 1)
+                {
+                    doctor.patients = doctor.patients.OrderBy(p => p.lastName).ToList();
+                }
+                else
+                {
+                doctor.patients = doctor.patients.OrderBy(p => p.firstName).ToList();
+            }
+            DisplayPatients();
+        }
+
+        private void DoctorInterface_Click(object sender, EventArgs e)
+        {
+            progressBar.Value = 0;
+            progressLabel.Text = "";
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+            progressBar.Value = 0;
+            progressLabel.Text = "";
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+            progressBar.Value = 0;
+            progressLabel.Text = "";
+        }
+
+        private void panel2_Click(object sender, EventArgs e)
+        {
+            progressBar.Value = 0;
+            progressLabel.Text = "";
+        }
+
+        private void lvPatients_Click(object sender, EventArgs e)
+        {
+            progressBar.Value = 0;
+            progressLabel.Text = "";
         }
     }
 }

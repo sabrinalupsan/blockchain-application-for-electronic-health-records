@@ -172,33 +172,34 @@ namespace BlockchainApp
                 byte[] hashedPIN = computeHash(tbPIN.Text.Trim().ToString());
 
                 var querry = "SELECT * from Doctors;";
-
-                using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+                try
                 {
-                    conn.Open();
-                    var command = new SqlCommand(querry, conn);
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                     {
-                        while (reader.Read())
+                        conn.Open();
+                        var command = new SqlCommand(querry, conn);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            long dbID = (int)reader["doctor_id"];
-                            string dbPassword = (string)reader["hashed_pass"];
-                            string hashedNewPIN = null;
-                            if (dbID.CompareTo(docID) == 0 && (Encoding.Default.GetString(hashedPassword)).CompareTo(dbPassword) == 0)
+                            while (reader.Read())
                             {
-                                string lastName = (string)reader["doctor_last_name"];
-                                string firstName = (string)reader["doctor_first_name"];
-                                string specialisation = (string)reader["specialization"];
-
-                                if (reader["hashed_PIN"] == System.DBNull.Value)
+                                long dbID = (int)reader["doctor_id"];
+                                string dbPassword = (string)reader["hashed_pass"];
+                                string hashedNewPIN = null;
+                                if (dbID.CompareTo(docID) == 0 && (Encoding.Default.GetString(hashedPassword)).CompareTo(dbPassword) == 0)
                                 {
-                                    hashedNewPIN = updatePIN(dbID);
-                                    connected = true;
-                                    startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName,
-                                        System.Text.Encoding.UTF8.GetBytes(hashedNewPIN), DateTime.Now);
-                                }
-                                else
-                                    if (validatePIN() == true)
+                                    string lastName = (string)reader["doctor_last_name"];
+                                    string firstName = (string)reader["doctor_first_name"];
+                                    string specialisation = (string)reader["specialization"];
+
+                                    if (reader["hashed_PIN"] == System.DBNull.Value)
+                                    {
+                                        hashedNewPIN = updatePIN(dbID);
+                                        connected = true;
+                                        startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName,
+                                            System.Text.Encoding.UTF8.GetBytes(hashedNewPIN), DateTime.Now);
+                                    }
+                                    else
+                                        if (validatePIN() == true)
                                     {
                                         string dbPIN = (string)reader["hashed_PIN"];
                                         if ((Encoding.Default.GetString(hashedPIN)).CompareTo(dbPIN) == 0)
@@ -218,10 +219,16 @@ namespace BlockchainApp
                                             }
                                         }
                                     }
+                                }
                             }
+
                         }
-                        
                     }
+                }
+                catch(Exception ex)
+                {
+                    if (ex.Message.CompareTo("") == 0)
+                        MessageBox.Show("You are not allowed to connect to the server. Please contact the administrator for permission.");
                 }
                 
                 if(connected == false)

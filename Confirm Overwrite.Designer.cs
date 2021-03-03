@@ -88,7 +88,7 @@
             this.tbYes.Location = new System.Drawing.Point(165, 220);
             this.tbYes.Name = "tbYes";
             this.tbYes.Size = new System.Drawing.Size(100, 22);
-            this.tbYes.TabIndex = 8;
+            this.tbYes.TabIndex = 2;
             // 
             // label2
             // 

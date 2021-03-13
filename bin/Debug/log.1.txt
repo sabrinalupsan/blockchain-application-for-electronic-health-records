@@ -1,0 +1,42 @@
+2021-03-03 10:54:20.8284|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-03-03 10:55:24.6902|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-03-03 10:56:28.7719|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-03-03 10:59:16.2523|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-03-03 11:00:43.0718|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-03-03 11:01:10.1735|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 6290438.
+2021-03-03 11:10:52.9220|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-03-03 11:11:17.3429|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 5658230.
+2021-03-03 11:11:24.0962|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 5658230.
+2021-03-03 11:11:36.4623|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 5658230.
+2021-03-03 11:16:14.4443|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-03-03 11:53:34.3653|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-03-03 11:56:05.0229|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-03-03 12:00:40.7531|DEBUG|BlockchainApp.PatientLogin|The patient with ID 5658230 logged in.
+2021-03-03 12:30:14.8761|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-03-03 13:04:30.5358|WARN|BlockchainApp.AdminInterface|Database has been overwritten
+2021-03-03 16:23:07.4717|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-03-03 16:23:24.5060|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 5658230.
+2021-03-03 16:24:09.7438|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-03-03 16:24:53.2099|WARN|BlockchainApp.AdminInterface|Database has been overwritten
+2021-03-03 16:25:22.4155|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-03-03 16:25:55.0739|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 5658230.
+2021-03-03 16:26:59.2681|DEBUG|BlockchainApp.PatientLogin|The patient with ID 5658230 logged in.
+2021-03-03 16:27:20.8031|DEBUG|BlockchainApp.PatientLogin|The patient with ID 5658230 logged in.
+2021-03-03 16:33:15.3339|DEBUG|BlockchainApp.PatientLogin|The patient with ID 5658230 logged in.
+2021-03-03 16:34:09.5326|DEBUG|BlockchainApp.PatientLogin|The patient with ID 5658230 logged in.
+2021-03-03 16:52:54.2764|WARN|BlockchainApp.AdminInterface|Database has been overwritten
+2021-03-03 16:53:29.6017|WARN|BlockchainApp.AdminInterface|Database has been overwritten
+2021-03-03 16:53:45.7087|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-03-03 16:54:00.7479|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 5658230.
+2021-03-03 17:10:13.3044|WARN|BlockchainApp.AdminInterface|Database has been overwritten
+2021-03-05 17:08:45.3234|WARN|BlockchainApp.AdminInterface|Database has been overwritten
+2021-03-06 21:43:43.4121|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-03-06 21:44:54.6100|DEBUG|BlockchainApp.PatientLogin|The patient with ID 8534791 logged in.
+2021-03-06 21:46:00.2044|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1847583 logged in.
+2021-03-06 21:46:22.5193|DEBUG|BlockchainApp.DoctorInterface|Doctor 1847583 added patient 8534791 to his list.
+2021-03-06 21:46:58.7398|DEBUG|BlockchainApp.DoctorInterface|Doctor 1847583 added a record for patient 8534791.
+2021-03-06 21:47:54.5411|DEBUG|BlockchainApp.PatientLogin|The patient with ID 8534791 logged in.
+2021-03-06 21:48:38.4662|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1847583 logged in.
+2021-03-06 21:49:41.4249|WARN|BlockchainApp.AdminInterface|Database has been overwritten
+2021-03-06 22:01:31.2859|WARN|BlockchainApp.PatientLogin|The patient with IP 192.168.56.1 is repeatedly trying to log in.
+2021-03-10 15:54:03.9300|WARN|BlockchainApp.AdminInterface|Database has been overwritten

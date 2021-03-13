@@ -361,36 +361,6 @@ namespace BlockchainApp
             //btnSelectPacient.Enabled = true;
             btnAddNewRecord.Enabled = true;
         }
-
-        //private void btnSelectPacient_Click(object sender, EventArgs e)
-        //{
-        //    if (lvPatients.SelectedItems.Count > 0)
-        //    {
-        //        lbRecords.Items.Clear();
-        //        ListViewItem item = lvPatients.SelectedItems[0];
-        //        Patient patient = (Patient)item.Tag;
-
-        //        var populateListBoxQuerry = "SELECT appointment_title, appointment_description, appointment_date FROM Block " +
-        //            "WHERE doctor_id = " + doctor.docID + "AND patient_id = " + patient.patientID;
-
-        //        using (SqlConnection populateListBoxConn = new SqlConnection(builder.ConnectionString))
-        //        {
-        //            populateListBoxConn.Open();
-        //            var command = new SqlCommand(populateListBoxQuerry, populateListBoxConn);
-        //            using (SqlDataReader reader = command.ExecuteReader())
-        //                while (reader.Read())
-        //                {
-        //                    string title = (string)reader["appointment_title"];
-        //                    string description = (string)reader["appointment_description"];
-        //                    DateTime date = (DateTime)reader["appointment_date"];
-        //                    MedicalRecord record = new MedicalRecord(doctor.docID, patient.patientID, title, description, date);
-        //                    lbRecords.Items.Add(record);
-        //                }
-        //        }
-        //    }
-        //    else
-        //        MessageBox.Show("Please select a patient!");
-        //}
     
         private int generateIndex(SqlConnectionStringBuilder builder)
         {

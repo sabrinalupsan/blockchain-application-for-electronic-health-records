@@ -24,11 +24,6 @@ namespace BlockchainApp
             InitializeComponent();
             this.record = record;
             this.patient = patient;
-            //var skinManager = MaterialSkinManager.Instance;
-            //skinManager.AddFormToManage(this);
-            //skinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            //skinManager.ColorScheme = new ColorScheme(Primary.Pink200, Primary.Pink300, Primary.LightBlue200, Accent.LightBlue100, TextShade.WHITE);
-            //skinManager.
         }
 
         private void btnDone_Click(object sender, EventArgs e)

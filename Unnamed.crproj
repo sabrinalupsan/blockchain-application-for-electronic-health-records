@@ -1,0 +1,6 @@
+<project outputDir="D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\Confused" baseDir="D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp" xmlns="http://confuser.codeplex.com">
+  <rule pattern="true" preset="maximum" inherit="false" />
+  <module path="bin\Debug\System.Security.Cryptography.Algorithms.dll" />
+  <module path="bin\Debug\Microsoft.Identity.Client.dll" />
+  <module path="bin\Debug\Microsoft.Data.SqlClient.dll" />
+</project>

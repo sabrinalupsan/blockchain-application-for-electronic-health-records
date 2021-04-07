@@ -103,6 +103,7 @@
             this.Controls.Add(this.tbPassword);
             this.Name = "AdminLogin";
             this.Text = "Admin Login";
+            this.Load += new System.EventHandler(this.AdminLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

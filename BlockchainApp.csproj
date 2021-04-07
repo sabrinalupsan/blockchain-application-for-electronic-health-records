@@ -123,6 +123,12 @@
     <Compile Include="AdminLogin.Designer.cs">
       <DependentUpon>AdminLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="AreYouSure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AreYouSure.Designer.cs">
+      <DependentUpon>AreYouSure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Block.cs" />
     <Compile Include="Blockchain App.cs">
       <SubType>Form</SubType>
@@ -149,6 +155,7 @@
     <Compile Include="DoctorLogIn.Designer.cs">
       <DependentUpon>DoctorLogIn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Email.cs" />
     <Compile Include="Hash.cs" />
     <Compile Include="MedicalRecord.cs" />
     <Compile Include="MedicalRecordInterface.cs">
@@ -184,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdminLogin.resx">
       <DependentUpon>AdminLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AreYouSure.resx">
+      <DependentUpon>AreYouSure.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Blockchain App.resx">
       <DependentUpon>Blockchain App.cs</DependentUpon>

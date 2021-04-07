@@ -20,6 +20,7 @@ namespace BlockchainApp
         private List<Block> blocks = new List<Block>();
         private int successfulAuthentication = 0;
         private SqlConnectionStringBuilder builder;
+        private Email email;
 
         public DoctorInterface(Doctor doctor)
         {
@@ -27,6 +28,7 @@ namespace BlockchainApp
             this.doctor = doctor;
             doctor.patients = new List<Patient>();
             MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
+            email = Email.instance;
             builder = mySqlBuilder.builder;
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
@@ -36,11 +38,10 @@ namespace BlockchainApp
                 {
                     conn.Open();
                     using (SqlDataReader reader = command.ExecuteReader())
-                        if(!reader.HasRows)
+                        if (!reader.HasRows)
                             GenesisBlock();
                 }
             }
-
         }
 
         private byte[] computeHash(string toHash)
@@ -124,7 +125,7 @@ namespace BlockchainApp
 
                             using (SqlDataReader reader = command.ExecuteReader())
                                 while (reader.Read())
-                                    Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));  
+                                    Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
                         }
                     }
                     updateListView();
@@ -137,11 +138,11 @@ namespace BlockchainApp
                 else
                     MessageBox.Show("That ID does not correspond to any existing patient.");
             }
-            catch(FormatException)
+            catch (FormatException)
             {
                 MessageBox.Show("Please input a valid patient ID!");
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 if (ex.Number == 2627)
                     MessageBox.Show("You already have that patient!");
@@ -200,7 +201,7 @@ namespace BlockchainApp
             Details.Hide();
             //lbRecords.Visible = false;
         }
-        
+
         private void showControls()
         {
             lbRecords.Visible = true;
@@ -255,7 +256,7 @@ namespace BlockchainApp
             for (int i = j; i >= 0; i--)
             {
                 string substring = lines[i].Substring(24, (lines[i].Length - 24));
-                string toCompare = 
+                string toCompare =
                     "|WARN|BlockchainApp.DoctorInterface|The doctor with ID 4583018 and IP 26.235.128.98 is repeatedly trying to input the PIN code 1234. " + ip + " is repeatedly trying to log in.";
                 //de scris expresii regulate cu Cosmin
                 if (substring.CompareTo(toCompare) == 0)
@@ -276,7 +277,7 @@ namespace BlockchainApp
 
         private void tbPIN_Click(object sender, EventArgs e)
         {
-            tbPIN.Text = ""; 
+            tbPIN.Text = "";
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
@@ -361,7 +362,7 @@ namespace BlockchainApp
             //btnSelectPacient.Enabled = true;
             btnAddNewRecord.Enabled = true;
         }
-    
+
         private int generateIndex(SqlConnectionStringBuilder builder)
         {
             var querryString = "SELECT CAST(NEXT VALUE FOR block_indexes AS INT) val;";
@@ -396,7 +397,7 @@ namespace BlockchainApp
         {
             var leadingZeros = new string('0', difficulty);
 
-            while(hash.theHash.Substring(0, difficulty) != leadingZeros)
+            while (hash.theHash.Substring(0, difficulty) != leadingZeros)
             {
                 hash.nounce++;
                 hash.theHash = hash.computeHash();
@@ -415,11 +416,11 @@ namespace BlockchainApp
                     conn.Open();
 
                     using (SqlDataReader reader = command.ExecuteReader())
-                        while(reader.Read())
+                        while (reader.Read())
                             hash = (string)reader["hash_of_curr_block"];
                 }
             }
-            if(hash==null)
+            if (hash == null)
             {
                 MessageBox.Show("An error occured. Please refer to the administrator."); //YOU NEED TO PUT A DROP SEQUENCE!
             }
@@ -510,9 +511,16 @@ namespace BlockchainApp
             return true;
         }
 
+        private void logInsertRecord(long doctorID, long patientID)
+        {
+            Logger logger = LogManager.GetCurrentClassLogger();
+            logger.Debug("Doctor {0} added a record for patient {1}.", doctorID, patientID);
+        }
+
         private void btnAddNewRecord_Click(object sender, EventArgs e)
         {
-            if (validateRecord() == true && checkBlockchain()==true)
+            bool isBlockchainValid = checkBlockchain();
+            if (validateRecord() == true && isBlockchainValid==true)
             {
                 try
                 {
@@ -525,57 +533,75 @@ namespace BlockchainApp
                     ListViewItem item = lvPatients.SelectedItems[0];
                     Patient patient = (Patient)item.Tag;
                     long patientID = patient.patientID;
-
-                    using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+                    AreYouSure checkInterface = new AreYouSure(patient.lastName, patient.firstName, patient.patientID, title, details);
+                    if (checkInterface.ShowDialog() == DialogResult.OK)
                     {
-                        var querryString =
-                            "INSERT INTO Block (patient_id, doctor_id, appointment_date, appointment_title, appointment_description, nounce, block_timestamp, block_index, " +
-                            "hash_of_prev_block, hash_of_curr_block)" +
-                            "VALUES (@pacID, @docID, @date, @title, @description, @nounce, @dateNow, @index, @hashOfPrevBlock, @hashOfCurrBlock);";
-                        using (SqlCommand command = new SqlCommand(querryString, conn))
+                        using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                         {
-                            conn.Open();
-                            command.Parameters.AddWithValue("@pacID", patientID);
-                            command.Parameters.AddWithValue("@docID", doctor.docID);
-                            command.Parameters.AddWithValue("@date", date);
-                            command.Parameters.AddWithValue("@title", title);
-                            command.Parameters.AddWithValue("@index", generateIndex(builder));
-                            command.Parameters.AddWithValue("@description", details);
-                            string now = DateTime.Now.ToString("yyyy-MM-dd");
-                            command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
-                            string theHashOfPrevBlock = getLastBlockHash();
-                            command.Parameters.AddWithValue("@hashOfPrevBlock", theHashOfPrevBlock);
+                            var querryString =
+                                "INSERT INTO Block (patient_id, doctor_id, appointment_date, appointment_title, appointment_description, nounce, block_timestamp, block_index, " +
+                                "hash_of_prev_block, hash_of_curr_block)" +
+                                "VALUES (@pacID, @docID, @date, @title, @description, @nounce, @dateNow, @index, @hashOfPrevBlock, @hashOfCurrBlock);";
+                            using (SqlCommand command = new SqlCommand(querryString, conn))
+                            {
+                                conn.Open();
+                                command.Parameters.AddWithValue("@pacID", patientID);
+                                command.Parameters.AddWithValue("@docID", doctor.docID);
+                                command.Parameters.AddWithValue("@date", date);
+                                command.Parameters.AddWithValue("@title", title);
+                                command.Parameters.AddWithValue("@index", generateIndex(builder));
+                                command.Parameters.AddWithValue("@description", details);
+                                string now = DateTime.Now.ToString("yyyy-MM-dd");
+                                command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
+                                string theHashOfPrevBlock = getLastBlockHash();
+                                command.Parameters.AddWithValue("@hashOfPrevBlock", theHashOfPrevBlock);
 
-                            index = getIndex(builder);
+                                index = getIndex(builder);
 
-                            string toHash = patientID + doctor.docID + date + title + details + now + index + theHashOfPrevBlock;
-                            int nounce = 0;
-                            Hash hash = new Hash(nounce, toHash);
-                            proofOfWork(hash, 1);
-                            command.Parameters.AddWithValue("@nounce", hash.nounce);
-                            command.Parameters.AddWithValue("@hashOfCurrBlock", hash.computeHash());
+                                string toHash = patientID + doctor.docID + date + title + details + now + index + theHashOfPrevBlock;
+                                int nounce = 0;
+                                Hash hash = new Hash(nounce, toHash);
+                                proofOfWork(hash, 1);
+                                command.Parameters.AddWithValue("@nounce", hash.nounce);
+                                command.Parameters.AddWithValue("@hashOfCurrBlock", hash.computeHash());
 
-                            using (SqlDataReader reader = command.ExecuteReader())
-                                while (reader.Read())
-                                    Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                                using (SqlDataReader reader = command.ExecuteReader())
+                                    while (reader.Read())
+                                        Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                            }
                         }
+
+                        logInsertRecord(doctor.docID, patientID);
+                        MedicalRecord record = new MedicalRecord(doctor.docID, patientID, title, details, dateTime);
+                        progressBar.Value = 100;
+                        progressLabel.Text = "Appointment added!";
+                        clearControls();
+                        lbRecords.Items.Add(record);
                     }
-                    Logger logger = LogManager.GetCurrentClassLogger();
-                    logger.Debug("Doctor {0} added a record for patient {1}.", doctor.docID, patientID);
-                    MedicalRecord record = new MedicalRecord(doctor.docID, patientID, title, details, dateTime);
-                    progressBar.Value = 100;
-                    progressLabel.Text = "Appointment added!";
-                    clearControls();
-                    lbRecords.Items.Add(record);
                 }
                 catch (ArgumentOutOfRangeException)
                 {
                     MessageBox.Show("Please select a patient!");
                 }
-                catch(Microsoft.Data.SqlClient.SqlException ex)
+                catch (Microsoft.Data.SqlClient.SqlException ex)
                 {
                     MessageBox.Show(ex.Message);
                     //fix the error => drop sequence and restart it from where you left (SELECT LAST BLOCK and get its index
+                }
+                
+            }
+            else
+            {
+                if(isBlockchainValid == false)
+                {
+                    try
+                    {
+                        email.Send("lupsansabrina18@stud.ase.ro", "INVALID BLOCKCHAIN", "The blockchain was invalid. Immediate attention is required.");
+                    }
+                    catch(Exception)
+                    {
+                        MessageBox.Show("Invalid blockchain.");
+                    }
                 }
             }
         }

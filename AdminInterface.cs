@@ -24,7 +24,7 @@ namespace BlockchainApp
         private SqlConnectionStringBuilder builder;
         private List<Block> blocks = new List<Block>();
         private string backupFileName = "backup.bin";
-        Aes aes;
+        private Aes aes;
 
         public AdminInterface()
         {
@@ -137,6 +137,8 @@ namespace BlockchainApp
             tbPassword.Text = null;
             tbRePassword.Text = null;
             tbSpecialisation.Text = null;
+            tbDoctorEmailAddress.Text = null;
+
         }
 
         private void clearPatientControls()
@@ -147,6 +149,7 @@ namespace BlockchainApp
             dtpBirthday.Value = DateTime.Now;
             tbPatientLastName.Text = null;
             tbPatientREPass.Text = null;
+            tbPatientEmailAddress.Text = null;
         }
 
         private string saltPassword(string password, long ID)
@@ -175,10 +178,11 @@ namespace BlockchainApp
                 {
                     long docID = long.Parse(tbNewDocID.Text.Trim());
                     string lastName = tbLastName.Text.Trim().ToString();
-                    string firstName = tbLastName.Text.Trim().ToString();
+                    string firstName = tbFirstName.Text.Trim().ToString();
                     string specialization = tbSpecialisation.Text.Trim().ToString();
                     string password = tbPassword.Text.Trim().ToString();
                     string saltedPassword = saltPassword(password, docID);
+                    string email = tbDoctorEmailAddress.Text.Trim().ToString();
                     var hasher = SHA256.Create();
                     byte[] pass = System.Text.Encoding.UTF8.GetBytes(saltedPassword);
                     byte[] hashedPassword = hasher.ComputeHash(pass);
@@ -187,17 +191,18 @@ namespace BlockchainApp
                     {
 
                         var querryString =
-                            "INSERT INTO Doctors (doctor_id, doctor_last_name, doctor_first_name, specialization, hashed_pass, last_login)" +
-                            "VALUES (@docID, @lastName, @firstName, @specialization, @hashedPass, @dateNow);";
+                            "INSERT INTO Doctors (doctor_id, doctor_last_name, doctor_first_name, specialization, hashed_pass, last_login, email)" +
+                            "VALUES (@docID, @lastName, @firstName, @specialization, @hashedPass, @dateNow, @email);";
                         using (SqlCommand command = new SqlCommand(querryString, conn))
                         {
                             conn.Open();
                             command.Parameters.AddWithValue("@docID", tbNewDocID.Text.Trim().ToString());
-                            command.Parameters.AddWithValue("@lastName", tbLastName.Text.Trim().ToString());
-                            command.Parameters.AddWithValue("@firstName", tbFirstName.Text.Trim().ToString());
-                            command.Parameters.AddWithValue("@specialization", tbSpecialisation.Text.Trim().ToString());
+                            command.Parameters.AddWithValue("@lastName", lastName);
+                            command.Parameters.AddWithValue("@firstName", firstName);
+                            command.Parameters.AddWithValue("@specialization", specialization);
                             command.Parameters.AddWithValue("@hashedPass", Encoding.Default.GetString(hashedPassword));
                             command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
+                            command.Parameters.AddWithValue("@email", email);
 
                             using (SqlDataReader reader = command.ExecuteReader())
                                 while (reader.Read())
@@ -256,23 +261,25 @@ namespace BlockchainApp
                     string password = tbPatientPassword.Text.Trim().ToString();
                     string saltedPassword = saltPassword(password, patientID);
                     string hashedPass = computeHash2(saltedPassword);
+                    string email = tbPatientEmailAddress.Text.Trim().ToString();
                     DateTime birthday = dtpBirthday.Value;
 
                     using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                     {
 
                         var querryString =
-                            "INSERT INTO Patients (patient_id, patient_last_name, patient_first_name, hashed_pass, last_login, birthday)" +
-                            "VALUES (@pacID, @lastName, @firstName, @hashedPass, @dateNow, @birthday);";
+                            "INSERT INTO Patients (patient_id, patient_last_name, patient_first_name, hashed_pass, last_login, birthday, email)" +
+                            "VALUES (@pacID, @lastName, @firstName, @hashedPass, @dateNow, @birthday, @email);";
                         using (SqlCommand command = new SqlCommand(querryString, conn))
                         {
                             conn.Open();
                             command.Parameters.AddWithValue("@pacID", tbPatientID.Text.Trim().ToString());
-                            command.Parameters.AddWithValue("@lastName", tbPatientLastName.Text.Trim().ToString());
-                            command.Parameters.AddWithValue("@firstName", tbPatientFirstName.Text.Trim().ToString());
+                            command.Parameters.AddWithValue("@lastName", lastName);
+                            command.Parameters.AddWithValue("@firstName", firstName);
                             command.Parameters.AddWithValue("@hashedPass", hashedPass);
                             command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
                             command.Parameters.AddWithValue("@birthday", birthday.ToString("yyyy-MM-dd"));
+                            command.Parameters.AddWithValue("@email", email);
 
                             using (SqlDataReader reader = command.ExecuteReader())
                             {
@@ -293,7 +300,7 @@ namespace BlockchainApp
                 string s = "Violation of PRIMARY KEY constraint";
                 if (ex.Message.Substring(0, s.Length).CompareTo(s)==0)
                 {
-                    MessageBox.Show("Database error! This patient is already present in the database.");
+                    MessageBox.Show("This patient is already present in the database.");
                 }
             }
         }
@@ -312,166 +319,6 @@ namespace BlockchainApp
         {
             clearDoctorControls();
         }
-
-        //private void tbNewDocID_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider.SetError(tbNewDocID, null);
-        //}
-
-        //private void tbNewDocID_Validating(object sender, CancelEventArgs e)
-        //{
-        //    if (tbNewDocID.Text.Trim().Length != 7)
-        //    {
-        //        errorProvider.SetError(tbNewDocID, "Wrong ID.");
-        //        e.Cancel = true;
-        //    }
-        //}
-
-        //private void tbLastName_Validating(object sender, CancelEventArgs e)
-        //{
-        //    if(tbLastName.Text.Trim().Length < 1)
-        //    {
-        //        errorProvider.SetError(tbLastName, "Your name is not valid!");
-        //        e.Cancel = true;
-        //    }
-        //}
-
-        //private void tbLastName_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider.SetError(tbLastName, null);
-        //}
-
-        //private void tbFirstName_Validating(object sender, CancelEventArgs e)
-        //{
-        //    if (tbFirstName.Text.Trim().Length < 1)
-        //    {
-        //        errorProvider.SetError(tbLastName, "Your name is not valid!");
-        //        e.Cancel = true;
-        //    }
-        //}
-
-        //private void tbFirstName_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider.SetError(tbFirstName, null);
-        //}
-
-        //private void tbPassword_Validating(object sender, CancelEventArgs e)
-        //{
-        //    if (tbPassword.Text.Trim().Length < 5 || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
-        //        || !(tbPassword.Text.Trim().Any(char.IsLetter)) || !(tbPassword.Text.Trim().Any(char.IsNumber)) ||
-        //            !(tbPassword.Text.Trim().Any(char.IsPunctuation)))
-        //    {
-        //        errorProvider.SetError(tbPassword, "Your passwords need to include a number, an uppercase character, a special symbol and " +
-        //            "at least 5 characters!");
-        //        e.Cancel = true;
-        //    }
-        //}
-
-        //private void tbPassword_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider.SetError(tbPassword, null);
-        //}
-
-        //private void tbRePassword_Validating(object sender, CancelEventArgs e)
-        //{
-        //    if(tbRePassword.Text.Trim().CompareTo(tbPassword.Text.Trim())!=0)
-        //    {
-        //        errorProvider.SetError(tbRePassword, "The passwords don't match!");
-        //        e.Cancel = true;
-        //    }
-        //}
-
-        //private void tbRePassword_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider.SetError(tbRePassword, null);
-        //}
-
-        //private void tbPacientID_Validating(object sender, CancelEventArgs e)
-        //{
-        //    if (tbPacientID.Text.Trim().Length != 7)
-        //    {
-        //        errorProvider2.SetError(tbPacientID, "Wrong ID.");
-        //        e.Cancel = true;
-        //    }
-        //}
-
-        //private void tbPacientID_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider2.SetError(tbPacientID, null);
-        //}
-
-        //private void tbPacientLastName_Validating(object sender, CancelEventArgs e)
-        //{
-        //    if (tbPacientLastName.Text.Trim().Length < 1)
-        //    {
-        //        errorProvider2.SetError(tbPacientLastName, "Your name is not valid!");
-        //        e.Cancel = true;
-        //    }
-        //}
-
-        //private void tbPacientLastName_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider2.SetError(tbPacientLastName, null);
-        //}
-
-        //private void tbPacientFirstName_Validating(object sender, CancelEventArgs e)
-        //{
-        //    if (tbPacientFirstName.Text.Trim().Length < 1)
-        //    {
-        //        errorProvider2.SetError(tbPacientFirstName, "Your name is not valid!");
-        //        e.Cancel = true;
-        //    }
-        //}
-
-        //private void tbPacientFirstName_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider2.SetError(tbPacientFirstName, null);
-        //}
-
-        //private void tbPacientPassword_Validating(object sender, CancelEventArgs e)
-        //{
-        //    if (tbPacientPassword.Text.Trim().Length < 5 || !(tbPacientPassword.Text.Trim().Any(char.IsUpper)) || !(tbPacientPassword.Text.Trim().Any(char.IsLower))
-        //        || !(tbPacientPassword.Text.Trim().Any(char.IsLetter)) || !(tbPacientPassword.Text.Trim().Any(char.IsNumber)) ||
-        //            !(tbPacientPassword.Text.Trim().Any(char.IsPunctuation)))
-        //    {
-        //        errorProvider2.SetError(tbPacientPassword, "Your passwords need to include a number, an uppercase character, a special symbol and " +
-        //            "at least 5 characters!");
-        //        e.Cancel = true;
-        //    }
-        //}
-
-        //private void tbPacientPassword_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider2.SetError(tbPacientPassword, null);
-        //}
-
-        //private void tbPacientREPass_Validating(object sender, CancelEventArgs e)
-        //{
-        //    if (tbPacientPassword.Text.Trim().CompareTo(tbPacientREPass.Text.Trim()) != 0)
-        //    {
-        //        errorProvider2.SetError(tbPacientREPass, "The passwords don't match!");
-        //        e.Cancel = true;
-        //    }
-        //}
-
-        //private void tbPacientREPass_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider2.SetError(tbPacientREPass, null);
-        //}
-
-        //private void dtpBirthday_Validating(object sender, CancelEventArgs e)
-        //{
-        //    if(dtpBirthday.Value < DateTime.Now)
-        //    {
-        //        errorProvider2.SetError(dtpBirthday, "Invalid birthdate!");
-        //        e.Cancel = true;
-        //    }
-        //}
-
-        //private void dtpBirthday_Validated(object sender, EventArgs e)
-        //{
-        //    errorProvider2.SetError(dtpBirthday, null);
-        //}
 
         private bool checkBlockchain()
         {
@@ -544,7 +391,8 @@ namespace BlockchainApp
         {
             try
             {
-                if (checkBlockchain() == true)
+                bool isBlockchainValid = checkBlockchain();
+                if (isBlockchainValid == true)
                 {
                     //generate IV and write to a new file
                     aes.GenerateIV();
@@ -556,7 +404,7 @@ namespace BlockchainApp
                     using (FileStream fs = new FileStream(backupFileName, FileMode.Create))
                     {
                         using (CryptoStream cs = new CryptoStream(fs, aes.CreateEncryptor(), CryptoStreamMode.Write))
-                        { 
+                        {
                             new BinaryFormatter().Serialize(cs, blocks);
                         }
                     }
@@ -572,7 +420,9 @@ namespace BlockchainApp
                     updateLastBackup();
                 }
                 else
-                    MessageBox.Show("CRITICAL ERROR. BLOCKCHAIN HAS BEEN COMPROMISED.");
+                {
+                    MessageBox.Show("The blockchain is invalid!");
+                }
             }
             catch(Exception ex)
             {

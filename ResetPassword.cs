@@ -16,12 +16,25 @@ namespace BlockchainApp
     public partial class ResetPassword : MaterialSkin.Controls.MaterialForm
     {
         private SqlConnectionStringBuilder builder;
+        private Email email;
+        private string verificationCode;
 
         public ResetPassword()
         {
             InitializeComponent();
             MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
             builder = mySqlBuilder.builder;
+            email = Email.instance;
+            verificationCode = generateVerificationCode();
+            prepareForm();
+        }
+
+        private void prepareForm()
+        {
+            panel2.Visible = false;
+            panel3.Visible = false;
+            progressBar.Value = 0;
+            statusLabel.Text = "";
         }
 
         private string computeHash(string toHash)
@@ -44,33 +57,94 @@ namespace BlockchainApp
             return saltedPassword;
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private bool checkInitialData()
         {
-            Close();
+            long person_id = long.Parse(tbID.Text.Trim().ToString());
+            string personID = tbID.Text.Trim().ToString();
+
+            string stringPin = tbPIN.Text.Trim().ToString();
+            int PIN = int.Parse(stringPin);
+
+            if (personID.Length != 7 || (personID.All(char.IsNumber) == false))
+            {
+                MessageBox.Show("The ID is invalid.");
+                return false;
+            }
+            if (stringPin.Length != 4 || (stringPin.All(char.IsNumber) == false))
+            {
+                MessageBox.Show("The ID is invalid.");
+                return false;
+            }
+            try
+            {
+                var selectDoctorPin = "SELECT hashed_PIN, email FROM Doctors WHERE doctor_id = " + person_id; //check for SQL injection
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    var command = new SqlCommand(selectDoctorPin, connection);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        reader.Read();
+                        if (reader.HasRows == true)
+                        {
+                            string hashedPIN = computeHash(PIN.ToString());
+                            string dbPIN = (string)reader["hashed_PIN"];
+                            if (hashedPIN.CompareTo(dbPIN) != 0)
+                                return false;
+                            string destinationEmail = tbEmail.Text.Trim().ToString();
+                            string databaseEmail = (string)reader["email"];
+                            if (destinationEmail.CompareTo(databaseEmail) != 0)
+                                return false;
+                            return true;
+                        }
+                    }
+                }
+
+                var selectPatientPIN = "SELECT hashed_PIN, email FROM Patients WHERE patient_id = " + person_id; //check for SQL injection
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    var command = new SqlCommand(selectPatientPIN, connection);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        reader.Read();
+                        if (reader.HasRows == true)
+                        {
+                            string hashedPIN = computeHash(PIN.ToString());
+                            string dbPIN = (string)reader["hashed_PIN"];
+                            if (hashedPIN.CompareTo(dbPIN) != 0)
+                                return false;
+                            string destinationEmail = tbEmail.Text.Trim().ToString();
+                            string databaseEmail = (string)reader["email"];
+                            if (destinationEmail.CompareTo(databaseEmail) != 0)
+                                return false;
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch(System.InvalidCastException)
+            {
+                return false;
+            }
+            return true;
         }
 
         private bool checkData()
         {
-            if (tbID.Text.Trim().Length != 7 || (tbID.Text.Trim().All(char.IsNumber) == false))
-            {
-                MessageBox.Show("The ID is invalid.");
-                return false;
-            }
-            if (tbPIN.Text.Trim().Length != 4 || (tbPIN.Text.Trim().All(char.IsNumber) == false))
-            {
-                MessageBox.Show("The ID is invalid.");
-                return false;
-            }
+            
             if (tbPassword.Text.Trim().Length < 5 || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
                 || !(tbPassword.Text.Trim().Any(char.IsLetter)) || !(tbPassword.Text.Trim().Any(char.IsNumber)) ||
                     !(tbPassword.Text.Trim().Any(char.IsPunctuation)))
             {
+                DialogResult = DialogResult.None;
                 MessageBox.Show("Your password needs to include a number, a lowercase character, an uppercase character, a special symbol and " +
                     "at least 5 characters!");
                 return false;
             }
-            if (tbRePassword.Text.Trim().CompareTo(tbRePassword.Text.Trim()) != 0)
+            if (tbPassword.Text.Trim().CompareTo(tbRePassword.Text.Trim()) != 0)
             {
+                DialogResult = DialogResult.None;
                 MessageBox.Show("The passwords don't match!");
                 return false;
             }
@@ -90,14 +164,14 @@ namespace BlockchainApp
                 {
 
                     var querryDoctors =
-                        "UPDATE Doctors SET hashed_pass = @hashedpassword WHERE hashed_pin = @hashedPIN;";
+                        "UPDATE Doctors SET hashed_pass = @hashedpassword WHERE doctor_id = @doctor_id;";
                     var querryPatients =
-                        "UPDATE Doctors SET hashed_pass = @hashedpassword WHERE hashed_pin = @hashedPIN;";
+                        "UPDATE Patients SET hashed_pass = @hashedpassword WHERE patient_id = @patient_id;";
                     using (SqlCommand doctorsCommand = new SqlCommand(querryDoctors, conn))
                     {
                         conn.Open();
                         doctorsCommand.Parameters.AddWithValue("@hashedpassword", hashedPassword);
-                        doctorsCommand.Parameters.AddWithValue("@hashedPIN", hashedPIN);
+                        doctorsCommand.Parameters.AddWithValue("@doctor_id", ID);
 
                         using (SqlDataReader reader = doctorsCommand.ExecuteReader())
                         {
@@ -110,7 +184,7 @@ namespace BlockchainApp
                     using (SqlCommand patientsCommand = new SqlCommand(querryPatients, conn))
                     {
                         patientsCommand.Parameters.AddWithValue("@hashedpassword", hashedPassword);
-                        patientsCommand.Parameters.AddWithValue("@hashedPIN", hashedPIN);
+                        patientsCommand.Parameters.AddWithValue("@patient_id", ID);
 
                         using (SqlDataReader reader = patientsCommand.ExecuteReader())
                         {
@@ -121,11 +195,72 @@ namespace BlockchainApp
                         }
                     }
                 }
-
                 Logger logger = LogManager.GetCurrentClassLogger();
-                logger.Debug("The user with the ID {0} just changed their password.", ID);
-                Close();
+                logger.Info("The user with the ID {0} just changed their password.", ID);
+                progressBar.Value = 100;
+                statusLabel.Text = "The password was reset.";
+                DialogResult = DialogResult.None;
             }
         }
+
+        private bool checkVerificationCode()
+        {
+            if (tbVerificationCode.Text.Trim().ToString().CompareTo(verificationCode) == 0)
+                return true;
+            return false;
+        }
+
+        private string generateVerificationCode()
+        {
+            Random r = new Random();
+            int randNum = r.Next(1000000);
+            string sixDigitNumber = randNum.ToString("D6");
+            return sixDigitNumber;
+        }
+
+        private void btnSendVerificationCode_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.None;
+            string id = tbID.Text.Trim().ToString();
+            string PIN = tbPIN.Text.Trim().ToString();
+            string destinationEmail = tbEmail.Text.Trim().ToString();
+            try
+            {
+                if (checkInitialData() == true)
+                {
+                    email.Send(destinationEmail, "Password renewal verification code", "Your verification code is: " + verificationCode);
+                    MessageBox.Show("An email has been sent! Make sure to check in spam too.");
+                    panel3.Visible = true;
+                }
+                else
+                    MessageBox.Show("Incorrect credentials");
+            }
+            catch (System.FormatException ex)
+            {
+                if (ex.Message.CompareTo("The specified string is not in the form required for an e-mail address.") == 0)
+                    MessageBox.Show("Wrong email specified.");
+                if(ex.Message.CompareTo("Input string was not in a correct format.")==0)
+                    MessageBox.Show("Incorrect credentials.");
+
+            }
+
+        }
+
+        private void btnCheckVerificationCode_Click(object sender, EventArgs e)
+        {
+            if (checkVerificationCode() == true)
+            {
+                DialogResult = DialogResult.None;
+                panel1.Visible = false;
+                panel3.Visible = false;
+                panel2.Visible = true;
+            }
+            else
+            {
+                DialogResult = DialogResult.None;
+                MessageBox.Show("Wrong code!");
+            }
+        }
+
     }
 }

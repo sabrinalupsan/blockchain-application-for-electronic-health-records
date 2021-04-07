@@ -29,6 +29,8 @@ namespace BlockchainApp
         public DateTime Birthdate;
         public DateTime birthDate { get { return Birthdate; } set { Birthdate = value; } }
 
+        private string EmailAddress;
+        public string emailAddress { get { return EmailAddress; } set { EmailAddress = value; } }
 
         public Patient() { }
 
@@ -60,5 +62,18 @@ namespace BlockchainApp
             FirstName = firstName;
             Birthdate = bday;
         }
+
+        public Patient(long patientID, byte[] passHashed, byte[] cardPIN, List<Doctor> doctors, string lastName, string firstName, DateTime bday, string emailAddress)
+        {
+            PatientID = patientID;
+            PassHashed = passHashed;
+            CardPIN = cardPIN;
+            Doctors = doctors;
+            LastName = lastName;
+            FirstName = firstName;
+            Birthdate = bday;
+            EmailAddress = emailAddress;
+        }
+
     }
 }

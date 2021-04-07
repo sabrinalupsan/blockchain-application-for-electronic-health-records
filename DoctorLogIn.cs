@@ -21,12 +21,14 @@ namespace BlockchainApp
     {
         private int successfulAuthentication = 0;
         private SqlConnectionStringBuilder builder;
+        private Email email;
 
         public DoctorLogIn()
         {
             InitializeComponent();
             MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
             builder = mySqlBuilder.builder;
+            email = Email.instance;
         }
 
         private int generatePIN()
@@ -94,10 +96,11 @@ namespace BlockchainApp
             }
         }
 
-        private string updatePIN(long doctorID)
+        private string updatePIN(long doctorID, string destinationEmail)
         {
             int newPIN = generatePIN();
-            MessageBox.Show("Your new token PIN for the next 30 days is: " + newPIN.ToString());
+            email.Send(destinationEmail, "New PIN", "Your new token PIN for the next 30 days is " + newPIN.ToString()); //is this ok tho?
+            MessageBox.Show("Your new PIN was sent via email");
             string hashedNewPIN = computeHash2(newPIN.ToString());
             //var builder = build();
             var updatePINquery = "UPDATE Doctors SET hashed_PIN = @hashPIN WHERE doctor_id = " + doctorID + ";";
@@ -190,10 +193,11 @@ namespace BlockchainApp
                                     string lastName = (string)reader["doctor_last_name"];
                                     string firstName = (string)reader["doctor_first_name"];
                                     string specialisation = (string)reader["specialization"];
+                                    string email = (string)reader["email"];
 
                                     if (reader["hashed_PIN"] == System.DBNull.Value)
                                     {
-                                        hashedNewPIN = updatePIN(dbID);
+                                        hashedNewPIN = updatePIN(dbID, email);
                                         connected = true;
                                         startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName,
                                             System.Text.Encoding.UTF8.GetBytes(hashedNewPIN), DateTime.Now);
@@ -207,7 +211,7 @@ namespace BlockchainApp
                                             DateTime theDate = (DateTime)reader["last_login"];
                                             if ((DateTime.Today.Date - theDate.Date).Days > 30)
                                             {
-                                                hashedNewPIN = updatePIN(docID);
+                                                hashedNewPIN = updatePIN(docID, email);
                                                 connected = true;
                                                 startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName,
                                                 System.Text.Encoding.UTF8.GetBytes(hashedNewPIN), DateTime.Now);
@@ -227,7 +231,7 @@ namespace BlockchainApp
                 }
                 catch(Exception ex)
                 {
-                    if (ex.Message.CompareTo("") == 0)
+                    if (ex.Message.CompareTo("") == 0) //yeah you need to put something here
                         MessageBox.Show("You are not allowed to connect to the server. Please contact the administrator for permission.");
                 }
                 
@@ -245,6 +249,9 @@ namespace BlockchainApp
                     string myIP = getIP();
                     logger.Warn("The doctor with IP {0} is repeatedly trying to log in.", myIP);
                     MessageBox.Show("Invalid credentials and too many attempts! You need to wait 30 seconds to log in again.");
+                    email.Send("lupsansabrina18@stud.ase.ro", "Too many log in attempts", 
+                        "Someone is repeatedly trying to log in into an account. It is for the doctor with the ID " 
+                        + tbDocID.Text.ToString() + " and IP "+myIP);
                     Wait(30);
                 }
 

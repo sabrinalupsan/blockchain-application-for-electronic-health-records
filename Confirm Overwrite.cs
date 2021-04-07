@@ -51,20 +51,14 @@ namespace BlockchainApp
                     MessageBox.Show("You need to write the password.");
                 else
                     if(saltedPassword.CompareTo("12blockchainapplication3") != 0)
-                    {
                         MessageBox.Show("Wrong password.");
-                    }
                     else
                         if(tbYes.Text.ToString().CompareTo("yes") != 0)
-                        {
                             MessageBox.Show("Please type yes if you are sure you want to overwrite the database.");
-                        }
                 successfulAuthentication++;
             }
             if (successfulAuthentication > 5)
-            {
                 logger.Warn("Someone is repeateldy trying to corrupt the database!");
-            }
         }
 
         private void CancelBtn_Click_1(object sender, EventArgs e)

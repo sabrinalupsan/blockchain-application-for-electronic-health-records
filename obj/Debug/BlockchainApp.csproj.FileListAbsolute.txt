@@ -59,3 +59,4 @@ D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\Micro
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\Microsoft.Data.Tools.Utilities.dll
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\bin\Debug\Microsoft.SqlServer.Dac.dll
 D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.Confirm_Overwrite.resources
+D:\Facultate an 2 semestru 2\Windows\BlockchainApp\BlockchainApp\obj\Debug\BlockchainApp.AreYouSure.resources

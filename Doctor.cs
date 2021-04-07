@@ -11,8 +11,8 @@ namespace BlockchainApp
         private long DocID;
         public long docID { get { return DocID; } set { DocID = value; } }
 
-        private byte[] PassHashed;
-        public byte[] passHashed { get { return PassHashed; } }
+        private byte[] HashedPassword;
+        public byte[] hashedPassword { get { return HashedPassword; } }
 
         private string Specialisation;
         public string specialisation { get { return Specialisation; } set { Specialisation = value; } }
@@ -26,34 +26,45 @@ namespace BlockchainApp
         private List<Patient> Patients;
         public List<Patient> patients { get { return Patients; } set { Patients = value; } }
 
-        private byte[] TokenHashed;
-        public byte[] tokenHashed { get { return TokenHashed; } }
+        private byte[] PINcode;
+        public byte[] PINCode { get { return PINcode; } }
 
-        public DateTime lastLogin;
+        private string EmailAddress;
+        public string emailAddress { get { return EmailAddress; } set { EmailAddress = value; } }
 
         public Doctor() { }
 
         public Doctor(long docID, byte[] passHashed, string specialisation, string lastName, string firstName, byte[] tokenHashed, DateTime lastLogin)
         {
             DocID = docID;
-            PassHashed = passHashed;
+            HashedPassword = passHashed;
             Specialisation = specialisation;
             LastName = lastName;
             FirstName = firstName;
-            TokenHashed = tokenHashed;
-            this.lastLogin = lastLogin;
+            PINcode = tokenHashed;
         }
 
         public Doctor(long docID, byte[] passHashed, string specialisation, string lastName, string firstName, List<Patient> patients, byte[] tokenHashed, DateTime lastLogin)
         {
             DocID = docID;
-            PassHashed = passHashed;
+            HashedPassword = passHashed;
             Specialisation = specialisation;
             LastName = lastName;
             FirstName = firstName;
             Patients = patients;
-            TokenHashed = tokenHashed;
-            this.lastLogin = lastLogin;
+            PINcode = tokenHashed;
+        }
+
+        public Doctor(long docID, byte[] passHashed, string specialisation, string lastName, string firstName, List<Patient> patients, byte[] tokenHashed, DateTime lastLogin, string emailAddress)
+        {
+            DocID = docID;
+            HashedPassword = passHashed;
+            Specialisation = specialisation;
+            LastName = lastName;
+            FirstName = firstName;
+            Patients = patients;
+            PINcode = tokenHashed;
+            EmailAddress = emailAddress;
         }
     }
 }

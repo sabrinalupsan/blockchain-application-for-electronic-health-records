@@ -1,4 +1,1 @@
-2021-03-13 15:43:25.2779|DEBUG|BlockchainApp.PatientLogin|The patient with ID 5658230 logged in.
-2021-03-13 15:44:05.5564|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
-2021-03-13 15:48:01.6780|WARN|BlockchainApp.AdminInterface|Database has been overwritten
-2021-03-13 15:49:34.2845|WARN|BlockchainApp.DoctorLogIn|The doctor with IP 192.168.56.1 is repeatedly trying to log in.
+2021-04-07 22:59:08.6448|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 7290163 logged in.

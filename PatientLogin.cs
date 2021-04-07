@@ -20,12 +20,14 @@ namespace BlockchainApp
         
         private int successfulAuthentication = 0;
         private SqlConnectionStringBuilder builder;
+        private Email email;
 
         public PatientLogin()
         {
             InitializeComponent();
             MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
             builder = mySqlBuilder.builder;
+            email = Email.instance;
         }
 
         private byte[] computeHash(string toHash)
@@ -135,9 +137,20 @@ namespace BlockchainApp
             return true;
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void freezeAndWarnRepeatedLogIn()
         {
             Logger logger = LogManager.GetCurrentClassLogger();
+            string myIP = getIP();
+            logger.Warn("The patient with IP {0} is repeatedly trying to log in.", myIP);
+            MessageBox.Show("Invalid credentials and too many attempts! You need to wait 30 seconds to log in again.");
+            email.Send("lupsansabrina18@stud.ase.ro", "Too many log in attempts",
+            "Someone is repeatedly trying to log in into an account. It is for the patient with the ID "
+            + tbPatientID.Text.ToString() + " and IP " + myIP);
+            Wait(30);
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
             string checkID = tbPatientID.Text.Trim().ToString();
             bool warned = false; //to make sure we don't send two MessageBox warnings about wrong credentials
             try
@@ -252,24 +265,14 @@ namespace BlockchainApp
                 {
                     successfulAuthentication++;
                     if (successfulAuthentication > 4)
-                    {
-                        string myIP = getIP();
-                        logger.Warn("The patient with IP {0} is repeatedly trying to log in.", myIP);
-                        MessageBox.Show("Invalid credentials and too many attempts! You need to wait 30 seconds to log in again.");
-                        Wait(30);
-                    }
+                        freezeAndWarnRepeatedLogIn();
                 }
             }
             catch (FormatException)
             {
                 successfulAuthentication++;
                 if (successfulAuthentication > 4)
-                {
-                    string myIP = getIP();
-                    logger.Warn("The patient with IP {0} is repeatedly trying to log in.", myIP);
-                    MessageBox.Show("Invalid credentials and too many attempts! You need to wait 30 seconds to log in again.");
-                    Wait(30);
-                }
+                    freezeAndWarnRepeatedLogIn();
             }
             
         }

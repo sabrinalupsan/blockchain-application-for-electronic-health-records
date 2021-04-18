@@ -33,6 +33,7 @@
             this.OKbtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbPassword
@@ -84,11 +85,22 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(33, 117);
+            this.label2.Location = new System.Drawing.Point(44, 103);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(304, 24);
+            this.label2.Size = new System.Drawing.Size(293, 24);
             this.label2.TabIndex = 9;
-            this.label2.Text = "Unauthorized access is prohoibited";
+            this.label2.Text = "Unauthorized access is prohibited";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(85, 136);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(200, 24);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Every action is logged.";
             // 
             // AdminLogin
             // 
@@ -96,6 +108,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(380, 308);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.OKbtn);
@@ -116,5 +129,6 @@
         private System.Windows.Forms.Button OKbtn;
         private System.Windows.Forms.Button CancelBtn;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

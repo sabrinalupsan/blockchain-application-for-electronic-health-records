@@ -115,9 +115,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(32, 185);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 17);
+            this.label3.Size = new System.Drawing.Size(65, 17);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Token PIN";
+            this.label3.Text = "PIN code";
             // 
             // tbPIN
             // 

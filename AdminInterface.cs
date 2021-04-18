@@ -55,7 +55,7 @@ namespace BlockchainApp
 
         private bool validateDoctor()
         {
-            if (tbNewDocID.Text.Trim().Length != 7)
+            if (tbDoctorID.Text.Trim().Length != 7)
             {
                 MessageBox.Show("The ID is incorrect.");
                 return false;
@@ -131,7 +131,7 @@ namespace BlockchainApp
 
         private void clearDoctorControls()
         {
-            tbNewDocID.Text = null;
+            tbDoctorID.Text = null;
             tbFirstName.Text = null;
             tbLastName.Text = null;
             tbPassword.Text = null;
@@ -176,7 +176,7 @@ namespace BlockchainApp
             {
                 if (validateDoctor() == true)
                 {
-                    long docID = long.Parse(tbNewDocID.Text.Trim());
+                    long docID = long.Parse(tbDoctorID.Text.Trim());
                     string lastName = tbLastName.Text.Trim().ToString();
                     string firstName = tbFirstName.Text.Trim().ToString();
                     string specialization = tbSpecialisation.Text.Trim().ToString();
@@ -187,26 +187,23 @@ namespace BlockchainApp
                     byte[] pass = System.Text.Encoding.UTF8.GetBytes(saltedPassword);
                     byte[] hashedPassword = hasher.ComputeHash(pass);
 
-                    using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+                    using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                     {
 
                         var querryString =
-                            "INSERT INTO Doctors (doctor_id, doctor_last_name, doctor_first_name, specialization, hashed_pass, last_login, email)" +
-                            "VALUES (@docID, @lastName, @firstName, @specialization, @hashedPass, @dateNow, @email);";
-                        using (SqlCommand command = new SqlCommand(querryString, conn))
+                            "INSERT INTO Doctors (doctor_id, doctor_last_name, doctor_first_name, specialization, hashed_pass, last_login, email)" 
+                            + "VALUES (@doctorID, @lastName, @firstName, @specialization, @hashedPassword, @dateOfToday, @email);";
+                        using (SqlCommand command = new SqlCommand(querryString, connection))
                         {
-                            conn.Open();
-                            command.Parameters.AddWithValue("@docID", tbNewDocID.Text.Trim().ToString());
+                            connection.Open();
+                            command.Parameters.AddWithValue("@doctorID", tbDoctorID.Text.Trim().ToString());
                             command.Parameters.AddWithValue("@lastName", lastName);
                             command.Parameters.AddWithValue("@firstName", firstName);
                             command.Parameters.AddWithValue("@specialization", specialization);
-                            command.Parameters.AddWithValue("@hashedPass", Encoding.Default.GetString(hashedPassword));
-                            command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
+                            command.Parameters.AddWithValue("@hashedPassword", Encoding.Default.GetString(hashedPassword));
+                            command.Parameters.AddWithValue("@dateOfToday", DateTime.Now.ToString("yyyy-MM-dd"));
                             command.Parameters.AddWithValue("@email", email);
-
-                            using (SqlDataReader reader = command.ExecuteReader())
-                                while (reader.Read())
-                                    Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                            command.ExecuteNonQuery();
                         }
                     }
                     progressBar.Value = 100;
@@ -226,25 +223,21 @@ namespace BlockchainApp
 
         private void GenesisBlock()
         {
-            using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
-            {
+            using (SqlConnection conn = new SqlConnection(builder.ConnectionString)) {
                 var querryString =
-                    "INSERT INTO Block (patient_id, doctor_id, appointment_date, appointment_description, appointment_title, block_timestamp, block_index, " +
-                    "hash_of_prev_block, hash_of_curr_block)" +
-                    "VALUES (-1, -1, @date, 'no description', 'no title', @dateNow, 0, 0, @hashOfCurrBlock);";
-                using (SqlCommand command = new SqlCommand(querryString, conn))
-                {
+                    "INSERT INTO Block (patient_id, doctor_id, appointment_date, appointment_description, appointment_title, block_timestamp, " +
+                    "block_index, hash_of_prev_block, hash_of_curr_block)" +
+                    "VALUES (-1, -1, @date, 'no description', 'no title', @timestamp, 0, 0, @hashOfCurrBlock);";
+                using (SqlCommand command = new SqlCommand(querryString, conn)) {
                     conn.Open();
                     string now = DateTime.Now.ToString("yyyy-MM-dd");
                     command.Parameters.AddWithValue("@date", now);
-                    command.Parameters.AddWithValue("@dateNow", now);
+                    command.Parameters.AddWithValue("@timestamp", now);
 
                     string toHash = "-1" + "-1" + "1" + "no description" + "1" + "0" + "0";
                     command.Parameters.AddWithValue("@hashOfCurrBlock", computeHash2(toHash));
 
-                    using (SqlDataReader reader = command.ExecuteReader())
-                        while (reader.Read())
-                            Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                    command.ExecuteNonQuery();
                 }
             }
         }
@@ -281,13 +274,7 @@ namespace BlockchainApp
                             command.Parameters.AddWithValue("@birthday", birthday.ToString("yyyy-MM-dd"));
                             command.Parameters.AddWithValue("@email", email);
 
-                            using (SqlDataReader reader = command.ExecuteReader())
-                            {
-                                while (reader.Read())
-                                {
-                                    Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
-                                }
-                            }
+                            command.ExecuteNonQuery();
                         }
                     }
                     progressBar.Value = 100;
@@ -392,40 +379,27 @@ namespace BlockchainApp
             try
             {
                 bool isBlockchainValid = checkBlockchain();
-                if (isBlockchainValid == true)
-                {
-                    //generate IV and write to a new file
+                if (isBlockchainValid == true) {
                     aes.GenerateIV();
                     BinaryFormatter bf = new BinaryFormatter();
                     using (FileStream s = File.Create("IV.bin"))
                         bf.Serialize(s, aes.IV);
 
-                    //write to file the whole list
-                    using (FileStream fs = new FileStream(backupFileName, FileMode.Create))
-                    {
-                        using (CryptoStream cs = new CryptoStream(fs, aes.CreateEncryptor(), CryptoStreamMode.Write))
-                        {
+                    using (FileStream fs = new FileStream(backupFileName, FileMode.Create)) {
+                        using (CryptoStream cs = new CryptoStream(fs, aes.CreateEncryptor(), CryptoStreamMode.Write)) {
                             new BinaryFormatter().Serialize(cs, blocks);
                         }
                     }
-
-                    //BinaryFormatter formatter = new BinaryFormatter();
-                    //using (FileStream s = File.Create("backup.bin"))
-                    //{
-                    //    using (CryptoStream cs = new CryptoStream(s, aes.CreateEncryptor(key, iv), CryptoStreamMode.Write))
-                    //        formatter.Serialize(cs, blocks);
-                    //}
+                    
                     progressBar.Value = 100;
                     progressLabel.Text = "Created backup.";
                     updateLastBackup();
                 }
-                else
-                {
+                else {
                     MessageBox.Show("The blockchain is invalid!");
                 }
             }
-            catch(Exception ex)
-            {
+            catch(Exception ex) {
                 MessageBox.Show("Error writing to file"+" "+ex.Message);
             }
         }
@@ -451,10 +425,6 @@ namespace BlockchainApp
                 {
                     conn.Open();
                     command.ExecuteNonQuery();
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                        while (reader.Read())
-                            Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
                 }
             }
 
@@ -466,10 +436,6 @@ namespace BlockchainApp
                 {
                     conn.Open();
                     command.ExecuteNonQuery();
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                        while (reader.Read())
-                            Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
                 }
             }
         }
@@ -520,9 +486,7 @@ namespace BlockchainApp
                                     command.Parameters.AddWithValue("@nounce", currentBlock.nounce);
                                     command.Parameters.AddWithValue("@hashOfCurrBlock", currentBlock.hashOfCurrBlock);
 
-                                    using (SqlDataReader reader = command.ExecuteReader())
-                                        while (reader.Read())
-                                            Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                                    command.ExecuteNonQuery();
                                 }
                             }
                         }
@@ -531,7 +495,6 @@ namespace BlockchainApp
                         Logger logger = LogManager.GetCurrentClassLogger();
                         logger.Warn("Database has been overwritten");
                     }
-
                 }
             }
         }

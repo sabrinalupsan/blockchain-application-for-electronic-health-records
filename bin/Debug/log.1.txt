@@ -102,3 +102,6 @@
 2021-04-04 13:16:41.5302|DEBUG|BlockchainApp.DoctorInterface|Doctor 1847583 added a record for patient 8534791.
 2021-04-04 13:26:52.0963|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1847583 logged in.
 2021-04-04 13:27:18.4748|DEBUG|BlockchainApp.DoctorInterface|Doctor 1847583 added a record for patient 8534791.
+2021-04-07 22:59:08.6448|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 7290163 logged in.
+2021-04-08 21:22:10.3583|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-04-08 21:22:29.4162|WARN|BlockchainApp.DoctorInterface|The doctor with ID 4583018 and IP 192.168.196.1 is repeatedly trying to input the PIN code 1111.

@@ -15,12 +15,9 @@ namespace BlockchainApp
         private const string sourceEmailAddress = "hospichain@gmail.com";
         private const string sourceEmailPassword = "6bachelor!AABB#";
 
-
         private static Email Instance;
-        public static Email instance
-        {
-            get
-            {
+        public static Email instance {
+            get {
                 if (Instance == null)
                     Instance = new Email();
                 return Instance;
@@ -42,9 +39,6 @@ namespace BlockchainApp
 
         public void Send(string sendTo, string subject, string body)
         {
-            //setup SMTP Host Here
-
-
             //convert string to MailAdress
             MailAddress to = null;
             if (sendTo != null && sendTo.CompareTo("") != 0)

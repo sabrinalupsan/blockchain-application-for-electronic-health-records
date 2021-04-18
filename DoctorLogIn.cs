@@ -89,9 +89,7 @@ namespace BlockchainApp
                 {
                     lastLoginCommand.Parameters.AddWithValue("@last_login", DateTime.Now.ToString("yyyy-MM-dd"));
 
-                    using (SqlDataReader lastLoginreader = lastLoginCommand.ExecuteReader())
-                        while (lastLoginreader.Read())
-                            Console.WriteLine("{0} {1}", lastLoginreader.GetString(0), lastLoginreader.GetString(1));
+                    lastLoginCommand.ExecuteNonQuery();
                 }
             }
         }
@@ -111,9 +109,7 @@ namespace BlockchainApp
                 {
                     updatePINCommand.Parameters.AddWithValue("@hashPIN", hashedNewPIN);
 
-                    using (SqlDataReader updatePINReader = updatePINCommand.ExecuteReader())
-                        while (updatePINReader.Read())
-                            Console.WriteLine("{0} {1}", updatePINReader.GetString(0), updatePINReader.GetString(1));
+                    updatePINCommand.ExecuteNonQuery();
                 }
             }
             return hashedNewPIN;
@@ -203,26 +199,22 @@ namespace BlockchainApp
                                             System.Text.Encoding.UTF8.GetBytes(hashedNewPIN), DateTime.Now);
                                     }
                                     else
-                                        if (validatePIN() == true)
-                                    {
-                                        string dbPIN = (string)reader["hashed_PIN"];
-                                        if ((Encoding.Default.GetString(hashedPIN)).CompareTo(dbPIN) == 0)
-                                        {
-                                            DateTime theDate = (DateTime)reader["last_login"];
-                                            if ((DateTime.Today.Date - theDate.Date).Days > 30)
-                                            {
-                                                hashedNewPIN = updatePIN(docID, email);
-                                                connected = true;
-                                                startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName,
-                                                System.Text.Encoding.UTF8.GetBytes(hashedNewPIN), DateTime.Now);
-                                            }
-                                            else
-                                            {
-                                                connected = true;
-                                                startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName, hashedPIN, DateTime.Now);
+                                        if (validatePIN() == true) {
+                                            string dbPIN = (string)reader["hashed_PIN"];
+                                            if ((Encoding.Default.GetString(hashedPIN)).CompareTo(dbPIN) == 0) {
+                                                DateTime theDate = (DateTime)reader["last_login"];
+                                                if ((DateTime.Today.Date - theDate.Date).Days > 30) {
+                                                    hashedNewPIN = updatePIN(docID, email);
+                                                    connected = true;
+                                                    startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName,
+                                                    System.Text.Encoding.UTF8.GetBytes(hashedNewPIN), DateTime.Now);
+                                                }
+                                                else {
+                                                    connected = true;
+                                                    startDoctorInterface(dbID, hashedPassword, specialisation, lastName, firstName, hashedPIN, DateTime.Now);
+                                                }
                                             }
                                         }
-                                    }
                                 }
                             }
 
@@ -249,7 +241,7 @@ namespace BlockchainApp
                     string myIP = getIP();
                     logger.Warn("The doctor with IP {0} is repeatedly trying to log in.", myIP);
                     MessageBox.Show("Invalid credentials and too many attempts! You need to wait 30 seconds to log in again.");
-                    email.Send("lupsansabrina18@stud.ase.ro", "Too many log in attempts", 
+                    email.Send("hospichain@gmail.com", "Too many log in attempts", 
                         "Someone is repeatedly trying to log in into an account. It is for the doctor with the ID " 
                         + tbDocID.Text.ToString() + " and IP "+myIP);
                     Wait(30);

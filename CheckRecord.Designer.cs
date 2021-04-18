@@ -1,6 +1,6 @@
 ﻿namespace BlockchainApp
 {
-    partial class AreYouSure
+    partial class CheckRecord
     {
         /// <summary>
         /// Required designer variable.

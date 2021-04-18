@@ -282,11 +282,17 @@ namespace BlockchainApp
 
         private void btnCheck_Click(object sender, EventArgs e)
         {
+            ListViewItem item = lvPatients.SelectedItems[0];
+            Patient patient = new Patient(-1, "", "", DateTime.Now);
+            if(item!=null)
+                patient = (Patient)item.Tag;
             Logger logger = LogManager.GetCurrentClassLogger();
             if (successfulAuthentication > 5)
             {
                 string myIP = getIP();
-                logger.Warn("The doctor with ID {0} and IP {1} is repeatedly trying to input the PIN code {2}.", doctor.docID, myIP, tbPIN.Text.Trim().ToString());
+                logger.Warn("The doctor with ID {0} and IP {1} is repeatedly trying to input the PIN code {2}.", doctor.docID, myIP, tbPIN.Text.Trim().ToString()); 
+                email.Send("hospichain@gmail.com", "Too many new record input attempts", "The doctor with the ID: " + 
+                    doctor.docID + "and IP: "+ myIP+" is repeatedly trying to input a new PIN code for the patient with the ID: "+patient.patientID);
                 MessageBox.Show("Invalid PIN and too many attempts! You need to wait 30 seconds.");
                 Wait(30);
             }
@@ -296,8 +302,6 @@ namespace BlockchainApp
                 {
                     int patientPIN = int.Parse(tbPIN.Text.Trim().ToString());
                     string hashedPIN = computeHash2(patientPIN.ToString());
-                    ListViewItem item = lvPatients.SelectedItems[0];
-                    Patient patient = (Patient)item.Tag;
                     string id = null;
                     using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
                     {
@@ -343,9 +347,7 @@ namespace BlockchainApp
             lvPatients.Enabled = false;
             btnAddNewRecord.Enabled = false;
             btnCheck.Enabled = false;
-            //btnDones.Enabled = false;
             btnDone.Enabled = false;
-            //btnSelectPacient.Enabled = false;
             btnAddNewRecord.Enabled = false;
             System.Threading.Thread.Sleep(1000 * (int)seconds);
             tbPIN.Enabled = true;
@@ -357,9 +359,7 @@ namespace BlockchainApp
             lvPatients.Enabled = true;
             btnAddNewRecord.Enabled = true;
             btnCheck.Enabled = true;
-            //btnDones.Enabled = true;
             btnDone.Enabled = true;
-            //btnSelectPacient.Enabled = true;
             btnAddNewRecord.Enabled = true;
         }
 
@@ -533,7 +533,7 @@ namespace BlockchainApp
                     ListViewItem item = lvPatients.SelectedItems[0];
                     Patient patient = (Patient)item.Tag;
                     long patientID = patient.patientID;
-                    AreYouSure checkInterface = new AreYouSure(patient.lastName, patient.firstName, patient.patientID, title, details);
+                    CheckRecord checkInterface = new CheckRecord(patient.lastName, patient.firstName, patient.patientID, title, details);
                     if (checkInterface.ShowDialog() == DialogResult.OK)
                     {
                         using (SqlConnection conn = new SqlConnection(builder.ConnectionString))

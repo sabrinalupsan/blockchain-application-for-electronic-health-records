@@ -202,9 +202,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(3, 98);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 17);
+            this.label6.Size = new System.Drawing.Size(35, 17);
             this.label6.TabIndex = 16;
-            this.label6.Text = "Type";
+            this.label6.Text = "Title";
             // 
             // dtpDate
             // 

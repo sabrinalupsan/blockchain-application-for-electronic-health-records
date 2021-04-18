@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace BlockchainApp
 {
-    public partial class AreYouSure : MaterialSkin.Controls.MaterialForm
+    public partial class CheckRecord : MaterialSkin.Controls.MaterialForm
     {
         private string patientLastName;
         private string patientFirstName;
@@ -18,7 +18,7 @@ namespace BlockchainApp
         private string title;
         private string description;
 
-        public AreYouSure(string patientLastName, string patientFirstName, long patientID, string title, string description)
+        public CheckRecord(string patientLastName, string patientFirstName, long patientID, string title, string description)
         {
             InitializeComponent();
             this.patientFirstName = patientFirstName;

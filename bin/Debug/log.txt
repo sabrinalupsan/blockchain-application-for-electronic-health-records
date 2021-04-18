@@ -1,1 +1,1 @@
-2021-04-07 22:59:08.6448|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 7290163 logged in.
+2021-04-10 17:47:56.7865|WARN|BlockchainApp.AdminInterface|Database has been overwritten

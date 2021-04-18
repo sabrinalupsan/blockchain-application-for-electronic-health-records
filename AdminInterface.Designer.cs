@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
-            this.tbNewDocID = new System.Windows.Forms.TextBox();
+            this.tbDoctorID = new System.Windows.Forms.TextBox();
             this.tbLastName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tbFirstName = new System.Windows.Forms.TextBox();
@@ -115,14 +115,14 @@
             this.btnOK.UseVisualStyleBackColor = false;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // tbNewDocID
+            // tbDoctorID
             // 
-            this.tbNewDocID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbNewDocID.Location = new System.Drawing.Point(183, 68);
-            this.tbNewDocID.Name = "tbNewDocID";
-            this.tbNewDocID.Size = new System.Drawing.Size(137, 22);
-            this.tbNewDocID.TabIndex = 0;
-            this.tbNewDocID.Click += new System.EventHandler(this.controlClicked);
+            this.tbDoctorID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
+            this.tbDoctorID.Location = new System.Drawing.Point(183, 68);
+            this.tbDoctorID.Name = "tbDoctorID";
+            this.tbDoctorID.Size = new System.Drawing.Size(137, 22);
+            this.tbDoctorID.TabIndex = 0;
+            this.tbDoctorID.Click += new System.EventHandler(this.controlClicked);
             // 
             // tbLastName
             // 
@@ -437,7 +437,7 @@
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.btnOK);
             this.panel2.Controls.Add(this.tbRePassword);
-            this.panel2.Controls.Add(this.tbNewDocID);
+            this.panel2.Controls.Add(this.tbDoctorID);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.tbPassword);
@@ -559,9 +559,9 @@
             this.labelNoRecords.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
             this.labelNoRecords.Location = new System.Drawing.Point(22, 269);
             this.labelNoRecords.Name = "labelNoRecords";
-            this.labelNoRecords.Size = new System.Drawing.Size(32, 18);
+            this.labelNoRecords.Size = new System.Drawing.Size(12, 18);
             this.labelNoRecords.TabIndex = 7;
-            this.labelNoRecords.Text = "aaa";
+            this.labelNoRecords.Text = ".";
             // 
             // labelNoDoctors
             // 
@@ -569,9 +569,9 @@
             this.labelNoDoctors.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
             this.labelNoDoctors.Location = new System.Drawing.Point(22, 252);
             this.labelNoDoctors.Name = "labelNoDoctors";
-            this.labelNoDoctors.Size = new System.Drawing.Size(32, 18);
+            this.labelNoDoctors.Size = new System.Drawing.Size(12, 18);
             this.labelNoDoctors.TabIndex = 6;
-            this.labelNoDoctors.Text = "aaa";
+            this.labelNoDoctors.Text = ".";
             // 
             // labelNoPatients
             // 
@@ -579,9 +579,9 @@
             this.labelNoPatients.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
             this.labelNoPatients.Location = new System.Drawing.Point(22, 235);
             this.labelNoPatients.Name = "labelNoPatients";
-            this.labelNoPatients.Size = new System.Drawing.Size(32, 18);
+            this.labelNoPatients.Size = new System.Drawing.Size(12, 18);
             this.labelNoPatients.TabIndex = 5;
-            this.labelNoPatients.Text = "aaa";
+            this.labelNoPatients.Text = ".";
             // 
             // label16
             // 
@@ -669,7 +669,7 @@
         #endregion
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.TextBox tbNewDocID;
+        private System.Windows.Forms.TextBox tbDoctorID;
         private System.Windows.Forms.TextBox tbLastName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbFirstName;

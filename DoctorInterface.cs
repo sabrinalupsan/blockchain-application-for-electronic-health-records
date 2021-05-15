@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
 using NLog;
@@ -30,13 +28,13 @@ namespace BlockchainApp
             MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
             email = Email.instance;
             builder = mySqlBuilder.builder;
-            using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
             {
                 var querryString =
                     "SELECT * FROM BLOCK;";
-                using (SqlCommand command = new SqlCommand(querryString, conn))
+                using (SqlCommand command = new SqlCommand(querryString, connection))
                 {
-                    conn.Open();
+                    connection.Open();
                     using (SqlDataReader reader = command.ExecuteReader())
                         if (!reader.HasRows)
                             GenesisBlock();
@@ -59,16 +57,13 @@ namespace BlockchainApp
             return Encoding.Default.GetString(finalHash);
         }
 
-        private void GenesisBlock()
-        {
-            using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
-            {
+        private void GenesisBlock() {
+            using (SqlConnection conn = new SqlConnection(builder.ConnectionString)) {
                 var querryString =
                     "INSERT INTO Block (patient_id, doctor_id, appointment_date, appointment_description, appointment_title, block_timestamp, block_index, " +
                     "hash_of_prev_block, hash_of_curr_block)" +
                     "VALUES (-1, -1, @date, 'no description', 'no title', @dateNow, 0, 0, @hashOfCurrBlock);";
-                using (SqlCommand command = new SqlCommand(querryString, conn))
-                {
+                using (SqlCommand command = new SqlCommand(querryString, conn)) {
                     conn.Open();
                     string now = DateTime.Now.ToString("yyyy-MM-dd");
                     command.Parameters.AddWithValue("@date", now);
@@ -77,9 +72,7 @@ namespace BlockchainApp
                     string toHash = "-1" + "-1" + "1" + "no description" + "1" + "0" + "0";
                     command.Parameters.AddWithValue("@hashOfCurrBlock", computeHash2(toHash));
 
-                    using (SqlDataReader reader = command.ExecuteReader())
-                        while (reader.Read())
-                            Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                    command.ExecuteNonQuery();
                 }
             }
         }
@@ -193,6 +186,9 @@ namespace BlockchainApp
 
         private void hideControls()
         {
+            tbPIN.Enabled = true;
+            btnCheck.Enabled = true;
+            tbPIN.Clear();
             tbTitle.Hide();
             tbDetails.Hide();
             dtpDate.Hide();
@@ -313,7 +309,11 @@ namespace BlockchainApp
                                 id = (string)reader["hashed_pin"];
                     }
                     if (hashedPIN.CompareTo(id) == 0)
+                    {
                         showControls();
+                        tbPIN.Enabled = false;
+                        btnCheck.Enabled = false;
+                    }
                     else
                     {
                         successfulAuthentication++;
@@ -449,7 +449,7 @@ namespace BlockchainApp
 
         private void clearControls()
         {
-            tbPIN.Text = null;
+            //tbPIN.Text = null;
             tbDetails.Text = null;
             tbTitle.Text = null;
             dtpDate.Value = DateTime.Now;
@@ -590,16 +590,12 @@ namespace BlockchainApp
                 }
                 
             }
-            else
-            {
-                if(isBlockchainValid == false)
-                {
-                    try
-                    {
+            else {
+                if(isBlockchainValid == false) {
+                    try {
                         email.Send("lupsansabrina18@stud.ase.ro", "INVALID BLOCKCHAIN", "The blockchain was invalid. Immediate attention is required.");
                     }
-                    catch(Exception)
-                    {
+                    catch(Exception) {
                         MessageBox.Show("Invalid blockchain.");
                     }
                 }
@@ -653,7 +649,8 @@ namespace BlockchainApp
                 Patient patient = (Patient)item.Tag;
 
                 var populateListBoxQuerry = "SELECT appointment_title, appointment_description, appointment_date FROM Block " +
-                    "WHERE doctor_id = " + doctor.docID + "AND patient_id = " + patient.patientID + ";";
+                    "WHERE patient_id = " + patient.patientID + " AND doctor_id IN (SELECT doctor_id FROM Doctors" +
+                    " WHERE specialization = '" + doctor.specialisation + "');";
 
                 using (SqlConnection populateListBoxConn = new SqlConnection(builder.ConnectionString))
                 {
@@ -668,7 +665,6 @@ namespace BlockchainApp
                             DateTime date = (DateTime)reader["appointment_date"];
                             MedicalRecord record = new MedicalRecord(doctor.docID, patient.patientID, title, description, date);
                             lbRecords.Items.Add(record);
-                            //lbRecords.Visible = false;
                         }
                     }
                 }

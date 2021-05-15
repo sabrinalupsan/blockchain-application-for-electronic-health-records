@@ -67,7 +67,7 @@
             this.tbTitle.Location = new System.Drawing.Point(166, 207);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.ReadOnly = true;
-            this.tbTitle.Size = new System.Drawing.Size(183, 22);
+            this.tbTitle.Size = new System.Drawing.Size(267, 22);
             this.tbTitle.TabIndex = 1;
             // 
             // tbDescription

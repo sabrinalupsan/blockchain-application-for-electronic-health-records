@@ -279,7 +279,6 @@
             this.lbRecords.FormattingEnabled = true;
             this.lbRecords.ItemHeight = 16;
             this.lbRecords.Location = new System.Drawing.Point(60, 6);
-            this.lbRecords.MultiColumn = true;
             this.lbRecords.Name = "lbRecords";
             this.lbRecords.Size = new System.Drawing.Size(338, 196);
             this.lbRecords.TabIndex = 0;

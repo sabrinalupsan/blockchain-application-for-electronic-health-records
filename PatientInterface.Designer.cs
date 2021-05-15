@@ -132,17 +132,17 @@
             this.tbDate.Location = new System.Drawing.Point(88, 88);
             this.tbDate.Name = "tbDate";
             this.tbDate.ReadOnly = true;
-            this.tbDate.Size = new System.Drawing.Size(145, 22);
+            this.tbDate.Size = new System.Drawing.Size(228, 22);
             this.tbDate.TabIndex = 20;
             // 
             // tbName
             // 
             this.tbName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbName.Enabled = false;
-            this.tbName.Location = new System.Drawing.Point(88, 15);
+            this.tbName.Location = new System.Drawing.Point(88, 10);
             this.tbName.Name = "tbName";
             this.tbName.ReadOnly = true;
-            this.tbName.Size = new System.Drawing.Size(145, 22);
+            this.tbName.Size = new System.Drawing.Size(228, 22);
             this.tbName.TabIndex = 19;
             // 
             // label5
@@ -166,7 +166,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 15);
+            this.label3.Location = new System.Drawing.Point(3, 13);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 17);
             this.label3.TabIndex = 15;
@@ -179,7 +179,7 @@
             this.tbTitle.Location = new System.Drawing.Point(88, 48);
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.ReadOnly = true;
-            this.tbTitle.Size = new System.Drawing.Size(145, 22);
+            this.tbTitle.Size = new System.Drawing.Size(228, 22);
             this.tbTitle.TabIndex = 14;
             // 
             // tbDescription

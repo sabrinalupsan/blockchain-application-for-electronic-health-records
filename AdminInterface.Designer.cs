@@ -68,7 +68,6 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.progressLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -82,6 +81,7 @@
             this.tbLastBackup = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.btnBackup = new System.Windows.Forms.Button();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -243,7 +243,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(24, 32);
+            this.label8.Location = new System.Drawing.Point(20, 12);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(109, 24);
             this.label8.TabIndex = 16;
@@ -252,7 +252,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(25, 88);
+            this.label9.Location = new System.Drawing.Point(21, 68);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(52, 17);
             this.label9.TabIndex = 17;
@@ -261,7 +261,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(25, 138);
+            this.label10.Location = new System.Drawing.Point(21, 118);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(74, 17);
             this.label10.TabIndex = 18;
@@ -270,7 +270,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(25, 188);
+            this.label11.Location = new System.Drawing.Point(21, 168);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(74, 17);
             this.label11.TabIndex = 19;
@@ -279,7 +279,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(25, 271);
+            this.label12.Location = new System.Drawing.Point(21, 265);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(69, 17);
             this.label12.TabIndex = 20;
@@ -288,7 +288,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(25, 321);
+            this.label13.Location = new System.Drawing.Point(21, 312);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(121, 17);
             this.label13.TabIndex = 21;
@@ -297,7 +297,7 @@
             // tbPatientID
             // 
             this.tbPatientID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPatientID.Location = new System.Drawing.Point(187, 88);
+            this.tbPatientID.Location = new System.Drawing.Point(183, 68);
             this.tbPatientID.Name = "tbPatientID";
             this.tbPatientID.Size = new System.Drawing.Size(137, 22);
             this.tbPatientID.TabIndex = 0;
@@ -306,7 +306,7 @@
             // tbPatientLastName
             // 
             this.tbPatientLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPatientLastName.Location = new System.Drawing.Point(187, 138);
+            this.tbPatientLastName.Location = new System.Drawing.Point(183, 118);
             this.tbPatientLastName.Name = "tbPatientLastName";
             this.tbPatientLastName.Size = new System.Drawing.Size(137, 22);
             this.tbPatientLastName.TabIndex = 1;
@@ -315,7 +315,7 @@
             // tbPatientFirstName
             // 
             this.tbPatientFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPatientFirstName.Location = new System.Drawing.Point(187, 188);
+            this.tbPatientFirstName.Location = new System.Drawing.Point(183, 168);
             this.tbPatientFirstName.Name = "tbPatientFirstName";
             this.tbPatientFirstName.Size = new System.Drawing.Size(137, 22);
             this.tbPatientFirstName.TabIndex = 2;
@@ -324,7 +324,7 @@
             // tbPatientPassword
             // 
             this.tbPatientPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPatientPassword.Location = new System.Drawing.Point(187, 271);
+            this.tbPatientPassword.Location = new System.Drawing.Point(183, 265);
             this.tbPatientPassword.Name = "tbPatientPassword";
             this.tbPatientPassword.PasswordChar = '*';
             this.tbPatientPassword.Size = new System.Drawing.Size(137, 22);
@@ -334,7 +334,7 @@
             // tbPatientREPass
             // 
             this.tbPatientREPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPatientREPass.Location = new System.Drawing.Point(187, 321);
+            this.tbPatientREPass.Location = new System.Drawing.Point(183, 311);
             this.tbPatientREPass.Name = "tbPatientREPass";
             this.tbPatientREPass.PasswordChar = '*';
             this.tbPatientREPass.Size = new System.Drawing.Size(137, 22);
@@ -346,7 +346,7 @@
             this.btnOkPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnOkPatient.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOkPatient.ForeColor = System.Drawing.Color.White;
-            this.btnOkPatient.Location = new System.Drawing.Point(47, 410);
+            this.btnOkPatient.Location = new System.Drawing.Point(40, 402);
             this.btnOkPatient.Name = "btnOkPatient";
             this.btnOkPatient.Size = new System.Drawing.Size(104, 28);
             this.btnOkPatient.TabIndex = 7;
@@ -359,7 +359,7 @@
             this.btnCancelPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnCancelPatient.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelPatient.ForeColor = System.Drawing.Color.White;
-            this.btnCancelPatient.Location = new System.Drawing.Point(178, 410);
+            this.btnCancelPatient.Location = new System.Drawing.Point(171, 402);
             this.btnCancelPatient.Name = "btnCancelPatient";
             this.btnCancelPatient.Size = new System.Drawing.Size(104, 28);
             this.btnCancelPatient.TabIndex = 8;
@@ -395,7 +395,7 @@
             // tbPatientEmailAddress
             // 
             this.tbPatientEmailAddress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPatientEmailAddress.Location = new System.Drawing.Point(187, 230);
+            this.tbPatientEmailAddress.Location = new System.Drawing.Point(183, 218);
             this.tbPatientEmailAddress.Name = "tbPatientEmailAddress";
             this.tbPatientEmailAddress.Size = new System.Drawing.Size(137, 22);
             this.tbPatientEmailAddress.TabIndex = 3;
@@ -403,7 +403,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(25, 230);
+            this.label18.Location = new System.Drawing.Point(21, 218);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(97, 17);
             this.label18.TabIndex = 32;
@@ -412,7 +412,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(25, 371);
+            this.label14.Location = new System.Drawing.Point(21, 362);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(60, 17);
             this.label14.TabIndex = 30;
@@ -421,7 +421,7 @@
             // dtpBirthday
             // 
             this.dtpBirthday.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.dtpBirthday.Location = new System.Drawing.Point(187, 371);
+            this.dtpBirthday.Location = new System.Drawing.Point(183, 361);
             this.dtpBirthday.Name = "dtpBirthday";
             this.dtpBirthday.Size = new System.Drawing.Size(137, 22);
             this.dtpBirthday.TabIndex = 6;
@@ -483,22 +483,17 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.progressBar,
             this.progressLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 619);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 620);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(408, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(408, 24);
             this.statusStrip1.TabIndex = 33;
             this.statusStrip1.Text = "statusStrip1";
-            // 
-            // progressBar
-            // 
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(100, 19);
             // 
             // progressLabel
             // 
             this.progressLabel.BackColor = System.Drawing.Color.White;
             this.progressLabel.Name = "progressLabel";
-            this.progressLabel.Size = new System.Drawing.Size(0, 20);
+            this.progressLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // tabControl1
             // 
@@ -557,7 +552,7 @@
             // 
             this.labelNoRecords.AutoSize = true;
             this.labelNoRecords.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.labelNoRecords.Location = new System.Drawing.Point(22, 269);
+            this.labelNoRecords.Location = new System.Drawing.Point(33, 309);
             this.labelNoRecords.Name = "labelNoRecords";
             this.labelNoRecords.Size = new System.Drawing.Size(12, 18);
             this.labelNoRecords.TabIndex = 7;
@@ -567,7 +562,7 @@
             // 
             this.labelNoDoctors.AutoSize = true;
             this.labelNoDoctors.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.labelNoDoctors.Location = new System.Drawing.Point(22, 252);
+            this.labelNoDoctors.Location = new System.Drawing.Point(33, 292);
             this.labelNoDoctors.Name = "labelNoDoctors";
             this.labelNoDoctors.Size = new System.Drawing.Size(12, 18);
             this.labelNoDoctors.TabIndex = 6;
@@ -577,7 +572,7 @@
             // 
             this.labelNoPatients.AutoSize = true;
             this.labelNoPatients.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.labelNoPatients.Location = new System.Drawing.Point(22, 235);
+            this.labelNoPatients.Location = new System.Drawing.Point(33, 275);
             this.labelNoPatients.Name = "labelNoPatients";
             this.labelNoPatients.Size = new System.Drawing.Size(12, 18);
             this.labelNoPatients.TabIndex = 5;
@@ -587,17 +582,17 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.label16.Location = new System.Drawing.Point(22, 209);
+            this.label16.Location = new System.Drawing.Point(33, 249);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(42, 18);
+            this.label16.Size = new System.Drawing.Size(68, 18);
             this.label16.TabIndex = 4;
-            this.label16.Text = "Stats";
+            this.label16.Text = "Statistics";
             // 
             // btnOverwrite
             // 
             this.btnOverwrite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnOverwrite.ForeColor = System.Drawing.Color.White;
-            this.btnOverwrite.Location = new System.Drawing.Point(22, 158);
+            this.btnOverwrite.Location = new System.Drawing.Point(25, 178);
             this.btnOverwrite.Name = "btnOverwrite";
             this.btnOverwrite.Size = new System.Drawing.Size(104, 28);
             this.btnOverwrite.TabIndex = 3;
@@ -608,7 +603,7 @@
             // tbLastBackup
             // 
             this.tbLastBackup.Enabled = false;
-            this.tbLastBackup.Location = new System.Drawing.Point(124, 40);
+            this.tbLastBackup.Location = new System.Drawing.Point(127, 60);
             this.tbLastBackup.Name = "tbLastBackup";
             this.tbLastBackup.Size = new System.Drawing.Size(143, 22);
             this.tbLastBackup.TabIndex = 2;
@@ -617,7 +612,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F);
-            this.label15.Location = new System.Drawing.Point(19, 40);
+            this.label15.Location = new System.Drawing.Point(22, 60);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(92, 18);
             this.label15.TabIndex = 1;
@@ -627,13 +622,18 @@
             // 
             this.btnBackup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnBackup.ForeColor = System.Drawing.Color.White;
-            this.btnBackup.Location = new System.Drawing.Point(22, 113);
+            this.btnBackup.Location = new System.Drawing.Point(25, 133);
             this.btnBackup.Name = "btnBackup";
             this.btnBackup.Size = new System.Drawing.Size(104, 28);
             this.btnBackup.TabIndex = 0;
             this.btnBackup.Text = "Backup";
             this.btnBackup.UseVisualStyleBackColor = false;
             this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
+            // 
+            // progressBar
+            // 
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(100, 16);
             // 
             // AdminInterface
             // 
@@ -702,7 +702,6 @@
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.ErrorProvider errorProvider2;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripProgressBar progressBar;
         private System.Windows.Forms.ToolStripStatusLabel progressLabel;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
@@ -720,5 +719,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox tbDoctorEmailAddress;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ToolStripProgressBar progressBar;
     }
 }

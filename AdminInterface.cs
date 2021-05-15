@@ -16,6 +16,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Security.AccessControl;
 using NLog;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace BlockchainApp
 {
@@ -33,7 +34,8 @@ namespace BlockchainApp
             MySqlBuilder mySqlBuilder = MySqlBuilder.instance;
             builder = mySqlBuilder.builder;
             aes = Aes.Create();
-            byte[] key = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16 };
+            string password = "tB9Afvw5fKCGvJgBrHc7L6V8WSahkC3h";
+            byte[] key = Encoding.UTF8.GetBytes(password);
             aes.Key = key;
             updateLastBackup();
         }
@@ -78,7 +80,7 @@ namespace BlockchainApp
                     "at least 5 characters!");
                 return false;
             }
-            if(tbSpecialisation.Text.Trim().Length < 1)
+            if (tbSpecialisation.Text.Trim().Length < 1)
             {
                 MessageBox.Show("The specialization is invalid!");
                 return false;
@@ -191,7 +193,7 @@ namespace BlockchainApp
                     {
 
                         var querryString =
-                            "INSERT INTO Doctors (doctor_id, doctor_last_name, doctor_first_name, specialization, hashed_pass, last_login, email)" 
+                            "INSERT INTO Doctors (doctor_id, doctor_last_name, doctor_first_name, specialization, hashed_pass, last_login, email)"
                             + "VALUES (@doctorID, @lastName, @firstName, @specialization, @hashedPassword, @dateOfToday, @email);";
                         using (SqlCommand command = new SqlCommand(querryString, connection))
                         {
@@ -211,7 +213,7 @@ namespace BlockchainApp
                     clearDoctorControls();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string s = "Violation of PRIMARY KEY constraint";
                 if (ex.Message.Substring(0, s.Length).CompareTo(s) == 0)
@@ -223,12 +225,14 @@ namespace BlockchainApp
 
         private void GenesisBlock()
         {
-            using (SqlConnection conn = new SqlConnection(builder.ConnectionString)) {
+            using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+            {
                 var querryString =
                     "INSERT INTO Block (patient_id, doctor_id, appointment_date, appointment_description, appointment_title, block_timestamp, " +
                     "block_index, hash_of_prev_block, hash_of_curr_block)" +
                     "VALUES (-1, -1, @date, 'no description', 'no title', @timestamp, 0, 0, @hashOfCurrBlock);";
-                using (SqlCommand command = new SqlCommand(querryString, conn)) {
+                using (SqlCommand command = new SqlCommand(querryString, conn))
+                {
                     conn.Open();
                     string now = DateTime.Now.ToString("yyyy-MM-dd");
                     command.Parameters.AddWithValue("@date", now);
@@ -253,24 +257,24 @@ namespace BlockchainApp
                     string firstName = tbPatientFirstName.Text.Trim().ToString();
                     string password = tbPatientPassword.Text.Trim().ToString();
                     string saltedPassword = saltPassword(password, patientID);
-                    string hashedPass = computeHash2(saltedPassword);
+                    string hashedPassword = computeHash2(saltedPassword);
                     string email = tbPatientEmailAddress.Text.Trim().ToString();
                     DateTime birthday = dtpBirthday.Value;
 
-                    using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+                    using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                     {
 
                         var querryString =
-                            "INSERT INTO Patients (patient_id, patient_last_name, patient_first_name, hashed_pass, last_login, birthday, email)" +
-                            "VALUES (@pacID, @lastName, @firstName, @hashedPass, @dateNow, @birthday, @email);";
-                        using (SqlCommand command = new SqlCommand(querryString, conn))
-                        {
-                            conn.Open();
-                            command.Parameters.AddWithValue("@pacID", tbPatientID.Text.Trim().ToString());
+                            "INSERT INTO Patients (patient_id, patient_last_name, patient_first_name, hashed_pass, " +
+                            "last_login, birthday, email) " +
+                            "VALUES (@patientID, @lastName, @firstName, @hashedPassword, @dateOfToday, @birthday, @email);";
+                        using (SqlCommand command = new SqlCommand(querryString, connection)) {
+                            connection.Open();
+                            command.Parameters.AddWithValue("@patientID", tbPatientID.Text.Trim().ToString());
                             command.Parameters.AddWithValue("@lastName", lastName);
                             command.Parameters.AddWithValue("@firstName", firstName);
-                            command.Parameters.AddWithValue("@hashedPass", hashedPass);
-                            command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
+                            command.Parameters.AddWithValue("@hashedPassword", hashedPassword);
+                            command.Parameters.AddWithValue("@dateOfToday", DateTime.Now.ToString("yyyy-MM-dd"));
                             command.Parameters.AddWithValue("@birthday", birthday.ToString("yyyy-MM-dd"));
                             command.Parameters.AddWithValue("@email", email);
 
@@ -282,10 +286,10 @@ namespace BlockchainApp
                     clearPatientControls();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string s = "Violation of PRIMARY KEY constraint";
-                if (ex.Message.Substring(0, s.Length).CompareTo(s)==0)
+                if (ex.Message.Substring(0, s.Length).CompareTo(s) == 0)
                 {
                     MessageBox.Show("This patient is already present in the database.");
                 }
@@ -309,11 +313,11 @@ namespace BlockchainApp
 
         private bool checkBlockchain()
         {
-            var selectEverythingQuery = "SELECT * FROM Block ORDER BY block_index";
+            var selectQuery = "SELECT * FROM Block ORDER BY block_index";
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
             {
                 connection.Open();
-                var command = new SqlCommand(selectEverythingQuery, connection);
+                var command = new SqlCommand(selectQuery, connection);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     string genesisContent = "-1" + "-1" + "1" + "no description" + "1" + "0" + "0";
@@ -321,7 +325,7 @@ namespace BlockchainApp
 
                     reader.Read();
                     string previousHash = (string)reader["hash_of_curr_block"];
-                    if(previousHash.CompareTo(hashedgenesisContent) !=0)
+                    if (previousHash.CompareTo(hashedgenesisContent) != 0)
                     {
                         return false;
                     }
@@ -379,28 +383,33 @@ namespace BlockchainApp
             try
             {
                 bool isBlockchainValid = checkBlockchain();
-                if (isBlockchainValid == true) {
+                if (isBlockchainValid == true)
+                {
                     aes.GenerateIV();
                     BinaryFormatter bf = new BinaryFormatter();
                     using (FileStream s = File.Create("IV.bin"))
                         bf.Serialize(s, aes.IV);
 
-                    using (FileStream fs = new FileStream(backupFileName, FileMode.Create)) {
-                        using (CryptoStream cs = new CryptoStream(fs, aes.CreateEncryptor(), CryptoStreamMode.Write)) {
+                    using (FileStream fs = new FileStream(backupFileName, FileMode.Create))
+                    {
+                        using (CryptoStream cs = new CryptoStream(fs, aes.CreateEncryptor(), CryptoStreamMode.Write))
+                        {
                             new BinaryFormatter().Serialize(cs, blocks);
                         }
                     }
-                    
+
                     progressBar.Value = 100;
                     progressLabel.Text = "Created backup.";
                     updateLastBackup();
                 }
-                else {
+                else
+                {
                     MessageBox.Show("The blockchain is invalid!");
                 }
             }
-            catch(Exception ex) {
-                MessageBox.Show("Error writing to file"+" "+ex.Message);
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error writing to file" + " " + ex.Message);
             }
         }
 
@@ -445,7 +454,7 @@ namespace BlockchainApp
             clickField();
             Confirm_Overwrite confirm_Overwrite = new Confirm_Overwrite();
             confirm_Overwrite.ShowDialog();
-            if(confirm_Overwrite.DialogResult==DialogResult.OK)
+            if (confirm_Overwrite.DialogResult == DialogResult.OK)
             {
                 BinaryFormatter formatter = new BinaryFormatter();
                 using (FileStream s = File.OpenRead("IV.bin"))
@@ -458,7 +467,7 @@ namespace BlockchainApp
                     {
                         List<Block> deserialized = (List<Block>)new BinaryFormatter().Deserialize(cs);
 
-                        deleteBlockTable(deserialized.Count+1);
+                        deleteBlockTable(deserialized.Count + 1);
 
                         GenesisBlock();
 

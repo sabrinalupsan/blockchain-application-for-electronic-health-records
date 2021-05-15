@@ -1,16 +1,12 @@
 ﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BlockchainApp {
 
     public sealed class MySqlBuilder {
 
         private SqlConnectionStringBuilder Builder;
-        public SqlConnectionStringBuilder builder { get { return Builder; } }
+        public SqlConnectionStringBuilder builder { get { return Builder; } set { } }
 
         private static MySqlBuilder Instance;
 
@@ -23,13 +19,20 @@ namespace BlockchainApp {
         }
 
         private MySqlBuilder() {
-            Builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "blockchainapp.database.windows.net";
-            builder.UserID = "lupsansabrina18";
-            #region hide
-            builder.Password = "Selenacolierul9!";
-            #endregion hide
-            builder.InitialCatalog = "blockchainapp";
+            try
+            {
+                Builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "blockchainapp.database.windows.net";
+                builder.UserID = "lupsansabrina18";
+                #region hide
+                builder.Password = "Selenacolierul9!";
+                #endregion hide
+                builder.InitialCatalog = "blockchainapp";
+            }
+            catch (System.NullReferenceException)
+            {
+                
+            }
         }
     }
 }

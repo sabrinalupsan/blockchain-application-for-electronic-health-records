@@ -28,28 +28,18 @@ namespace BlockchainApp
             builder = mySqlBuilder.builder;
         }
 
-        //private SqlConnectionStringBuilder build()
-        //{
-        //    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-        //    builder.DataSource = "blockchainapp.database.windows.net";
-        //    builder.UserID = "lupsansabrina18";
-        //    builder.Password = "Selenacolierul9!";
-        //    builder.InitialCatalog = "blockchainapp";
-        //    return builder;
-        //}
-
         private void PatientInterface_Load(object sender, EventArgs e)
         {
-            var querry = "SELECT doctor_id, appointment_date, appointment_title, appointment_description FROM Block WHERE patient_id = " + patient.patientID+";";
-            using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
-            {
-                conn.Open();
-                var command = new SqlCommand(querry, conn);
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        long id = (int)reader["doctor_id"];
+            var querry = "SELECT doctor_id, appointment_date, appointment_title, appointment_description " +
+                "FROM Block WHERE patient_id = " + patient.patientID + ";";
+            using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
+
+                connection.Open();
+                var command = new SqlCommand(querry, connection);
+                using (SqlDataReader reader = command.ExecuteReader()) {
+
+                    while (reader.Read()) {
+                        int id = (int)reader["doctor_id"];
                         DateTime bday = (DateTime)reader["appointment_date"];
                         string title = (string)reader["appointment_title"];
                         string description = (string)reader["appointment_description"];

@@ -100,6 +100,7 @@
     </Reference>
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -136,11 +137,11 @@
     <Compile Include="Blockchain App.Designer.cs">
       <DependentUpon>Blockchain App.cs</DependentUpon>
     </Compile>
-    <Compile Include="Confirm Overwrite.cs">
+    <Compile Include="ConfirmOverwrite.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Confirm Overwrite.Designer.cs">
-      <DependentUpon>Confirm Overwrite.cs</DependentUpon>
+    <Compile Include="ConfirmOverwrite.Designer.cs">
+      <DependentUpon>ConfirmOverwrite.cs</DependentUpon>
     </Compile>
     <Compile Include="Doctor.cs" />
     <Compile Include="DoctorInterface.cs">
@@ -198,8 +199,8 @@
     <EmbeddedResource Include="Blockchain App.resx">
       <DependentUpon>Blockchain App.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Confirm Overwrite.resx">
-      <DependentUpon>Confirm Overwrite.cs</DependentUpon>
+    <EmbeddedResource Include="ConfirmOverwrite.resx">
+      <DependentUpon>ConfirmOverwrite.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DoctorInterface.resx">
       <DependentUpon>DoctorInterface.cs</DependentUpon>

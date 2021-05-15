@@ -39,7 +39,7 @@
             // tbPassword
             // 
             this.tbPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPassword.Location = new System.Drawing.Point(197, 172);
+            this.tbPassword.Location = new System.Drawing.Point(197, 192);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 22);
@@ -48,7 +48,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(76, 176);
+            this.label1.Location = new System.Drawing.Point(76, 196);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 17);
             this.label1.TabIndex = 2;
@@ -59,7 +59,7 @@
             this.OKbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.OKbtn.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.OKbtn.ForeColor = System.Drawing.Color.White;
-            this.OKbtn.Location = new System.Drawing.Point(102, 233);
+            this.OKbtn.Location = new System.Drawing.Point(102, 253);
             this.OKbtn.Name = "OKbtn";
             this.OKbtn.Size = new System.Drawing.Size(75, 28);
             this.OKbtn.TabIndex = 1;
@@ -72,7 +72,7 @@
             this.CancelBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.CancelBtn.ForeColor = System.Drawing.Color.White;
-            this.CancelBtn.Location = new System.Drawing.Point(197, 233);
+            this.CancelBtn.Location = new System.Drawing.Point(197, 253);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(75, 28);
             this.CancelBtn.TabIndex = 2;
@@ -96,7 +96,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(85, 136);
+            this.label3.Location = new System.Drawing.Point(86, 137);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(200, 24);
             this.label3.TabIndex = 10;

@@ -62,14 +62,16 @@ namespace BlockchainApp
                 var querryString =
                     "INSERT INTO Block (patient_id, doctor_id, appointment_date, appointment_description, appointment_title, block_timestamp, block_index, " +
                     "hash_of_prev_block, hash_of_curr_block)" +
-                    "VALUES (-1, -1, @date, 'no description', 'no title', @dateNow, 0, 0, @hashOfCurrBlock);";
+                    "VALUES (-1, -1, @date, 'no description', 'no title', @dateNow, @index, 0, @hashOfCurrBlock);";
                 using (SqlCommand command = new SqlCommand(querryString, conn)) {
                     conn.Open();
                     string now = DateTime.Now.ToString("yyyy-MM-dd");
                     command.Parameters.AddWithValue("@date", now);
                     command.Parameters.AddWithValue("@dateNow", now);
+                    int x = generateIndex(conn);
 
-                    string toHash = "-1" + "-1" + "1" + "no description" + "1" + "0" + "0";
+                    command.Parameters.AddWithValue("@index", x);
+                    string toHash = "-1" + "-1" + "1" + "no description" + "1" + x  + "0";
                     command.Parameters.AddWithValue("@hashOfCurrBlock", computeHash2(toHash));
 
                     command.ExecuteNonQuery();
@@ -363,18 +365,15 @@ namespace BlockchainApp
             btnAddNewRecord.Enabled = true;
         }
 
-        private int generateIndex(SqlConnectionStringBuilder builder)
+        private int generateIndex(SqlConnection conn)
         {
             var querryString = "SELECT CAST(NEXT VALUE FOR block_indexes AS INT) val;";
             int x = 0;
-            using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
-            {
-                conn.Open();
+                //conn.Open();
                 var command = new SqlCommand(querryString, conn);
                 using (SqlDataReader reader = command.ExecuteReader())
                     while (reader.Read())
                         x = (int)(reader["val"]);
-            }
             return x;
         }
 
@@ -410,7 +409,7 @@ namespace BlockchainApp
 
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
-                var querryString = "SELECT hash_of_curr_block FROM Block WHERE block_index+1 = (SELECT current_value FROM sys.sequences WHERE name = 'block_indexes');";
+                var querryString = "SELECT hash_of_curr_block FROM Block WHERE block_index = "+getIndex(builder)+";";
                 using (SqlCommand command = new SqlCommand(querryString, conn))
                 {
                     conn.Open();
@@ -549,12 +548,12 @@ namespace BlockchainApp
                                 command.Parameters.AddWithValue("@docID", doctor.docID);
                                 command.Parameters.AddWithValue("@date", date);
                                 command.Parameters.AddWithValue("@title", title);
-                                command.Parameters.AddWithValue("@index", generateIndex(builder));
                                 command.Parameters.AddWithValue("@description", details);
                                 string now = DateTime.Now.ToString("yyyy-MM-dd");
                                 command.Parameters.AddWithValue("@dateNow", DateTime.Now.ToString("yyyy-MM-dd"));
                                 string theHashOfPrevBlock = getLastBlockHash();
                                 command.Parameters.AddWithValue("@hashOfPrevBlock", theHashOfPrevBlock);
+                                command.Parameters.AddWithValue("@index", generateIndex(conn));
 
                                 index = getIndex(builder);
 
@@ -565,9 +564,8 @@ namespace BlockchainApp
                                 command.Parameters.AddWithValue("@nounce", hash.nounce);
                                 command.Parameters.AddWithValue("@hashOfCurrBlock", hash.computeHash());
 
-                                using (SqlDataReader reader = command.ExecuteReader())
-                                    while (reader.Read())
-                                        Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
+                                command.ExecuteNonQuery();
+
                             }
                         }
 

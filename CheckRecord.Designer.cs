@@ -64,6 +64,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(78, 285);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 17);
@@ -73,6 +74,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(78, 248);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 17);
@@ -82,6 +84,7 @@
             // Patient
             // 
             this.Patient.AutoSize = true;
+            this.Patient.BackColor = System.Drawing.Color.White;
             this.Patient.Location = new System.Drawing.Point(78, 137);
             this.Patient.Name = "Patient";
             this.Patient.Size = new System.Drawing.Size(127, 17);
@@ -91,6 +94,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(77, 174);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(128, 17);
@@ -100,6 +104,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(78, 211);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 17);
@@ -151,6 +156,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.White;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.label3.Location = new System.Drawing.Point(115, 88);
             this.label3.Name = "label3";
@@ -171,7 +177,7 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // AreYouSure
+            // CheckRecord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -189,7 +195,7 @@
             this.Controls.Add(this.tbDescription);
             this.Controls.Add(this.tbTitle);
             this.Controls.Add(this.btnDone);
-            this.Name = "AreYouSure";
+            this.Name = "CheckRecord";
             this.Text = "AreYouSure";
             this.Load += new System.EventHandler(this.AreYouSure_Load);
             this.ResumeLayout(false);

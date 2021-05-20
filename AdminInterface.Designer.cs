@@ -68,6 +68,7 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.progressLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -81,7 +82,6 @@
             this.tbLastBackup = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.btnBackup = new System.Windows.Forms.Button();
-            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -120,7 +120,7 @@
             this.tbDoctorID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbDoctorID.Location = new System.Drawing.Point(183, 68);
             this.tbDoctorID.Name = "tbDoctorID";
-            this.tbDoctorID.Size = new System.Drawing.Size(137, 22);
+            this.tbDoctorID.Size = new System.Drawing.Size(155, 22);
             this.tbDoctorID.TabIndex = 0;
             this.tbDoctorID.Click += new System.EventHandler(this.controlClicked);
             // 
@@ -129,7 +129,7 @@
             this.tbLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbLastName.Location = new System.Drawing.Point(183, 118);
             this.tbLastName.Name = "tbLastName";
-            this.tbLastName.Size = new System.Drawing.Size(137, 22);
+            this.tbLastName.Size = new System.Drawing.Size(155, 22);
             this.tbLastName.TabIndex = 1;
             this.tbLastName.Click += new System.EventHandler(this.controlClicked);
             // 
@@ -147,7 +147,7 @@
             this.tbFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbFirstName.Location = new System.Drawing.Point(183, 168);
             this.tbFirstName.Name = "tbFirstName";
-            this.tbFirstName.Size = new System.Drawing.Size(137, 22);
+            this.tbFirstName.Size = new System.Drawing.Size(155, 22);
             this.tbFirstName.TabIndex = 2;
             this.tbFirstName.Click += new System.EventHandler(this.controlClicked);
             // 
@@ -165,7 +165,7 @@
             this.tbSpecialisation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbSpecialisation.Location = new System.Drawing.Point(183, 218);
             this.tbSpecialisation.Name = "tbSpecialisation";
-            this.tbSpecialisation.Size = new System.Drawing.Size(137, 22);
+            this.tbSpecialisation.Size = new System.Drawing.Size(155, 22);
             this.tbSpecialisation.TabIndex = 3;
             this.tbSpecialisation.Click += new System.EventHandler(this.controlClicked);
             // 
@@ -197,7 +197,7 @@
             this.tbPassword.Location = new System.Drawing.Point(183, 311);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
-            this.tbPassword.Size = new System.Drawing.Size(137, 22);
+            this.tbPassword.Size = new System.Drawing.Size(155, 22);
             this.tbPassword.TabIndex = 5;
             this.tbPassword.Click += new System.EventHandler(this.controlClicked);
             // 
@@ -216,7 +216,7 @@
             this.tbRePassword.Location = new System.Drawing.Point(183, 361);
             this.tbRePassword.Name = "tbRePassword";
             this.tbRePassword.PasswordChar = '*';
-            this.tbRePassword.Size = new System.Drawing.Size(137, 22);
+            this.tbRePassword.Size = new System.Drawing.Size(155, 22);
             this.tbRePassword.TabIndex = 6;
             this.tbRePassword.Click += new System.EventHandler(this.controlClicked);
             // 
@@ -299,7 +299,7 @@
             this.tbPatientID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbPatientID.Location = new System.Drawing.Point(183, 68);
             this.tbPatientID.Name = "tbPatientID";
-            this.tbPatientID.Size = new System.Drawing.Size(137, 22);
+            this.tbPatientID.Size = new System.Drawing.Size(155, 22);
             this.tbPatientID.TabIndex = 0;
             this.tbPatientID.Click += new System.EventHandler(this.controlClicked);
             // 
@@ -308,7 +308,7 @@
             this.tbPatientLastName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbPatientLastName.Location = new System.Drawing.Point(183, 118);
             this.tbPatientLastName.Name = "tbPatientLastName";
-            this.tbPatientLastName.Size = new System.Drawing.Size(137, 22);
+            this.tbPatientLastName.Size = new System.Drawing.Size(155, 22);
             this.tbPatientLastName.TabIndex = 1;
             this.tbPatientLastName.Click += new System.EventHandler(this.controlClicked);
             // 
@@ -317,7 +317,7 @@
             this.tbPatientFirstName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbPatientFirstName.Location = new System.Drawing.Point(183, 168);
             this.tbPatientFirstName.Name = "tbPatientFirstName";
-            this.tbPatientFirstName.Size = new System.Drawing.Size(137, 22);
+            this.tbPatientFirstName.Size = new System.Drawing.Size(155, 22);
             this.tbPatientFirstName.TabIndex = 2;
             this.tbPatientFirstName.Click += new System.EventHandler(this.controlClicked);
             // 
@@ -327,7 +327,7 @@
             this.tbPatientPassword.Location = new System.Drawing.Point(183, 265);
             this.tbPatientPassword.Name = "tbPatientPassword";
             this.tbPatientPassword.PasswordChar = '*';
-            this.tbPatientPassword.Size = new System.Drawing.Size(137, 22);
+            this.tbPatientPassword.Size = new System.Drawing.Size(155, 22);
             this.tbPatientPassword.TabIndex = 4;
             this.tbPatientPassword.Click += new System.EventHandler(this.controlClicked);
             // 
@@ -337,7 +337,7 @@
             this.tbPatientREPass.Location = new System.Drawing.Point(183, 311);
             this.tbPatientREPass.Name = "tbPatientREPass";
             this.tbPatientREPass.PasswordChar = '*';
-            this.tbPatientREPass.Size = new System.Drawing.Size(137, 22);
+            this.tbPatientREPass.Size = new System.Drawing.Size(155, 22);
             this.tbPatientREPass.TabIndex = 5;
             this.tbPatientREPass.Click += new System.EventHandler(this.controlClicked);
             // 
@@ -389,7 +389,7 @@
             this.panel1.Controls.Add(this.tbPatientID);
             this.panel1.Location = new System.Drawing.Point(20, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(341, 438);
+            this.panel1.Size = new System.Drawing.Size(353, 445);
             this.panel1.TabIndex = 29;
             // 
             // tbPatientEmailAddress
@@ -397,7 +397,7 @@
             this.tbPatientEmailAddress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbPatientEmailAddress.Location = new System.Drawing.Point(183, 218);
             this.tbPatientEmailAddress.Name = "tbPatientEmailAddress";
-            this.tbPatientEmailAddress.Size = new System.Drawing.Size(137, 22);
+            this.tbPatientEmailAddress.Size = new System.Drawing.Size(155, 22);
             this.tbPatientEmailAddress.TabIndex = 3;
             // 
             // label18
@@ -423,7 +423,7 @@
             this.dtpBirthday.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.dtpBirthday.Location = new System.Drawing.Point(183, 361);
             this.dtpBirthday.Name = "dtpBirthday";
-            this.dtpBirthday.Size = new System.Drawing.Size(137, 22);
+            this.dtpBirthday.Size = new System.Drawing.Size(155, 22);
             this.dtpBirthday.TabIndex = 6;
             this.dtpBirthday.DropDown += new System.EventHandler(this.controlClicked);
             // 
@@ -449,7 +449,7 @@
             this.panel2.Controls.Add(this.label4);
             this.panel2.Location = new System.Drawing.Point(20, 20);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(337, 449);
+            this.panel2.Size = new System.Drawing.Size(353, 449);
             this.panel2.TabIndex = 30;
             // 
             // tbDoctorEmailAddress
@@ -457,7 +457,7 @@
             this.tbDoctorEmailAddress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbDoctorEmailAddress.Location = new System.Drawing.Point(183, 265);
             this.tbDoctorEmailAddress.Name = "tbDoctorEmailAddress";
-            this.tbDoctorEmailAddress.Size = new System.Drawing.Size(137, 22);
+            this.tbDoctorEmailAddress.Size = new System.Drawing.Size(155, 22);
             this.tbDoctorEmailAddress.TabIndex = 4;
             // 
             // label17
@@ -483,11 +483,16 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.progressBar,
             this.progressLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 620);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 622);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(408, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(408, 22);
             this.statusStrip1.TabIndex = 33;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(100, 16);
             // 
             // progressLabel
             // 
@@ -629,11 +634,6 @@
             this.btnBackup.Text = "Backup";
             this.btnBackup.UseVisualStyleBackColor = false;
             this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
-            // 
-            // progressBar
-            // 
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(100, 16);
             // 
             // AdminInterface
             // 

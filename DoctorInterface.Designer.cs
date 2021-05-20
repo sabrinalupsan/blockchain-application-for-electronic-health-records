@@ -278,7 +278,7 @@
             this.lbRecords.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.lbRecords.FormattingEnabled = true;
             this.lbRecords.ItemHeight = 16;
-            this.lbRecords.Location = new System.Drawing.Point(60, 6);
+            this.lbRecords.Location = new System.Drawing.Point(59, 37);
             this.lbRecords.Name = "lbRecords";
             this.lbRecords.Size = new System.Drawing.Size(338, 196);
             this.lbRecords.TabIndex = 0;
@@ -292,7 +292,7 @@
             // 
             this.selectRecord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.selectRecord.ForeColor = System.Drawing.Color.White;
-            this.selectRecord.Location = new System.Drawing.Point(175, 230);
+            this.selectRecord.Location = new System.Drawing.Point(174, 261);
             this.selectRecord.Name = "selectRecord";
             this.selectRecord.Size = new System.Drawing.Size(107, 26);
             this.selectRecord.TabIndex = 11;

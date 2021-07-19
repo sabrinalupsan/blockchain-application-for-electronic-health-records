@@ -76,7 +76,7 @@ namespace BlockchainApp
             Logger logger = LogManager.GetCurrentClassLogger();
             string password = tbPassword.Text.Trim().ToString();
             string saltedPassword = saltPassword(password);
-            if (saltedPassword != null && saltedPassword.CompareTo("12blockchainapplication3") == 0)
+            if (saltedPassword != null && saltedPassword.CompareTo("4gblockchainapplication2VYWtK?LVjT,@v") == 0)
             {
                 AdminInterface form = new AdminInterface();
                 Hide();

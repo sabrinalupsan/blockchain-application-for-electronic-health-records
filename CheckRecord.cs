@@ -44,11 +44,11 @@ namespace BlockchainApp
         {
             try
             {
-                tbLastName.Text = this.patientLastName;
-                tbFirstName.Text = this.patientFirstName;
-                tbID.Text = this.patientID.ToString();
-                tbTitle.Text = this.title;
-                tbDescription.Text = this.description;
+                tbLastName.Text = patientLastName;
+                tbFirstName.Text = patientFirstName;
+                tbID.Text = patientID.ToString();
+                tbTitle.Text = title;
+                tbDescription.Text = description;
             }
             catch (Exception ex)
             {

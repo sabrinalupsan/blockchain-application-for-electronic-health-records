@@ -47,8 +47,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -91,7 +91,7 @@
             this.tbID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbID.Location = new System.Drawing.Point(141, 25);
             this.tbID.Name = "tbID";
-            this.tbID.Size = new System.Drawing.Size(95, 22);
+            this.tbID.Size = new System.Drawing.Size(157, 22);
             this.tbID.TabIndex = 0;
             // 
             // tbPIN
@@ -100,7 +100,7 @@
             this.tbPIN.Location = new System.Drawing.Point(141, 67);
             this.tbPIN.Name = "tbPIN";
             this.tbPIN.PasswordChar = '*';
-            this.tbPIN.Size = new System.Drawing.Size(95, 22);
+            this.tbPIN.Size = new System.Drawing.Size(157, 22);
             this.tbPIN.TabIndex = 1;
             // 
             // tbRePassword
@@ -142,7 +142,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 120);
+            this.label1.Location = new System.Drawing.Point(33, 109);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 17);
             this.label1.TabIndex = 18;
@@ -151,7 +151,7 @@
             // tbEmail
             // 
             this.tbEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbEmail.Location = new System.Drawing.Point(141, 117);
+            this.tbEmail.Location = new System.Drawing.Point(141, 109);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(157, 22);
             this.tbEmail.TabIndex = 19;
@@ -159,15 +159,15 @@
             // tbVerificationCode
             // 
             this.tbVerificationCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbVerificationCode.Location = new System.Drawing.Point(180, 22);
+            this.tbVerificationCode.Location = new System.Drawing.Point(116, 25);
             this.tbVerificationCode.Name = "tbVerificationCode";
-            this.tbVerificationCode.Size = new System.Drawing.Size(100, 22);
+            this.tbVerificationCode.Size = new System.Drawing.Size(157, 22);
             this.tbVerificationCode.TabIndex = 21;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 27);
+            this.label3.Location = new System.Drawing.Point(3, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 17);
             this.label3.TabIndex = 22;
@@ -191,7 +191,7 @@
             this.btnCheckVerificationCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(133)))), ((int)(((byte)(203)))));
             this.btnCheckVerificationCode.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnCheckVerificationCode.ForeColor = System.Drawing.Color.White;
-            this.btnCheckVerificationCode.Location = new System.Drawing.Point(110, 66);
+            this.btnCheckVerificationCode.Location = new System.Drawing.Point(100, 67);
             this.btnCheckVerificationCode.Name = "btnCheckVerificationCode";
             this.btnCheckVerificationCode.Size = new System.Drawing.Size(100, 24);
             this.btnCheckVerificationCode.TabIndex = 25;
@@ -231,7 +231,7 @@
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.tbPassword);
-            this.panel2.Location = new System.Drawing.Point(9, 117);
+            this.panel2.Location = new System.Drawing.Point(12, 137);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(337, 230);
             this.panel2.TabIndex = 27;
@@ -248,15 +248,15 @@
             this.statusStrip1.TabIndex = 28;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // statusLabel
-            // 
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(0, 17);
-            // 
             // progressBar
             // 
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(100, 16);
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // ResetPassword
             // 

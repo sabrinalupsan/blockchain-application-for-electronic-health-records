@@ -18,6 +18,8 @@ namespace BlockchainApp
         private SqlConnectionStringBuilder builder;
         private Email email;
         private string verificationCode;
+        private static int PASSWORD_LENGTH = 9;
+        private static int ID_LENGTH = 13;
 
         public ResetPassword()
         {
@@ -59,87 +61,93 @@ namespace BlockchainApp
 
         private bool checkInitialData()
         {
-            long person_id = long.Parse(tbID.Text.Trim().ToString());
-            string personID = tbID.Text.Trim().ToString();
-
-            string stringPin = tbPIN.Text.Trim().ToString();
-            int PIN = int.Parse(stringPin);
-
-            if (personID.Length != 7 || (personID.All(char.IsNumber) == false))
-            {
-                MessageBox.Show("The ID is invalid.");
-                return false;
-            }
-            if (stringPin.Length != 4 || (stringPin.All(char.IsNumber) == false))
-            {
-                MessageBox.Show("The ID is invalid.");
-                return false;
-            }
             try
             {
-                var selectDoctorPin = "SELECT hashed_PIN, email FROM Doctors WHERE doctor_id = " + person_id; //check for SQL injection
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    connection.Open();
-                    var command = new SqlCommand(selectDoctorPin, connection);
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        reader.Read();
-                        if (reader.HasRows == true)
-                        {
-                            string hashedPIN = computeHash(PIN.ToString());
-                            string dbPIN = (string)reader["hashed_PIN"];
-                            if (hashedPIN.CompareTo(dbPIN) != 0)
-                                return false;
-                            string destinationEmail = tbEmail.Text.Trim().ToString();
-                            string databaseEmail = (string)reader["email"];
-                            if (destinationEmail.CompareTo(databaseEmail) != 0)
-                                return false;
-                            return true;
-                        }
-                    }
-                }
+                long person_id = long.Parse(tbID.Text.Trim().ToString());
+                string personID = tbID.Text.Trim().ToString();
 
-                var selectPatientPIN = "SELECT hashed_PIN, email FROM Patients WHERE patient_id = " + person_id; //check for SQL injection
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                string stringPin = tbPIN.Text.Trim().ToString();
+                int PIN = int.Parse(stringPin);
+
+                if (personID.Length != ID_LENGTH || (personID.All(char.IsNumber) == false))
                 {
-                    connection.Open();
-                    var command = new SqlCommand(selectPatientPIN, connection);
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    MessageBox.Show("The ID is invalid.");
+                    return false;
+                }
+                if (stringPin.Length != 4 || (stringPin.All(char.IsNumber) == false))
+                {
+                    MessageBox.Show("The ID is invalid.");
+                    return false;
+                }
+                try
+                {
+                    var selectDoctorPin = "SELECT hashed_PIN, email FROM Doctors WHERE doctor_id = " + person_id; //check for SQL injection
+                    using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                     {
-                        reader.Read();
-                        if (reader.HasRows == true)
+                        connection.Open();
+                        var command = new SqlCommand(selectDoctorPin, connection);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            string hashedPIN = computeHash(PIN.ToString());
-                            string dbPIN = (string)reader["hashed_PIN"];
-                            if (hashedPIN.CompareTo(dbPIN) != 0)
-                                return false;
-                            string destinationEmail = tbEmail.Text.Trim().ToString();
-                            string databaseEmail = (string)reader["email"];
-                            if (destinationEmail.CompareTo(databaseEmail) != 0)
-                                return false;
-                            return true;
+                            reader.Read();
+                            if (reader.HasRows == true)
+                            {
+                                string hashedPIN = computeHash(PIN.ToString());
+                                string dbPIN = (string)reader["hashed_PIN"];
+                                if (hashedPIN.CompareTo(dbPIN) != 0)
+                                    return false;
+                                string destinationEmail = tbEmail.Text.Trim().ToString();
+                                string databaseEmail = (string)reader["email"];
+                                if (destinationEmail.CompareTo(databaseEmail) != 0)
+                                    return false;
+                                return true;
+                            }
+                        }
+                    }
+
+                    var selectPatientPIN = "SELECT hashed_PIN, email FROM Patients WHERE patient_id = " + person_id; //check for SQL injection
+                    using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                    {
+                        connection.Open();
+                        var command = new SqlCommand(selectPatientPIN, connection);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            reader.Read();
+                            if (reader.HasRows == true)
+                            {
+                                string hashedPIN = computeHash(PIN.ToString());
+                                string dbPIN = (string)reader["hashed_PIN"];
+                                if (hashedPIN.CompareTo(dbPIN) != 0)
+                                    return false;
+                                string destinationEmail = tbEmail.Text.Trim().ToString();
+                                string databaseEmail = (string)reader["email"];
+                                if (destinationEmail.CompareTo(databaseEmail) != 0)
+                                    return false;
+                                return true;
+                            }
                         }
                     }
                 }
+                catch (System.InvalidCastException)
+                {
+                    return false;
+                }
+                return true;
             }
-            catch(System.InvalidCastException)
-            {
+            catch (Exception ex) {
                 return false;
             }
-            return true;
         }
 
         private bool checkData()
         {
             
-            if (tbPassword.Text.Trim().Length < 5 || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
+            if (tbPassword.Text.Trim().Length < PASSWORD_LENGTH || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
                 || !(tbPassword.Text.Trim().Any(char.IsLetter)) || !(tbPassword.Text.Trim().Any(char.IsNumber)) ||
                     !(tbPassword.Text.Trim().Any(char.IsPunctuation)))
             {
                 DialogResult = DialogResult.None;
                 MessageBox.Show("Your password needs to include a number, a lowercase character, an uppercase character, a special symbol and " +
-                    "at least 5 characters!");
+                    "at least 9 characters!");
                 return false;
             }
             if (tbPassword.Text.Trim().CompareTo(tbRePassword.Text.Trim()) != 0)
@@ -153,9 +161,9 @@ namespace BlockchainApp
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if(checkData()==true)
+            if (checkData()==true)
             {
-                long ID = int.Parse(tbID.Text.Trim().ToString());
+                long ID = long.Parse(tbID.Text.Trim().ToString());
                 int PIN = int.Parse(tbPIN.Text.Trim().ToString());
                 string saltedPassword = saltPassword(tbPassword.Text.Trim().ToString(), ID);
                 string hashedPassword = computeHash(saltedPassword);

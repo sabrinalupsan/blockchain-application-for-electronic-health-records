@@ -45,7 +45,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(107, 160);
+            this.label1.Location = new System.Drawing.Point(95, 160);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 17);
             this.label1.TabIndex = 0;
@@ -67,9 +67,9 @@
             // tbPatientID
             // 
             this.tbPatientID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPatientID.Location = new System.Drawing.Point(207, 157);
+            this.tbPatientID.Location = new System.Drawing.Point(195, 157);
             this.tbPatientID.Name = "tbPatientID";
-            this.tbPatientID.Size = new System.Drawing.Size(100, 22);
+            this.tbPatientID.Size = new System.Drawing.Size(126, 22);
             this.tbPatientID.TabIndex = 0;
             this.tbPatientID.Validating += new System.ComponentModel.CancelEventHandler(this.tbPatientID_Validating);
             this.tbPatientID.Validated += new System.EventHandler(this.tbPatientID_Validated);
@@ -77,7 +77,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(107, 206);
+            this.label2.Location = new System.Drawing.Point(95, 206);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 17);
             this.label2.TabIndex = 3;
@@ -86,10 +86,10 @@
             // tbPassword
             // 
             this.tbPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPassword.Location = new System.Drawing.Point(207, 203);
+            this.tbPassword.Location = new System.Drawing.Point(195, 203);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
-            this.tbPassword.Size = new System.Drawing.Size(100, 22);
+            this.tbPassword.Size = new System.Drawing.Size(126, 22);
             this.tbPassword.TabIndex = 1;
             this.tbPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tbPassword_Validating);
             this.tbPassword.Validated += new System.EventHandler(this.tbPassword_Validated);
@@ -110,10 +110,10 @@
             // tbPIN
             // 
             this.tbPIN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbPIN.Location = new System.Drawing.Point(207, 251);
+            this.tbPIN.Location = new System.Drawing.Point(195, 251);
             this.tbPIN.Name = "tbPIN";
             this.tbPIN.PasswordChar = '*';
-            this.tbPIN.Size = new System.Drawing.Size(100, 22);
+            this.tbPIN.Size = new System.Drawing.Size(126, 22);
             this.tbPIN.TabIndex = 2;
             this.tbPIN.Validating += new System.ComponentModel.CancelEventHandler(this.tbPIN_Validating);
             this.tbPIN.Validated += new System.EventHandler(this.tbPIN_Validated);
@@ -121,11 +121,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(107, 251);
+            this.label3.Location = new System.Drawing.Point(95, 251);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 17);
+            this.label3.Size = new System.Drawing.Size(65, 17);
             this.label3.TabIndex = 9;
-            this.label3.Text = "Card PIN";
+            this.label3.Text = "PIN code";
             // 
             // errorProvider
             // 
@@ -138,9 +138,9 @@
             this.label4.ForeColor = System.Drawing.Color.Red;
             this.label4.Location = new System.Drawing.Point(24, 95);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(360, 24);
+            this.label4.Size = new System.Drawing.Size(370, 24);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Do not disclose your password to anyone.";
+            this.label4.Text = "Do not disclose your credentials to anyone.";
             // 
             // PatientLogin
             // 

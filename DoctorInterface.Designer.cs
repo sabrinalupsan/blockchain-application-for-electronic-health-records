@@ -128,9 +128,9 @@
             // tbNewPacientID
             // 
             this.tbNewPacientID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
-            this.tbNewPacientID.Location = new System.Drawing.Point(119, 57);
+            this.tbNewPacientID.Location = new System.Drawing.Point(105, 57);
             this.tbNewPacientID.Name = "tbNewPacientID";
-            this.tbNewPacientID.Size = new System.Drawing.Size(100, 22);
+            this.tbNewPacientID.Size = new System.Drawing.Size(140, 22);
             this.tbNewPacientID.TabIndex = 0;
             this.tbNewPacientID.Validating += new System.ComponentModel.CancelEventHandler(this.tbNewPacientID_Validating);
             this.tbNewPacientID.Validated += new System.EventHandler(this.tbNewPacientID_Validated);
@@ -138,11 +138,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 60);
+            this.label3.Location = new System.Drawing.Point(3, 60);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 17);
+            this.label3.Size = new System.Drawing.Size(69, 17);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Pacient ID";
+            this.label3.Text = "Patient ID";
             // 
             // panel1
             // 
@@ -153,7 +153,7 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Location = new System.Drawing.Point(96, 66);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(243, 186);
+            this.panel1.Size = new System.Drawing.Size(276, 193);
             this.panel1.TabIndex = 8;
             // 
             // tbDetails
@@ -221,6 +221,7 @@
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.Size = new System.Drawing.Size(200, 22);
             this.tbTitle.TabIndex = 3;
+            this.tbTitle.Click += new System.EventHandler(this.tbTitle_Click);
             // 
             // label5
             // 
@@ -257,6 +258,7 @@
             this.tbPIN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbPIN.Location = new System.Drawing.Point(89, 14);
             this.tbPIN.Name = "tbPIN";
+            this.tbPIN.PasswordChar = '*';
             this.tbPIN.Size = new System.Drawing.Size(200, 22);
             this.tbPIN.TabIndex = 0;
             this.tbPIN.Text = "Introduce PIN";
@@ -286,6 +288,7 @@
             // 
             // errorProvider
             // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
             // selectRecord
@@ -380,6 +383,7 @@
             this.Controls.Add(this.lvPatients);
             this.Name = "DoctorInterface";
             this.Text = "My patients";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DoctorInterface_FormClosing);
             this.Load += new System.EventHandler(this.DoctorInterface_Load);
             this.Click += new System.EventHandler(this.DoctorInterface_Click);
             this.panel1.ResumeLayout(false);

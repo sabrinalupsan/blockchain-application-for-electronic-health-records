@@ -19,6 +19,8 @@ namespace BlockchainApp
         private int successfulAuthentication = 0;
         private SqlConnectionStringBuilder builder;
         private Email email;
+        private Patient selectedPatient = null;
+        private static int ID_LENGTH = 13;
 
         public DoctorInterface(Doctor doctor)
         {
@@ -62,7 +64,7 @@ namespace BlockchainApp
                 var querryString =
                     "INSERT INTO Block (patient_id, doctor_id, appointment_date, appointment_description, appointment_title, block_timestamp, block_index, " +
                     "hash_of_prev_block, hash_of_curr_block)" +
-                    "VALUES (-1, -1, @date, 'no description', 'no title', @dateNow, @index, 0, @hashOfCurrBlock);";
+                    "VALUES (-1, -1, @date, 'no description', 'no title', @dateNow, 0, 0, @hashOfCurrBlock);";
                 using (SqlCommand command = new SqlCommand(querryString, conn)) {
                     conn.Open();
                     string now = DateTime.Now.ToString("yyyy-MM-dd");
@@ -70,8 +72,7 @@ namespace BlockchainApp
                     command.Parameters.AddWithValue("@dateNow", now);
                     int x = generateIndex(conn);
 
-                    command.Parameters.AddWithValue("@index", x);
-                    string toHash = "-1" + "-1" + "1" + "no description" + "1" + x  + "0";
+                    string toHash = "-1" + "-1" + "1" + "no description" + "1" + "0"  + "0";
                     command.Parameters.AddWithValue("@hashOfCurrBlock", computeHash2(toHash));
 
                     command.ExecuteNonQuery();
@@ -91,7 +92,7 @@ namespace BlockchainApp
                 {
                     while (reader.Read())
                     {
-                        int patient_id = (int)reader["patient_id"];
+                        long patient_id = (long)reader["patient_id"];
                         if (id == patient_id)
                             ok = true;
                     }
@@ -173,7 +174,7 @@ namespace BlockchainApp
                 {
                     while (reader.Read())
                     {
-                        long id = (int)reader["patient_id"];
+                        long id = (long)reader["patient_id"];
                         string patientLastName = (string)reader["patient_last_name"];
                         string patientFirstName = (string)reader["patient_first_name"];
                         DateTime bday = (DateTime)reader["birthday"];
@@ -197,7 +198,17 @@ namespace BlockchainApp
             label5.Hide();
             label6.Hide();
             Details.Hide();
-            //lbRecords.Visible = false;
+        }
+
+        private void hideControlsExceptTbPIN()
+        {
+            btnCheck.Enabled = true;
+            tbTitle.Hide();
+            tbDetails.Hide();
+            dtpDate.Hide();
+            label5.Hide();
+            label6.Hide();
+            Details.Hide();
         }
 
         private void showControls()
@@ -234,7 +245,7 @@ namespace BlockchainApp
                 {
                     while (reader.Read())
                     {
-                        long id = (int)reader["patient_id"];
+                        long id = (long)reader["patient_id"];
                         string patientLastName = (string)reader["patient_last_name"];
                         string patientFirstName = (string)reader["patient_first_name"];
                         DateTime bday = (DateTime)reader["birthday"];
@@ -275,66 +286,72 @@ namespace BlockchainApp
 
         private void tbPIN_Click(object sender, EventArgs e)
         {
-            tbPIN.Text = "";
+            //tbPIN.Text = "";
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
         {
-            ListViewItem item = lvPatients.SelectedItems[0];
-            Patient patient = new Patient(-1, "", "", DateTime.Now);
-            if(item!=null)
-                patient = (Patient)item.Tag;
-            Logger logger = LogManager.GetCurrentClassLogger();
-            if (successfulAuthentication > 5)
+            try
             {
-                string myIP = getIP();
-                logger.Warn("The doctor with ID {0} and IP {1} is repeatedly trying to input the PIN code {2}.", doctor.docID, myIP, tbPIN.Text.Trim().ToString()); 
-                email.Send("hospichain@gmail.com", "Too many new record input attempts", "The doctor with the ID: " + 
-                    doctor.docID + "and IP: "+ myIP+" is repeatedly trying to input a new PIN code for the patient with the ID: "+patient.patientID);
-                MessageBox.Show("Invalid PIN and too many attempts! You need to wait 30 seconds.");
-                Wait(30);
-            }
-            else
-            {
-                try
+                ListViewItem item = lvPatients.SelectedItems[0];
+                Patient patient = new Patient(-1, "", "", DateTime.Now);
+                if (item != null)
+                    patient = (Patient)item.Tag;
+                Logger logger = LogManager.GetCurrentClassLogger();
+                if (successfulAuthentication > 5)
                 {
-                    int patientPIN = int.Parse(tbPIN.Text.Trim().ToString());
-                    string hashedPIN = computeHash2(patientPIN.ToString());
-                    string id = null;
-                    using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+                    string myIP = getIP();
+                    logger.Warn("The doctor with ID {0} and IP {1} is repeatedly trying to input the PIN code {2}.", doctor.docID, myIP, tbPIN.Text.Trim().ToString());
+                    email.Send("hospichain@gmail.com", "Too many new record input attempts", "The doctor with the ID: " +
+                        doctor.docID + "and IP: " + myIP + " is repeatedly trying to input a new PIN code for the patient with the ID: " + patient.patientID);
+                    MessageBox.Show("Invalid PIN and too many attempts! You need to wait 30 seconds.");
+                    Wait(30);
+                }
+                else
+                {
+                    try
                     {
-                        var querry = "SELECT hashed_pin FROM Patients WHERE patient_id = " + patient.patientID + ";";
-                        conn.Open();
-                        var command = new SqlCommand(querry, conn);
-                        using (SqlDataReader reader = command.ExecuteReader())
-                            while (reader.Read())
-                                id = (string)reader["hashed_pin"];
+                        int patientPIN = int.Parse(tbPIN.Text.Trim().ToString());
+                        string hashedPIN = computeHash2(patientPIN.ToString());
+                        string id = null;
+                        using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
+                        {
+                            var querry = "SELECT hashed_pin FROM Patients WHERE patient_id = " + patient.patientID + ";";
+                            conn.Open();
+                            var command = new SqlCommand(querry, conn);
+                            using (SqlDataReader reader = command.ExecuteReader())
+                                while (reader.Read())
+                                    id = (string)reader["hashed_pin"];
+                        }
+                        if (hashedPIN.CompareTo(id) == 0)
+                        {
+                            showControls();
+                            tbPIN.Enabled = false;
+                            btnCheck.Enabled = false;
+                        }
+                        else
+                        {
+                            successfulAuthentication++;
+                            MessageBox.Show("Wrong PIN!");
+                        }
                     }
-                    if (hashedPIN.CompareTo(id) == 0)
+                    catch (ArgumentOutOfRangeException)
                     {
-                        showControls();
-                        tbPIN.Enabled = false;
-                        btnCheck.Enabled = false;
+                        MessageBox.Show("Please select a patient!");
                     }
-                    else
+                    catch (FormatException)
                     {
                         successfulAuthentication++;
-                        MessageBox.Show("Wrong PIN!");
+                        MessageBox.Show("Please input a PIN code.");
+                    }
+                    catch (InvalidCastException)
+                    {
+                        MessageBox.Show("That patient does not have a PIN code yet. Please contact the administrator or inform them to log in first.");
                     }
                 }
-                catch (ArgumentOutOfRangeException)
-                {
-                    MessageBox.Show("Please select a patient!");
-                }
-                catch (FormatException)
-                {
-                    successfulAuthentication++;
-                    MessageBox.Show("Please input a PIN code.");
-                }
-                catch (InvalidCastException)
-                {
-                    MessageBox.Show("That patient does not have a PIN code yet. Please contact de administrator or inform them to log in first.");
-                }
+            } catch (Exception)
+            {
+
             }
         }
 
@@ -369,11 +386,10 @@ namespace BlockchainApp
         {
             var querryString = "SELECT CAST(NEXT VALUE FOR block_indexes AS INT) val;";
             int x = 0;
-                //conn.Open();
-                var command = new SqlCommand(querryString, conn);
-                using (SqlDataReader reader = command.ExecuteReader())
-                    while (reader.Read())
-                        x = (int)(reader["val"]);
+            var command = new SqlCommand(querryString, conn);
+            using (SqlDataReader reader = command.ExecuteReader())
+                while (reader.Read())
+                    x = (int)(reader["val"]);
             return x;
         }
 
@@ -419,8 +435,8 @@ namespace BlockchainApp
                             hash = (string)reader["hash_of_curr_block"];
                 }
             }
-            if (hash == null)
-            {
+
+            if (hash == null) {
                 MessageBox.Show("An error occured. Please refer to the administrator."); //YOU NEED TO PUT A DROP SEQUENCE!
             }
             return hash;
@@ -481,8 +497,8 @@ namespace BlockchainApp
                         current = (string)reader["hash_of_curr_block"];
                         previous = (string)reader["hash_of_prev_block"];
 
-                        long patientID = (int)reader["patient_id"];
-                        long doctorID = (int)reader["doctor_id"];
+                        long patientID = (long)reader["patient_id"];
+                        long doctorID = (long)reader["doctor_id"];
                         string title = (string)reader["appointment_title"];
                         string description = (string)reader["appointment_description"];
                         DateTime date = (DateTime)reader["appointment_date"];
@@ -625,7 +641,7 @@ namespace BlockchainApp
 
         private void tbNewPacientID_Validating(object sender, CancelEventArgs e)
         {
-            if (tbNewPacientID.Text.Trim().Length != 7)
+            if (tbNewPacientID.Text.Trim().Length != ID_LENGTH)
             {
                 errorProvider.SetError(tbNewPacientID, "Wrong ID.");
                 e.Cancel = true;
@@ -642,9 +658,18 @@ namespace BlockchainApp
             lbRecords.Items.Clear();
             if (lvPatients.SelectedItems.Count > 0)
             {
-                hideControls();
                 ListViewItem item = lvPatients.SelectedItems[0];
                 Patient patient = (Patient)item.Tag;
+
+                if (selectedPatient == null)
+                {
+                    selectedPatient = patient;
+                    hideControlsExceptTbPIN();
+                }
+
+                if(selectedPatient!=patient)
+                    hideControls();
+
 
                 var populateListBoxQuerry = "SELECT appointment_title, appointment_description, appointment_date FROM Block " +
                     "WHERE patient_id = " + patient.patientID + " AND doctor_id IN (SELECT doctor_id FROM Doctors" +
@@ -700,32 +725,45 @@ namespace BlockchainApp
 
         private void DoctorInterface_Click(object sender, EventArgs e)
         {
-            progressBar.Value = 0;
-            progressLabel.Text = "";
+            clearProgress();
         }
 
         private void tabPage2_Click(object sender, EventArgs e)
         {
-            progressBar.Value = 0;
-            progressLabel.Text = "";
+            clearProgress();
         }
 
         private void tabPage3_Click(object sender, EventArgs e)
         {
-            progressBar.Value = 0;
-            progressLabel.Text = "";
+            clearProgress();
         }
 
         private void panel2_Click(object sender, EventArgs e)
         {
-            progressBar.Value = 0;
-            progressLabel.Text = "";
+            clearProgress();
         }
 
         private void lvPatients_Click(object sender, EventArgs e)
         {
+            clearProgress();
+        }
+
+        private void clearProgress()
+        {
             progressBar.Value = 0;
             progressLabel.Text = "";
         }
+
+        private void tbTitle_Click(object sender, EventArgs e)
+        {
+            clearProgress();
+        }
+
+        private void DoctorInterface_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = false;
+        }
+
+        
     }
 }

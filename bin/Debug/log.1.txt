@@ -211,3 +211,167 @@
 2021-05-15 23:58:31.2527|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
 2021-05-15 23:58:46.8398|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
 2021-05-15 23:59:04.4331|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:01:10.6021|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-16 00:01:19.7046|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:01:25.4612|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:02:41.7960|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-16 00:02:50.7264|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:02:56.4190|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:04:48.0567|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-16 00:05:39.8137|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-16 00:06:37.3003|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-16 00:06:47.1188|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:06:52.7585|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:25:37.0026|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-16 00:25:50.4177|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:25:55.0277|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:27:23.7695|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-16 00:28:55.2677|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:29:03.0067|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:40:15.9890|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-16 00:40:26.4048|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:40:32.9150|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:41:14.8599|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-16 00:41:23.8934|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:41:27.6079|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:41:34.5856|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:44:08.6145|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-16 00:45:11.5101|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:48:49.0957|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-16 00:50:11.4972|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-16 00:54:01.6043|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:55:18.2647|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-16 00:55:33.2979|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:55:37.7325|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:55:42.1339|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 00:55:45.7813|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 01:03:27.3957|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-16 01:04:50.8893|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-16 01:05:09.6749|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 01:05:28.0146|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 01:05:38.6652|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-05-16 01:05:52.2855|DEBUG|BlockchainApp.PatientLogin|The patient with ID 8973496 logged in.
+2021-05-28 08:04:56.6847|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-05-28 08:05:21.6444|DEBUG|BlockchainApp.PatientLogin|The patient with ID 8973496 logged in.
+2021-05-28 08:41:21.9348|DEBUG|BlockchainApp.PatientLogin|The patient with ID 8973496 logged in.
+2021-06-21 16:06:50.1957|WARN|BlockchainApp.AdminInterface|Database has been overwritten
+2021-06-21 16:47:28.9565|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-06-21 16:49:25.5814|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-06-21 16:49:35.9979|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added patient 8973496 to his list.
+2021-06-21 16:51:12.0293|DEBUG|BlockchainApp.PatientLogin|The patient with ID 8973496 logged in.
+2021-06-21 16:52:04.1583|DEBUG|BlockchainApp.PatientLogin|The patient with ID 8973496 logged in.
+2021-06-21 16:59:08.1895|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-06-21 17:03:41.4904|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-06-21 17:04:25.9470|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-06-21 17:04:45.6977|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-06-21 17:06:44.5078|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-06-21 17:10:13.2467|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-06-21 17:17:58.2370|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-06-21 17:20:58.0032|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-06-21 17:26:53.0123|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-06-21 17:28:22.9797|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-06-21 17:32:17.2818|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-06-21 17:33:07.2611|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-06-21 17:33:19.2423|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-06-21 17:33:24.3560|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-06-21 17:33:28.5325|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-06-21 17:33:32.5669|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 8973496.
+2021-06-21 17:41:00.3087|DEBUG|BlockchainApp.PatientLogin|The patient with ID 5658230 logged in.
+2021-06-21 17:41:37.4796|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-06-21 17:41:46.5299|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added patient 5658230 to his list.
+2021-06-21 17:42:16.1681|DEBUG|BlockchainApp.DoctorInterface|Doctor 4583018 added a record for patient 5658230.
+2021-06-21 17:42:34.4070|DEBUG|BlockchainApp.PatientLogin|The patient with ID 5658230 logged in.
+2021-06-21 17:43:33.4021|DEBUG|BlockchainApp.PatientLogin|The patient with ID 8973496 logged in.
+2021-06-28 12:33:13.4982|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 4583018 logged in.
+2021-07-11 19:22:37.4505|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-11 19:31:27.5912|DEBUG|BlockchainApp.PatientLogin|The patient with ID 2970705730092 logged in.
+2021-07-11 19:37:40.7502|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-11 19:37:46.4472|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-11 19:38:28.2749|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-11 19:41:07.5641|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-11 19:41:32.2606|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-11 19:43:25.0193|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-11 19:43:36.5245|DEBUG|BlockchainApp.DoctorInterface|Doctor 1970405780091 added patient 2970705730092 to his list.
+2021-07-11 19:46:28.5946|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-11 19:46:54.4287|DEBUG|BlockchainApp.DoctorInterface|Doctor 1970405780091 added a record for patient 2970705730092.
+2021-07-11 19:47:24.2066|DEBUG|BlockchainApp.DoctorInterface|Doctor 1970405780091 added a record for patient 2970705730092.
+2021-07-11 19:47:43.7574|DEBUG|BlockchainApp.PatientLogin|The patient with ID 2970705730092 logged in.
+2021-07-13 13:05:30.4463|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-13 13:05:51.6794|DEBUG|BlockchainApp.DoctorInterface|Doctor 1970405780091 added patient 1780406004489 to his list.
+2021-07-13 13:06:38.5736|DEBUG|BlockchainApp.DoctorInterface|Doctor 1970405780091 added patient 1650706790071 to his list.
+2021-07-13 13:06:45.5325|DEBUG|BlockchainApp.DoctorInterface|Doctor 1970405780091 added patient 2451112540073 to his list.
+2021-07-13 13:06:50.8710|DEBUG|BlockchainApp.DoctorInterface|Doctor 1970405780091 added patient 2990602560089 to his list.
+2021-07-13 13:07:02.1024|DEBUG|BlockchainApp.DoctorInterface|Doctor 1970405780091 added patient 2890405780081 to his list.
+2021-07-13 13:07:24.0335|DEBUG|BlockchainApp.DoctorInterface|Doctor 1970405780091 added patient 1680407423391 to his list.
+2021-07-13 13:08:00.0043|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1850412046689 logged in.
+2021-07-13 13:08:25.5960|DEBUG|BlockchainApp.DoctorInterface|Doctor 1850412046689 added patient 2990602560089 to his list.
+2021-07-13 13:08:31.3236|DEBUG|BlockchainApp.DoctorInterface|Doctor 1850412046689 added patient 2970705730092 to his list.
+2021-07-13 13:10:09.0344|DEBUG|BlockchainApp.DoctorInterface|Doctor 1850412046689 added a record for patient 2970705730092.
+2021-07-13 13:10:37.1243|DEBUG|BlockchainApp.DoctorInterface|Doctor 1850412046689 added a record for patient 2970705730092.
+2021-07-13 13:17:01.7404|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 2780403479981 logged in.
+2021-07-13 13:17:49.2375|DEBUG|BlockchainApp.DoctorInterface|Doctor 2780403479981 added patient 2970705730092 to his list.
+2021-07-13 13:18:59.3840|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 2780403479981 logged in.
+2021-07-13 13:20:46.1058|DEBUG|BlockchainApp.DoctorInterface|Doctor 2780403479981 added a record for patient 2970705730092.
+2021-07-13 13:22:47.7539|DEBUG|BlockchainApp.DoctorInterface|Doctor 2780403479981 added patient 2990602560089 to his list.
+2021-07-13 13:22:54.6675|DEBUG|BlockchainApp.DoctorInterface|Doctor 2780403479981 added patient 1650706790071 to his list.
+2021-07-13 13:23:14.3587|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 2760405489911 logged in.
+2021-07-13 13:28:24.2192|DEBUG|BlockchainApp.DoctorInterface|Doctor 2760405489911 added patient 2970705730092 to his list.
+2021-07-13 13:28:29.9906|DEBUG|BlockchainApp.DoctorInterface|Doctor 2760405489911 added patient 1650706790071 to his list.
+2021-07-13 13:28:33.5128|DEBUG|BlockchainApp.DoctorInterface|Doctor 2760405489911 added patient 1680407423391 to his list.
+2021-07-13 13:29:51.3619|DEBUG|BlockchainApp.DoctorInterface|Doctor 2760405489911 added a record for patient 2970705730092.
+2021-07-13 13:30:08.2734|DEBUG|BlockchainApp.PatientLogin|The patient with ID 2970705730092 logged in.
+2021-07-13 13:30:56.5206|DEBUG|BlockchainApp.PatientLogin|The patient with ID 2890405780081 logged in.
+2021-07-13 13:32:44.6092|DEBUG|BlockchainApp.PatientLogin|The patient with ID 1780406004489 logged in.
+2021-07-13 13:33:14.5373|DEBUG|BlockchainApp.PatientLogin|The patient with ID 2990602560089 logged in.
+2021-07-13 13:34:01.4860|DEBUG|BlockchainApp.PatientLogin|The patient with ID 1680407423391 logged in.
+2021-07-13 13:34:28.5186|DEBUG|BlockchainApp.PatientLogin|The patient with ID 2451112540073 logged in.
+2021-07-13 13:34:52.3790|DEBUG|BlockchainApp.PatientLogin|The patient with ID 1650706790071 logged in.
+2021-07-14 10:42:52.7167|INFO|BlockchainApp.ResetPassword|The user with the ID 2760405489911 just changed their password.
+2021-07-14 10:42:59.6215|INFO|BlockchainApp.ResetPassword|The user with the ID 2760405489911 just changed their password.
+2021-07-14 10:43:17.9485|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 2760405489911 logged in.
+2021-07-14 10:47:30.0877|INFO|BlockchainApp.ResetPassword|The user with the ID 1650706790071 just changed their password.
+2021-07-14 10:47:34.8834|INFO|BlockchainApp.ResetPassword|The user with the ID 1650706790071 just changed their password.
+2021-07-14 10:49:31.8744|INFO|BlockchainApp.ResetPassword|The user with the ID 1780406004489 just changed their password.
+2021-07-14 10:49:33.6946|INFO|BlockchainApp.ResetPassword|The user with the ID 1780406004489 just changed their password.
+2021-07-14 10:49:35.8457|INFO|BlockchainApp.ResetPassword|The user with the ID 1780406004489 just changed their password.
+2021-07-14 10:49:36.3045|INFO|BlockchainApp.ResetPassword|The user with the ID 1780406004489 just changed their password.
+2021-07-14 10:49:36.4621|INFO|BlockchainApp.ResetPassword|The user with the ID 1780406004489 just changed their password.
+2021-07-14 10:49:36.6194|INFO|BlockchainApp.ResetPassword|The user with the ID 1780406004489 just changed their password.
+2021-07-14 10:49:36.8781|INFO|BlockchainApp.ResetPassword|The user with the ID 1780406004489 just changed their password.
+2021-07-14 10:49:37.0297|INFO|BlockchainApp.ResetPassword|The user with the ID 1780406004489 just changed their password.
+2021-07-14 10:49:38.1820|INFO|BlockchainApp.ResetPassword|The user with the ID 1780406004489 just changed their password.
+2021-07-14 10:49:38.3606|INFO|BlockchainApp.ResetPassword|The user with the ID 1780406004489 just changed their password.
+2021-07-14 10:49:39.1269|INFO|BlockchainApp.ResetPassword|The user with the ID 1780406004489 just changed their password.
+2021-07-14 10:49:39.2856|INFO|BlockchainApp.ResetPassword|The user with the ID 1780406004489 just changed their password.
+2021-07-14 10:49:39.4619|INFO|BlockchainApp.ResetPassword|The user with the ID 1780406004489 just changed their password.
+2021-07-14 10:49:39.6386|INFO|BlockchainApp.ResetPassword|The user with the ID 1780406004489 just changed their password.
+2021-07-14 10:55:05.0429|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-14 10:57:19.5494|DEBUG|BlockchainApp.DoctorInterface|Doctor 1970405780091 added a record for patient 2970705730092.
+2021-07-14 10:58:48.6202|INFO|BlockchainApp.ResetPassword|The user with the ID 1650706790071 just changed their password.
+2021-07-14 10:58:55.4588|INFO|BlockchainApp.ResetPassword|The user with the ID 1650706790071 just changed their password.
+2021-07-14 10:59:08.8977|DEBUG|BlockchainApp.PatientLogin|The patient with ID 2970705730092 logged in.
+2021-07-14 16:21:23.3416|DEBUG|BlockchainApp.PatientLogin|The patient with ID 2990602560089 logged in.
+2021-07-14 16:21:38.6070|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 2760405489911 logged in.
+2021-07-14 16:22:18.4904|DEBUG|BlockchainApp.DoctorInterface|Doctor 2760405489911 added a record for patient 1680407423391.
+2021-07-14 17:29:54.7849|DEBUG|BlockchainApp.PatientLogin|The patient with ID 2970705730092 logged in.
+2021-07-14 17:30:57.1780|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-14 17:32:24.4564|DEBUG|BlockchainApp.DoctorInterface|Doctor 1970405780091 added a record for patient 2970705730092.
+2021-07-14 17:46:57.5771|DEBUG|BlockchainApp.PatientLogin|The patient with ID 2970705730092 logged in.
+2021-07-14 17:47:48.8608|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-14 17:56:38.2925|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-14 17:59:33.2056|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-14 17:59:51.3256|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-14 18:00:42.3273|DEBUG|BlockchainApp.DoctorInterface|Doctor 1970405780091 added a record for patient 2890405780081.
+2021-07-14 18:13:40.9759|WARN|BlockchainApp.AdminInterface|Database has been overwritten
+2021-07-14 18:14:06.8108|DEBUG|BlockchainApp.PatientLogin|The patient with ID 2970705730092 logged in.
+2021-07-14 18:14:52.7861|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-14 19:37:49.0455|WARN|BlockchainApp.AdminInterface|Database has been overwritten
+2021-07-14 19:38:46.9348|DEBUG|BlockchainApp.PatientLogin|The patient with ID 2970705730092 logged in.
+2021-07-14 19:39:26.5887|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-14 19:51:48.6257|WARN|BlockchainApp.AdminInterface|Database has been overwritten
+2021-07-14 19:59:40.9819|WARN|BlockchainApp.AdminInterface|Database has been overwritten
+2021-07-14 20:00:29.2176|DEBUG|BlockchainApp.PatientLogin|The patient with ID 2970705730092 logged in.
+2021-07-14 20:01:17.4087|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-14 20:16:43.7834|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1970405780091 logged in.
+2021-07-14 21:36:46.6856|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 1680407423392 logged in.
+2021-07-14 21:37:53.1018|DEBUG|BlockchainApp.DoctorLogIn|The doctor with ID 2451112540072 logged in.

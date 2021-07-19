@@ -34,22 +34,26 @@ namespace BlockchainApp
 
         public void Send(string sendTo, string subject, string body)
         {
-            //convert string to MailAdress
-            MailAddress to = null;
-            if (sendTo != null && sendTo.CompareTo("") != 0)
-                to = new MailAddress(sendTo);
-            else
-                return;
-            MailAddress from = new MailAddress(sourceEmailAddress);
+            try
+            {
+                //convert string to MailAdress
+                MailAddress to = null;
+                if (sendTo != null && sendTo.CompareTo("") != 0)
+                    to = new MailAddress(sendTo);
+                else
+                    return;
+                MailAddress from = new MailAddress(sourceEmailAddress);
 
-            //set up message settings
+                //set up message settings
 
-            msg.Subject = subject;
-            msg.Body = body;
-            msg.From = from;
-            msg.To.Add(to);
+                msg.Subject = subject;
+                msg.Body = body;
+                msg.From = from;
+                msg.To.Add(to);
 
-            client.Send(msg);
+                client.Send(msg);
+            }
+            catch (System.Exception ex) { }
         }
     }
 }

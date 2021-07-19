@@ -25,7 +25,7 @@ namespace BlockchainApp {
                 builder.DataSource = "blockchainapp.database.windows.net";
                 builder.UserID = "lupsansabrina18";
                 #region hide
-                builder.Password = "Selenacolierul9!";
+                builder.Password = "e#WLQgz/E2UP=8_s";
                 #endregion hide
                 builder.InitialCatalog = "blockchainapp";
             }

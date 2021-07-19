@@ -17,6 +17,8 @@ using System.Xml.Serialization;
 using System.Security.AccessControl;
 using NLog;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Text.RegularExpressions;
+using System.Net.Mail;
 
 namespace BlockchainApp
 {
@@ -26,6 +28,9 @@ namespace BlockchainApp
         private List<Block> blocks = new List<Block>();
         private string backupFileName = "backup.bin";
         private Aes aes;
+        private static int PASSWORD_LENGTH = 9;
+        private static int ID_LENGTH = 13;
+
 
         public AdminInterface()
         {
@@ -57,27 +62,27 @@ namespace BlockchainApp
 
         private bool validateDoctor()
         {
-            if (tbDoctorID.Text.Trim().Length != 7)
+            if (tbDoctorID.Text.Trim().Length != ID_LENGTH)
             {
                 MessageBox.Show("The ID is incorrect.");
                 return false;
             }
-            if (tbLastName.Text.Trim().Length < 1)
+            if (tbLastName.Text.Trim().Length < 1 || !(Regex.Match(tbLastName.Text.Trim(), "^[A-Za-z-]+$").Success))
             {
                 MessageBox.Show("The last name is invalid.");
                 return false;
             }
-            if (tbFirstName.Text.Trim().Length < 1)
+            if (tbFirstName.Text.Trim().Length < 1 || !(Regex.Match(tbFirstName.Text.Trim(), "^[A-Za-z-]+$").Success))
             {
                 MessageBox.Show("The first name is invalid.");
                 return false;
             }
-            if (tbPassword.Text.Trim().Length < 5 || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
+            if (tbPassword.Text.Trim().Length < PASSWORD_LENGTH || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
                 || !(tbPassword.Text.Trim().Any(char.IsLetter)) || !(tbPassword.Text.Trim().Any(char.IsNumber)) ||
                     !(tbPassword.Text.Trim().Any(char.IsPunctuation)))
             {
                 MessageBox.Show("Your password needs to include a number, a lowercase character, an uppercase character, a special symbol and " +
-                    "at least 5 characters!");
+                    "at least 9 characters!");
                 return false;
             }
             if (tbSpecialisation.Text.Trim().Length < 1)
@@ -90,32 +95,42 @@ namespace BlockchainApp
                 MessageBox.Show("The passwords don't match!");
                 return false;
             }
+            string email = tbDoctorEmailAddress.Text.Trim().ToString();
+            try
+            {
+                MailAddress mail = new MailAddress(email);
+            }
+            catch(FormatException)
+            {
+                MessageBox.Show("Wrong email!");
+                return false;
+            }
             return true;
         }
 
         private bool validatePatient()
         {
-            if (tbPatientID.Text.Trim().Length != 7)
+            if (tbPatientID.Text.Trim().Length != ID_LENGTH)
             {
                 MessageBox.Show("The ID is invalid.");
                 return false;
             }
-            if (tbPatientLastName.Text.Trim().Length < 1)
+            if (tbPatientLastName.Text.Trim().Length < 1 || !(Regex.Match(tbPatientLastName.Text.Trim(), "^[A-Za-z-]+$").Success))
             {
                 MessageBox.Show("The last name is invalid.");
                 return false;
             }
-            if (tbPatientFirstName.Text.Trim().Length < 1)
+            if (tbPatientFirstName.Text.Trim().Length < 1 || !(Regex.Match(tbPatientFirstName.Text.Trim(), "^[A-Za-z-]+$").Success))
             {
                 MessageBox.Show("The first name is invalid.");
                 return false;
             }
-            if (tbPatientPassword.Text.Trim().Length < 5 || !(tbPatientPassword.Text.Trim().Any(char.IsUpper)) || !(tbPatientPassword.Text.Trim().Any(char.IsLower))
+            if (tbPatientPassword.Text.Trim().Length < PASSWORD_LENGTH || !(tbPatientPassword.Text.Trim().Any(char.IsUpper)) || !(tbPatientPassword.Text.Trim().Any(char.IsLower))
                 || !(tbPatientPassword.Text.Trim().Any(char.IsLetter)) || !(tbPatientPassword.Text.Trim().Any(char.IsNumber)) ||
                     !(tbPatientPassword.Text.Trim().Any(char.IsPunctuation)))
             {
                 MessageBox.Show("Your password needs to include a number, a lowercase character, an uppercase character, a special symbol and " +
-                    "at least 5 characters!");
+                    "at least 9 characters!");
                 return false;
             }
             if (tbPatientREPass.Text.Trim().CompareTo(tbPatientPassword.Text.Trim()) != 0)
@@ -126,6 +141,16 @@ namespace BlockchainApp
             if (dtpBirthday.Value > DateTime.Now)
             {
                 MessageBox.Show("The birthdate is invalid!");
+                return false;
+            }
+            string email = tbPatientEmailAddress.Text.Trim().ToString();
+            try
+            {
+                MailAddress mail = new MailAddress(email);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Wrong email!");
                 return false;
             }
             return true;
@@ -211,15 +236,20 @@ namespace BlockchainApp
                     progressBar.Value = 100;
                     progressLabel.Text = "Doctor added!";
                     clearDoctorControls();
+                    updateStatistics();
                 }
             }
             catch (Exception ex)
             {
                 string s = "Violation of PRIMARY KEY constraint";
-                if (ex.Message.Substring(0, s.Length).CompareTo(s) == 0)
+                try
                 {
-                    MessageBox.Show("Database error! This doctor is already present in the database.");
+                    if (ex.Message.Substring(0, s.Length).CompareTo(s) == 0)
+                    {
+                        MessageBox.Show("Database error! This doctor is already present in the database.");
+                    }
                 }
+                catch (Exception ex2) { }
             }
         }
 
@@ -284,6 +314,7 @@ namespace BlockchainApp
                     progressBar.Value = 100;
                     progressLabel.Text = "Patient added!";
                     clearPatientControls();
+                    updateStatistics();
                 }
             }
             catch (Exception ex)
@@ -338,8 +369,8 @@ namespace BlockchainApp
                         current = (string)reader["hash_of_curr_block"];
                         previous = (string)reader["hash_of_prev_block"];
 
-                        long patientID = (int)reader["patient_id"];
-                        long doctorID = (int)reader["doctor_id"];
+                        long patientID = (long)reader["patient_id"];
+                        long doctorID = (long)reader["doctor_id"];
                         string title = (string)reader["appointment_title"];
                         string description = (string)reader["appointment_description"];
                         DateTime date = (DateTime)reader["appointment_date"];
@@ -598,11 +629,15 @@ namespace BlockchainApp
             return noRecords;
         }
 
-        private void AdminInterface_Load(object sender, EventArgs e)
-        {
+        private void AdminInterface_Load(object sender, EventArgs e) {
+            updateStatistics();
+        }
+
+        private void updateStatistics() {
             labelNoDoctors.Text = "The number of doctors is: " + getNoDoctors();
             labelNoPatients.Text = "The number of patients is: " + getNoPatients();
             labelNoRecords.Text = "The number of records is: " + getNoRecords();
         }
+
     }
 }

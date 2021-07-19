@@ -483,22 +483,22 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.progressBar,
             this.progressLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 622);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 620);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(408, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(408, 24);
             this.statusStrip1.TabIndex = 33;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // progressBar
             // 
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(100, 16);
+            this.progressBar.Size = new System.Drawing.Size(100, 18);
             // 
             // progressLabel
             // 
             this.progressLabel.BackColor = System.Drawing.Color.White;
             this.progressLabel.Name = "progressLabel";
-            this.progressLabel.Size = new System.Drawing.Size(0, 17);
+            this.progressLabel.Size = new System.Drawing.Size(0, 19);
             // 
             // tabControl1
             // 

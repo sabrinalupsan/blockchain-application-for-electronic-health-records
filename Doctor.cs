@@ -34,17 +34,17 @@ namespace BlockchainApp
 
         public Doctor() { }
 
-        public Doctor(long docID, byte[] passHashed, string specialisation, string lastName, string firstName, byte[] tokenHashed, DateTime lastLogin)
+        public Doctor(long docID, byte[] passHashed, string specialisation, string lastName, string firstName, byte[] PINhashed, DateTime lastLogin)
         {
             DocID = docID;
             HashedPassword = passHashed;
             Specialisation = specialisation;
             LastName = lastName;
             FirstName = firstName;
-            PINcode = tokenHashed;
+            PINcode = PINhashed;
         }
 
-        public Doctor(long docID, byte[] passHashed, string specialisation, string lastName, string firstName, List<Patient> patients, byte[] tokenHashed, DateTime lastLogin)
+        public Doctor(long docID, byte[] passHashed, string specialisation, string lastName, string firstName, List<Patient> patients, byte[] PINhashed, DateTime lastLogin)
         {
             DocID = docID;
             HashedPassword = passHashed;
@@ -52,10 +52,10 @@ namespace BlockchainApp
             LastName = lastName;
             FirstName = firstName;
             Patients = patients;
-            PINcode = tokenHashed;
+            PINcode = PINhashed;
         }
 
-        public Doctor(long docID, byte[] passHashed, string specialisation, string lastName, string firstName, List<Patient> patients, byte[] tokenHashed, DateTime lastLogin, string emailAddress)
+        public Doctor(long docID, byte[] passHashed, string specialisation, string lastName, string firstName, List<Patient> patients, byte[] PINhashed, DateTime lastLogin, string emailAddress)
         {
             DocID = docID;
             HashedPassword = passHashed;
@@ -63,7 +63,7 @@ namespace BlockchainApp
             LastName = lastName;
             FirstName = firstName;
             Patients = patients;
-            PINcode = tokenHashed;
+            PINcode = PINhashed;
             EmailAddress = emailAddress;
         }
     }

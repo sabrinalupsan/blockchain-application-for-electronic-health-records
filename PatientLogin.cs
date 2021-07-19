@@ -21,6 +21,8 @@ namespace BlockchainApp
         private int successfulAuthentication = 0;
         private SqlConnectionStringBuilder builder;
         private Email email;
+        private static int PASSWORD_LENGTH = 9;
+        private static int ID_LENGTH = 13;
 
         public PatientLogin()
         {
@@ -81,10 +83,11 @@ namespace BlockchainApp
             }
         }
 
-        private string updatePIN(long patientID)
+        private string updatePIN(long patientID, string destinationEmail)
         {
             int newPIN = generatePIN();
-            MessageBox.Show("Your new token PIN for the next 30 days is: " + newPIN.ToString());
+            email.Send(destinationEmail, "New PIN", "Your new PIN for the next 30 days is " + newPIN.ToString()); //is this ok tho?
+            MessageBox.Show("Your new PIN was sent via email");
             string hashedNewPIN = computeHash2(newPIN.ToString());
             var updatePINquery = "UPDATE Patients SET hashed_PIN = @hashPIN WHERE patient_id = " + patientID + ";";
             using (SqlConnection updatePINconnection = new SqlConnection(builder.ConnectionString))
@@ -114,12 +117,12 @@ namespace BlockchainApp
 
         private bool validatePatient()
         {
-            if (tbPatientID.Text.Trim().Length != 7 || (tbPatientID.Text.Trim().All(char.IsNumber) == false))
+            if (tbPatientID.Text.Trim().Length != ID_LENGTH || (tbPatientID.Text.Trim().All(char.IsNumber) == false))
             {
                 MessageBox.Show("The ID is invalid.");
                 return false;
             }
-            if (tbPassword.Text.Trim().Length < 5 || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
+            if (tbPassword.Text.Trim().Length < PASSWORD_LENGTH || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
                 || !(tbPassword.Text.Trim().Any(char.IsLetter)) || !(tbPassword.Text.Trim().Any(char.IsNumber)) ||
                     !(tbPassword.Text.Trim().Any(char.IsPunctuation)))
             {
@@ -177,14 +180,16 @@ namespace BlockchainApp
                         {
                             while (reader.Read())
                             {
-                                int DBID = (int)reader["patient_id"];
+                                long DBID = (long)reader["patient_id"];
                                 long databaseID = DBID;
                                 string databasePassword = (string)reader["hashed_pass"];
 
                                 if (inputedPacientID.CompareTo(databaseID) == 0 && hashedPass.CompareTo(databasePassword) == 0)
                                     if (reader["hashed_PIN"] == System.DBNull.Value)
                                     {
-                                        string hashedNewPIN = updatePIN(inputedPacientID);
+                                        string email = (string)reader["email"];
+
+                                        string hashedNewPIN = updatePIN(inputedPacientID, email);
 
                                         string lastName = (string)reader["patient_last_name"];
                                         string firstName = (string)reader["patient_first_name"];
@@ -203,6 +208,7 @@ namespace BlockchainApp
                                         {
                                             if (validatePIN() == true)
                                             {
+
                                                 int inputedPIN = int.Parse(tbPIN.Text.Trim().ToString());
                                                 string hashedPIN = computeHash2(inputedPIN.ToString());
 
@@ -213,10 +219,11 @@ namespace BlockchainApp
                                                     string firstName = (string)reader["patient_first_name"];
                                                     DateTime theDate = (DateTime)reader["last_login"];
                                                     DateTime birthday = (DateTime)reader["birthday"];
+                                                    string email = (string)reader["email"];
 
                                                     if ((DateTime.Today.Date - theDate.Date).Days > 30)
                                                     {
-                                                        string hashedNewPIN = updatePIN(inputedPacientID);
+                                                        string hashedNewPIN = updatePIN(inputedPacientID, email);
                                                     }
 
                                                     updateLastLogin(inputedPacientID);
@@ -321,7 +328,7 @@ namespace BlockchainApp
 
         private void tbPatientID_Validating(object sender, CancelEventArgs e)
         {
-            if (tbPatientID.Text.Trim().Length != 7)
+            if (tbPatientID.Text.Trim().Length != ID_LENGTH)
             {
                 errorProvider.SetError(tbPatientID, "Wrong ID.");
                 e.Cancel = true;
@@ -335,12 +342,12 @@ namespace BlockchainApp
 
         private void tbPassword_Validating(object sender, CancelEventArgs e)
         {
-            if (tbPassword.Text.Trim().Length < 5 || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
+            if (tbPassword.Text.Trim().Length < PASSWORD_LENGTH || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
                 || !(tbPassword.Text.Trim().Any(char.IsLetter)) || !(tbPassword.Text.Trim().Any(char.IsNumber)) ||
                 !(tbPassword.Text.Trim().Any(char.IsPunctuation)))
             {
                 errorProvider.SetError(tbPassword, "Your passwords need to include a number, an uppercase character, a special symbol and " +
-                    "at least 5 characters!");
+                    "at least 9 characters!");
                 e.Cancel = true;
             }
         }

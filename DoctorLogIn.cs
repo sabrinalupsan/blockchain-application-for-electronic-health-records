@@ -22,6 +22,8 @@ namespace BlockchainApp
         private int successfulAuthentication = 0;
         private SqlConnectionStringBuilder builder;
         private Email email;
+        private static int PASSWORD_LENGTH = 9;
+        private static int ID_LENGTH = 13;
 
         public DoctorLogIn()
         {
@@ -67,7 +69,7 @@ namespace BlockchainApp
 
         private void tbDocID_Validating(object sender, CancelEventArgs e)
         {
-            if (tbDocID.Text.Trim().Length != 7)
+            if (tbDocID.Text.Trim().Length != ID_LENGTH)
             {
                 errorProvider.SetError(tbDocID, "Wrong ID.");
                 e.Cancel = true;
@@ -97,7 +99,7 @@ namespace BlockchainApp
         private string updatePIN(long doctorID, string destinationEmail)
         {
             int newPIN = generatePIN();
-            email.Send(destinationEmail, "New PIN", "Your new token PIN for the next 30 days is " + newPIN.ToString()); //is this ok tho?
+            email.Send(destinationEmail, "New PIN", "Your new PIN for the next 30 days is " + newPIN.ToString()); //is this ok tho?
             MessageBox.Show("Your new PIN was sent via email");
             string hashedNewPIN = computeHash2(newPIN.ToString());
             //var builder = build();
@@ -123,17 +125,17 @@ namespace BlockchainApp
             Doctor doc = new Doctor(dbID, hashedPassword, specialisation, lastName, firstName, dbPIN, DateTime.Now);
             DoctorInterface doctorInterface = new DoctorInterface(doc);
             Hide();
-            doctorInterface.ShowDialog();
+            doctorInterface.Show();
         }
 
         private bool validateDoctor()
         {
-            if (tbDocID.Text.Trim().Length != 7 || (tbDocID.Text.Trim().All(char.IsNumber) == false))
+            if (tbDocID.Text.Trim().Length != ID_LENGTH || (tbDocID.Text.Trim().All(char.IsNumber) == false))
             {
                 MessageBox.Show("The ID is invalid.");
                 return false;
             }
-            if (tbPassword.Text.Trim().Length < 5 || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
+            if (tbPassword.Text.Trim().Length < PASSWORD_LENGTH || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
                 || !(tbPassword.Text.Trim().Any(char.IsLetter)) || !(tbPassword.Text.Trim().Any(char.IsNumber)) ||
                     !(tbPassword.Text.Trim().Any(char.IsPunctuation)))
             {
@@ -181,7 +183,7 @@ namespace BlockchainApp
                         {
                             while (reader.Read())
                             {
-                                long dbID = (int)reader["doctor_id"];
+                                long dbID = (long)reader["doctor_id"];
                                 string dbPassword = (string)reader["hashed_pass"];
                                 string hashedNewPIN = null;
                                 if (dbID.CompareTo(docID) == 0 && (Encoding.Default.GetString(hashedPassword)).CompareTo(dbPassword) == 0)
@@ -314,7 +316,7 @@ namespace BlockchainApp
 
         private void tbPassword_Validating(object sender, CancelEventArgs e)
         {
-            if (tbPassword.Text.Trim().Length < 5 || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
+            if (tbPassword.Text.Trim().Length < PASSWORD_LENGTH || !(tbPassword.Text.Trim().Any(char.IsUpper)) || !(tbPassword.Text.Trim().Any(char.IsLower))
                 || !(tbPassword.Text.Trim().Any(char.IsLetter)) || !(tbPassword.Text.Trim().Any(char.IsNumber)) ||
                 !(tbPassword.Text.Trim().Any(char.IsPunctuation)))
             {

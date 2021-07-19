@@ -69,7 +69,7 @@
             this.tbPassword.Location = new System.Drawing.Point(153, 137);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
-            this.tbPassword.Size = new System.Drawing.Size(100, 22);
+            this.tbPassword.Size = new System.Drawing.Size(128, 22);
             this.tbPassword.TabIndex = 1;
             this.tbPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tbPassword_Validating);
             this.tbPassword.Validated += new System.EventHandler(this.tbPassword_Validated);
@@ -88,7 +88,7 @@
             this.tbDocID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(246)))));
             this.tbDocID.Location = new System.Drawing.Point(153, 95);
             this.tbDocID.Name = "tbDocID";
-            this.tbDocID.Size = new System.Drawing.Size(100, 22);
+            this.tbDocID.Size = new System.Drawing.Size(128, 22);
             this.tbDocID.TabIndex = 0;
             this.tbDocID.Validating += new System.ComponentModel.CancelEventHandler(this.tbDocID_Validating);
             this.tbDocID.Validated += new System.EventHandler(this.tbDocID_Validated);
@@ -125,7 +125,7 @@
             this.tbPIN.Location = new System.Drawing.Point(153, 185);
             this.tbPIN.Name = "tbPIN";
             this.tbPIN.PasswordChar = '*';
-            this.tbPIN.Size = new System.Drawing.Size(100, 22);
+            this.tbPIN.Size = new System.Drawing.Size(128, 22);
             this.tbPIN.TabIndex = 2;
             this.tbPIN.Validating += new System.ComponentModel.CancelEventHandler(this.tbPIN_Validating);
             this.tbPIN.Validated += new System.EventHandler(this.tbPIN_Validated);

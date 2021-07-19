@@ -39,7 +39,7 @@ namespace BlockchainApp
                 using (SqlDataReader reader = command.ExecuteReader()) {
 
                     while (reader.Read()) {
-                        int id = (int)reader["doctor_id"];
+                        long id = (long)reader["doctor_id"];
                         DateTime bday = (DateTime)reader["appointment_date"];
                         string title = (string)reader["appointment_title"];
                         string description = (string)reader["appointment_description"];

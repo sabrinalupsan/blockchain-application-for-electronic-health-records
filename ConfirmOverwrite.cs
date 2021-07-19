@@ -38,7 +38,7 @@ namespace BlockchainApp
             Logger logger = LogManager.GetCurrentClassLogger();
             string password = tbPassword.Text.Trim().ToString();
             string saltedPassword = saltPassword(password);
-            if (saltedPassword!=null && saltedPassword.CompareTo("12blockchainapplication3") == 0 && tbYes.Text.ToString().CompareTo("yes") == 0)
+            if (saltedPassword!=null && saltedPassword.CompareTo("4gblockchainapplication2VYWtK?LVjT,@v") == 0 && tbYes.Text.ToString().CompareTo("yes") == 0)
             {
                 success = true;
                 DialogResult = DialogResult.OK;
@@ -50,7 +50,7 @@ namespace BlockchainApp
                 if(saltedPassword==null)
                     MessageBox.Show("You need to write the password.");
                 else
-                    if(saltedPassword.CompareTo("12blockchainapplication3") != 0)
+                    if(saltedPassword.CompareTo("4gblockchainapplication2VYWtK?LVjT,@v") != 0)
                         MessageBox.Show("Wrong password.");
                     else
                         if(tbYes.Text.ToString().CompareTo("yes") != 0)
